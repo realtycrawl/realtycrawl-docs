@@ -1,0 +1,11 @@
+{
+  "name": "realtycrawl-docs",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node scripts/validate.mjs",
+    "check:live": "node scripts/validate.mjs --live",
+    "dev": "npx mint dev",
+    "validate": "npx mint validate"
+  }
+}

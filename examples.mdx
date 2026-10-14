@@ -1,0 +1,28 @@
+---
+title: "API examples"
+---
+
+Runnable examples in cURL, Node.js, Python and Go. Each example makes one bounded request; no automatic retries or pagination.
+
+## Get the examples
+
+Clone the public examples repository: https://github.com/realtycrawl/realtycrawl-api-examples. Use Node.js 22+, Python 3.9+, or Go 1.22+. Set REALTYCRAWL_API_KEY in your environment for authenticated operations.
+
+```bash
+git clone https://github.com/realtycrawl/realtycrawl-api-examples.git
+cd realtycrawl-api-examples
+node examples/node/01-capabilities.mjs
+```
+
+## Run a bounded search
+
+First inspect capabilities for your platform and country. Set REALTYCRAWL_IDEMPOTENCY_KEY to a new unique value for a new logical search; keep it for a deliberate retry. The sample Zillow sale search has limit=1 and X-Max-Credits=50. Stored listing reads cost 1 credit. Run examples individually.
+
+```bash
+export REALTYCRAWL_IDEMPOTENCY_KEY="my-search-unique-id"
+node examples/node/02-search.mjs
+```
+
+## Keep the evidence
+
+Read data together with meta.completeness, meta.sources, warnings and pagination. Keep price currency, period, area units, source URL and observation time. Never replace unknown values with zero.

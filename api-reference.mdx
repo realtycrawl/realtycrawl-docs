@@ -1,0 +1,266 @@
+---
+title: "API reference"
+description: "Explore the contract and verify live availability before execution."
+---
+
+Base URL: `https://realtycrawl.dev`. [Download OpenAPI](/openapi.json).
+
+The contract includes operations that are not enabled. Check [coverage](/coverage) and the live capability response first.
+
+<a id="listPlatforms" />
+
+### List platform research and availability states
+
+[GET /v1/meta/platforms ](/api-reference/listPlatforms)
+
+<a id="listCapabilities" />
+
+### Describe source and country capabilities
+
+[GET /v1/meta/capabilities ](/api-reference/listCapabilities)
+
+<a id="listSchemas" />
+
+### List schema versions
+
+[GET /v1/meta/schemas ](/api-reference/listSchemas)
+
+<a id="searchListings" />
+
+### Search selected listing platforms
+
+[POST /v1/listings/search ](/api-reference/searchListings)
+
+<a id="searchPlatformListings" />
+
+### Search one platform
+
+[POST /v1/\{platform\}/listings/search ](/api-reference/searchPlatformListings)
+
+<a id="getPlatformListing" />
+
+### Get listing by platform native ID
+
+[GET /v1/\{platform\}/listings/\{native_id\} ](/api-reference/getPlatformListing)
+
+<a id="resolveListing" />
+
+### Resolve a listing URL or source ID
+
+[POST /v1/listings/resolve ](/api-reference/resolveListing)
+
+<a id="getListing" />
+
+### getListing
+
+[GET /v1/listings/\{listing_id\} ](/api-reference/getListing)
+
+<a id="getListingMedia" />
+
+### getListingMedia
+
+[GET /v1/listings/\{listing_id\}/media ](/api-reference/getListingMedia)
+
+<a id="getListingHistory" />
+
+### getListingHistory
+
+[GET /v1/listings/\{listing_id\}/history ](/api-reference/getListingHistory)
+
+<a id="getListingOpenHouses" />
+
+### getListingOpenHouses
+
+[GET /v1/listings/\{listing_id\}/open-houses ](/api-reference/getListingOpenHouses)
+
+<a id="getSimilarListings" />
+
+### getSimilarListings
+
+[GET /v1/listings/\{listing_id\}/similar ](/api-reference/getSimilarListings)
+
+<a id="resolveProperty" />
+
+### Resolve physical property identity
+
+[POST /v1/properties/resolve ](/api-reference/resolveProperty)
+
+<a id="getProperty" />
+
+### getProperty
+
+[GET /v1/properties/\{property_id\} ](/api-reference/getProperty)
+
+<a id="getPropertyListings" />
+
+### getPropertyListings
+
+[GET /v1/properties/\{property_id\}/listings ](/api-reference/getPropertyListings)
+
+<a id="getPropertyRecords" />
+
+### getPropertyRecords
+
+[GET /v1/properties/\{property_id\}/records ](/api-reference/getPropertyRecords)
+
+<a id="getPropertyTransactions" />
+
+### getPropertyTransactions
+
+[GET /v1/properties/\{property_id\}/transactions ](/api-reference/getPropertyTransactions)
+
+<a id="getPropertyTaxAssessments" />
+
+### getPropertyTaxAssessments
+
+[GET /v1/properties/\{property_id\}/tax-assessments ](/api-reference/getPropertyTaxAssessments)
+
+<a id="getPropertyValuations" />
+
+### getPropertyValuations
+
+[GET /v1/properties/\{property_id\}/valuations ](/api-reference/getPropertyValuations)
+
+<a id="getPropertyComparables" />
+
+### getPropertyComparables
+
+[GET /v1/properties/\{property_id\}/comparables ](/api-reference/getPropertyComparables)
+
+<a id="getBuilding" />
+
+### Get a building
+
+[GET /v1/buildings/\{building_id\} ](/api-reference/getBuilding)
+
+<a id="getBuildingUnits" />
+
+### Get advertised units and floor plans
+
+[GET /v1/buildings/\{building_id\}/units ](/api-reference/getBuildingUnits)
+
+<a id="searchDevelopments" />
+
+### Search developments
+
+[POST /v1/developments/search ](/api-reference/searchDevelopments)
+
+<a id="getDevelopment" />
+
+### Get development
+
+[GET /v1/developments/\{development_id\} ](/api-reference/getDevelopment)
+
+<a id="searchAgents" />
+
+### Search agents
+
+[POST /v1/agents/search ](/api-reference/searchAgents)
+
+<a id="getAgent" />
+
+### Get agent
+
+[GET /v1/agents/\{agent_id\} ](/api-reference/getAgent)
+
+<a id="getAgentListings" />
+
+### Get professional listing portfolio
+
+[GET /v1/agents/\{agent_id\}/listings ](/api-reference/getAgentListings)
+
+<a id="searchAgencies" />
+
+### Search agencies
+
+[POST /v1/agencies/search ](/api-reference/searchAgencies)
+
+<a id="getAgency" />
+
+### Get agency
+
+[GET /v1/agencies/\{agency_id\} ](/api-reference/getAgency)
+
+<a id="getAgencyListings" />
+
+### Get professional listing portfolio
+
+[GET /v1/agencies/\{agency_id\}/listings ](/api-reference/getAgencyListings)
+
+<a id="searchAuctions" />
+
+### Search auctions
+
+[POST /v1/auctions/search ](/api-reference/searchAuctions)
+
+<a id="getAuction" />
+
+### Get auction
+
+[GET /v1/auctions/\{auction_id\} ](/api-reference/getAuction)
+
+<a id="searchMarkets" />
+
+### Search markets
+
+[POST /v1/markets/search ](/api-reference/searchMarkets)
+
+<a id="searchStays" />
+
+### Search property-focused accommodation
+
+[POST /v1/stays/search ](/api-reference/searchStays)
+
+<a id="getStay" />
+
+### Get accommodation details
+
+[GET /v1/stays/\{stay_id\} ](/api-reference/getStay)
+
+<a id="getStayQuote" />
+
+### Get a dated guest-specific price quote
+
+[POST /v1/stays/\{stay_id\}/quote ](/api-reference/getStayQuote)
+
+<a id="getStayAvailability" />
+
+### Read calendar observations
+
+[GET /v1/stays/\{stay_id\}/availability ](/api-reference/getStayAvailability)
+
+<a id="getStayReviews" />
+
+### Read paginated accommodation reviews
+
+[GET /v1/stays/\{stay_id\}/reviews ](/api-reference/getStayReviews)
+
+<a id="getMarketSeries" />
+
+### Read a named source market series
+
+[GET /v1/markets/\{market_id\}/series ](/api-reference/getMarketSeries)
+
+<a id="searchLocations" />
+
+### Find source-compatible locations
+
+[POST /v1/locations/search ](/api-reference/searchLocations)
+
+<a id="createReadJob" />
+
+### Request asynchronous read collection
+
+[POST /v1/jobs ](/api-reference/createReadJob)
+
+<a id="getReadJob" />
+
+### Get read collection status
+
+[GET /v1/jobs/\{job_id\} ](/api-reference/getReadJob)
+
+<a id="getReadJobResults" />
+
+### Read completed collection results
+
+[GET /v1/jobs/\{job_id\}/results ](/api-reference/getReadJobResults)

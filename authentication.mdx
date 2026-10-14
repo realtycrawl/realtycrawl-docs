@@ -14,7 +14,7 @@ Authorization: Bearer $REALTYCRAWL_API_KEY
 
 ## Control credits
 
-Set X-Max-Credits: 1 for the current one-credit operations. Public metadata costs zero credits. Unavailable capabilities and rejected input fail before a debit. Failed source execution refunds its reservation; a stale unfinished reservation is reconciled automatically.
+Set X-Max-Credits: 50 for one source crawl or 1 for a stored-data read. Unified searches reserve 50 credits per requested platform and charge only successful platforms; unsuccessful platforms are refunded. Public metadata costs zero credits. Unavailable capabilities and rejected input fail before a debit. Failed source execution refunds its reservation; a stale unfinished reservation is reconciled automatically.
 
 ## Make retries idempotent
 

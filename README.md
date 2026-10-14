@@ -1,5 +1,19 @@
 # RealtyCrawl documentation
 
-Public API, MCP and agent documentation for https://docs.realtycrawl.dev. The OpenAPI 3.1 contract defines 43 operations. Read the live capabilities endpoint before calling a source. Research catalog entries do not imply active integrations.
+Mintlify source for [docs.realtycrawl.dev](https://docs.realtycrawl.dev). The public OpenAPI contract includes proposed operations: check live capabilities before calling a source.
 
-This Mintlify-compatible source is generated alongside the self-hosted Next.js documentation. `docs.json` defines navigation; `openapi.json` contains the schema.
+## Develop
+
+```bash
+npm test
+npx mint validate
+npx mint dev
+```
+
+`docs.json` defines the navigation and styling. Each API page binds to an operation in `openapi.json`. Guides cover authentication, credits, coverage, pagination, errors, REST examples, MCP and agent skills. `npm run check:live` compares the public operation contract without credentials or paid calls.
+
+## Publish
+
+Connect this repository in Mintlify with branch `main` and content directory `/`. Set the custom domain to `docs.realtycrawl.dev` and use the DNS record provided by Mintlify. Commits to the connected branch deploy the site. The application redirects its former `/docs` routes here.
+
+[Documentation](https://docs.realtycrawl.dev) · [MCP](https://github.com/realtycrawl/realtycrawl-mcp) · [Agent skills](https://github.com/realtycrawl/realtycrawl-agent-skills) · [Examples](https://github.com/realtycrawl/realtycrawl-api-examples)

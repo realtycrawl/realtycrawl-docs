@@ -18,20 +18,20 @@ curl "https://realtycrawl.dev/v1/meta/capabilities?platform=zillow&country=US"
 
 ## 3. Search one sale listing
 
-This verified Zillow request uses a contiguous-US bounding box in west, south, east, north order. X-Max-Credits limits this request to one credit. Use a new idempotency key for a new logical request and preserve the same key and body if retrying.
+This verified Zillow request uses a contiguous-US bounding box in west, south, east, north order. X-Max-Credits limits this source crawl to 50 credits. Use a new idempotency key for a new logical request and preserve the same key and body if retrying.
 
 ```bash
 curl https://realtycrawl.dev/v1/zillow/listings/search \
   -H "Authorization: Bearer $REALTYCRAWL_API_KEY" \
   -H "Content-Type: application/json" \
-  -H "X-Max-Credits: 1" \
+  -H "X-Max-Credits: 50" \
   -H "Idempotency-Key: my-first-zillow-search" \
   -d '{"location":{"kind":"bbox","bbox":[-97.82,30.2,-97.65,30.35]},"transaction":"sale","limit":1}'
 ```
 
 ## 4. Use the returned listing ID
 
-Read the ID from data[0].id. Listing and media endpoints read your account’s saved observation for up to 24 hours. They do not refresh the source. Each successful source or stored-observation request currently uses one credit.
+Read the ID from data[0].id. Listing and media endpoints read your account’s saved observation for up to 24 hours. They do not refresh the source. Each successful source crawl uses 50 credits per platform. Each stored-observation read uses 1 credit.
 
 ```bash
 curl "https://realtycrawl.dev/v1/listings/$LISTING_ID" \

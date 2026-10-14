@@ -1,49 +1,220 @@
 {
   "$schema": "https://mintlify.com/docs.json",
-  "theme": "mint",
+  "theme": "almond",
   "name": "RealtyCrawl",
+  "description": "Source-linked real estate observations through REST, MCP, and agent skills.",
   "colors": {
     "primary": "#447B39",
-    "light": "#C8DD83",
-    "dark": "#122019"
+    "light": "#8AB54C",
+    "dark": "#336B36"
   },
   "logo": {
     "light": "/logo.svg",
-    "dark": "/logo.svg"
+    "dark": "/logo.svg",
+    "href": "https://realtycrawl.dev"
   },
   "favicon": "/logo.svg",
+  "fonts": {
+    "family": "Inter"
+  },
+  "background": {
+    "color": {
+      "light": "#FCFDF8",
+      "dark": "#102D1C"
+    }
+  },
+  "api": {
+    "openapi": "openapi.json",
+    "playground": {
+      "display": "interactive"
+    },
+    "examples": {
+      "languages": [
+        "curl",
+        "python",
+        "javascript"
+      ],
+      "defaults": "required",
+      "prefill": true,
+      "autogenerate": true
+    }
+  },
   "navigation": {
     "tabs": [
       {
-        "tab": "Guides",
+        "tab": "Documentation",
+        "icon": "book-open",
         "groups": [
           {
-            "group": "Start",
+            "group": "Get started",
             "pages": [
               "introduction",
               "quickstart",
-              "authentication",
+              "authentication"
+            ]
+          },
+          {
+            "group": "Core concepts",
+            "pages": [
               "coverage",
               "response-schema",
               "pagination",
-              "errors",
+              "errors"
+            ]
+          },
+          {
+            "group": "Build with RealtyCrawl",
+            "pages": [
               "mcp",
-              "agent-skills"
+              "agent-skills",
+              "examples"
             ]
           }
         ]
       },
       {
         "tab": "API reference",
-        "openapi": "/openapi.json"
+        "icon": "code",
+        "groups": [
+          {
+            "group": "Overview",
+            "pages": [
+              "api-reference"
+            ]
+          },
+          {
+            "group": "Meta",
+            "pages": [
+              "api-reference/listPlatforms",
+              "api-reference/listCapabilities",
+              "api-reference/listSchemas"
+            ]
+          },
+          {
+            "group": "Listings",
+            "pages": [
+              "api-reference/searchListings",
+              "api-reference/resolveListing",
+              "api-reference/getListing",
+              "api-reference/getListingMedia",
+              "api-reference/getListingHistory",
+              "api-reference/getListingOpenHouses",
+              "api-reference/getSimilarListings"
+            ]
+          },
+          {
+            "group": "Platform listings",
+            "pages": [
+              "api-reference/searchPlatformListings",
+              "api-reference/getPlatformListing"
+            ]
+          },
+          {
+            "group": "Properties",
+            "pages": [
+              "api-reference/resolveProperty",
+              "api-reference/getProperty",
+              "api-reference/getPropertyListings",
+              "api-reference/getPropertyRecords",
+              "api-reference/getPropertyTransactions",
+              "api-reference/getPropertyTaxAssessments",
+              "api-reference/getPropertyValuations",
+              "api-reference/getPropertyComparables"
+            ]
+          },
+          {
+            "group": "Buildings",
+            "pages": [
+              "api-reference/getBuilding",
+              "api-reference/getBuildingUnits"
+            ]
+          },
+          {
+            "group": "Developments",
+            "pages": [
+              "api-reference/searchDevelopments",
+              "api-reference/getDevelopment"
+            ]
+          },
+          {
+            "group": "Agents",
+            "pages": [
+              "api-reference/searchAgents",
+              "api-reference/getAgent",
+              "api-reference/getAgentListings"
+            ]
+          },
+          {
+            "group": "Agencies",
+            "pages": [
+              "api-reference/searchAgencies",
+              "api-reference/getAgency",
+              "api-reference/getAgencyListings"
+            ]
+          },
+          {
+            "group": "Auctions",
+            "pages": [
+              "api-reference/searchAuctions",
+              "api-reference/getAuction"
+            ]
+          },
+          {
+            "group": "Markets",
+            "pages": [
+              "api-reference/searchMarkets",
+              "api-reference/getMarketSeries"
+            ]
+          },
+          {
+            "group": "Stays",
+            "pages": [
+              "api-reference/searchStays",
+              "api-reference/getStay",
+              "api-reference/getStayQuote",
+              "api-reference/getStayAvailability",
+              "api-reference/getStayReviews"
+            ]
+          },
+          {
+            "group": "Locations",
+            "pages": [
+              "api-reference/searchLocations"
+            ]
+          },
+          {
+            "group": "Jobs",
+            "pages": [
+              "api-reference/createReadJob",
+              "api-reference/getReadJob",
+              "api-reference/getReadJobResults"
+            ]
+          }
+        ]
       }
     ]
   },
   "navbar": {
+    "links": [
+      {
+        "label": "Status",
+        "href": "https://realtycrawl.dev/status"
+      },
+      {
+        "label": "Support",
+        "href": "https://realtycrawl.dev/contact"
+      }
+    ],
     "primary": {
       "type": "button",
-      "label": "Dashboard",
-      "href": "https://realtycrawl.dev/dashboard"
+      "label": "Get API key",
+      "href": "https://realtycrawl.dev/dashboard/api-keys"
+    }
+  },
+  "footer": {
+    "socials": {
+      "website": "https://realtycrawl.dev",
+      "github": "https://github.com/realtycrawl"
     }
   }
 }
