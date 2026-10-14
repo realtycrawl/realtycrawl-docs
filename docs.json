@@ -9,8 +9,8 @@
     "dark": "#336B36"
   },
   "logo": {
-    "light": "/logo.svg",
-    "dark": "/logo.svg",
+    "light": "/wordmark-light.svg",
+    "dark": "/wordmark-dark.svg",
     "href": "https://realtycrawl.dev"
   },
   "favicon": "/logo.svg",

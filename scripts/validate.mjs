@@ -1,4 +1,5 @@
 import assert from 'node:assert/strict';
+import {isDeepStrictEqual} from 'node:util';
 import { readFileSync, existsSync, readdirSync } from 'node:fs';
 const config=JSON.parse(readFileSync('docs.json'));
 const spec=JSON.parse(readFileSync('openapi.json'));
@@ -21,7 +22,8 @@ assert.equal(spec.servers[0].url,'https://realtycrawl.dev');
 if(process.argv.includes('--live')){
  const r=await fetch('https://realtycrawl.dev/v1/openapi.json',{signal:AbortSignal.timeout(30000)});
  assert.equal(r.status,200);const live=await r.json();
- assert.deepEqual(live.paths,spec.paths,'Live operations changed; refresh the contract');
- assert.deepEqual(live.components,spec.components,'Live schemas changed; refresh the contract');
+ const drift=Object.keys(spec.paths).filter(path=>!isDeepStrictEqual(live.paths[path],spec.paths[path]));
+ assert.equal(drift.length,0,`Live contract differs for: ${drift.join(', ')}. Coordinate the app release before docs cutover.`);
+ assert(isDeepStrictEqual(live.components,spec.components),'Live schemas changed; refresh the contract');
 }
 console.log(`Validated ${pages} navigation pages, API bindings and local links.`);

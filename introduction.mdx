@@ -1,5 +1,25 @@
 ---
-title: "RealtyCrawl"
+title: "Build with RealtyCrawl"
+description: "Source-linked real estate observations through one API."
 ---
 
-A unified API for source-linked real estate observations. Check capabilities before requesting data.
+Search supported real estate platforms, retrieve stored listing observations, and connect the same API to your agents. Responses preserve the source behind each record, along with currencies, area units, timestamps, and completeness warnings.
+
+<CardGroup cols={2}>
+  <Card title="Make your first request" icon="rocket" href="/quickstart">Check capabilities, search one listing, and inspect the response.</Card>
+  <Card title="Explore the API" icon="code" href="/api-reference">Browse operation inputs, response schemas, and executable examples.</Card>
+  <Card title="Connect an agent" icon="robot" href="/mcp">Use hosted MCP or install the local stdio server.</Card>
+  <Card title="Run an example" icon="terminal" href="/examples">Start with cURL, Node.js, Python, or Go.</Card>
+</CardGroup>
+
+## Check coverage first
+
+The inventory contains 200 researched platforms. Research coverage and defined API operations do not imply live availability. Read [coverage and evidence](/coverage), then check the current [capabilities endpoint](https://realtycrawl.dev/v1/meta/capabilities) for your source, operation, and country.
+
+## Keep the evidence
+
+A listing is a source observation, not a verified property identity or transaction. Preserve the complete response envelope, source URLs, observation times, units, unknown values, and warnings. See the [response schema](/response-schema).
+
+## Choose your integration
+
+Use the [REST API](/api-reference), [MCP tools](/mcp), or [installable agent skill](/agent-skills). All three use the same API keys, capability boundaries, and credit accounting. Create a key in the [dashboard](https://realtycrawl.dev/dashboard/api-keys).
