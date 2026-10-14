@@ -1,5 +1,29 @@
 ---
-title: "Authentication"
+title: "Authentication and credits"
 ---
 
-Send `Authorization: Bearer $REALTYCRAWL_API_KEY`. Keep keys on the server. Rotate or revoke keys from the dashboard. A test key verifies authentication but does not invoke paid source operations.
+Keep API credentials on your server. The public metadata endpoints do not require authentication.
+
+## Authenticate requests
+
+Send one Authorization: Bearer header with a live rc_live_ key. X-API-Key is supported as an alternative; do not send both. Revoked, expired, scoped-out, deleted-account and banned-account keys are rejected.
+
+```text
+Authorization: Bearer $REALTYCRAWL_API_KEY
+```
+
+## Control credits
+
+Set X-Max-Credits: 1 for the current one-credit operations. Public metadata costs zero credits. Unavailable capabilities and rejected input fail before a debit. Failed source execution refunds its reservation; a stale unfinished reservation is reconciled automatically.
+
+## Make retries idempotent
+
+Use a stable Idempotency-Key for a logical POST request. The key is scoped to your account, operation and canonical input. A completed replay returns the stored response and X-Credits-Used: 0. Reusing it for a different input returns HTTP 409. Keep the key unchanged after a network interruption; do not start a second scrape with a fresh key.
+
+## Key lifecycle
+
+Create and revoke keys in the dashboard. Copy a newly created key into a protected environment value, then remove it from chat transcripts or temporary notes. To rotate, create a replacement, update your clients, verify them, and revoke the old key. Test keys can exercise authentication but cannot run source operations.
+
+## Rate limits
+
+Authenticated API requests are limited to 60 per account per minute; metadata has a separate limit of 120 per client per minute, with a 240-request ingress limit. Honor Retry-After on 429 responses. Request limiting fails closed when Redis is unavailable.

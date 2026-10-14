@@ -1,0 +1,25 @@
+---
+title: "Response schema"
+---
+
+Successful responses contain data and meta. Download the OpenAPI document for the complete schemas and operation-specific response shapes.
+
+## Identity and provenance
+
+A listing ID identifies an account-owned source observation. Native source IDs remain opaque. Property identity is separate and remains null when no reliable mapping exists. Preserve the source URL and observation timestamp; neither proves present-day availability.
+
+## Money, area and unknown values
+
+Money preserves decimal-string amount, currency, kind and period. Areas preserve numeric value, unit and basis. Do not mix square feet and square metres or infer a measurement basis. Null means unknown, never zero. A property’s condition is not its listing availability status.
+
+## History and media
+
+History is source-reported asking-price information where supplied. It is not a certified transaction record or title history. Media responses can be empty if the upstream observation provides no valid URLs. Do not fabricate source assets.
+
+## Response metadata
+
+meta.request_id supports tracing. Preserve schema_version, generated_at, completeness, source outcomes, warnings and pagination. X-Credits-Used reports the credits charged for this request; an idempotent replay reports zero even though it repeats the original body.
+
+```bash
+curl https://realtycrawl.dev/v1/openapi.json
+```

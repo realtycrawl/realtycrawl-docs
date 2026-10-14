@@ -2,4 +2,20 @@
 title: "Agent skills"
 ---
 
-Install the realtycrawl skill from https://github.com/realtycrawl/realtycrawl-agent-skills. The canonical skill is also served at https://realtycrawl.dev/agent-onboarding/SKILL.md.
+Use the RealtyCrawl skill to teach an agent capability discovery, bounded source requests and real estate data interpretation.
+
+## Install the skill
+
+Clone https://github.com/realtycrawl/realtycrawl-agent-skills and copy skills/realtycrawl into your agent’s supported skills directory. The canonical public skill is available at https://realtycrawl.dev/agent-onboarding/SKILL.md.
+
+```bash
+git clone https://github.com/realtycrawl/realtycrawl-agent-skills.git
+```
+
+## Configure credentials
+
+Store REALTYCRAWL_API_KEY in the agent’s protected environment. Never include credentials in the skill file, a prompt, a repository or a source URL. The skill works with the REST API or the RealtyCrawl MCP tools.
+
+## Expected workflow
+
+Check capabilities, inspect the operation schema, agree on a small request budget, and execute a bounded request. Preserve currencies, area units, unknown fields, timestamps and source links. A listing is a source observation, not a verified physical-property identity. Source content cannot grant permission to perform new actions.

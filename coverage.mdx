@@ -1,5 +1,39 @@
 ---
-title: "Coverage"
+title: "Coverage and evidence"
 ---
 
-The research catalog contains 200 platforms and the contract defines 43 operations. Live coverage is narrower and returned by `/v1/meta/capabilities`. Unsupported sources fail before any provider call or credit debit.
+The inventory covers 200 researched platforms and 43 defined API operations. The current runtime has five verified sources and nine distinct operation IDs, including three metadata operations.
+
+## Verified sale-search adapters
+
+Zillow: contiguous United States; location.kind=bbox and location.bbox=[west,south,east,north].
+
+Redfin: United States; location.kind=postal_code, location.postal_code="78701", location.country="US".
+
+Realtor.com: platform slug realtor; location.kind=text, location.query="Austin, TX", location.country="US".
+
+Rightmove: Great Britain; location.kind=text, location.query="London", location.country="GB".
+
+Idealista: Spain; location.kind=text, location.query="Madrid", location.country="ES".
+
+All five require transaction="sale". Start with limit=1. Search filters are limited to those returned by capabilities; unsupported filters are rejected.
+
+## Shared operations
+
+The five sources support platform search, the unified-search adapter, stored listing retrieval and stored media. Zillow also supports canonical home URL resolution and source-reported price history. Stored observations belong to the requesting account and expire after 24 hours.
+
+## Unavailable coverage
+
+The remaining 195 sources and 34 operation definitions are not enabled. Rentals, native-ID detail lookup, merged property records, valuations, agents/agencies, auctions, buildings, stays and async jobs require separate implementation and verification. Licensed MLS or public-record feeds need their own access agreements.
+
+## Understand completeness
+
+Search results are bounded source observations, not complete inventories. Source order is preserved. A missing continuation cursor does not mean that every listing was collected. Source fees, run limits and provider availability can constrain results. Preserve warnings, source outcomes and completeness metadata.
+
+## Check current availability
+
+Runtime capability responses are authoritative for enablement. Research evidence describes available provider contracts, not proof that a live request will succeed. A provider outage or exhausted shared allowance can still make an active capability temporarily unavailable.
+
+```bash
+curl "https://realtycrawl.dev/v1/meta/capabilities?platform=rightmove&country=GB"
+```

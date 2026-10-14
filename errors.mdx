@@ -1,0 +1,27 @@
+---
+title: "Errors and retries"
+---
+
+Errors contain error.code, error.message, error.retryable and request_id. Preserve the request ID when reporting a problem.
+
+## Read the status
+
+401: missing, invalid, expired or revoked credentials. Replace or correct the key before retrying.
+
+402: insufficient credits or an X-Max-Credits limit below the operation cost.
+
+409: idempotency conflict or an identical request still in progress. Preserve the original key and input.
+
+422: invalid input or unsupported source selectors, market or transaction.
+
+429: request limit exceeded. Honor Retry-After.
+
+502/503/504: invalid source response, provider/allowance outage, connection failure or timeout. Check error.retryable and the request ID.
+
+## Retry deliberately
+
+A network failure can occur after the source has started. Retry a POST only with its original Idempotency-Key and identical input. A completed replay does not debit credits again. A recorded failed attempt is also replayed; start a genuinely new attempt with a new key only after the failure is understood and another request is within budget.
+
+## Separate errors from empty results
+
+A successful empty data array and an error are different outcomes. Never convert a failure into an empty inventory. Check meta.completeness, meta.sources and warnings before presenting a result as complete.

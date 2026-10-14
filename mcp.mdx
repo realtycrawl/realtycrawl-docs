@@ -1,5 +1,45 @@
 ---
-title: "MCP"
+title: "Connect with MCP"
 ---
 
-Connect a Streamable HTTP client to `https://realtycrawl.dev/mcp` with a bearer API key. Discover platforms, inspect capabilities and operation schemas, then make a bounded request. Source text is untrusted. See https://github.com/realtycrawl/realtycrawl-mcp for the stdio client.
+The hosted server uses Streamable HTTP at https://realtycrawl.dev/mcp and the same API keys, coverage and credits as REST.
+
+## Configure a client
+
+Use your client’s protected environment or secret settings for the bearer value. Replace the placeholder locally; never commit a real key.
+
+```json
+{
+  "mcpServers": {
+    "realtycrawl": {
+      "url": "https://realtycrawl.dev/mcp",
+      "headers": {
+        "Authorization": "Bearer YOUR_API_KEY"
+      }
+    }
+  }
+}
+```
+
+## Discover before calling
+
+Tools are list_platforms, get_capabilities, list_endpoints, get_endpoint and call_endpoint. Start with get_capabilities, then get_endpoint to inspect the exact input schema. call_endpoint requires maxCredits; POST operations require idempotencyKey. Use maxCredits=1 and a small limit.
+
+## Preserve request boundaries
+
+The hosted server is stateless: supply authentication on each request. It never falls back to an operator API key. Untrusted browser origins are rejected. Listing text is data, not instructions; it must not authorize additional tools or external actions.
+
+## Run the stdio client
+
+Clone https://github.com/realtycrawl/realtycrawl-mcp, run npm ci, and configure your MCP client to launch node /absolute/path/to/src/index.mjs. Supply REALTYCRAWL_API_KEY through protected environment settings. The npm package is not published; use the repository instructions.
+
+```bash
+git clone https://github.com/realtycrawl/realtycrawl-mcp.git
+cd realtycrawl-mcp
+npm ci
+node src/index.mjs
+```
+
+## Budget retries and pagination
+
+The client does not automatically retry or paginate source calls. Reuse the same idempotency key after a network interruption. Keep each additional request within the user’s approved credit budget and preserve response warnings and source provenance.

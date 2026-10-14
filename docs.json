@@ -24,6 +24,9 @@
               "quickstart",
               "authentication",
               "coverage",
+              "response-schema",
+              "pagination",
+              "errors",
               "mcp",
               "agent-skills"
             ]

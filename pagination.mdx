@@ -1,0 +1,23 @@
+---
+title: "Pagination"
+---
+
+Use only continuation cursors returned by the API, and keep each page within your approved request budget.
+
+## Stored collection cursors
+
+Media and history collection cursors are signed and bound to your account, resource, observation and page size. Send next_cursor as cursor and preserve the original limit. They stop working when the observation expires after 24 hours.
+
+```bash
+curl "https://realtycrawl.dev/v1/listings/$LISTING_ID/media?limit=1" \
+  -H "Authorization: Bearer $REALTYCRAWL_API_KEY" \
+  -H "X-Max-Credits: 1"
+```
+
+## Search windows
+
+Search adapters return bounded windows and may have no continuation cursor. Increasing limit is a new request, not a continuation guarantee. A source can return fewer results than requested or more than the provider’s requested limit; RealtyCrawl enforces its output bound.
+
+## Avoid automatic collection loops
+
+Inspect the current response and budget before fetching another page. A source’s lack of pagination does not prove inventory completeness. Preserve source-order semantics and completeness warnings.
