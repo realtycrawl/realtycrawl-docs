@@ -21,3 +21,5 @@ Connect this repository in Mintlify with branch `main` and content directory `/`
 ## Release compatibility
 
 Publish documentation against the deployed API contract. Run `npm run check:live` before a documentation cutover. The app’s local source may contain a pending credit-policy update; generate the public docs with `node scripts/generate-docs.mjs --live-docs` from the private application workspace until that update is deployed. Runnable examples can use a higher `X-Max-Credits` cap than the current charge; `X-Credits-Used` reports the actual charge.
+
+Run `npm run check:site` to verify HTTPS and every public documentation route. The manual **Verify live docs** workflow performs this check plus deployed API-contract comparison from GitHub Actions without credentials or billable requests.
