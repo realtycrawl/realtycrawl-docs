@@ -139,7 +139,7 @@
       "post": {
         "operationId": "searchListings",
         "summary": "Search selected listing platforms",
-        "description": "Verified for the platforms listed in x-live-verified-platforms. Consult /v1/meta/capabilities for current enablement and accepted selectors. Sale searches only. Stored listing, media and history observations expire after 24 hours; they do not trigger a fresh crawl.",
+        "description": "Verified for the platforms listed in x-live-verified-platforms. Consult /v1/meta/capabilities for current enablement and accepted selectors. Sale searches only. Stored listing, media and history observations expire after 24 hours; they do not trigger a fresh crawl. Billing: 50 credits per successful source crawl. Unified searches reserve 50 credits per requested platform and refund failed platforms.",
         "x-research-status": "live-verified",
         "tags": [
           "listings"
@@ -177,21 +177,32 @@
           }
         },
         "x-runtime-status": "beta",
-        "x-credit-cost": 1,
+        "x-credit-cost": 50,
         "x-live-verified-platforms": [
           "zillow",
           "redfin",
           "realtor",
           "rightmove",
-          "idealista"
-        ]
+          "idealista",
+          "realtor_ca",
+          "zoopla",
+          "realestate_au",
+          "propertyfinder",
+          "spitogatos",
+          "squareyards",
+          "hepsiemlak",
+          "mercadolibre",
+          "oneroof",
+          "99co"
+        ],
+        "x-credit-unit": "successful_source_crawl"
       }
     },
     "/v1/{platform}/listings/search": {
       "post": {
         "operationId": "searchPlatformListings",
         "summary": "Search one platform",
-        "description": "Verified for the platforms listed in x-live-verified-platforms. Consult /v1/meta/capabilities for current enablement and accepted selectors. Sale searches only. Stored listing, media and history observations expire after 24 hours; they do not trigger a fresh crawl.",
+        "description": "Verified for the platforms listed in x-live-verified-platforms. Consult /v1/meta/capabilities for current enablement and accepted selectors. Sale searches only. Stored listing, media and history observations expire after 24 hours; they do not trigger a fresh crawl. Billing: 50 credits per successful source crawl. Unified searches reserve 50 credits per requested platform and refund failed platforms.",
         "x-research-status": "live-verified",
         "tags": [
           "platform-listings"
@@ -240,22 +251,33 @@
           }
         },
         "x-runtime-status": "beta",
-        "x-credit-cost": 1,
+        "x-credit-cost": 50,
         "x-live-verified-platforms": [
           "zillow",
           "redfin",
           "realtor",
           "rightmove",
-          "idealista"
-        ]
+          "idealista",
+          "realtor_ca",
+          "zoopla",
+          "realestate_au",
+          "propertyfinder",
+          "spitogatos",
+          "squareyards",
+          "hepsiemlak",
+          "mercadolibre",
+          "oneroof",
+          "99co"
+        ],
+        "x-credit-unit": "successful_source_crawl"
       }
     },
     "/v1/{platform}/listings/{native_id}": {
       "get": {
         "operationId": "getPlatformListing",
         "summary": "Get listing by platform native ID",
-        "description": "Proposed interface. Enable only for documented and verified source/country capabilities. Requires native-ID lookup or explicit URL resolver",
-        "x-research-status": "proposed",
+        "description": "Fresh native-ID details are currently unavailable. The previously tested Rightmove detail provider excludes API use on its Free plan. Use stored listing retrieval after a supported search.",
+        "x-research-status": "live-verified",
         "tags": [
           "platform-listings"
         ],
@@ -302,14 +324,16 @@
           }
         ],
         "x-runtime-status": "unavailable",
-        "x-credit-cost": 1
+        "x-credit-cost": 50,
+        "x-credit-unit": "successful_source_crawl",
+        "x-live-verified-platforms": []
       }
     },
     "/v1/listings/resolve": {
       "post": {
         "operationId": "resolveListing",
         "summary": "Resolve a listing URL or source ID",
-        "description": "Verified for the platforms listed in x-live-verified-platforms. Consult /v1/meta/capabilities for current enablement and accepted selectors. Sale searches only. Stored listing, media and history observations expire after 24 hours; they do not trigger a fresh crawl.",
+        "description": "Resolve a canonical Zillow US home URL. Returns an exact source identifier and saves an account-scoped listing observation. Other source/selector combinations remain unavailable.",
         "x-research-status": "live-verified",
         "tags": [
           "listings"
@@ -347,10 +371,11 @@
           }
         },
         "x-runtime-status": "beta",
-        "x-credit-cost": 1,
+        "x-credit-cost": 50,
         "x-live-verified-platforms": [
           "zillow"
-        ]
+        ],
+        "x-credit-unit": "successful_source_crawl"
       }
     },
     "/v1/listings/{listing_id}": {
@@ -402,8 +427,19 @@
           "redfin",
           "realtor",
           "rightmove",
-          "idealista"
-        ]
+          "idealista",
+          "realtor_ca",
+          "zoopla",
+          "realestate_au",
+          "propertyfinder",
+          "spitogatos",
+          "squareyards",
+          "hepsiemlak",
+          "mercadolibre",
+          "oneroof",
+          "99co"
+        ],
+        "x-credit-unit": "stored_observation_read"
       }
     },
     "/v1/listings/{listing_id}/media": {
@@ -472,8 +508,19 @@
           "redfin",
           "realtor",
           "rightmove",
-          "idealista"
-        ]
+          "idealista",
+          "realtor_ca",
+          "zoopla",
+          "realestate_au",
+          "propertyfinder",
+          "spitogatos",
+          "squareyards",
+          "hepsiemlak",
+          "mercadolibre",
+          "oneroof",
+          "99co"
+        ],
+        "x-credit-unit": "stored_observation_read"
       }
     },
     "/v1/listings/{listing_id}/history": {
@@ -539,15 +586,16 @@
         "x-credit-cost": 1,
         "x-live-verified-platforms": [
           "zillow"
-        ]
+        ],
+        "x-credit-unit": "stored_observation_read"
       }
     },
     "/v1/listings/{listing_id}/open-houses": {
       "get": {
         "operationId": "getListingOpenHouses",
         "summary": "getListingOpenHouses",
-        "description": "Proposed interface. Enable only for documented and verified source/country capabilities. Licensed feeds / source-published schedules",
-        "x-research-status": "proposed",
+        "description": "Returns this account’s stored OneRoof open-home schedule after a successful New Zealand search. Timestamps and timezone are UTC as published by the source. Observations expire after 24 hours; this operation does not refresh the source.",
+        "x-research-status": "live-verified",
         "tags": [
           "listings"
         ],
@@ -601,8 +649,11 @@
             }
           }
         ],
-        "x-runtime-status": "unavailable",
-        "x-credit-cost": 1
+        "x-runtime-status": "beta",
+        "x-credit-cost": 1,
+        "x-live-verified-platforms": [
+          "oneroof"
+        ]
       }
     },
     "/v1/listings/{listing_id}/similar": {

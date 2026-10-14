@@ -2,7 +2,7 @@
 title: "Coverage and evidence"
 ---
 
-The inventory covers 200 researched platforms and 43 defined API operations. The current runtime has five verified sources and nine distinct operation IDs, including three metadata operations.
+The inventory covers 200 researched platforms and 43 defined API operations. This release includes 15 source adapters and 10 enabled operation IDs, including three metadata operations. Check live capabilities for current enablement.
 
 ## Verified sale-search adapters
 
@@ -16,15 +16,31 @@ Rightmove: Great Britain; location.kind=text, location.query="London", location.
 
 Idealista: Spain; location.kind=text, location.query="Madrid", location.country="ES".
 
-All five require transaction="sale". Start with limit=1. Search filters are limited to those returned by capabilities; unsupported filters are rejected.
+Realtor.ca: realtor_ca, CA; Zoopla: zoopla, GB; realestate.com.au: realestate_au, AU; Property Finder: propertyfinder, AE. These use location.kind=text, location.query and the stated country.
+
+Spitogatos: spitogatos, GR, location.kind=text; example query Kolonaki. Residential sale search only.
+
+Square Yards: squareyards, IN; use location.kind=source_region, location.platform=squareyards and location.region_id=mumbai (the source city slug).
+
+Hepsiemlak: hepsiemlak, TR; use source_region with platform=hepsiemlak and region_id=istanbul (the source city slug).
+
+MercadoLibre: mercadolibre, AR; apartment sale search only. Use source_region with platform=mercadolibre and region_id=bsas-gba-sur/lomas-de-zamora, the path after departamentos/venta/ in the source search URL.
+
+OneRoof: oneroof, NZ; house sale search. Use source_region with platform=oneroof and region_id=auckland-city-auckland-225, the district slug and ID.
+
+99.co: 99co, SG; use source_region with platform=99co and region_id=singapore for island-wide residential sale search.
+
+Every location selector above includes location.country. All adapters require transaction=sale. Start with limit=1. Only capability-advertised filters are accepted; source_region paths are not free-text geocoding.
 
 ## Shared operations
 
-The five sources support platform search, the unified-search adapter, stored listing retrieval and stored media. Zillow also supports canonical home URL resolution and source-reported price history. Stored observations belong to the requesting account and expire after 24 hours.
+All 15 adapters support platform search, unified search, stored listing retrieval and stored media. Zillow supports canonical URL resolution and source-reported price history. OneRoof supports stored open-home schedules in UTC. Stored observations belong to the requesting account and expire after 24 hours.
+
+Source records retain their original currencies and area units. Hidden search prices, auction text, price ranges and ambiguous room counts are not converted into exact asking prices or bedroom counts.
 
 ## Unavailable coverage
 
-The remaining 195 sources and 34 operation definitions are not enabled. Rentals, native-ID detail lookup, merged property records, valuations, agents/agencies, auctions, buildings, stays and async jobs require separate implementation and verification. Licensed MLS or public-record feeds need their own access agreements.
+The remaining 185 sources and 33 operation definitions are not enabled. Fresh native-ID details (including Rightmove), rentals, merged property records, valuations, dedicated agent/agency APIs, auction-event APIs, buildings, stays and async jobs require separate implementation and verification. Licensed MLS and public-record feeds need their own access agreements. Otodom, Flatmates and Dubizzle Egypt samples did not pass acceptance.
 
 ## Understand completeness
 

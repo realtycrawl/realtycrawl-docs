@@ -14,7 +14,7 @@ Authorization: Bearer $REALTYCRAWL_API_KEY
 
 ## Control credits
 
-The deployed OpenAPI currently advertises 1 credit for a single-platform source search and 1 credit for a stored-observation read. Set X-Max-Credits to the maximum you authorize; it is a ceiling, not the charge. Check the current operation contract before execution. Public metadata is free. Inspect creditsCharged and warnings in the returned envelope.
+Set X-Max-Credits: 50 for one source crawl or 1 for a stored-data read. Unified searches reserve 50 credits per requested platform and charge only successful platforms; unsuccessful platforms are refunded. Public metadata costs zero credits. Unavailable capabilities and rejected input fail before a debit. Failed source execution refunds its reservation; a stale unfinished reservation is reconciled automatically.
 
 ## Make retries idempotent
 
