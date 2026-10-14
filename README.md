@@ -20,4 +20,4 @@ Connect this repository in Mintlify with branch `main` and content directory `/`
 
 ## Release compatibility
 
-The examples target the application’s 50-credit-per-platform source-crawl update. At verification on 2026-10-14, the live OpenAPI still advertised the previous 1-credit source price. `X-Max-Credits` is a maximum budget, not a charge; the deployed contract and `X-Credits-Used` determine the actual cost. Coordinate the documentation cutover with the application release.
+Publish documentation against the deployed API contract. Run `npm run check:live` before a documentation cutover. The app’s local source may contain a pending credit-policy update; generate the public docs with `node scripts/generate-docs.mjs --live-docs` from the private application workspace until that update is deployed. Runnable examples can use a higher `X-Max-Credits` cap than the current charge; `X-Credits-Used` reports the actual charge.
