@@ -1,0 +1,6395 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "RealtyCrawl proposed unified API",
+    "version": "0.1.0",
+    "description": "Research draft dated 2026-10-13. No production server or enabled platform coverage is implied. Country and operation capabilities must be checked."
+  },
+  "jsonSchemaDialect": "https://json-schema.org/draft/2020-12/schema",
+  "security": [
+    {
+      "ApiKeyAuth": []
+    }
+  ],
+  "paths": {
+    "/v1/meta/platforms": {
+      "get": {
+        "operationId": "listPlatforms",
+        "summary": "List platform research and availability states",
+        "description": "Proposed interface. Enable only for documented and verified source/country capabilities. Platform registry",
+        "x-research-status": "proposed",
+        "tags": [
+          "meta"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response; meta discloses source completeness",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/listPlatformsResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Typed error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "x-runtime-status": "active",
+        "x-credit-cost": 0
+      }
+    },
+    "/v1/meta/capabilities": {
+      "get": {
+        "operationId": "listCapabilities",
+        "summary": "Describe source and country capabilities",
+        "description": "Proposed interface. Enable only for documented and verified source/country capabilities. Per-provider contracts",
+        "x-research-status": "proposed",
+        "tags": [
+          "meta"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response; meta discloses source completeness",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/listCapabilitiesResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Typed error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "platform",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "country",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "x-runtime-status": "active",
+        "x-credit-cost": 0
+      }
+    },
+    "/v1/meta/schemas": {
+      "get": {
+        "operationId": "listSchemas",
+        "summary": "List schema versions",
+        "description": "Proposed interface. Enable only for documented and verified source/country capabilities. Canonical contract",
+        "x-research-status": "proposed",
+        "tags": [
+          "meta"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response; meta discloses source completeness",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/listSchemasResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Typed error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "x-runtime-status": "active",
+        "x-credit-cost": 0
+      }
+    },
+    "/v1/listings/search": {
+      "post": {
+        "operationId": "searchListings",
+        "summary": "Search selected listing platforms",
+        "description": "Verified for the platforms listed in x-live-verified-platforms. Consult /v1/meta/capabilities for current enablement and accepted selectors. Sale searches only. Stored listing, media and history observations expire after 24 hours; they do not trigger a fresh crawl.",
+        "x-research-status": "live-verified",
+        "tags": [
+          "listings"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response; meta discloses source completeness",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/searchListingsResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Typed error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ListingSearchRequest"
+              }
+            }
+          }
+        },
+        "x-runtime-status": "beta",
+        "x-credit-cost": 1,
+        "x-live-verified-platforms": [
+          "zillow",
+          "redfin",
+          "realtor",
+          "rightmove",
+          "idealista"
+        ]
+      }
+    },
+    "/v1/{platform}/listings/search": {
+      "post": {
+        "operationId": "searchPlatformListings",
+        "summary": "Search one platform",
+        "description": "Verified for the platforms listed in x-live-verified-platforms. Consult /v1/meta/capabilities for current enablement and accepted selectors. Sale searches only. Stored listing, media and history observations expire after 24 hours; they do not trigger a fresh crawl.",
+        "x-research-status": "live-verified",
+        "tags": [
+          "platform-listings"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response; meta discloses source completeness",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/searchPlatformListingsResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Typed error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "platform",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PlatformSearchRequest"
+              }
+            }
+          }
+        },
+        "x-runtime-status": "beta",
+        "x-credit-cost": 1,
+        "x-live-verified-platforms": [
+          "zillow",
+          "redfin",
+          "realtor",
+          "rightmove",
+          "idealista"
+        ]
+      }
+    },
+    "/v1/{platform}/listings/{native_id}": {
+      "get": {
+        "operationId": "getPlatformListing",
+        "summary": "Get listing by platform native ID",
+        "description": "Proposed interface. Enable only for documented and verified source/country capabilities. Requires native-ID lookup or explicit URL resolver",
+        "x-research-status": "proposed",
+        "tags": [
+          "platform-listings"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response; meta discloses source completeness",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/getPlatformListingResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Typed error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "platform",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          {
+            "name": "native_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        ],
+        "x-runtime-status": "unavailable",
+        "x-credit-cost": 1
+      }
+    },
+    "/v1/listings/resolve": {
+      "post": {
+        "operationId": "resolveListing",
+        "summary": "Resolve a listing URL or source ID",
+        "description": "Verified for the platforms listed in x-live-verified-platforms. Consult /v1/meta/capabilities for current enablement and accepted selectors. Sale searches only. Stored listing, media and history observations expire after 24 hours; they do not trigger a fresh crawl.",
+        "x-research-status": "live-verified",
+        "tags": [
+          "listings"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response; meta discloses source completeness",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/resolveListingResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Typed error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ListingResolveRequest"
+              }
+            }
+          }
+        },
+        "x-runtime-status": "beta",
+        "x-credit-cost": 1,
+        "x-live-verified-platforms": [
+          "zillow"
+        ]
+      }
+    },
+    "/v1/listings/{listing_id}": {
+      "get": {
+        "operationId": "getListing",
+        "summary": "getListing",
+        "description": "Verified for the platforms listed in x-live-verified-platforms. Consult /v1/meta/capabilities for current enablement and accepted selectors. Sale searches only. Stored listing, media and history observations expire after 24 hours; they do not trigger a fresh crawl.",
+        "x-research-status": "live-verified",
+        "tags": [
+          "listings"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response; meta discloses source completeness",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/getListingResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Typed error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "listing_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        ],
+        "x-runtime-status": "beta",
+        "x-credit-cost": 1,
+        "x-live-verified-platforms": [
+          "zillow",
+          "redfin",
+          "realtor",
+          "rightmove",
+          "idealista"
+        ]
+      }
+    },
+    "/v1/listings/{listing_id}/media": {
+      "get": {
+        "operationId": "getListingMedia",
+        "summary": "getListingMedia",
+        "description": "Verified for the platforms listed in x-live-verified-platforms. Consult /v1/meta/capabilities for current enablement and accepted selectors. Sale searches only. Stored listing, media and history observations expire after 24 hours; they do not trigger a fresh crawl.",
+        "x-research-status": "live-verified",
+        "tags": [
+          "listings"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response; meta discloses source completeness",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/getListingMediaResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Typed error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "listing_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 100,
+              "default": 20
+            }
+          },
+          {
+            "name": "cursor",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "x-runtime-status": "beta",
+        "x-credit-cost": 1,
+        "x-live-verified-platforms": [
+          "zillow",
+          "redfin",
+          "realtor",
+          "rightmove",
+          "idealista"
+        ]
+      }
+    },
+    "/v1/listings/{listing_id}/history": {
+      "get": {
+        "operationId": "getListingHistory",
+        "summary": "getListingHistory",
+        "description": "Verified for the platforms listed in x-live-verified-platforms. Consult /v1/meta/capabilities for current enablement and accepted selectors. Sale searches only. Stored listing, media and history observations expire after 24 hours; they do not trigger a fresh crawl.",
+        "x-research-status": "live-verified",
+        "tags": [
+          "listings"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response; meta discloses source completeness",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/getListingHistoryResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Typed error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "listing_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 100,
+              "default": 20
+            }
+          },
+          {
+            "name": "cursor",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "x-runtime-status": "beta",
+        "x-credit-cost": 1,
+        "x-live-verified-platforms": [
+          "zillow"
+        ]
+      }
+    },
+    "/v1/listings/{listing_id}/open-houses": {
+      "get": {
+        "operationId": "getListingOpenHouses",
+        "summary": "getListingOpenHouses",
+        "description": "Proposed interface. Enable only for documented and verified source/country capabilities. Licensed feeds / source-published schedules",
+        "x-research-status": "proposed",
+        "tags": [
+          "listings"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response; meta discloses source completeness",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/getListingOpenHousesResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Typed error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "listing_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 100,
+              "default": 20
+            }
+          },
+          {
+            "name": "cursor",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "x-runtime-status": "unavailable",
+        "x-credit-cost": 1
+      }
+    },
+    "/v1/listings/{listing_id}/similar": {
+      "get": {
+        "operationId": "getSimilarListings",
+        "summary": "getSimilarListings",
+        "description": "Proposed interface. Enable only for documented and verified source/country capabilities. Separate source recommendation contract required",
+        "x-research-status": "proposed",
+        "tags": [
+          "listings"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response; meta discloses source completeness",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/getSimilarListingsResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Typed error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "listing_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 100,
+              "default": 20
+            }
+          },
+          {
+            "name": "cursor",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "x-runtime-status": "unavailable",
+        "x-credit-cost": 1
+      }
+    },
+    "/v1/properties/resolve": {
+      "post": {
+        "operationId": "resolveProperty",
+        "summary": "Resolve physical property identity",
+        "description": "Proposed interface. Enable only for documented and verified source/country capabilities. Address/parcel providers; ambiguous results retained",
+        "x-research-status": "proposed",
+        "tags": [
+          "properties"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response; meta discloses source completeness",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/resolvePropertyResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Typed error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PropertyResolveRequest"
+              }
+            }
+          }
+        },
+        "x-runtime-status": "unavailable",
+        "x-credit-cost": 1
+      }
+    },
+    "/v1/properties/{property_id}": {
+      "get": {
+        "operationId": "getProperty",
+        "summary": "getProperty",
+        "description": "Proposed interface. Enable only for documented and verified source/country capabilities. Property identity and records",
+        "x-research-status": "proposed",
+        "tags": [
+          "properties"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response; meta discloses source completeness",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/getPropertyResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Typed error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "property_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        ],
+        "x-runtime-status": "unavailable",
+        "x-credit-cost": 1
+      }
+    },
+    "/v1/properties/{property_id}/listings": {
+      "get": {
+        "operationId": "getPropertyListings",
+        "summary": "getPropertyListings",
+        "description": "Proposed interface. Enable only for documented and verified source/country capabilities. Explicitly matched source advertisements",
+        "x-research-status": "proposed",
+        "tags": [
+          "properties"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response; meta discloses source completeness",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/getPropertyListingsResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Typed error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "property_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 100,
+              "default": 20
+            }
+          },
+          {
+            "name": "cursor",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "x-runtime-status": "unavailable",
+        "x-credit-cost": 1
+      }
+    },
+    "/v1/properties/{property_id}/records": {
+      "get": {
+        "operationId": "getPropertyRecords",
+        "summary": "getPropertyRecords",
+        "description": "Proposed interface. Enable only for documented and verified source/country capabilities. ATTOM / RentCast / licensed records",
+        "x-research-status": "proposed",
+        "tags": [
+          "properties"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response; meta discloses source completeness",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/getPropertyRecordsResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Typed error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "property_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 100,
+              "default": 20
+            }
+          },
+          {
+            "name": "cursor",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "x-runtime-status": "unavailable",
+        "x-credit-cost": 1
+      }
+    },
+    "/v1/properties/{property_id}/transactions": {
+      "get": {
+        "operationId": "getPropertyTransactions",
+        "summary": "getPropertyTransactions",
+        "description": "Proposed interface. Enable only for documented and verified source/country capabilities. Recorded or licensed transactions",
+        "x-research-status": "proposed",
+        "tags": [
+          "properties"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response; meta discloses source completeness",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/getPropertyTransactionsResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Typed error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "property_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 100,
+              "default": 20
+            }
+          },
+          {
+            "name": "cursor",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "x-runtime-status": "unavailable",
+        "x-credit-cost": 1
+      }
+    },
+    "/v1/properties/{property_id}/tax-assessments": {
+      "get": {
+        "operationId": "getPropertyTaxAssessments",
+        "summary": "getPropertyTaxAssessments",
+        "description": "Proposed interface. Enable only for documented and verified source/country capabilities. Specific assessment endpoint entitlement",
+        "x-research-status": "proposed",
+        "tags": [
+          "properties"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response; meta discloses source completeness",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/getPropertyTaxAssessmentsResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Typed error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "property_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 100,
+              "default": 20
+            }
+          },
+          {
+            "name": "cursor",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "x-runtime-status": "unavailable",
+        "x-credit-cost": 1
+      }
+    },
+    "/v1/properties/{property_id}/valuations": {
+      "get": {
+        "operationId": "getPropertyValuations",
+        "summary": "getPropertyValuations",
+        "description": "Proposed interface. Enable only for documented and verified source/country capabilities. RentCast / HouseCanary / licensed AVM",
+        "x-research-status": "proposed",
+        "tags": [
+          "properties"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response; meta discloses source completeness",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/getPropertyValuationsResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Typed error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "property_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 100,
+              "default": 20
+            }
+          },
+          {
+            "name": "cursor",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "x-runtime-status": "unavailable",
+        "x-credit-cost": 1
+      }
+    },
+    "/v1/properties/{property_id}/comparables": {
+      "get": {
+        "operationId": "getPropertyComparables",
+        "summary": "getPropertyComparables",
+        "description": "Proposed interface. Enable only for documented and verified source/country capabilities. RentCast valuation comparables or licensed comps",
+        "x-research-status": "proposed",
+        "tags": [
+          "properties"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response; meta discloses source completeness",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/getPropertyComparablesResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Typed error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "property_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          {
+            "name": "basis",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "closed_sale",
+                "active_listing",
+                "rental_listing",
+                "closed_lease"
+              ]
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 100,
+              "default": 20
+            }
+          },
+          {
+            "name": "cursor",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "x-runtime-status": "unavailable",
+        "x-credit-cost": 1
+      }
+    },
+    "/v1/buildings/{building_id}": {
+      "get": {
+        "operationId": "getBuilding",
+        "summary": "Get a building",
+        "description": "Proposed interface. Enable only for documented and verified source/country capabilities. StreetEasy / Apartments / Zillow detail subject to contract",
+        "x-research-status": "proposed",
+        "tags": [
+          "buildings"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response; meta discloses source completeness",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/getBuildingResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Typed error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "building_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        ],
+        "x-runtime-status": "unavailable",
+        "x-credit-cost": 1
+      }
+    },
+    "/v1/buildings/{building_id}/units": {
+      "get": {
+        "operationId": "getBuildingUnits",
+        "summary": "Get advertised units and floor plans",
+        "description": "Proposed interface. Enable only for documented and verified source/country capabilities. Unit expansion; completeness explicitly scoped",
+        "x-research-status": "proposed",
+        "tags": [
+          "buildings"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response; meta discloses source completeness",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/getBuildingUnitsResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Typed error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "building_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 100,
+              "default": 20
+            }
+          },
+          {
+            "name": "cursor",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "x-runtime-status": "unavailable",
+        "x-credit-cost": 1
+      }
+    },
+    "/v1/developments/search": {
+      "post": {
+        "operationId": "searchDevelopments",
+        "summary": "Search developments",
+        "description": "Proposed interface. Enable only for documented and verified source/country capabilities. Dedicated source search contract; no blanket platform support",
+        "x-research-status": "proposed",
+        "tags": [
+          "developments"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response; meta discloses source completeness",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/searchDevelopmentsResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Typed error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EntitySearchRequest"
+              }
+            }
+          }
+        },
+        "x-runtime-status": "unavailable",
+        "x-credit-cost": 1
+      }
+    },
+    "/v1/developments/{development_id}": {
+      "get": {
+        "operationId": "getDevelopment",
+        "summary": "Get development",
+        "description": "Proposed interface. Enable only for documented and verified source/country capabilities. Dedicated source detail contract",
+        "x-research-status": "proposed",
+        "tags": [
+          "developments"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response; meta discloses source completeness",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/getDevelopmentResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Typed error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "development_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        ],
+        "x-runtime-status": "unavailable",
+        "x-credit-cost": 1
+      }
+    },
+    "/v1/agents/search": {
+      "post": {
+        "operationId": "searchAgents",
+        "summary": "Search agents",
+        "description": "Proposed interface. Enable only for documented and verified source/country capabilities. Dedicated source search contract; no blanket platform support",
+        "x-research-status": "proposed",
+        "tags": [
+          "agents"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response; meta discloses source completeness",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/searchAgentsResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Typed error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EntitySearchRequest"
+              }
+            }
+          }
+        },
+        "x-runtime-status": "unavailable",
+        "x-credit-cost": 1
+      }
+    },
+    "/v1/agents/{agent_id}": {
+      "get": {
+        "operationId": "getAgent",
+        "summary": "Get agent",
+        "description": "Proposed interface. Enable only for documented and verified source/country capabilities. Dedicated source detail contract",
+        "x-research-status": "proposed",
+        "tags": [
+          "agents"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response; meta discloses source completeness",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/getAgentResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Typed error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "agent_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        ],
+        "x-runtime-status": "unavailable",
+        "x-credit-cost": 1
+      }
+    },
+    "/v1/agents/{agent_id}/listings": {
+      "get": {
+        "operationId": "getAgentListings",
+        "summary": "Get professional listing portfolio",
+        "description": "Proposed interface. Enable only for documented and verified source/country capabilities. Source portfolio pagination contract",
+        "x-research-status": "proposed",
+        "tags": [
+          "agents"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response; meta discloses source completeness",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/getAgentListingsResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Typed error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "agent_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 100,
+              "default": 20
+            }
+          },
+          {
+            "name": "cursor",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "x-runtime-status": "unavailable",
+        "x-credit-cost": 1
+      }
+    },
+    "/v1/agencies/search": {
+      "post": {
+        "operationId": "searchAgencies",
+        "summary": "Search agencies",
+        "description": "Proposed interface. Enable only for documented and verified source/country capabilities. Dedicated source search contract; no blanket platform support",
+        "x-research-status": "proposed",
+        "tags": [
+          "agencies"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response; meta discloses source completeness",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/searchAgenciesResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Typed error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EntitySearchRequest"
+              }
+            }
+          }
+        },
+        "x-runtime-status": "unavailable",
+        "x-credit-cost": 1
+      }
+    },
+    "/v1/agencies/{agency_id}": {
+      "get": {
+        "operationId": "getAgency",
+        "summary": "Get agency",
+        "description": "Proposed interface. Enable only for documented and verified source/country capabilities. Dedicated source detail contract",
+        "x-research-status": "proposed",
+        "tags": [
+          "agencies"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response; meta discloses source completeness",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/getAgencyResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Typed error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "agency_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        ],
+        "x-runtime-status": "unavailable",
+        "x-credit-cost": 1
+      }
+    },
+    "/v1/agencies/{agency_id}/listings": {
+      "get": {
+        "operationId": "getAgencyListings",
+        "summary": "Get professional listing portfolio",
+        "description": "Proposed interface. Enable only for documented and verified source/country capabilities. Source portfolio pagination contract",
+        "x-research-status": "proposed",
+        "tags": [
+          "agencies"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response; meta discloses source completeness",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/getAgencyListingsResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Typed error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "agency_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 100,
+              "default": 20
+            }
+          },
+          {
+            "name": "cursor",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "x-runtime-status": "unavailable",
+        "x-credit-cost": 1
+      }
+    },
+    "/v1/auctions/search": {
+      "post": {
+        "operationId": "searchAuctions",
+        "summary": "Search auctions",
+        "description": "Proposed interface. Enable only for documented and verified source/country capabilities. Dedicated source search contract; no blanket platform support",
+        "x-research-status": "proposed",
+        "tags": [
+          "auctions"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response; meta discloses source completeness",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/searchAuctionsResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Typed error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EntitySearchRequest"
+              }
+            }
+          }
+        },
+        "x-runtime-status": "unavailable",
+        "x-credit-cost": 1
+      }
+    },
+    "/v1/auctions/{auction_id}": {
+      "get": {
+        "operationId": "getAuction",
+        "summary": "Get auction",
+        "description": "Proposed interface. Enable only for documented and verified source/country capabilities. Dedicated source detail contract",
+        "x-research-status": "proposed",
+        "tags": [
+          "auctions"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response; meta discloses source completeness",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/getAuctionResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Typed error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "auction_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        ],
+        "x-runtime-status": "unavailable",
+        "x-credit-cost": 1
+      }
+    },
+    "/v1/markets/search": {
+      "post": {
+        "operationId": "searchMarkets",
+        "summary": "Search markets",
+        "description": "Proposed interface. Enable only for documented and verified source/country capabilities. Dedicated source search contract; no blanket platform support",
+        "x-research-status": "proposed",
+        "tags": [
+          "markets"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response; meta discloses source completeness",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/searchMarketsResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Typed error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EntitySearchRequest"
+              }
+            }
+          }
+        },
+        "x-runtime-status": "unavailable",
+        "x-credit-cost": 1
+      }
+    },
+    "/v1/stays/search": {
+      "post": {
+        "operationId": "searchStays",
+        "summary": "Search property-focused accommodation",
+        "description": "Proposed interface. Enable only for documented and verified source/country capabilities. Airbnb/Vrbo actors or approved Booking/Rapid read APIs",
+        "x-research-status": "proposed",
+        "tags": [
+          "stays"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response; meta discloses source completeness",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/searchStaysResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Typed error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/StaySearchRequest"
+              }
+            }
+          }
+        },
+        "x-runtime-status": "unavailable",
+        "x-credit-cost": 1
+      }
+    },
+    "/v1/stays/{stay_id}": {
+      "get": {
+        "operationId": "getStay",
+        "summary": "Get accommodation details",
+        "description": "Proposed interface. Enable only for documented and verified source/country capabilities. Source detail contract",
+        "x-research-status": "proposed",
+        "tags": [
+          "stays"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response; meta discloses source completeness",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/getStayResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Typed error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "stay_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        ],
+        "x-runtime-status": "unavailable",
+        "x-credit-cost": 1
+      }
+    },
+    "/v1/stays/{stay_id}/quote": {
+      "post": {
+        "operationId": "getStayQuote",
+        "summary": "Get a dated guest-specific price quote",
+        "description": "Proposed interface. Enable only for documented and verified source/country capabilities. Booking/Rapid pricing or independently verified scraper quote",
+        "x-research-status": "proposed",
+        "tags": [
+          "stays"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response; meta discloses source completeness",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/getStayQuoteResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Typed error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "stay_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/QuoteRequest"
+              }
+            }
+          }
+        },
+        "x-runtime-status": "unavailable",
+        "x-credit-cost": 1
+      }
+    },
+    "/v1/stays/{stay_id}/availability": {
+      "get": {
+        "operationId": "getStayAvailability",
+        "summary": "Read calendar observations",
+        "description": "Proposed interface. Enable only for documented and verified source/country capabilities. Specific calendar contract; unavailable does not mean booked",
+        "x-research-status": "proposed",
+        "tags": [
+          "stays"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response; meta discloses source completeness",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/getStayAvailabilityResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Typed error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "stay_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          {
+            "name": "from",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "date"
+            }
+          },
+          {
+            "name": "to",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "date"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 100,
+              "default": 20
+            }
+          },
+          {
+            "name": "cursor",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "x-runtime-status": "unavailable",
+        "x-credit-cost": 1
+      }
+    },
+    "/v1/stays/{stay_id}/reviews": {
+      "get": {
+        "operationId": "getStayReviews",
+        "summary": "Read paginated accommodation reviews",
+        "description": "Proposed interface. Enable only for documented and verified source/country capabilities. Airbnb review actor; Booking review dataset",
+        "x-research-status": "proposed",
+        "tags": [
+          "stays"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response; meta discloses source completeness",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/getStayReviewsResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Typed error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "stay_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 100,
+              "default": 20
+            }
+          },
+          {
+            "name": "cursor",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "x-runtime-status": "unavailable",
+        "x-credit-cost": 1
+      }
+    },
+    "/v1/markets/{market_id}/series": {
+      "get": {
+        "operationId": "getMarketSeries",
+        "summary": "Read a named source market series",
+        "description": "Proposed interface. Enable only for documented and verified source/country capabilities. RentCast / PropertyData / official market datasets",
+        "x-research-status": "proposed",
+        "tags": [
+          "markets"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response; meta discloses source completeness",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/getMarketSeriesResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Typed error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "market_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          {
+            "name": "series",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "from",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "format": "date"
+            }
+          },
+          {
+            "name": "to",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "format": "date"
+            }
+          }
+        ],
+        "x-runtime-status": "unavailable",
+        "x-credit-cost": 1
+      }
+    },
+    "/v1/locations/search": {
+      "post": {
+        "operationId": "searchLocations",
+        "summary": "Find source-compatible locations",
+        "description": "Proposed interface. Enable only for documented and verified source/country capabilities. Official geography/autocomplete source contract",
+        "x-research-status": "proposed",
+        "tags": [
+          "locations"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response; meta discloses source completeness",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/searchLocationsResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Typed error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EntitySearchRequest"
+              }
+            }
+          }
+        },
+        "x-runtime-status": "unavailable",
+        "x-credit-cost": 1
+      }
+    },
+    "/v1/jobs": {
+      "post": {
+        "operationId": "createReadJob",
+        "summary": "Request asynchronous read collection",
+        "description": "Proposed interface. Enable only for documented and verified source/country capabilities. Apify/Bright Data async collection semantics",
+        "x-research-status": "proposed",
+        "tags": [
+          "jobs"
+        ],
+        "responses": {
+          "202": {
+            "description": "Read job accepted",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/createReadJobResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Typed error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/JobRequest"
+              }
+            }
+          }
+        },
+        "x-runtime-status": "unavailable",
+        "x-credit-cost": 1
+      }
+    },
+    "/v1/jobs/{job_id}": {
+      "get": {
+        "operationId": "getReadJob",
+        "summary": "Get read collection status",
+        "description": "Proposed interface. Enable only for documented and verified source/country capabilities. Proposed job contract",
+        "x-research-status": "proposed",
+        "tags": [
+          "jobs"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response; meta discloses source completeness",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/getReadJobResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Typed error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "job_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        ],
+        "x-runtime-status": "unavailable",
+        "x-credit-cost": 1
+      }
+    },
+    "/v1/jobs/{job_id}/results": {
+      "get": {
+        "operationId": "getReadJobResults",
+        "summary": "Read completed collection results",
+        "description": "Proposed interface. Enable only for documented and verified source/country capabilities. Proposed job contract",
+        "x-research-status": "proposed",
+        "tags": [
+          "jobs"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response; meta discloses source completeness",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/getReadJobResultsResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Typed error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "job_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 100,
+              "default": 20
+            }
+          },
+          {
+            "name": "cursor",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "x-runtime-status": "unavailable",
+        "x-credit-cost": 1
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "ApiKeyAuth": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "x-api-key"
+      }
+    },
+    "schemas": {
+      "Source": {
+        "type": "object",
+        "properties": {
+          "platform": {
+            "type": "string"
+          },
+          "country": {
+            "type": "string"
+          },
+          "native_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "url": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uri"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "provider": {
+            "type": "string"
+          },
+          "observed_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "source_updated_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "access_class": {
+            "type": "string",
+            "enum": [
+              "public_portal",
+              "licensed_feed",
+              "public_record",
+              "modeled"
+            ]
+          },
+          "retrieved_at": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "required": [
+          "platform",
+          "provider",
+          "observed_at",
+          "access_class"
+        ],
+        "additionalProperties": false
+      },
+      "Money": {
+        "type": "object",
+        "properties": {
+          "amount": {
+            "anyOf": [
+              {
+                "type": "string",
+                "pattern": "^-?\\d+(\\.\\d+)?$"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "min": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "max": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "currency": {
+            "anyOf": [
+              {
+                "type": "string",
+                "pattern": "^[A-Z]{3}$"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "unit_code": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "kind": {
+            "type": "string",
+            "enum": [
+              "asking",
+              "sold",
+              "rent",
+              "lease_rate",
+              "starting_bid",
+              "deposit",
+              "fee",
+              "estimate",
+              "unknown"
+            ]
+          },
+          "period": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "night",
+                  "week",
+                  "month",
+                  "year",
+                  "one_time"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "per_area_unit": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "display_text": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "required": [
+          "amount",
+          "currency",
+          "kind"
+        ],
+        "additionalProperties": false
+      },
+      "Area": {
+        "type": "object",
+        "properties": {
+          "value": {
+            "type": "number"
+          },
+          "unit": {
+            "type": "string",
+            "enum": [
+              "sqm",
+              "sqft",
+              "acre",
+              "hectare",
+              "ping",
+              "tsubo",
+              "other"
+            ]
+          },
+          "basis": {
+            "type": "string",
+            "enum": [
+              "living",
+              "built",
+              "gross",
+              "carpet",
+              "saleable",
+              "land",
+              "unknown"
+            ]
+          },
+          "original_text": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "normalized_sqm": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "required": [
+          "value",
+          "unit",
+          "basis"
+        ],
+        "additionalProperties": false
+      },
+      "Address": {
+        "type": "object",
+        "properties": {
+          "formatted": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "line1": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "unit": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "city": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "region": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "postal_code": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "country": {
+            "type": "string",
+            "pattern": "^[A-Z]{2}$"
+          },
+          "original_text": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "required": [
+          "country"
+        ],
+        "additionalProperties": false
+      },
+      "Geometry": {
+        "type": "object",
+        "properties": {
+          "latitude": {
+            "type": "number",
+            "minimum": -90,
+            "maximum": 90
+          },
+          "longitude": {
+            "type": "number",
+            "minimum": -180,
+            "maximum": 180
+          },
+          "precision": {
+            "type": "string",
+            "enum": [
+              "exact",
+              "approximate",
+              "centroid",
+              "obfuscated",
+              "unknown"
+            ]
+          },
+          "crs": {
+            "type": "string",
+            "const": "EPSG:4326"
+          }
+        },
+        "required": [
+          "latitude",
+          "longitude",
+          "precision",
+          "crs"
+        ],
+        "additionalProperties": false
+      },
+      "PropertySummary": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "address": {
+            "$ref": "#/components/schemas/Address"
+          },
+          "geometry": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Geometry"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "property_type": {
+            "type": "string"
+          },
+          "bedrooms": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "rooms": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "bathrooms": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "areas": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Area"
+            }
+          },
+          "layout": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "year_built": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "required": [
+          "id",
+          "address",
+          "property_type"
+        ],
+        "additionalProperties": false
+      },
+      "Media": {
+        "type": "object",
+        "properties": {
+          "url": {
+            "type": "string",
+            "format": "uri"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "photo",
+              "floor_plan",
+              "video",
+              "virtual_tour",
+              "document"
+            ]
+          },
+          "caption": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "position": {
+            "type": "integer"
+          },
+          "source": {
+            "$ref": "#/components/schemas/Source"
+          }
+        },
+        "required": [
+          "url",
+          "type"
+        ],
+        "additionalProperties": false
+      },
+      "Agent": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "source": {
+            "$ref": "#/components/schemas/Source"
+          },
+          "name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "agency_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "profile_url": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "professional_contacts": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "kind": {
+                  "type": "string",
+                  "enum": [
+                    "business_phone",
+                    "business_email",
+                    "website"
+                  ]
+                },
+                "value": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "kind",
+                "value"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "extensions": {
+            "type": "object",
+            "properties": {},
+            "required": [],
+            "additionalProperties": true
+          }
+        },
+        "required": [
+          "id",
+          "source"
+        ],
+        "additionalProperties": false
+      },
+      "Agency": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "source": {
+            "$ref": "#/components/schemas/Source"
+          },
+          "name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "address": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Address"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "website": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "required": [
+          "id",
+          "source"
+        ],
+        "additionalProperties": false
+      },
+      "Listing": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "source": {
+            "$ref": "#/components/schemas/Source"
+          },
+          "native_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "transaction": {
+            "type": "string",
+            "enum": [
+              "sale",
+              "rent",
+              "lease",
+              "auction"
+            ]
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "active",
+              "pending",
+              "contingent",
+              "sold",
+              "rented",
+              "withdrawn",
+              "expired",
+              "off_market",
+              "unknown"
+            ]
+          },
+          "source_status": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "title": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "url": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "property": {
+            "$ref": "#/components/schemas/PropertySummary"
+          },
+          "price": {
+            "$ref": "#/components/schemas/Money"
+          },
+          "agent": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Agent"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "agency": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Agency"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "media": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Media"
+            }
+          },
+          "observed_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "source_updated_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "extensions": {
+            "type": "object",
+            "properties": {},
+            "required": [],
+            "additionalProperties": true
+          },
+          "field_status": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string",
+              "enum": [
+                "present",
+                "not_published",
+                "not_requested",
+                "unsupported",
+                "restricted",
+                "temporarily_unavailable"
+              ]
+            }
+          }
+        },
+        "required": [
+          "id",
+          "source",
+          "transaction",
+          "status",
+          "property",
+          "price",
+          "observed_at"
+        ],
+        "additionalProperties": false
+      },
+      "Property": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "summary": {
+            "$ref": "#/components/schemas/PropertySummary"
+          },
+          "references": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "namespace": {
+                  "type": "string"
+                },
+                "value": {
+                  "type": "string"
+                },
+                "jurisdiction": {
+                  "anyOf": [
+                    {
+                      "type": "string"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                }
+              },
+              "required": [
+                "namespace",
+                "value"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "sources": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Source"
+            }
+          }
+        },
+        "required": [
+          "id",
+          "summary",
+          "sources"
+        ],
+        "additionalProperties": false
+      },
+      "HistoryEvent": {
+        "type": "object",
+        "properties": {
+          "kind": {
+            "type": "string",
+            "enum": [
+              "listed",
+              "price_changed",
+              "pending",
+              "sold",
+              "rented",
+              "withdrawn",
+              "expired",
+              "relisted",
+              "unavailable_observation",
+              "other"
+            ]
+          },
+          "event_at": {
+            "type": "string"
+          },
+          "time_precision": {
+            "type": "string",
+            "enum": [
+              "date",
+              "second",
+              "approximate",
+              "unknown"
+            ]
+          },
+          "origin": {
+            "type": "string",
+            "enum": [
+              "source_reported",
+              "public_record",
+              "licensed_feed",
+              "observed_change",
+              "modeled"
+            ]
+          },
+          "price": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Money"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "source": {
+            "$ref": "#/components/schemas/Source"
+          },
+          "source_text": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "required": [
+          "kind",
+          "event_at",
+          "time_precision",
+          "origin",
+          "source"
+        ],
+        "additionalProperties": false
+      },
+      "OpenHouse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "starts_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "ends_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "timezone": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "in_person",
+              "virtual",
+              "unknown"
+            ]
+          },
+          "source": {
+            "$ref": "#/components/schemas/Source"
+          }
+        },
+        "required": [
+          "id",
+          "starts_at",
+          "timezone",
+          "source"
+        ],
+        "additionalProperties": false
+      },
+      "Comparable": {
+        "type": "object",
+        "properties": {
+          "property": {
+            "$ref": "#/components/schemas/PropertySummary"
+          },
+          "listing": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Listing"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "price": {
+            "$ref": "#/components/schemas/Money"
+          },
+          "basis": {
+            "type": "string",
+            "enum": [
+              "closed_sale",
+              "active_listing",
+              "rental_listing",
+              "closed_lease",
+              "source_recommendation"
+            ]
+          },
+          "event_at": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "distance_meters": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "selection_method": {
+            "type": "string"
+          },
+          "source": {
+            "$ref": "#/components/schemas/Source"
+          }
+        },
+        "required": [
+          "property",
+          "price",
+          "basis",
+          "selection_method",
+          "source"
+        ],
+        "additionalProperties": false
+      },
+      "Valuation": {
+        "type": "object",
+        "properties": {
+          "estimate": {
+            "$ref": "#/components/schemas/Money"
+          },
+          "lower": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "upper": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "as_of": {
+            "type": "string"
+          },
+          "provider": {
+            "type": "string"
+          },
+          "model": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "method": {
+            "type": "string"
+          },
+          "confidence": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "source": {
+            "$ref": "#/components/schemas/Source"
+          }
+        },
+        "required": [
+          "estimate",
+          "as_of",
+          "provider",
+          "method",
+          "source"
+        ],
+        "additionalProperties": false
+      },
+      "Record": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "record_type": {
+            "type": "string",
+            "enum": [
+              "property_record",
+              "transaction",
+              "tax_assessment"
+            ]
+          },
+          "event_at": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "jurisdiction": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "source": {
+            "$ref": "#/components/schemas/Source"
+          },
+          "fields": {
+            "type": "object",
+            "properties": {},
+            "required": [],
+            "additionalProperties": true
+          }
+        },
+        "required": [
+          "id",
+          "record_type",
+          "source",
+          "fields"
+        ],
+        "additionalProperties": false
+      },
+      "Unit": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "kind": {
+            "type": "string",
+            "enum": [
+              "physical_unit",
+              "floor_plan",
+              "availability_bucket"
+            ]
+          },
+          "label": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "price": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Money"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "available_from": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "property": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/PropertySummary"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "source": {
+            "$ref": "#/components/schemas/Source"
+          }
+        },
+        "required": [
+          "kind",
+          "source"
+        ],
+        "additionalProperties": false
+      },
+      "Building": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "address": {
+            "$ref": "#/components/schemas/Address"
+          },
+          "source": {
+            "$ref": "#/components/schemas/Source"
+          },
+          "extensions": {
+            "type": "object",
+            "properties": {},
+            "required": [],
+            "additionalProperties": true
+          }
+        },
+        "required": [
+          "id",
+          "address",
+          "source"
+        ],
+        "additionalProperties": false
+      },
+      "Development": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "address": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Address"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "phase": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "completion_date": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "source": {
+            "$ref": "#/components/schemas/Source"
+          },
+          "extensions": {
+            "type": "object",
+            "properties": {},
+            "required": [],
+            "additionalProperties": true
+          }
+        },
+        "required": [
+          "id",
+          "source"
+        ],
+        "additionalProperties": false
+      },
+      "Auction": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "listing": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Listing"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "starts_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "ends_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "timezone": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "status": {
+            "type": "string"
+          },
+          "starting_bid": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Money"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "current_bid": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Money"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "reserve_disclosed": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "reserve": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Money"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "terms_url": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "source": {
+            "$ref": "#/components/schemas/Source"
+          }
+        },
+        "required": [
+          "id",
+          "status",
+          "source"
+        ],
+        "additionalProperties": false
+      },
+      "Stay": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "source": {
+            "$ref": "#/components/schemas/Source"
+          },
+          "name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "property": {
+            "$ref": "#/components/schemas/PropertySummary"
+          },
+          "accommodation_type": {
+            "type": "string",
+            "enum": [
+              "entire_home",
+              "private_room",
+              "shared_room",
+              "apartment",
+              "hotel",
+              "other",
+              "unknown"
+            ]
+          },
+          "guest_capacity": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "extensions": {
+            "type": "object",
+            "properties": {},
+            "required": [],
+            "additionalProperties": true
+          }
+        },
+        "required": [
+          "id",
+          "source",
+          "property",
+          "accommodation_type"
+        ],
+        "additionalProperties": false
+      },
+      "Guests": {
+        "type": "object",
+        "properties": {
+          "adults": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 30
+          },
+          "children_ages": {
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 17
+            }
+          },
+          "infants": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "pets": {
+            "type": "integer",
+            "minimum": 0
+          }
+        },
+        "required": [
+          "adults"
+        ],
+        "additionalProperties": false
+      },
+      "QuoteRequest": {
+        "type": "object",
+        "properties": {
+          "check_in": {
+            "type": "string",
+            "format": "date"
+          },
+          "check_out": {
+            "type": "string",
+            "format": "date"
+          },
+          "guests": {
+            "$ref": "#/components/schemas/Guests"
+          },
+          "currency": {
+            "type": "string",
+            "pattern": "^[A-Z]{3}$"
+          },
+          "locale": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "check_in",
+          "check_out",
+          "guests",
+          "currency"
+        ],
+        "additionalProperties": false,
+        "description": "check_out must be after check_in; source-specific stay length and guest limits are validated at runtime."
+      },
+      "Quote": {
+        "type": "object",
+        "properties": {
+          "stay_id": {
+            "type": "string"
+          },
+          "check_in": {
+            "type": "string",
+            "format": "date"
+          },
+          "check_out": {
+            "type": "string",
+            "format": "date"
+          },
+          "guests": {
+            "$ref": "#/components/schemas/Guests"
+          },
+          "total": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Money"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "fees": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Money"
+            }
+          },
+          "taxes_included": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "price_completeness": {
+            "type": "string",
+            "enum": [
+              "all_in",
+              "partial",
+              "unknown"
+            ]
+          },
+          "cancellation_text": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "quoted_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "source": {
+            "$ref": "#/components/schemas/Source"
+          }
+        },
+        "required": [
+          "stay_id",
+          "check_in",
+          "check_out",
+          "guests",
+          "total",
+          "price_completeness",
+          "quoted_at",
+          "source"
+        ],
+        "additionalProperties": false
+      },
+      "AvailabilityDay": {
+        "type": "object",
+        "properties": {
+          "date": {
+            "type": "string",
+            "format": "date"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "available",
+              "unavailable",
+              "unknown"
+            ]
+          },
+          "minimum_nights": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "source": {
+            "$ref": "#/components/schemas/Source"
+          }
+        },
+        "required": [
+          "date",
+          "status",
+          "source"
+        ],
+        "additionalProperties": false
+      },
+      "Review": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "published_at": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "rating": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "rating_scale_max": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "text": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "source": {
+            "$ref": "#/components/schemas/Source"
+          }
+        },
+        "required": [
+          "id",
+          "source"
+        ],
+        "additionalProperties": false
+      },
+      "Market": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "country": {
+            "type": "string"
+          },
+          "geography_type": {
+            "type": "string"
+          },
+          "source": {
+            "$ref": "#/components/schemas/Source"
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "country",
+          "geography_type",
+          "source"
+        ],
+        "additionalProperties": false
+      },
+      "SeriesPoint": {
+        "type": "object",
+        "properties": {
+          "period": {
+            "type": "string"
+          },
+          "value": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "required": [
+          "period",
+          "value"
+        ],
+        "additionalProperties": false
+      },
+      "MarketSeries": {
+        "type": "object",
+        "properties": {
+          "market_id": {
+            "type": "string"
+          },
+          "series": {
+            "type": "string"
+          },
+          "unit": {
+            "type": "string"
+          },
+          "frequency": {
+            "type": "string",
+            "enum": [
+              "daily",
+              "weekly",
+              "monthly",
+              "quarterly",
+              "annual"
+            ]
+          },
+          "methodology": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "points": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SeriesPoint"
+            }
+          },
+          "source": {
+            "$ref": "#/components/schemas/Source"
+          }
+        },
+        "required": [
+          "market_id",
+          "series",
+          "unit",
+          "frequency",
+          "points",
+          "source"
+        ],
+        "additionalProperties": false
+      },
+      "Location": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "country": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string"
+          },
+          "geometry": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Geometry"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "source_platform": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "country",
+          "type"
+        ],
+        "additionalProperties": false
+      },
+      "Resolution": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "enum": [
+              "matched",
+              "ambiguous",
+              "unmatched"
+            ]
+          },
+          "candidates": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "entity_type": {
+                  "type": "string",
+                  "enum": [
+                    "listing",
+                    "property",
+                    "building"
+                  ]
+                },
+                "confidence": {
+                  "anyOf": [
+                    {
+                      "type": "number"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                },
+                "method": {
+                  "type": "string"
+                },
+                "source": {
+                  "$ref": "#/components/schemas/Source"
+                }
+              },
+              "required": [
+                "id",
+                "entity_type",
+                "method",
+                "source"
+              ],
+              "additionalProperties": false
+            }
+          }
+        },
+        "required": [
+          "status",
+          "candidates"
+        ],
+        "additionalProperties": false
+      },
+      "LocationSelector": {
+        "oneOf": [
+          {
+            "type": "object",
+            "properties": {
+              "kind": {
+                "const": "text"
+              },
+              "query": {
+                "type": "string"
+              },
+              "country": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "kind",
+              "query",
+              "country"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "properties": {
+              "kind": {
+                "const": "postal_code"
+              },
+              "postal_code": {
+                "type": "string"
+              },
+              "country": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "kind",
+              "postal_code",
+              "country"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "properties": {
+              "kind": {
+                "const": "bbox"
+              },
+              "bbox": {
+                "type": "array",
+                "items": {
+                  "type": "number"
+                },
+                "minItems": 4,
+                "maxItems": 4
+              }
+            },
+            "required": [
+              "kind",
+              "bbox"
+            ],
+            "additionalProperties": false,
+            "description": "west,south,east,north in WGS84; bounds and antimeridian handling validated at runtime."
+          },
+          {
+            "type": "object",
+            "properties": {
+              "kind": {
+                "const": "radius"
+              },
+              "latitude": {
+                "type": "number",
+                "minimum": -90,
+                "maximum": 90
+              },
+              "longitude": {
+                "type": "number",
+                "minimum": -180,
+                "maximum": 180
+              },
+              "radius_meters": {
+                "type": "number",
+                "exclusiveMinimum": 0,
+                "maximum": 100000
+              }
+            },
+            "required": [
+              "kind",
+              "latitude",
+              "longitude",
+              "radius_meters"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "properties": {
+              "kind": {
+                "const": "polygon"
+              },
+              "geometry": {
+                "type": "object",
+                "properties": {
+                  "type": {
+                    "const": "Polygon"
+                  },
+                  "coordinates": {
+                    "type": "array",
+                    "items": {
+                      "type": "array",
+                      "minItems": 4,
+                      "items": {
+                        "type": "array",
+                        "items": {
+                          "type": "number"
+                        },
+                        "minItems": 2,
+                        "maxItems": 2
+                      }
+                    }
+                  }
+                },
+                "required": [
+                  "type",
+                  "coordinates"
+                ],
+                "additionalProperties": false
+              }
+            },
+            "required": [
+              "kind",
+              "geometry"
+            ],
+            "additionalProperties": false,
+            "description": "GeoJSON WGS84 polygon with closed rings. Ring closure and coordinate bounds validated at runtime."
+          },
+          {
+            "type": "object",
+            "properties": {
+              "kind": {
+                "const": "source_region"
+              },
+              "platform": {
+                "type": "string"
+              },
+              "region_id": {
+                "type": "string"
+              },
+              "country": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "kind",
+              "platform",
+              "region_id",
+              "country"
+            ],
+            "additionalProperties": false
+          }
+        ]
+      },
+      "Bounds": {
+        "type": "object",
+        "properties": {
+          "min": {
+            "type": "number"
+          },
+          "max": {
+            "type": "number"
+          }
+        },
+        "required": [],
+        "additionalProperties": false,
+        "description": "At least one bound is required; min <= max when both supplied.",
+        "anyOf": [
+          {
+            "required": [
+              "min"
+            ]
+          },
+          {
+            "required": [
+              "max"
+            ]
+          }
+        ]
+      },
+      "PriceFilter": {
+        "type": "object",
+        "properties": {
+          "min": {
+            "type": "number"
+          },
+          "max": {
+            "type": "number"
+          },
+          "currency": {
+            "type": "string"
+          },
+          "unit_code": {
+            "type": "string"
+          },
+          "period": {
+            "type": "string",
+            "enum": [
+              "night",
+              "week",
+              "month",
+              "year",
+              "one_time"
+            ]
+          }
+        },
+        "required": [
+          "currency"
+        ],
+        "additionalProperties": false,
+        "anyOf": [
+          {
+            "required": [
+              "min"
+            ]
+          },
+          {
+            "required": [
+              "max"
+            ]
+          }
+        ]
+      },
+      "ListingSearchRequest": {
+        "type": "object",
+        "properties": {
+          "platforms": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "minItems": 1,
+            "maxItems": 5,
+            "uniqueItems": true
+          },
+          "location": {
+            "$ref": "#/components/schemas/LocationSelector"
+          },
+          "transaction": {
+            "type": "string",
+            "enum": [
+              "sale",
+              "rent",
+              "lease",
+              "auction"
+            ]
+          },
+          "property_types": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "status": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "price": {
+            "$ref": "#/components/schemas/PriceFilter"
+          },
+          "bedrooms": {
+            "$ref": "#/components/schemas/Bounds"
+          },
+          "bathrooms": {
+            "$ref": "#/components/schemas/Bounds"
+          },
+          "area": {
+            "type": "object",
+            "properties": {
+              "min": {
+                "type": "number"
+              },
+              "max": {
+                "type": "number"
+              },
+              "unit": {
+                "type": "string",
+                "enum": [
+                  "sqm",
+                  "sqft",
+                  "acre",
+                  "hectare"
+                ]
+              },
+              "basis": {
+                "type": "string",
+                "enum": [
+                  "living",
+                  "built",
+                  "gross",
+                  "carpet",
+                  "land",
+                  "unknown"
+                ]
+              }
+            },
+            "required": [
+              "unit",
+              "basis"
+            ],
+            "additionalProperties": false
+          },
+          "listed_since": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "sort": {
+            "type": "string",
+            "enum": [
+              "source_order",
+              "price_asc",
+              "price_desc",
+              "newest"
+            ]
+          },
+          "include": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "media",
+                "history",
+                "agent",
+                "agency",
+                "units",
+                "open_houses",
+                "source_fields"
+              ]
+            }
+          },
+          "source_filters": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "object",
+              "properties": {},
+              "required": [],
+              "additionalProperties": true
+            }
+          },
+          "limit": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 100,
+            "default": 20
+          },
+          "cursor": {
+            "type": "string"
+          },
+          "allow_partial": {
+            "type": "boolean",
+            "default": false
+          },
+          "group_by_property": {
+            "type": "boolean",
+            "default": false
+          }
+        },
+        "required": [
+          "platforms",
+          "location",
+          "transaction"
+        ],
+        "additionalProperties": false
+      },
+      "PlatformSearchRequest": {
+        "type": "object",
+        "properties": {
+          "location": {
+            "$ref": "#/components/schemas/LocationSelector"
+          },
+          "transaction": {
+            "type": "string",
+            "enum": [
+              "sale",
+              "rent",
+              "lease",
+              "auction"
+            ]
+          },
+          "property_types": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "status": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "price": {
+            "$ref": "#/components/schemas/PriceFilter"
+          },
+          "bedrooms": {
+            "$ref": "#/components/schemas/Bounds"
+          },
+          "bathrooms": {
+            "$ref": "#/components/schemas/Bounds"
+          },
+          "area": {
+            "type": "object",
+            "properties": {
+              "min": {
+                "type": "number"
+              },
+              "max": {
+                "type": "number"
+              },
+              "unit": {
+                "type": "string",
+                "enum": [
+                  "sqm",
+                  "sqft",
+                  "acre",
+                  "hectare"
+                ]
+              },
+              "basis": {
+                "type": "string",
+                "enum": [
+                  "living",
+                  "built",
+                  "gross",
+                  "carpet",
+                  "land",
+                  "unknown"
+                ]
+              }
+            },
+            "required": [
+              "unit",
+              "basis"
+            ],
+            "additionalProperties": false
+          },
+          "listed_since": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "sort": {
+            "type": "string",
+            "enum": [
+              "source_order",
+              "price_asc",
+              "price_desc",
+              "newest"
+            ]
+          },
+          "include": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "media",
+                "history",
+                "agent",
+                "agency",
+                "units",
+                "open_houses",
+                "source_fields"
+              ]
+            }
+          },
+          "source_filters": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "object",
+              "properties": {},
+              "required": [],
+              "additionalProperties": true
+            }
+          },
+          "limit": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 100,
+            "default": 20
+          },
+          "cursor": {
+            "type": "string"
+          },
+          "allow_partial": {
+            "type": "boolean",
+            "default": false
+          },
+          "group_by_property": {
+            "type": "boolean",
+            "default": false
+          }
+        },
+        "required": [
+          "location",
+          "transaction"
+        ],
+        "additionalProperties": false
+      },
+      "ListingResolveRequest": {
+        "oneOf": [
+          {
+            "type": "object",
+            "properties": {
+              "url": {
+                "type": "string",
+                "format": "uri"
+              }
+            },
+            "required": [
+              "url"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "properties": {
+              "platform": {
+                "type": "string"
+              },
+              "native_id": {
+                "type": "string"
+              },
+              "country": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "platform",
+              "native_id"
+            ],
+            "additionalProperties": false
+          }
+        ]
+      },
+      "PropertyResolveRequest": {
+        "oneOf": [
+          {
+            "type": "object",
+            "properties": {
+              "address": {
+                "$ref": "#/components/schemas/AddressSelector"
+              }
+            },
+            "required": [
+              "address"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "properties": {
+              "parcel_id": {
+                "type": "string"
+              },
+              "jurisdiction": {
+                "type": "string"
+              },
+              "country": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "parcel_id",
+              "jurisdiction",
+              "country"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "properties": {
+              "platform": {
+                "type": "string"
+              },
+              "native_id": {
+                "type": "string"
+              },
+              "country": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "platform",
+              "native_id"
+            ],
+            "additionalProperties": false
+          }
+        ]
+      },
+      "EntitySearchRequest": {
+        "type": "object",
+        "properties": {
+          "platforms": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "minItems": 1,
+            "maxItems": 5
+          },
+          "query": {
+            "type": "string"
+          },
+          "location": {
+            "$ref": "#/components/schemas/LocationSelector"
+          },
+          "limit": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 100,
+            "default": 20
+          },
+          "cursor": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "platforms"
+        ],
+        "additionalProperties": false,
+        "anyOf": [
+          {
+            "required": [
+              "query"
+            ]
+          },
+          {
+            "required": [
+              "location"
+            ]
+          }
+        ]
+      },
+      "StaySearchRequest": {
+        "type": "object",
+        "properties": {
+          "platforms": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "minItems": 1,
+            "maxItems": 5,
+            "uniqueItems": true
+          },
+          "location": {
+            "$ref": "#/components/schemas/LocationSelector"
+          },
+          "check_in": {
+            "type": "string",
+            "format": "date"
+          },
+          "check_out": {
+            "type": "string",
+            "format": "date"
+          },
+          "guests": {
+            "$ref": "#/components/schemas/Guests"
+          },
+          "currency": {
+            "type": "string",
+            "pattern": "^[A-Z]{3}$"
+          },
+          "locale": {
+            "type": "string"
+          },
+          "accommodation_types": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "limit": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 100,
+            "default": 20
+          },
+          "cursor": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "platforms",
+          "location",
+          "check_in",
+          "check_out",
+          "guests",
+          "currency"
+        ],
+        "additionalProperties": false
+      },
+      "SourceOutcome": {
+        "type": "object",
+        "properties": {
+          "platform": {
+            "type": "string"
+          },
+          "provider": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "success",
+              "partial",
+              "failed",
+              "unsupported"
+            ]
+          },
+          "error_code": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "truncated": {
+            "type": "boolean"
+          },
+          "observed_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "required": [
+          "platform",
+          "status"
+        ],
+        "additionalProperties": false
+      },
+      "Meta": {
+        "type": "object",
+        "properties": {
+          "request_id": {
+            "type": "string"
+          },
+          "schema_version": {
+            "type": "string"
+          },
+          "generated_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "completeness": {
+            "type": "string",
+            "enum": [
+              "complete",
+              "partial",
+              "unknown"
+            ]
+          },
+          "sources": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SourceOutcome"
+            }
+          },
+          "warnings": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "string"
+                },
+                "message": {
+                  "type": "string"
+                },
+                "field": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "code",
+                "message"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "pagination": {
+            "type": "object",
+            "properties": {
+              "next_cursor": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "has_more": {
+                "type": "boolean"
+              },
+              "returned": {
+                "type": "integer"
+              },
+              "total": {
+                "anyOf": [
+                  {
+                    "type": "integer"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "total_relation": {
+                "type": "string",
+                "enum": [
+                  "exact",
+                  "lower_bound",
+                  "unknown"
+                ]
+              }
+            },
+            "required": [
+              "next_cursor",
+              "has_more",
+              "returned",
+              "total",
+              "total_relation"
+            ],
+            "additionalProperties": false
+          },
+          "property_groups": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PropertyGroup"
+            }
+          }
+        },
+        "required": [
+          "request_id",
+          "schema_version",
+          "generated_at",
+          "completeness",
+          "sources"
+        ],
+        "additionalProperties": false
+      },
+      "PropertyGroup": {
+        "type": "object",
+        "properties": {
+          "property_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "listing_ids": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "match_method": {
+            "type": "string"
+          },
+          "confidence": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "matched",
+              "ambiguous"
+            ]
+          }
+        },
+        "required": [
+          "property_id",
+          "listing_ids",
+          "match_method",
+          "status"
+        ],
+        "additionalProperties": false
+      },
+      "Platform": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "countries": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "verticals": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "research",
+              "beta",
+              "active",
+              "unavailable",
+              "retired"
+            ]
+          },
+          "evidence_level": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "countries",
+          "verticals",
+          "status",
+          "evidence_level"
+        ],
+        "additionalProperties": false
+      },
+      "Capability": {
+        "type": "object",
+        "properties": {
+          "platform": {
+            "type": "string"
+          },
+          "country": {
+            "type": "string"
+          },
+          "operation": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "research",
+              "beta",
+              "active",
+              "unavailable",
+              "retired"
+            ]
+          },
+          "required_selectors": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "supported_filters": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "supported_sorts": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "supported_expansions": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "supports_polygon": {
+            "type": "boolean"
+          },
+          "max_page_size": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "execution": {
+            "type": "string",
+            "enum": [
+              "sync",
+              "async",
+              "both"
+            ]
+          },
+          "access_class": {
+            "type": "string"
+          },
+          "evidence_level": {
+            "type": "string"
+          },
+          "checked_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "supports_history": {
+            "type": "boolean"
+          },
+          "history_kind": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "source_reported",
+                "public_record",
+                "licensed_feed",
+                "observed_change",
+                "modeled"
+              ]
+            }
+          },
+          "supports_units": {
+            "type": "boolean"
+          },
+          "supports_reviews": {
+            "type": "boolean"
+          },
+          "price_units": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "geographies": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "platform",
+          "operation",
+          "status",
+          "evidence_level"
+        ],
+        "additionalProperties": false
+      },
+      "SchemaInfo": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "version": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "name",
+          "version"
+        ],
+        "additionalProperties": false
+      },
+      "JobRequest": {
+        "oneOf": [
+          {
+            "type": "object",
+            "properties": {
+              "operation": {
+                "const": "listings.search"
+              },
+              "params": {
+                "$ref": "#/components/schemas/ListingSearchRequest"
+              },
+              "max_items": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 10000
+              },
+              "client_request_id": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "operation",
+              "params",
+              "max_items"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "properties": {
+              "operation": {
+                "const": "stays.search"
+              },
+              "params": {
+                "$ref": "#/components/schemas/StaySearchRequest"
+              },
+              "max_items": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 10000
+              },
+              "client_request_id": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "operation",
+              "params",
+              "max_items"
+            ],
+            "additionalProperties": false
+          }
+        ]
+      },
+      "Job": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "operation": {
+            "type": "string",
+            "enum": [
+              "listings.search",
+              "stays.search"
+            ]
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "queued",
+              "running",
+              "succeeded",
+              "partial",
+              "failed",
+              "cancelled"
+            ]
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "completed_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "result_count": {
+            "type": "integer"
+          },
+          "sources": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SourceOutcome"
+            }
+          }
+        },
+        "required": [
+          "id",
+          "operation",
+          "status",
+          "created_at",
+          "result_count",
+          "sources"
+        ],
+        "additionalProperties": false
+      },
+      "JobItem": {
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/Listing"
+          },
+          {
+            "$ref": "#/components/schemas/Stay"
+          }
+        ]
+      },
+      "ErrorResponse": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "object",
+            "properties": {
+              "code": {
+                "type": "string"
+              },
+              "message": {
+                "type": "string"
+              },
+              "retryable": {
+                "type": "boolean"
+              },
+              "details": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/SourceOutcome"
+                }
+              }
+            },
+            "required": [
+              "code",
+              "message",
+              "retryable"
+            ],
+            "additionalProperties": false
+          },
+          "request_id": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "error",
+          "request_id"
+        ],
+        "additionalProperties": false
+      },
+      "listPlatformsResponse": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Platform"
+            }
+          },
+          "meta": {
+            "$ref": "#/components/schemas/Meta"
+          }
+        },
+        "required": [
+          "data",
+          "meta"
+        ],
+        "additionalProperties": false
+      },
+      "listCapabilitiesResponse": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Capability"
+            }
+          },
+          "meta": {
+            "$ref": "#/components/schemas/Meta"
+          }
+        },
+        "required": [
+          "data",
+          "meta"
+        ],
+        "additionalProperties": false
+      },
+      "listSchemasResponse": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SchemaInfo"
+            }
+          },
+          "meta": {
+            "$ref": "#/components/schemas/Meta"
+          }
+        },
+        "required": [
+          "data",
+          "meta"
+        ],
+        "additionalProperties": false
+      },
+      "searchListingsResponse": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Listing"
+            }
+          },
+          "meta": {
+            "$ref": "#/components/schemas/Meta"
+          }
+        },
+        "required": [
+          "data",
+          "meta"
+        ],
+        "additionalProperties": false
+      },
+      "searchPlatformListingsResponse": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Listing"
+            }
+          },
+          "meta": {
+            "$ref": "#/components/schemas/Meta"
+          }
+        },
+        "required": [
+          "data",
+          "meta"
+        ],
+        "additionalProperties": false
+      },
+      "getPlatformListingResponse": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/Listing"
+          },
+          "meta": {
+            "$ref": "#/components/schemas/Meta"
+          }
+        },
+        "required": [
+          "data",
+          "meta"
+        ],
+        "additionalProperties": false
+      },
+      "resolveListingResponse": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/Resolution"
+          },
+          "meta": {
+            "$ref": "#/components/schemas/Meta"
+          }
+        },
+        "required": [
+          "data",
+          "meta"
+        ],
+        "additionalProperties": false
+      },
+      "getListingResponse": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/Listing"
+          },
+          "meta": {
+            "$ref": "#/components/schemas/Meta"
+          }
+        },
+        "required": [
+          "data",
+          "meta"
+        ],
+        "additionalProperties": false
+      },
+      "getListingMediaResponse": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Media"
+            }
+          },
+          "meta": {
+            "$ref": "#/components/schemas/Meta"
+          }
+        },
+        "required": [
+          "data",
+          "meta"
+        ],
+        "additionalProperties": false
+      },
+      "getListingHistoryResponse": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/HistoryEvent"
+            }
+          },
+          "meta": {
+            "$ref": "#/components/schemas/Meta"
+          }
+        },
+        "required": [
+          "data",
+          "meta"
+        ],
+        "additionalProperties": false
+      },
+      "getListingOpenHousesResponse": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/OpenHouse"
+            }
+          },
+          "meta": {
+            "$ref": "#/components/schemas/Meta"
+          }
+        },
+        "required": [
+          "data",
+          "meta"
+        ],
+        "additionalProperties": false
+      },
+      "getSimilarListingsResponse": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Comparable"
+            }
+          },
+          "meta": {
+            "$ref": "#/components/schemas/Meta"
+          }
+        },
+        "required": [
+          "data",
+          "meta"
+        ],
+        "additionalProperties": false
+      },
+      "resolvePropertyResponse": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/Resolution"
+          },
+          "meta": {
+            "$ref": "#/components/schemas/Meta"
+          }
+        },
+        "required": [
+          "data",
+          "meta"
+        ],
+        "additionalProperties": false
+      },
+      "getPropertyResponse": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/Property"
+          },
+          "meta": {
+            "$ref": "#/components/schemas/Meta"
+          }
+        },
+        "required": [
+          "data",
+          "meta"
+        ],
+        "additionalProperties": false
+      },
+      "getPropertyListingsResponse": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Listing"
+            }
+          },
+          "meta": {
+            "$ref": "#/components/schemas/Meta"
+          }
+        },
+        "required": [
+          "data",
+          "meta"
+        ],
+        "additionalProperties": false
+      },
+      "getPropertyRecordsResponse": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Record"
+            }
+          },
+          "meta": {
+            "$ref": "#/components/schemas/Meta"
+          }
+        },
+        "required": [
+          "data",
+          "meta"
+        ],
+        "additionalProperties": false
+      },
+      "getPropertyTransactionsResponse": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Record"
+            }
+          },
+          "meta": {
+            "$ref": "#/components/schemas/Meta"
+          }
+        },
+        "required": [
+          "data",
+          "meta"
+        ],
+        "additionalProperties": false
+      },
+      "getPropertyTaxAssessmentsResponse": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Record"
+            }
+          },
+          "meta": {
+            "$ref": "#/components/schemas/Meta"
+          }
+        },
+        "required": [
+          "data",
+          "meta"
+        ],
+        "additionalProperties": false
+      },
+      "getPropertyValuationsResponse": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Valuation"
+            }
+          },
+          "meta": {
+            "$ref": "#/components/schemas/Meta"
+          }
+        },
+        "required": [
+          "data",
+          "meta"
+        ],
+        "additionalProperties": false
+      },
+      "getPropertyComparablesResponse": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Comparable"
+            }
+          },
+          "meta": {
+            "$ref": "#/components/schemas/Meta"
+          }
+        },
+        "required": [
+          "data",
+          "meta"
+        ],
+        "additionalProperties": false
+      },
+      "getBuildingResponse": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/Building"
+          },
+          "meta": {
+            "$ref": "#/components/schemas/Meta"
+          }
+        },
+        "required": [
+          "data",
+          "meta"
+        ],
+        "additionalProperties": false
+      },
+      "getBuildingUnitsResponse": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Unit"
+            }
+          },
+          "meta": {
+            "$ref": "#/components/schemas/Meta"
+          }
+        },
+        "required": [
+          "data",
+          "meta"
+        ],
+        "additionalProperties": false
+      },
+      "searchDevelopmentsResponse": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Development"
+            }
+          },
+          "meta": {
+            "$ref": "#/components/schemas/Meta"
+          }
+        },
+        "required": [
+          "data",
+          "meta"
+        ],
+        "additionalProperties": false
+      },
+      "getDevelopmentResponse": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/Development"
+          },
+          "meta": {
+            "$ref": "#/components/schemas/Meta"
+          }
+        },
+        "required": [
+          "data",
+          "meta"
+        ],
+        "additionalProperties": false
+      },
+      "searchAgentsResponse": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Agent"
+            }
+          },
+          "meta": {
+            "$ref": "#/components/schemas/Meta"
+          }
+        },
+        "required": [
+          "data",
+          "meta"
+        ],
+        "additionalProperties": false
+      },
+      "getAgentResponse": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/Agent"
+          },
+          "meta": {
+            "$ref": "#/components/schemas/Meta"
+          }
+        },
+        "required": [
+          "data",
+          "meta"
+        ],
+        "additionalProperties": false
+      },
+      "getAgentListingsResponse": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Listing"
+            }
+          },
+          "meta": {
+            "$ref": "#/components/schemas/Meta"
+          }
+        },
+        "required": [
+          "data",
+          "meta"
+        ],
+        "additionalProperties": false
+      },
+      "searchAgenciesResponse": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Agency"
+            }
+          },
+          "meta": {
+            "$ref": "#/components/schemas/Meta"
+          }
+        },
+        "required": [
+          "data",
+          "meta"
+        ],
+        "additionalProperties": false
+      },
+      "getAgencyResponse": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/Agency"
+          },
+          "meta": {
+            "$ref": "#/components/schemas/Meta"
+          }
+        },
+        "required": [
+          "data",
+          "meta"
+        ],
+        "additionalProperties": false
+      },
+      "getAgencyListingsResponse": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Listing"
+            }
+          },
+          "meta": {
+            "$ref": "#/components/schemas/Meta"
+          }
+        },
+        "required": [
+          "data",
+          "meta"
+        ],
+        "additionalProperties": false
+      },
+      "searchAuctionsResponse": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Auction"
+            }
+          },
+          "meta": {
+            "$ref": "#/components/schemas/Meta"
+          }
+        },
+        "required": [
+          "data",
+          "meta"
+        ],
+        "additionalProperties": false
+      },
+      "getAuctionResponse": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/Auction"
+          },
+          "meta": {
+            "$ref": "#/components/schemas/Meta"
+          }
+        },
+        "required": [
+          "data",
+          "meta"
+        ],
+        "additionalProperties": false
+      },
+      "searchMarketsResponse": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Market"
+            }
+          },
+          "meta": {
+            "$ref": "#/components/schemas/Meta"
+          }
+        },
+        "required": [
+          "data",
+          "meta"
+        ],
+        "additionalProperties": false
+      },
+      "searchStaysResponse": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Stay"
+            }
+          },
+          "meta": {
+            "$ref": "#/components/schemas/Meta"
+          }
+        },
+        "required": [
+          "data",
+          "meta"
+        ],
+        "additionalProperties": false
+      },
+      "getStayResponse": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/Stay"
+          },
+          "meta": {
+            "$ref": "#/components/schemas/Meta"
+          }
+        },
+        "required": [
+          "data",
+          "meta"
+        ],
+        "additionalProperties": false
+      },
+      "getStayQuoteResponse": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/Quote"
+          },
+          "meta": {
+            "$ref": "#/components/schemas/Meta"
+          }
+        },
+        "required": [
+          "data",
+          "meta"
+        ],
+        "additionalProperties": false
+      },
+      "getStayAvailabilityResponse": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AvailabilityDay"
+            }
+          },
+          "meta": {
+            "$ref": "#/components/schemas/Meta"
+          }
+        },
+        "required": [
+          "data",
+          "meta"
+        ],
+        "additionalProperties": false
+      },
+      "getStayReviewsResponse": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Review"
+            }
+          },
+          "meta": {
+            "$ref": "#/components/schemas/Meta"
+          }
+        },
+        "required": [
+          "data",
+          "meta"
+        ],
+        "additionalProperties": false
+      },
+      "getMarketSeriesResponse": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/MarketSeries"
+          },
+          "meta": {
+            "$ref": "#/components/schemas/Meta"
+          }
+        },
+        "required": [
+          "data",
+          "meta"
+        ],
+        "additionalProperties": false
+      },
+      "searchLocationsResponse": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Location"
+            }
+          },
+          "meta": {
+            "$ref": "#/components/schemas/Meta"
+          }
+        },
+        "required": [
+          "data",
+          "meta"
+        ],
+        "additionalProperties": false
+      },
+      "createReadJobResponse": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/Job"
+          },
+          "meta": {
+            "$ref": "#/components/schemas/Meta"
+          }
+        },
+        "required": [
+          "data",
+          "meta"
+        ],
+        "additionalProperties": false
+      },
+      "getReadJobResponse": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/Job"
+          },
+          "meta": {
+            "$ref": "#/components/schemas/Meta"
+          }
+        },
+        "required": [
+          "data",
+          "meta"
+        ],
+        "additionalProperties": false
+      },
+      "getReadJobResultsResponse": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/JobItem"
+            }
+          },
+          "meta": {
+            "$ref": "#/components/schemas/Meta"
+          }
+        },
+        "required": [
+          "data",
+          "meta"
+        ],
+        "additionalProperties": false
+      },
+      "AddressSelector": {
+        "oneOf": [
+          {
+            "type": "object",
+            "properties": {
+              "formatted": {
+                "type": "string",
+                "minLength": 3
+              },
+              "country": {
+                "type": "string",
+                "pattern": "^[A-Z]{2}$"
+              }
+            },
+            "required": [
+              "formatted",
+              "country"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "properties": {
+              "line1": {
+                "type": "string",
+                "minLength": 1
+              },
+              "unit": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "city": {
+                "type": "string",
+                "minLength": 1
+              },
+              "region": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "postal_code": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "country": {
+                "type": "string",
+                "pattern": "^[A-Z]{2}$"
+              },
+              "original_text": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              }
+            },
+            "required": [
+              "line1",
+              "city",
+              "country"
+            ],
+            "additionalProperties": false
+          }
+        ]
+      }
+    }
+  }
+}

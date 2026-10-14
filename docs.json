@@ -1,0 +1,46 @@
+{
+  "$schema": "https://mintlify.com/docs.json",
+  "theme": "mint",
+  "name": "RealtyCrawl",
+  "colors": {
+    "primary": "#447B39",
+    "light": "#C8DD83",
+    "dark": "#122019"
+  },
+  "logo": {
+    "light": "/logo.svg",
+    "dark": "/logo.svg"
+  },
+  "favicon": "/logo.svg",
+  "navigation": {
+    "tabs": [
+      {
+        "tab": "Guides",
+        "groups": [
+          {
+            "group": "Start",
+            "pages": [
+              "introduction",
+              "quickstart",
+              "authentication",
+              "coverage",
+              "mcp",
+              "agent-skills"
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "API reference",
+        "openapi": "/openapi.json"
+      }
+    ]
+  },
+  "navbar": {
+    "primary": {
+      "type": "button",
+      "label": "Dashboard",
+      "href": "https://realtycrawl.dev/dashboard"
+    }
+  }
+}
