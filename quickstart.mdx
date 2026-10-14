@@ -41,4 +41,4 @@ curl "https://realtycrawl.dev/v1/listings/$LISTING_ID" \
 
 ## 5. Try unified search
 
-POST /v1/listings/search accepts the same selectors plus platforms. Start with one source: {"platforms":["zillow"],"location":{"kind":"bbox","bbox":[-97.82,30.2,-97.65,30.35]},"transaction":"sale","limit":1}. Check each source’s selectors before requesting a different platform. Do not infer that all 200 researched platforms are available.
+POST /v1/listings/search accepts the same selectors plus platforms. Start with one source: \{"platforms":["zillow"],"location":\{"kind":"bbox","bbox":[-97.82,30.2,-97.65,30.35]\},"transaction":"sale","limit":1\}. Check each source’s selectors before requesting a different platform. Do not infer that all 200 researched platforms are available.
