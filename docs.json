@@ -65,7 +65,7 @@
           {
             "group": "Build with RealtyCrawl",
             "pages": [
-              "mcp",
+              "mcp-guide",
               "agent-skills",
               "examples"
             ]
