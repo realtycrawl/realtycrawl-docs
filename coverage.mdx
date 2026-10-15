@@ -2,9 +2,11 @@
 title: "Coverage and evidence"
 ---
 
-The inventory covers 200 researched platforms and 43 defined API operations. This release includes 148 source adapters (107 sale, 31 rental, 3 auction, 5 stay and 2 development) and 17 enabled operation IDs, including three metadata operations. Check live capabilities for current enablement.
+The inventory covers 200 researched platforms and 43 defined API operations. This release includes 149 source adapters (108 sale, 31 rental, 3 auction, 5 stay and 2 development) and 17 enabled operation IDs, including three metadata operations. Check live capabilities for current enablement.
 
 ## Verified sale-search adapters
+
+Trulia: trulia, US; source_region with platform=trulia, region_id=seattle-wa, country=US and transaction=sale. Seattle resale observations using the upstream Condo filter only. Canonical URL and explicit ZPID must match; the distinct provider listing ID is retained separately. Builder plans, rentals and wrong-market results are rejected. Studios have zero bedrooms; area is square feet with unknown basis and property type remains unknown unless explicitly supplied. Contacts, street address, precise coordinates and raw payload are omitted. Bundled Actor cap $0.01.
 
 Zillow: contiguous United States; location.kind=bbox and location.bbox=[west,south,east,north].
 
@@ -216,7 +218,7 @@ The Anjuke Actor requires a minimum request size of 10, but RealtyCrawl applies 
 
 ## Unavailable coverage
 
-The remaining 52 sources and 26 operation definitions are not enabled. Additional rental markets, merged property records, valuations, dedicated agent/agency APIs, auction bidding, additional auction markets, buildings, additional stay operations and async jobs require separate implementation and verification. Licensed MLS and public-record feeds need their own access agreements.
+The remaining 51 sources and 26 operation definitions are not enabled. Additional rental markets, merged property records, valuations, dedicated agent/agency APIs, auction bidding, additional auction markets, buildings, additional stay operations and async jobs require separate implementation and verification. Licensed MLS and public-record feeds need their own access agreements.
 
 Source failures are candidate-specific. Earlier failed actors do not override the accepted adapters listed above. The current capability response determines availability; research entries and historical samples alone do not enable a platform.
 
