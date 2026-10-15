@@ -2,7 +2,7 @@
 title: "Coverage and evidence"
 ---
 
-The inventory covers 200 researched platforms and 43 defined API operations. This release includes 112 source adapters (89 sale, 16 rental, 3 auction, 2 stay and 2 development) and 17 enabled operation IDs, including three metadata operations. Check live capabilities for current enablement.
+The inventory covers 200 researched platforms and 43 defined API operations. This release includes 114 source adapters (91 sale, 16 rental, 3 auction, 2 stay and 2 development) and 17 enabled operation IDs, including three metadata operations. Check live capabilities for current enablement.
 
 ## Verified sale-search adapters
 
@@ -90,6 +90,10 @@ LoopNet: loopnet, US; source_region with region_id=austin-tx and transaction=sal
 
 Crexi: crexi, US; source_region with region_id=texas-retail and transaction=sale. Texas retail sale observations only. Broker and detail enrichment are disabled. Asking prices are USD; zero floor areas remain unknown and lot acres stay separate. On-Market is preserved as source status without guaranteeing current availability. Exact addresses and contacts are omitted. Bundled datacenter proxy use and a $0.01 charge cap are configured; results can be fewer than requested.
 
+Squarefoot: squarefoot, HK; source_region with region_id=kowloon and transaction=sale. The provider searches Kowloon sale advertisements using its bundled Hong Kong residential proxy. Canonical apartment URLs are required; the source district is retained without precise street or estate addresses. Asking prices are HKD; mortgage repayment estimates and per-square-foot rates are not asking prices. Saleable area is sqft, and explicit bedrooms and bathrooms retain source values. The $0.01 cap may return fewer results than requested.
+
+28Hse: 28hse, HK; source_region with region_id=hong-kong and transaction=sale. Hong Kong apartment sale listings with bundled proxy. Asking prices are HKD; saleable and gross areas remain distinct sqft measurements. Source rooms are retained without guessing bedroom counts. The verified listing feed has no photos, so stored media returns an empty list. Detail mode, contact enrichment and fresh native-ID lookup are not enabled. The $0.01 cap may return fewer results than requested.
+
 ## Catalog and auction markets
 
 All of these selectors use location.kind=source_region, location.platform matching the platform ID and the stated country. Sale: kleinanzeigen (DE, bremen); commercialrealestate_au (AU, australia); properati (AR, argentina); infocasas (UY, montevideo); estately (US, los-angeles-ca); opensooq (JO, jordan); midland_hk (HK, hong-kong); bayut_sa (SA, riyadh); toctoc (CL, santiago); adondevivir (PE, peru); plusvalia (EC, quito). Rental: vivanuncios (MX, aguascalientes). These are bounded, verified source windows, not nationwide coverage guarantees.
@@ -100,7 +104,7 @@ Auction sources: auction (US, chicago-il), xome (US, tx) and hubzu (US, tx). Pla
 
 GET /v1/auctions/\{auction_id\} returns the requesting account’s stored auction observation for 1 credit, retained for 24 hours. Starting bids, current bids, estimated values and reserve disclosures remain distinct. Unknown bids are null. Event dates and statuses are source observations, not guarantees that bidding is open; the API does not submit bids.
 
-Additional excluded samples: HouseSigma, LoopNet, Crexi and Aqarmap failed upstream; Urbania and Movoto returned no listings. Bproperty lacks verified canonical listing identity; RealtyTrac returned a conflicting market/URL and estimated value rather than a verified asking price. These sources remain unavailable.
+Additional excluded samples: HouseSigma and Aqarmap failed upstream; Urbania and Movoto returned no listings. RealtyTrac returned a conflicting market/URL and estimated value rather than a verified asking price. These sources remain unavailable.
 
 ## Stay observations and Austria
 
@@ -148,11 +152,11 @@ The Anjuke Actor requires a minimum request size of 10, but RealtyCrawl applies 
 
 ## Unavailable coverage
 
-The remaining 95 sources and 26 operation definitions are not enabled. Additional rental markets, merged property records, valuations, dedicated agent/agency APIs, auction bidding, additional auction markets, buildings, additional stay operations and async jobs require separate implementation and verification. Licensed MLS and public-record feeds need their own access agreements. BuyRentKenya and iProperty failed the latest capped tests; Casa.it returned no results. Other failed samples include Flatmates and Dubizzle Egypt.
+The remaining 86 sources and 26 operation definitions are not enabled. Additional rental markets, merged property records, valuations, dedicated agent/agency APIs, auction bidding, additional auction markets, buildings, additional stay operations and async jobs require separate implementation and verification. Licensed MLS and public-record feeds need their own access agreements. BuyRentKenya and iProperty failed the latest capped tests; Casa.it returned no results. Other failed samples include Flatmates and Dubizzle Egypt.
 
-Current excluded samples: Imobiliare.ro and Compass exceeded the synchronous deadline; Zolo returned no usable records. ImmoScout24 was interrupted by a client connection failure; Sahibinden returned an upstream error and MagicBricks returned no listings. These failures do not enable those sources.
+Current excluded samples: Imobiliare.ro and Compass exceeded the synchronous deadline; Zolo returned no usable records. Sahibinden returned an upstream error and MagicBricks returned no listings. These failures do not enable those sources.
 
-Additional deferred samples: Beike returned an error record; LIFULL HOME’S and Century 21 returned no listings; PortalInmobiliario, ImmoScout24 Switzerland and Zonaprop failed. QuintoAndar returned unpublished records without canonical listing URLs. Bikroy source identity needs further validation. These remain unavailable.
+Additional deferred samples: Beike returned an error record; LIFULL HOME’S and Century 21 returned no listings; PortalInmobiliario, ImmoScout24 Switzerland and Zonaprop failed. Bikroy source identity needs further validation. These remain unavailable.
 
 Additional excluded samples: SeLoger, JamesEdition and ApartmentGuide failed; Oikotie, Trade Me, Lianjia and Zigbang returned no listings. RentCafe had a provider connection failure. Land And Farm returned a diagnostic rather than listings. Amber lacks canonical platform identity in the sampled aggregate, and Blueground lacks a usable price/location contract. These sources remain unavailable.
 
