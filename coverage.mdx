@@ -2,7 +2,7 @@
 title: "Coverage and evidence"
 ---
 
-The inventory covers 200 researched platforms and 43 defined API operations. This release includes 101 source adapters (79 sale, 16 rental, 3 auction, 2 stay and 1 development) and 17 enabled operation IDs, including three metadata operations. Check live capabilities for current enablement.
+The inventory covers 200 researched platforms and 43 defined API operations. This release includes 103 source adapters (80 sale, 16 rental, 3 auction, 2 stay and 2 development) and 17 enabled operation IDs, including three metadata operations. Check live capabilities for current enablement.
 
 ## Verified sale-search adapters
 
@@ -144,11 +144,11 @@ The Anjuke Actor requires a minimum request size of 10, but RealtyCrawl applies 
 
 ## Unavailable coverage
 
-The remaining 99 sources and 26 operation definitions are not enabled. Additional rental markets, merged property records, valuations, dedicated agent/agency APIs, auction bidding, additional auction markets, buildings, additional stay operations and async jobs require separate implementation and verification. Licensed MLS and public-record feeds need their own access agreements. BuyRentKenya and iProperty failed the latest capped tests; Casa.it returned no results. Other failed samples include Flatmates and Dubizzle Egypt.
+The remaining 97 sources and 26 operation definitions are not enabled. Additional rental markets, merged property records, valuations, dedicated agent/agency APIs, auction bidding, additional auction markets, buildings, additional stay operations and async jobs require separate implementation and verification. Licensed MLS and public-record feeds need their own access agreements. BuyRentKenya and iProperty failed the latest capped tests; Casa.it returned no results. Other failed samples include Flatmates and Dubizzle Egypt.
 
 Current excluded samples: Imobiliare.ro and Compass exceeded the synchronous deadline; Hemnet and Zolo returned no usable records. ImmoScout24 was interrupted by a client connection failure; Imovirtual did not complete successfully. Sahibinden returned an upstream error and MagicBricks returned no listings. These failures do not enable those sources.
 
-Additional deferred samples: Beike returned an error record; LIFULL HOME’S and Century 21 returned no listings; PortalInmobiliario, ImmoScout24 Switzerland and Zonaprop failed. 591 needs verified development identity and normalization; Avito lacks an unambiguous sale marker; QuintoAndar returned unpublished records without canonical listing URLs. Bikroy source identity needs further validation. These remain unavailable.
+Additional deferred samples: Beike returned an error record; LIFULL HOME’S and Century 21 returned no listings; PortalInmobiliario, ImmoScout24 Switzerland and Zonaprop failed. QuintoAndar returned unpublished records without canonical listing URLs. Bikroy source identity needs further validation. These remain unavailable.
 
 Additional excluded samples: SeLoger, JamesEdition and ApartmentGuide failed; Oikotie, Trade Me, Lianjia and Zigbang returned no listings. RentCafe had a provider connection failure. Land And Farm returned a diagnostic rather than listings. Amber lacks canonical platform identity in the sampled aggregate, and Blueground lacks a usable price/location contract. These sources remain unavailable.
 
@@ -159,6 +159,10 @@ LuxuryEstate: luxuryestate, US; source_region with region_id=united-states and t
 Bproperty: bproperty, BD; source_region with region_id=Mirpur and transaction=sale. Results are the sale-only subset of a bounded mixed-transaction area feed; projects, inactive and expired records are excluded. Per-square-foot prices retain per_area_unit=sqft; Onwards prices use min with amount=null. Provider image filenames are not exposed as invented media URLs.
 
 Inmuebles24: inmuebles24, MX; POST /v1/developments/search with platforms=[inmuebles24], location.kind=source_region, location.platform=inmuebles24, location.region_id=mexico, location.country=MX and limit=1–100. GET /v1/developments/\{development_id\} returns this account’s stored observation for 24 hours. Search costs 50 credits and stored reads cost 1. Completion dates preserve YYYY-MM precision; total unit counts are not available-unit counts. No query/cursor filters, unit inventory or individual listing route is enabled for this source.
+
+Avito: avito, RU; source_region with region_id=moscow and transaction=sale. Enriched apartment records must carry an explicit sell transaction and purchase breadcrumb. Prices are RUB; minimum asking prices stay in min. Source room counts are retained in extensions.rooms and are not converted to bedroom counts. Precise addresses and contact data are omitted.
+
+591: platform 591, TW; POST /v1/developments/search with platforms=[591] and location=\{kind:source_region,platform:591,country:TW,region_id:taipei\}. This dedicated Taipei presale/new-build feed returns project observations, with source phase and textual layout/area descriptions. It does not support individual listing, rental, unit inventory or completion-date lookup. Stored development reads cost 1 credit; search costs 50 credits.
 
 ## Understand completeness
 
