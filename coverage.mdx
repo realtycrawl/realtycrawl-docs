@@ -2,7 +2,7 @@
 title: "Coverage and evidence"
 ---
 
-The inventory covers 200 researched platforms and 43 defined API operations. This release includes 149 source adapters (108 sale, 31 rental, 3 auction, 5 stay and 2 development) and 17 enabled operation IDs, including three metadata operations. Check live capabilities for current enablement.
+The inventory covers 200 researched platforms and 43 defined API operations. This release includes 149 distinct source platforms (108 sale, 31 rental, 3 auction, 5 stay and 2 development) and 19 enabled operation IDs, including three metadata operations. Check live capabilities for current enablement. Realtor.com also supports the dedicated agent operations below.
 
 ## Verified sale-search adapters
 
@@ -218,7 +218,7 @@ The Anjuke Actor requires a minimum request size of 10, but RealtyCrawl applies 
 
 ## Unavailable coverage
 
-The remaining 51 sources and 26 operation definitions are not enabled. Additional rental markets, merged property records, valuations, dedicated agent/agency APIs, auction bidding, additional auction markets, buildings, additional stay operations and async jobs require separate implementation and verification. Licensed MLS and public-record feeds need their own access agreements.
+The remaining 51 sources and 24 operation definitions are not enabled. Additional rental markets, merged property records, valuations, additional agent markets, agent portfolios and agency APIs, auction bidding, additional auction markets, buildings, additional stay operations and async jobs require separate implementation and verification. Licensed MLS and public-record feeds need their own access agreements.
 
 Source failures are candidate-specific. Earlier failed actors do not override the accepted adapters listed above. The current capability response determines availability; research entries and historical samples alone do not enable a platform.
 
@@ -249,6 +249,12 @@ QuintoAndar: quintoandar, BR; source_region with region_id=sao-paulo-sp-brasil a
 ImmoScout24 Germany: immoscout24, DE; source_region with region_id=berlin and transaction=sale. Berlin apartment observations only. German room counts remain source_rooms, not bedrooms. Missing prices stay null, and purchase prices are EUR per property. Informational records are omitted. The provider minimum batch is 20 listings; the API respects your requested result limit and a $0.04 source charge cap. Detail and incremental enrichment are disabled.
 
 Sreality: sreality, CZ; source_region with region_id=praha and transaction=sale. Prague apartment sale observations only. priceCzk is the CZK price for the property, not the price per m². Czech layouts such as 3+1 remain source_layout, not bedrooms. Details and third-party AI enrichment are disabled; proxies are explicitly disabled. The $0.01 cap can return fewer results than requested.
+
+## Agent directory observations
+
+Realtor.com: POST /v1/agents/search supports platforms=["realtor"], location.kind=source_region, location.platform=realtor, country=US, region_id=austin-tx, and limit 1–100. It costs 50 credits and returns bounded source relevance results. Query, cursor, ranking, portfolio and contact enrichment are unsupported.
+
+GET /v1/agents/\{agent_id\} reads the caller’s stored observation for 1 credit within 24 hours. Profiles preserve canonical identity, display name, brokerage label and city/state. Contact details, ratings and license claims are omitted. These observations do not verify credentials or recommend agents. Idempotent search replay is free.
 
 ## Understand completeness
 

@@ -2528,7 +2528,7 @@
       "post": {
         "operationId": "searchAgents",
         "summary": "Search agents",
-        "description": "Proposed interface. Enable only for documented and verified source/country capabilities. Dedicated source search contract; no blanket platform support",
+        "description": "Read-only Realtor.com agent directory observations for US source_region austin-tx. One platform (realtor), limit 1–100, source relevance order. Costs 50 credits. Query/cursor unsupported; bounded results, no verified licenses, contact enrichment, rankings or portfolio coverage.",
         "x-research-status": "proposed",
         "tags": [
           "agents"
@@ -2565,16 +2565,18 @@
             }
           }
         },
-        "x-runtime-status": "unavailable",
-        "x-credit-cost": 1,
-        "x-verified-platforms": []
+        "x-runtime-status": "beta",
+        "x-credit-cost": 50,
+        "x-verified-platforms": [
+          "realtor"
+        ]
       }
     },
     "/v1/agents/{agent_id}": {
       "get": {
         "operationId": "getAgent",
         "summary": "Get agent",
-        "description": "Proposed interface. Enable only for documented and verified source/country capabilities. Dedicated source detail contract",
+        "description": "Read this account’s stored agent directory observation for 1 credit, retained 24 hours. No fresh lookup, license verification or recommendation.",
         "x-research-status": "proposed",
         "tags": [
           "agents"
@@ -2612,9 +2614,11 @@
             }
           }
         ],
-        "x-runtime-status": "unavailable",
+        "x-runtime-status": "beta",
         "x-credit-cost": 1,
-        "x-verified-platforms": []
+        "x-verified-platforms": [
+          "realtor"
+        ]
       }
     },
     "/v1/agents/{agent_id}/listings": {
