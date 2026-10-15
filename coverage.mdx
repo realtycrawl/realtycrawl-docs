@@ -2,7 +2,7 @@
 title: "Coverage and evidence"
 ---
 
-The inventory covers 200 researched platforms and 43 defined API operations. This release includes 103 source adapters (80 sale, 16 rental, 3 auction, 2 stay and 2 development) and 17 enabled operation IDs, including three metadata operations. Check live capabilities for current enablement.
+The inventory covers 200 researched platforms and 43 defined API operations. This release includes 105 source adapters (82 sale, 16 rental, 3 auction, 2 stay and 2 development) and 17 enabled operation IDs, including three metadata operations. Check live capabilities for current enablement.
 
 ## Verified sale-search adapters
 
@@ -144,9 +144,9 @@ The Anjuke Actor requires a minimum request size of 10, but RealtyCrawl applies 
 
 ## Unavailable coverage
 
-The remaining 97 sources and 26 operation definitions are not enabled. Additional rental markets, merged property records, valuations, dedicated agent/agency APIs, auction bidding, additional auction markets, buildings, additional stay operations and async jobs require separate implementation and verification. Licensed MLS and public-record feeds need their own access agreements. BuyRentKenya and iProperty failed the latest capped tests; Casa.it returned no results. Other failed samples include Flatmates and Dubizzle Egypt.
+The remaining 95 sources and 26 operation definitions are not enabled. Additional rental markets, merged property records, valuations, dedicated agent/agency APIs, auction bidding, additional auction markets, buildings, additional stay operations and async jobs require separate implementation and verification. Licensed MLS and public-record feeds need their own access agreements. BuyRentKenya and iProperty failed the latest capped tests; Casa.it returned no results. Other failed samples include Flatmates and Dubizzle Egypt.
 
-Current excluded samples: Imobiliare.ro and Compass exceeded the synchronous deadline; Hemnet and Zolo returned no usable records. ImmoScout24 was interrupted by a client connection failure; Imovirtual did not complete successfully. Sahibinden returned an upstream error and MagicBricks returned no listings. These failures do not enable those sources.
+Current excluded samples: Imobiliare.ro and Compass exceeded the synchronous deadline; Zolo returned no usable records. ImmoScout24 was interrupted by a client connection failure; Sahibinden returned an upstream error and MagicBricks returned no listings. These failures do not enable those sources.
 
 Additional deferred samples: Beike returned an error record; LIFULL HOME’S and Century 21 returned no listings; PortalInmobiliario, ImmoScout24 Switzerland and Zonaprop failed. QuintoAndar returned unpublished records without canonical listing URLs. Bikroy source identity needs further validation. These remain unavailable.
 
@@ -163,6 +163,10 @@ Inmuebles24: inmuebles24, MX; POST /v1/developments/search with platforms=[inmue
 Avito: avito, RU; source_region with region_id=moscow and transaction=sale. Enriched apartment records must carry an explicit sell transaction and purchase breadcrumb. Prices are RUB; minimum asking prices stay in min. Source room counts are retained in extensions.rooms and are not converted to bedroom counts. Precise addresses and contact data are omitted.
 
 591: platform 591, TW; POST /v1/developments/search with platforms=[591] and location=\{kind:source_region,platform:591,country:TW,region_id:taipei\}. This dedicated Taipei presale/new-build feed returns project observations, with source phase and textual layout/area descriptions. It does not support individual listing, rental, unit inventory or completion-date lookup. Stored development reads cost 1 credit; search costs 50 credits.
+
+Hemnet: hemnet, SE; source_region with region_id=stockholm and transaction=sale. Results follow the provider’s Stockholm search and exclude sold/upcoming records. Asking prices are SEK; recurring association fees are retained separately in extensions.monthly_fee. Source room counts are not bedrooms. Living area is labeled living; city remains unknown when not supplied.
+
+Imovirtual: imovirtual, PT; source_region with region_id=lisboa and transaction=sale. This source covers apartment advertisements in Lisboa district, including municipalities such as Sintra. The opaque ID in the canonical ad URL is native_id. Source room counts are retained without inferring bedroom counts; area measurement basis remains unknown. Details and seller add-ons are disabled. Both sources support listing search and account-owned stored listing/media reads, not fresh native-ID detail lookup.
 
 ## Understand completeness
 

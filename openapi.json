@@ -225,6 +225,8 @@
         ],
         "x-credit-unit": "successful_source_crawl",
         "x-verified-platforms": [
+          "hemnet",
+          "imovirtual",
           "avito",
           "luxuryestate",
           "bproperty",
@@ -425,6 +427,8 @@
         ],
         "x-credit-unit": "successful_source_crawl",
         "x-verified-platforms": [
+          "hemnet",
+          "imovirtual",
           "avito",
           "luxuryestate",
           "bproperty",
@@ -731,6 +735,8 @@
         ],
         "x-credit-unit": "stored_observation_read",
         "x-verified-platforms": [
+          "hemnet",
+          "imovirtual",
           "avito",
           "luxuryestate",
           "bproperty",
@@ -938,6 +944,8 @@
         ],
         "x-credit-unit": "stored_observation_read",
         "x-verified-platforms": [
+          "hemnet",
+          "imovirtual",
           "avito",
           "luxuryestate",
           "bproperty",
