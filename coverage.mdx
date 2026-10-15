@@ -2,7 +2,7 @@
 title: "Coverage and evidence"
 ---
 
-The inventory covers 200 researched platforms and 43 defined API operations. This release includes 105 source adapters (82 sale, 16 rental, 3 auction, 2 stay and 2 development) and 17 enabled operation IDs, including three metadata operations. Check live capabilities for current enablement.
+The inventory covers 200 researched platforms and 43 defined API operations. This release includes 107 source adapters (84 sale, 16 rental, 3 auction, 2 stay and 2 development) and 17 enabled operation IDs, including three metadata operations. Check live capabilities for current enablement.
 
 ## Verified sale-search adapters
 
@@ -167,6 +167,10 @@ Avito: avito, RU; source_region with region_id=moscow and transaction=sale. Enri
 Hemnet: hemnet, SE; source_region with region_id=stockholm and transaction=sale. Results follow the provider’s Stockholm search and exclude sold/upcoming records. Asking prices are SEK; recurring association fees are retained separately in extensions.monthly_fee. Source room counts are not bedrooms. Living area is labeled living; city remains unknown when not supplied.
 
 Imovirtual: imovirtual, PT; source_region with region_id=lisboa and transaction=sale. This source covers apartment advertisements in Lisboa district, including municipalities such as Sintra. The opaque ID in the canonical ad URL is native_id. Source room counts are retained without inferring bedroom counts; area measurement basis remains unknown. Details and seller add-ons are disabled. Both sources support listing search and account-owned stored listing/media reads, not fresh native-ID detail lookup.
+
+Housing.com: housing, IN; source_region with region_id=mumbai and transaction=sale. Resale observations only; the Mumbai search scope includes surrounding places such as Nalasopara and is not asserted as the property city. INR asking prices are distinct from EMI amounts; fractional BHK values remain source_bhk, not bedrooms. One search page, no incremental state, proxy or connector exports. Starter Bronze pricing and the $0.05 cap may return fewer results than requested.
+
+Comparis: comparis, CH; source_region with region_id=zuerich and transaction=sale. Zürich apartment observations only, using canonical Comparis listing IDs and CHF purchase prices. Fractional source_rooms are not bedrooms. Detail enrichment is disabled; exact street, coordinates and partner contacts are omitted. The $0.01 cap can return fewer results than requested.
 
 ## Understand completeness
 
