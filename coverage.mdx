@@ -2,7 +2,7 @@
 title: "Coverage and evidence"
 ---
 
-The inventory covers 200 researched platforms and 43 defined API operations. This release includes 131 source adapters (99 sale, 25 rental, 3 auction, 2 stay and 2 development) and 17 enabled operation IDs, including three metadata operations. Check live capabilities for current enablement.
+The inventory covers 200 researched platforms and 43 defined API operations. This release includes 135 source adapters (100 sale, 26 rental, 3 auction, 4 stay and 2 development) and 17 enabled operation IDs, including three metadata operations. Check live capabilities for current enablement.
 
 ## Verified sale-search adapters
 
@@ -110,6 +110,8 @@ Compass: compass, US; source_region with platform=compass, country=US and region
 
 SeLoger: seloger, FR; source_region with platform=seloger, country=FR and region_id=paris; apartment sale only. Canonical current listing ID is distinct from the legacy ID. Exact EUR display must match numeric asking price. Rooms remain distinct from bedrooms. The provider isNew flag is not interpreted as new construction. Missing photo URLs remain empty even if a photo count is reported. Optional details, phones, monitoring and proxies are disabled. Search and account-owned stored listing/media reads are available; no fresh native-ID lookup. The $0.01 run cap can yield fewer results than requested.
 
+HouseSigma: housesigma, CA; source_region toronto-on, transaction=sale. Toronto active sale observations only, including parking spaces. Asking prices are CAD; sold amounts are excluded. MLS numbers identify listings and are checked against source URLs. Property categories are retained as source text; bedrooms and exact location remain unknown. Detail enrichment and proxies are disabled. The $0.01 cap can return fewer records than requested.
+
 ## Catalog and auction markets
 
 All of these selectors use location.kind=source_region, location.platform matching the platform ID and the stated country. Sale: kleinanzeigen (DE, bremen); commercialrealestate_au (AU, australia); properati (AR, argentina); infocasas (UY, montevideo); estately (US, los-angeles-ca); opensooq (JO, jordan); midland_hk (HK, hong-kong); bayut_sa (SA, riyadh); toctoc (CL, santiago); adondevivir (PE, peru); plusvalia (EC, quito). Rental: vivanuncios (MX, aguascalientes). These are bounded, verified source windows, not nationwide coverage guarantees.
@@ -124,15 +126,15 @@ Additional excluded samples: HouseSigma and Aqarmap failed upstream; Urbania and
 
 ## Stay observations and Austria
 
-Airbnb: airbnb, GB, source_region=london, currency GBP. Vrbo: vrbo, US, source_region=orlando-fl, currency USD. Use POST /v1/stays/search with one matching platform, location, check_in, check_out, guests=\{"adults":2\}, currency and limit=1–50. Dates must describe a future stay of 1–30 nights. Children, infants, pets, locale, accommodation filters and cursors are not currently supported.
+Airbnb: airbnb, GB, source_region=london, currency GBP. Vrbo: vrbo, US, source_region=orlando-fl, currency USD. Use POST /v1/stays/search with one matching platform, location, check_in, check_out, guests=\{"adults":2\}, currency and limit=1–50. Dates must describe a future stay of 1–30 nights. Children, infants, pets, locale, accommodation filters and cursors are not currently supported. Agoda: agoda, TH, source_region=bangkok, currency USD. Trip.com: trip, JP, source_region=tokyo, currency USD. Both currently search hotels for one room and two adults.
 
-Stay search costs 50 credits. GET /v1/stays/\{stay_id\} costs 1 credit and returns this account’s stored observation for 24 hours. Airbnb totals and Vrbo nightly observations remain separate in extensions.source_price. Taxes, fees and availability remain unknown. These are not booking quotes, full calendars, reviews or guarantees that a property can be reserved.
+Stay search costs 50 credits. GET /v1/stays/\{stay_id\} costs 1 credit and returns this account’s stored observation for 24 hours. Airbnb totals and Vrbo nightly observations remain separate in extensions.source_price. Airbnb/Vrbo taxes and fees remain unknown. Agoda reports nightly prices including taxes; fees remain unknown. Trip.com reports the total stay price including taxes and fees. Availability remains unknown for all sources. These are not booking quotes, full calendars, reviews or guarantees that a property can be reserved.
 
 ImmoScout24 Austria: immoscout24_at, AT; source_region=wien with transaction=sale. The verified Vienna apartment feed excludes development-project aggregates. Source room counts stay in property.rooms rather than being treated as bedrooms.
 
 Vivanuncios location hierarchies may start with a neighborhood or a city. The adapter uses the explicit CIUDAD, PROVINCIA and PAIS labels, preserving city/region and withholding precise location.
 
-Agoda returned named-hotel metadata but no result for the tested city-search contract, so it remains unavailable. A LoopNet auction candidate returned no results; Point2Homes denied the bounded API request. These do not enable those platforms.
+Agoda and Trip.com searches bind observations to the requested dates. Hotel display names are replaced by neutral city-level observation titles; contacts, reviews and exact addresses are omitted. Proxies, reviews and additional detail requests are disabled. Each source has a $0.01 run cap, which can return fewer records than requested.
 
 ## Verified rental-search adapters
 
@@ -169,6 +171,8 @@ RentCafe: rentcafe, US; transaction=rent; source_region phoenix-az. Detail mode 
 Yad2: yad2, IL; source_region with platform=yad2, country=IL and region_id=tel-aviv-yafo; rental observations only. Monthly ILS prices require the source to report 12 payments per year. Fractional room totals are not bedroom counts. Exact addresses, coordinates and contacts are omitted. Search and account-owned stored listing/media reads are supported; source timestamps and immediate-entry flags do not guarantee current availability. One search page, no proxies, $0.01 per-run cap; limit is an upper bound.
 
 Zigbang: zigbang, KR; source_region with platform=zigbang, country=KR and region_id=gangnam-station; monthly-rent observations from the Gangnam Station query only. The provider oneroom search may return officetels; property type and bedroom count remain unknown. Rent and deposit are converted from ten-thousand-won units, while source maintenance cost is already KRW and is separate from rent. Exclusive area and supply area remain distinct. No guarantee of current availability or independently verified distance. Details, contacts, incremental tracking and proxies are disabled. Search and account-owned stored listing/media reads are available; no fresh native-ID lookup. The $0.05 run cap may return fewer results than requested.
+
+Spotahome: spotahome, ES; source_region barcelona, transaction=rent. Monthly EUR rental observations, including individual rooms. Shared-home bedroom counts are not assigned to the rented room. Availability is not guaranteed, and exact address/contact fields are omitted. Proxies are disabled; the $0.01 cap can return fewer records than requested.
 
 ## Shared operations
 
