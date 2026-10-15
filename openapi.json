@@ -225,6 +225,8 @@
         ],
         "x-credit-unit": "successful_source_crawl",
         "x-verified-platforms": [
+          "luxuryestate",
+          "bproperty",
           "olx_br",
           "anjuke",
           "zillow",
@@ -422,6 +424,8 @@
         ],
         "x-credit-unit": "successful_source_crawl",
         "x-verified-platforms": [
+          "luxuryestate",
+          "bproperty",
           "olx_br",
           "anjuke",
           "zillow",
@@ -725,6 +729,8 @@
         ],
         "x-credit-unit": "stored_observation_read",
         "x-verified-platforms": [
+          "luxuryestate",
+          "bproperty",
           "olx_br",
           "anjuke",
           "zillow",
@@ -929,6 +935,8 @@
         ],
         "x-credit-unit": "stored_observation_read",
         "x-verified-platforms": [
+          "luxuryestate",
+          "bproperty",
           "olx_br",
           "anjuke",
           "zillow",
@@ -1837,7 +1845,7 @@
       "post": {
         "operationId": "searchDevelopments",
         "summary": "Search developments",
-        "description": "Proposed interface. Enable only for documented and verified source/country capabilities. Dedicated source search contract; no blanket platform support",
+        "description": "Read-only Inmuebles24 development observations for Mexico. One platform, source_region mexico, country MX; limit 1–100. Costs 50 credits. No query, cursor, unit availability or completion guarantees. Completion dates preserve month precision.",
         "x-research-status": "proposed",
         "tags": [
           "developments"
@@ -1874,16 +1882,18 @@
             }
           }
         },
-        "x-runtime-status": "unavailable",
-        "x-credit-cost": 1,
-        "x-verified-platforms": []
+        "x-runtime-status": "beta",
+        "x-credit-cost": 50,
+        "x-verified-platforms": [
+          "inmuebles24"
+        ]
       }
     },
     "/v1/developments/{development_id}": {
       "get": {
         "operationId": "getDevelopment",
         "summary": "Get development",
-        "description": "Proposed interface. Enable only for documented and verified source/country capabilities. Dedicated source detail contract",
+        "description": "Read this account’s stored development observation for 1 credit, retained 24 hours. No fresh lookup or unit availability check.",
         "x-research-status": "proposed",
         "tags": [
           "developments"
@@ -1921,9 +1931,11 @@
             }
           }
         ],
-        "x-runtime-status": "unavailable",
+        "x-runtime-status": "beta",
         "x-credit-cost": 1,
-        "x-verified-platforms": []
+        "x-verified-platforms": [
+          "inmuebles24"
+        ]
       }
     },
     "/v1/agents/search": {
