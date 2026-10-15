@@ -2,7 +2,7 @@
 title: "Coverage and evidence"
 ---
 
-The inventory covers 200 researched platforms and 43 defined API operations. This release includes 130 source adapters (99 sale, 24 rental, 3 auction, 2 stay and 2 development) and 17 enabled operation IDs, including three metadata operations. Check live capabilities for current enablement.
+The inventory covers 200 researched platforms and 43 defined API operations. This release includes 131 source adapters (99 sale, 25 rental, 3 auction, 2 stay and 2 development) and 17 enabled operation IDs, including three metadata operations. Check live capabilities for current enablement.
 
 ## Verified sale-search adapters
 
@@ -167,6 +167,8 @@ ZonaProp: zonaprop, AR; rent with source_region capital-federal. Capital Federal
 RentCafe: rentcafe, US; transaction=rent; source_region phoenix-az. Detail mode is required for a canonical listing URL. Building-level USD rent ranges and bedroom/bathroom labels are preserved; exact unit price, bedrooms, bathrooms and payment period stay unset. Contact enrichment is disabled.
 
 Yad2: yad2, IL; source_region with platform=yad2, country=IL and region_id=tel-aviv-yafo; rental observations only. Monthly ILS prices require the source to report 12 payments per year. Fractional room totals are not bedroom counts. Exact addresses, coordinates and contacts are omitted. Search and account-owned stored listing/media reads are supported; source timestamps and immediate-entry flags do not guarantee current availability. One search page, no proxies, $0.01 per-run cap; limit is an upper bound.
+
+Zigbang: zigbang, KR; source_region with platform=zigbang, country=KR and region_id=gangnam-station; monthly-rent observations from the Gangnam Station query only. The provider oneroom search may return officetels; property type and bedroom count remain unknown. Rent and deposit are converted from ten-thousand-won units, while source maintenance cost is already KRW and is separate from rent. Exclusive area and supply area remain distinct. No guarantee of current availability or independently verified distance. Details, contacts, incremental tracking and proxies are disabled. Search and account-owned stored listing/media reads are available; no fresh native-ID lookup. The $0.05 run cap may return fewer results than requested.
 
 ## Shared operations
 
