@@ -225,6 +225,8 @@
         ],
         "x-credit-unit": "successful_source_crawl",
         "x-verified-platforms": [
+          "olx_br",
+          "anjuke",
           "zillow",
           "redfin",
           "realtor",
@@ -420,6 +422,8 @@
         ],
         "x-credit-unit": "successful_source_crawl",
         "x-verified-platforms": [
+          "olx_br",
+          "anjuke",
           "zillow",
           "redfin",
           "realtor",
@@ -721,6 +725,8 @@
         ],
         "x-credit-unit": "stored_observation_read",
         "x-verified-platforms": [
+          "olx_br",
+          "anjuke",
           "zillow",
           "redfin",
           "realtor",
@@ -923,6 +929,8 @@
         ],
         "x-credit-unit": "stored_observation_read",
         "x-verified-platforms": [
+          "olx_br",
+          "anjuke",
           "zillow",
           "redfin",
           "realtor",

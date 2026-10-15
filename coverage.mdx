@@ -2,7 +2,7 @@
 title: "Coverage and evidence"
 ---
 
-The inventory covers 200 researched platforms and 43 defined API operations. This release includes 96 source adapters (76 sale, 15 rental, 3 auction and 2 stay) and 15 enabled operation IDs, including three metadata operations. Check live capabilities for current enablement.
+The inventory covers 200 researched platforms and 43 defined API operations. This release includes 98 source adapters (77 sale, 16 rental, 3 auction and 2 stay) and 15 enabled operation IDs, including three metadata operations. Check live capabilities for current enablement.
 
 ## Verified sale-search adapters
 
@@ -130,13 +130,21 @@ These additions expose locality only; exact street addresses and coordinates are
 
 ## Shared operations
 
-The 94 listing adapters support platform search, unified search, stored listing retrieval and stored media. Airbnb and Vrbo use the separate stay search and stored-stay endpoints. Zillow supports canonical URL resolution and source-reported price history. Rightmove supports fresh native-ID lookup and canonical URL resolution. OneRoof supports stored open-home schedules in UTC. Stored observations belong to the requesting account and expire after 24 hours.
+The 96 listing adapters support platform search, unified search, stored listing retrieval and stored media. Airbnb and Vrbo use the separate stay search and stored-stay endpoints. Zillow supports canonical URL resolution and source-reported price history. Rightmove supports fresh native-ID lookup and canonical URL resolution. OneRoof supports stored open-home schedules in UTC. Stored observations belong to the requesting account and expire after 24 hours.
 
 Source records retain their original currencies and area units. Hidden search prices, auction text, price ranges and ambiguous room counts are not converted into exact asking prices or bedroom counts.
 
+## Verified classified property feeds
+
+OLX Brazil: olx_br, BR; source_region with region_id=estado-sp and transaction=sale. The verified feed is property advertisements in São Paulo state, with BRL asking prices and source-reported bedroom/bathroom counts. Area measurement basis remains unknown. Seller enrichment is disabled.
+
+Anjuke: anjuke, CN; source_region with region_id=beijing and transaction=rent. The feed includes whole-unit and shared rentals. Monthly rent is CNY; source_rental_type retains the source distinction. Shared-house room/bathroom counts are not presented as exclusive facilities of the rented room. Area scope remains unknown; precise addresses, coordinates, broker contacts and community profiling are withheld.
+
+The Anjuke Actor requires a minimum request size of 10, but RealtyCrawl applies the requested result limit and a $0.02 provider charge ceiling. Both sources support listing search and stored listing/media reads only.
+
 ## Unavailable coverage
 
-The remaining 104 sources and 28 operation definitions are not enabled. Additional rental markets, merged property records, valuations, dedicated agent/agency APIs, auction bidding, additional auction markets, buildings, additional stay operations and async jobs require separate implementation and verification. Licensed MLS and public-record feeds need their own access agreements. BuyRentKenya and iProperty failed the latest capped tests; Casa.it returned no results. Other failed samples include Flatmates and Dubizzle Egypt.
+The remaining 102 sources and 28 operation definitions are not enabled. Additional rental markets, merged property records, valuations, dedicated agent/agency APIs, auction bidding, additional auction markets, buildings, additional stay operations and async jobs require separate implementation and verification. Licensed MLS and public-record feeds need their own access agreements. BuyRentKenya and iProperty failed the latest capped tests; Casa.it returned no results. Other failed samples include Flatmates and Dubizzle Egypt.
 
 Current excluded samples: Imobiliare.ro and Compass exceeded the synchronous deadline; Hemnet and Zolo returned no usable records. ImmoScout24 was interrupted by a client connection failure; Imovirtual did not complete successfully. Sahibinden returned an upstream error and MagicBricks returned no listings. These failures do not enable those sources.
 
