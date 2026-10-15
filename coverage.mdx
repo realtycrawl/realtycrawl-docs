@@ -2,7 +2,7 @@
 title: "Coverage and evidence"
 ---
 
-The inventory covers 200 researched platforms and 43 defined API operations. This release includes 140 source adapters (102 sale, 28 rental, 3 auction, 5 stay and 2 development) and 17 enabled operation IDs, including three metadata operations. Check live capabilities for current enablement.
+The inventory covers 200 researched platforms and 43 defined API operations. This release includes 142 source adapters (102 sale, 30 rental, 3 auction, 5 stay and 2 development) and 17 enabled operation IDs, including three metadata operations. Check live capabilities for current enablement.
 
 ## Verified sale-search adapters
 
@@ -184,9 +184,13 @@ Trade Me: trademe, NZ; source_region with platform=trademe and region_id=aucklan
 
 DDproperty: ddproperty, TH; source_region with region_id=thailand and transaction=rent. National rental observations with explicit THB monthly prices. Development project advertisements are excluded. Source region and explicit bedroom/bathroom counts are retained; exact addresses and contacts are omitted. Area text remains untyped because land and floor measurements can differ. The $0.05 run cap can return fewer results than requested.
 
+PropertyGuru Singapore: propertyguru, SG; source_region with platform=propertyguru and region_id=singapore, transaction=rent. National rental observations with explicit SGD monthly prices. Starting prices are lower bounds, not exact rent. Sale and development advertisements are excluded. Missing bedrooms remain unknown; source area text is not a typed floor measurement. Exact addresses and contacts are omitted. The $0.05 bundled run cap may return fewer results than requested.
+
+Domain Australia: domain, AU; source_region with platform=domain and region_id=sydney-nsw-2000, transaction=rent. Sydney NSW 2000 rental listings with explicit AUD weekly prices; price display and weekly amount must agree. Development projects are excluded. Exact addresses and contacts are omitted; no area is inferred from a unit label. Proxies are disabled and runs capped at $0.01.
+
 ## Shared operations
 
-The 98 listing adapters support platform search, unified search, stored listing retrieval and stored media. Airbnb and Vrbo use the separate stay search and stored-stay endpoints. Zillow supports canonical URL resolution and source-reported price history. Rightmove supports fresh native-ID lookup and canonical URL resolution. OneRoof supports stored open-home schedules in UTC. Stored observations belong to the requesting account and expire after 24 hours.
+The 135 listing adapters support platform search, unified search, stored listing retrieval and stored media. Airbnb, Vrbo, Agoda, Trip.com and Booking.com use the separate stay search and stored-stay endpoints. Zillow supports canonical URL resolution and source-reported price history. Rightmove supports fresh native-ID lookup and canonical URL resolution. OneRoof supports stored open-home schedules in UTC. Stored observations belong to the requesting account and expire after 24 hours.
 
 Source records retain their original currencies and area units. Hidden search prices, auction text, price ranges and ambiguous room counts are not converted into exact asking prices or bedroom counts.
 
@@ -200,7 +204,7 @@ The Anjuke Actor requires a minimum request size of 10, but RealtyCrawl applies 
 
 ## Unavailable coverage
 
-The remaining 60 sources and 26 operation definitions are not enabled. Additional rental markets, merged property records, valuations, dedicated agent/agency APIs, auction bidding, additional auction markets, buildings, additional stay operations and async jobs require separate implementation and verification. Licensed MLS and public-record feeds need their own access agreements.
+The remaining 58 sources and 26 operation definitions are not enabled. Additional rental markets, merged property records, valuations, dedicated agent/agency APIs, auction bidding, additional auction markets, buildings, additional stay operations and async jobs require separate implementation and verification. Licensed MLS and public-record feeds need their own access agreements.
 
 Source failures are candidate-specific. Earlier failed actors do not override the accepted adapters listed above. The current capability response determines availability; research entries and historical samples alone do not enable a platform.
 
