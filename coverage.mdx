@@ -2,9 +2,11 @@
 title: "Coverage and evidence"
 ---
 
-The inventory covers 200 researched platforms and 43 defined API operations. This release includes 150 distinct source platforms (109 sale, 31 rental, 3 auction, 5 stay and 2 development) and 19 enabled operation IDs, including three metadata operations. Check live capabilities for current enablement. Realtor.com also supports the dedicated agent operations below.
+The inventory covers 200 researched platforms and 43 defined API operations. This release includes 151 distinct source platforms (110 sale, 31 rental, 3 auction, 5 stay and 2 development) and 19 enabled operation IDs, including three metadata operations. Check live capabilities for current enablement. Realtor.com also supports the dedicated agent operations below.
 
 ## Verified sale-search adapters
+
+LIFULL HOME’S: lifull_homes, JP; source_region with platform=lifull_homes, country=JP, region_id=tokyo and transaction=sale. Tokyo resale condos only. The homes.co.jp listing ID and URL must match, with a Tokyo source address prefix. JPY asking price is checked against the published man-yen text. Layout codes are preserved without inferring bedrooms; floor area uses sqm with unknown basis. Availability stays unknown. Exact address, unit, building name and contacts are omitted. The preview image remains unclassified in extensions; media is empty. Proxy is off; provider charge is capped at $0.01 per run.
 
 PAP.fr: pap, FR; source_region with platform=pap, country=FR, region_id=paris and transaction=sale. Paris apartment sale observations only. The canonical advert URL must match listingId and the Paris arrondissement. EUR asking price, living area in sqm, source rooms and bedrooms are distinct. Availability stays unknown; source DPE is not independently verified. Owner contacts, exact address, coordinates and raw payload are omitted. Detail enrichment is off and provider charge is capped at $0.01 per run.
 
@@ -220,11 +222,11 @@ The Anjuke Actor requires a minimum request size of 10, but RealtyCrawl applies 
 
 ## Unavailable coverage
 
-The remaining 50 sources and 24 operation definitions are not enabled. Additional rental markets, merged property records, valuations, additional agent markets, agent portfolios and agency APIs, auction bidding, additional auction markets, buildings, additional stay operations and async jobs require separate implementation and verification. Licensed MLS and public-record feeds need their own access agreements.
+The remaining 49 sources and 24 operation definitions are not enabled. Additional rental markets, merged property records, valuations, additional agent markets, agent portfolios and agency APIs, auction bidding, additional auction markets, buildings, additional stay operations and async jobs require separate implementation and verification. Licensed MLS and public-record feeds need their own access agreements.
 
 Source failures are candidate-specific. Earlier failed actors do not override the accepted adapters listed above. The current capability response determines availability; research entries and historical samples alone do not enable a platform.
 
-Remaining examples include Booli, Dubizzle Egypt, BuyRentKenya, iProperty, Sahibinden, Beike, LIFULL HOME’S, PortalInmobiliario, ImmoScout24 Switzerland, Bikroy, JamesEdition, Lianjia, Amber and Blueground. Provider access, source identity, pricing and response-contract limitations are recorded separately in the implementation backlog.
+Remaining examples include Booli, Dubizzle Egypt, BuyRentKenya, iProperty, Sahibinden, Beike, PortalInmobiliario, ImmoScout24 Switzerland, Bikroy, JamesEdition, Lianjia, Amber and Blueground. Provider access, source identity, pricing and response-contract limitations are recorded separately in the implementation backlog.
 
 ## Specialist sales and developments
 
