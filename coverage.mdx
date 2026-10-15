@@ -2,7 +2,7 @@
 title: "Coverage and evidence"
 ---
 
-The inventory covers 200 researched platforms and 43 defined API operations. This release includes 114 source adapters (91 sale, 16 rental, 3 auction, 2 stay and 2 development) and 17 enabled operation IDs, including three metadata operations. Check live capabilities for current enablement.
+The inventory covers 200 researched platforms and 43 defined API operations. This release includes 117 source adapters (91 sale, 19 rental, 3 auction, 2 stay and 2 development) and 17 enabled operation IDs, including three metadata operations. Check live capabilities for current enablement.
 
 ## Verified sale-search adapters
 
@@ -136,6 +136,12 @@ HousingAnywhere: housinganywhere, NL; source_region with region_id=amsterdam for
 
 These additions expose locality only; exact street addresses and coordinates are withheld. Absent photos remain an empty media collection. They support search and stored listing/media reads, not fresh detail lookup, unit inventory, tenancy screening, booking or payment operations.
 
+OnTheMarket: onthemarket, GB; source_region with region_id=united-kingdom and transaction=rent. HousingFeed returns UK unit advertisements from its database, with a 30-day maximum source-scrape age. observed_at and source.observed_at preserve the source scrape time; extensions.provider_retrieved_at records the API retrieval time. These are stored source snapshots, not fresh page crawls. GBP monthly rent ranges are preserved.
+
+Apartments.com: apartments, US; source_region with region_id=austin-tx and transaction=rent. One Austin search page; no detail enrichment. Results are building advertisements, not individual units. A plus-suffixed starting rent stays in price.min with amount=null. Studio/bed labels remain source_beds_label, not an asserted unit bedroom count. Photo counts are not photo URLs, so media is empty when no URL is returned.
+
+Apartment List: apartmentlist, US; source_region with region_id=austin-tx and transaction=rent. One Austin search page, no property-detail requests. Monthly USD rent ranges and bedroom options describe the building advertisement. The canonical property slug is native_id; the separate provider p-ID remains provider_listing_id. No single unit, present availability, exact street or coordinates are asserted. All three sources retain the $0.01 charge ceiling and may return fewer results than requested.
+
 ## Shared operations
 
 The 98 listing adapters support platform search, unified search, stored listing retrieval and stored media. Airbnb and Vrbo use the separate stay search and stored-stay endpoints. Zillow supports canonical URL resolution and source-reported price history. Rightmove supports fresh native-ID lookup and canonical URL resolution. OneRoof supports stored open-home schedules in UTC. Stored observations belong to the requesting account and expire after 24 hours.
@@ -152,7 +158,7 @@ The Anjuke Actor requires a minimum request size of 10, but RealtyCrawl applies 
 
 ## Unavailable coverage
 
-The remaining 86 sources and 26 operation definitions are not enabled. Additional rental markets, merged property records, valuations, dedicated agent/agency APIs, auction bidding, additional auction markets, buildings, additional stay operations and async jobs require separate implementation and verification. Licensed MLS and public-record feeds need their own access agreements. BuyRentKenya and iProperty failed the latest capped tests; Casa.it returned no results. Other failed samples include Flatmates and Dubizzle Egypt.
+The remaining 83 sources and 26 operation definitions are not enabled. Additional rental markets, merged property records, valuations, dedicated agent/agency APIs, auction bidding, additional auction markets, buildings, additional stay operations and async jobs require separate implementation and verification. Licensed MLS and public-record feeds need their own access agreements. BuyRentKenya and iProperty failed the latest capped tests; Casa.it returned no results. Other failed samples include Flatmates and Dubizzle Egypt.
 
 Current excluded samples: Imobiliare.ro and Compass exceeded the synchronous deadline; Zolo returned no usable records. Sahibinden returned an upstream error and MagicBricks returned no listings. These failures do not enable those sources.
 
