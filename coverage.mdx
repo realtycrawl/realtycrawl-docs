@@ -2,7 +2,7 @@
 title: "Coverage and evidence"
 ---
 
-The inventory covers 200 researched platforms and 43 defined API operations. This release includes 126 source adapters (96 sale, 23 rental, 3 auction, 2 stay and 2 development) and 17 enabled operation IDs, including three metadata operations. Check live capabilities for current enablement.
+The inventory covers 200 researched platforms and 43 defined API operations. This release includes 128 source adapters (98 sale, 23 rental, 3 auction, 2 stay and 2 development) and 17 enabled operation IDs, including three metadata operations. Check live capabilities for current enablement.
 
 ## Verified sale-search adapters
 
@@ -103,6 +103,10 @@ Land And Farm: landandfarm, US; source_region with platform=landandfarm, country
 Casa.it: casa, IT; source_region with platform=casa, country=IT and region_id=roma; residential sale only. The provider uses an explicit sale-search URL. EUR asking prices and square metres retain their meaning; Italian room counts remain source_rooms, not bedrooms. Proxies are disabled. Search and account-owned stored listing/media are available; no fresh native-ID lookup. The $0.01 cap may return fewer listings than requested.
 
 Oikotie: oikotie, FI; source_region with platform=oikotie, country=FI and region_id=helsinki; sale only, excluding new developments and online offers. EUR headline price does not establish a cash-price/debt-share breakdown. Finnish rooms remain source_rooms, not bedrooms. Square metres have unknown area basis. Proxies, contact enrichment and agency scraping are disabled. Search and account-owned stored listing/media reads are available; no fresh native-ID lookup. The $0.01 cap may return fewer listings than requested.
+
+Century 21: century21, FR; source_region with platform=century21, country=FR and region_id=marseille; sale only. French purchase records, EUR prices, rooms distinct from bedrooms and square metres with unknown area basis. Only Century 21 is selected from the multi-source provider. The US sample is diagnostic and not enabled. Optional details and proxies are disabled. Search and account-owned stored listing/media reads are available; no fresh native-ID lookup. The $0.04 cap may return fewer listings than requested.
+
+Compass: compass, US; source_region with platform=compass, country=US and region_id=new-york-ny; sale only. An exact displayed USD price must agree with the numeric minimum and any maximum. Price ranges are rejected. The source numeric status is preserved without mapping; city and area remain unknown when absent. Optional details and proxies are disabled. Search and account-owned stored listing/media reads are available; no fresh native-ID lookup. The $0.01 cap may return fewer listings than requested.
 
 ## Catalog and auction markets
 
