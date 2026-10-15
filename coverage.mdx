@@ -2,7 +2,7 @@
 title: "Coverage and evidence"
 ---
 
-The inventory covers 200 researched platforms and 43 defined API operations. This release includes 147 source adapters (106 sale, 31 rental, 3 auction, 5 stay and 2 development) and 17 enabled operation IDs, including three metadata operations. Check live capabilities for current enablement.
+The inventory covers 200 researched platforms and 43 defined API operations. This release includes 148 source adapters (107 sale, 31 rental, 3 auction, 5 stay and 2 development) and 17 enabled operation IDs, including three metadata operations. Check live capabilities for current enablement.
 
 ## Verified sale-search adapters
 
@@ -118,6 +118,8 @@ PropertyGuru Malaysia: propertyguru_my, MY; source_region with region_id=malaysi
 
 Rumah123: rumah123, ID; location.kind=source_region, location.platform=rumah123, location.region_id=jakarta-selatan and transaction=sale. House listings in Jakarta Selatan only. Asking prices are exact IDR per property; mortgage instalments and price per square metre are excluded. Land and building areas retain separate bases. No details, private contacts or exact coordinates; bundled Actor run cap $0.02.
 
+Metrocuadrado: metrocuadrado, CO; source_region with platform=metrocuadrado, region_id=bogota and transaction=sale. Used apartment sale listings in Bogotá only; projects, rental records and detail enrichment are excluded. Exact asking prices retain COP, while administration fees are separate with period unknown. Floor area retains unknown basis. Private contacts, precise coordinates and street addresses are omitted; bundled Actor cap $0.01.
+
 PrimeLocation: primelocation, GB; source_region with platform=primelocation, region_id=london and transaction=sale. Source London sale search; the source search scope is not asserted as the property city. Canonical public listing ID, GBP asking price, explicit bedrooms/bathrooms and any floor size in sqft are retained. Floor-area basis stays unknown. Private contacts and exact location are omitted; bundled Actor cap $0.01.
 
 MagicBricks: magicbricks, IN; source_region with platform=magicbricks, region_id=bengaluru and transaction=sale. The provider apartment query can return houses, so there is no guaranteed property-type filter. Property type follows the returned record. Canonical opaque URL ID is retained without converting the provider numeric ID. Exact numeric INR prices retain their rounded crore/lakh display. Project photos, lead profiles and precise location are omitted. Area basis stays unknown; bundled Actor cap $0.01.
@@ -200,7 +202,7 @@ Flatmates: flatmates, AU; source_region with platform=flatmates, region_id=sydne
 
 ## Shared operations
 
-The 140 listing adapters support platform search, unified search, stored listing retrieval and stored media. Airbnb, Vrbo, Agoda, Trip.com and Booking.com use the separate stay search and stored-stay endpoints. Zillow supports canonical URL resolution and source-reported price history. Rightmove supports fresh native-ID lookup and canonical URL resolution. OneRoof supports stored open-home schedules in UTC. Stored observations belong to the requesting account and expire after 24 hours.
+The 141 listing adapters support platform search, unified search, stored listing retrieval and stored media. Airbnb, Vrbo, Agoda, Trip.com and Booking.com use the separate stay search and stored-stay endpoints. Zillow supports canonical URL resolution and source-reported price history. Rightmove supports fresh native-ID lookup and canonical URL resolution. OneRoof supports stored open-home schedules in UTC. Stored observations belong to the requesting account and expire after 24 hours.
 
 Source records retain their original currencies and area units. Hidden search prices, auction text, price ranges and ambiguous room counts are not converted into exact asking prices or bedroom counts.
 
@@ -214,7 +216,7 @@ The Anjuke Actor requires a minimum request size of 10, but RealtyCrawl applies 
 
 ## Unavailable coverage
 
-The remaining 53 sources and 26 operation definitions are not enabled. Additional rental markets, merged property records, valuations, dedicated agent/agency APIs, auction bidding, additional auction markets, buildings, additional stay operations and async jobs require separate implementation and verification. Licensed MLS and public-record feeds need their own access agreements.
+The remaining 52 sources and 26 operation definitions are not enabled. Additional rental markets, merged property records, valuations, dedicated agent/agency APIs, auction bidding, additional auction markets, buildings, additional stay operations and async jobs require separate implementation and verification. Licensed MLS and public-record feeds need their own access agreements.
 
 Source failures are candidate-specific. Earlier failed actors do not override the accepted adapters listed above. The current capability response determines availability; research entries and historical samples alone do not enable a platform.
 
