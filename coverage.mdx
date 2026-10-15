@@ -2,7 +2,7 @@
 title: "Coverage and evidence"
 ---
 
-The inventory covers 200 researched platforms and 43 defined API operations. This release includes 110 source adapters (87 sale, 16 rental, 3 auction, 2 stay and 2 development) and 17 enabled operation IDs, including three metadata operations. Check live capabilities for current enablement.
+The inventory covers 200 researched platforms and 43 defined API operations. This release includes 112 source adapters (89 sale, 16 rental, 3 auction, 2 stay and 2 development) and 17 enabled operation IDs, including three metadata operations. Check live capabilities for current enablement.
 
 ## Verified sale-search adapters
 
@@ -85,6 +85,10 @@ Land.com: land_com, US; text query Texas. LandWatch: landwatch, US; source_regio
 For every source_region selector, set location.platform to the platform slug and location.country to the country above.
 
 Every location selector above includes location.country. These sale adapters require transaction=sale. Start with limit=1. Only capability-advertised filters are accepted; source_region paths are not free-text geocoding.
+
+LoopNet: loopnet, US; source_region with region_id=austin-tx and transaction=sale. Austin commercial sale observations only. Explicit USD asking prices support K/M abbreviations; lease rates, ranges and auction bids are rejected. Available-space labels remain source text because a condo unit is not a whole building. Titles use source property type; exact addresses and contacts are omitted. The $0.01 cap may return fewer results than requested.
+
+Crexi: crexi, US; source_region with region_id=texas-retail and transaction=sale. Texas retail sale observations only. Broker and detail enrichment are disabled. Asking prices are USD; zero floor areas remain unknown and lot acres stay separate. On-Market is preserved as source status without guaranteeing current availability. Exact addresses and contacts are omitted. Bundled datacenter proxy use and a $0.01 charge cap are configured; results can be fewer than requested.
 
 ## Catalog and auction markets
 
