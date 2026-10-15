@@ -182,6 +182,9 @@
         "x-runtime-status": "beta",
         "x-credit-cost": 50,
         "x-live-verified-platforms": [
+          "sreality",
+          "immoscout24",
+          "quintoandar",
           "comparis",
           "housing",
           "hemnet",
@@ -288,6 +291,9 @@
         ],
         "x-credit-unit": "successful_source_crawl",
         "x-verified-platforms": [
+          "sreality",
+          "immoscout24",
+          "quintoandar",
           "comparis",
           "housing",
           "hemnet",
@@ -449,6 +455,9 @@
         "x-runtime-status": "beta",
         "x-credit-cost": 50,
         "x-live-verified-platforms": [
+          "sreality",
+          "immoscout24",
+          "quintoandar",
           "comparis",
           "housing",
           "hemnet",
@@ -555,6 +564,9 @@
         ],
         "x-credit-unit": "successful_source_crawl",
         "x-verified-platforms": [
+          "sreality",
+          "immoscout24",
+          "quintoandar",
           "comparis",
           "housing",
           "hemnet",
@@ -822,6 +834,9 @@
         "x-runtime-status": "beta",
         "x-credit-cost": 1,
         "x-live-verified-platforms": [
+          "sreality",
+          "immoscout24",
+          "quintoandar",
           "comparis",
           "housing",
           "hemnet",
@@ -928,6 +943,9 @@
         ],
         "x-credit-unit": "stored_observation_read",
         "x-verified-platforms": [
+          "sreality",
+          "immoscout24",
+          "quintoandar",
           "comparis",
           "housing",
           "hemnet",
@@ -1096,6 +1114,9 @@
         "x-runtime-status": "beta",
         "x-credit-cost": 1,
         "x-live-verified-platforms": [
+          "sreality",
+          "immoscout24",
+          "quintoandar",
           "comparis",
           "housing",
           "hemnet",
@@ -1202,6 +1223,9 @@
         ],
         "x-credit-unit": "stored_observation_read",
         "x-verified-platforms": [
+          "sreality",
+          "immoscout24",
+          "quintoandar",
           "comparis",
           "housing",
           "hemnet",

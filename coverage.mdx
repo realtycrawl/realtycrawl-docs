@@ -2,7 +2,7 @@
 title: "Coverage and evidence"
 ---
 
-The inventory covers 200 researched platforms and 43 defined API operations. This release includes 107 source adapters (84 sale, 16 rental, 3 auction, 2 stay and 2 development) and 17 enabled operation IDs, including three metadata operations. Check live capabilities for current enablement.
+The inventory covers 200 researched platforms and 43 defined API operations. This release includes 110 source adapters (87 sale, 16 rental, 3 auction, 2 stay and 2 development) and 17 enabled operation IDs, including three metadata operations. Check live capabilities for current enablement.
 
 ## Verified sale-search adapters
 
@@ -171,6 +171,12 @@ Imovirtual: imovirtual, PT; source_region with region_id=lisboa and transaction=
 Housing.com: housing, IN; source_region with region_id=mumbai and transaction=sale. Resale observations only; the Mumbai search scope includes surrounding places such as Nalasopara and is not asserted as the property city. INR asking prices are distinct from EMI amounts; fractional BHK values remain source_bhk, not bedrooms. One search page, no incremental state, proxy or connector exports. Starter Bronze pricing and the $0.05 cap may return fewer results than requested.
 
 Comparis: comparis, CH; source_region with region_id=zuerich and transaction=sale. Zürich apartment observations only, using canonical Comparis listing IDs and CHF purchase prices. Fractional source_rooms are not bedrooms. Detail enrichment is disabled; exact street, coordinates and partner contacts are omitted. The $0.01 cap can return fewer results than requested.
+
+QuintoAndar: quintoandar, BR; source_region with region_id=sao-paulo-sp-brasil and transaction=sale. São Paulo sale observations only. The salePrice is a BRL asking price; rentPrice, totalCost and monthly fees are not purchase prices. Canonical /imovel/\{id\}/comprar URLs are required. Availability remains unknown; titles use the source property type. Exact street, coordinates and contacts are omitted. The $0.01 cap can return fewer results than requested.
+
+ImmoScout24 Germany: immoscout24, DE; source_region with region_id=berlin and transaction=sale. Berlin apartment observations only. German room counts remain source_rooms, not bedrooms. Missing prices stay null, and purchase prices are EUR per property. Informational records are omitted. The provider minimum batch is 20 listings; the API respects your requested result limit and a $0.04 source charge cap. Detail and incremental enrichment are disabled.
+
+Sreality: sreality, CZ; source_region with region_id=praha and transaction=sale. Prague apartment sale observations only. priceCzk is the CZK price for the property, not the price per m². Czech layouts such as 3+1 remain source_layout, not bedrooms. Details and third-party AI enrichment are disabled; proxies are explicitly disabled. The $0.01 cap can return fewer results than requested.
 
 ## Understand completeness
 
