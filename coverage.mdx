@@ -2,7 +2,7 @@
 title: "Coverage and evidence"
 ---
 
-The inventory covers 200 researched platforms and 43 defined API operations. This release includes 137 source adapters (101 sale, 26 rental, 3 auction, 5 stay and 2 development) and 17 enabled operation IDs, including three metadata operations. Check live capabilities for current enablement.
+The inventory covers 200 researched platforms and 43 defined API operations. This release includes 140 source adapters (102 sale, 28 rental, 3 auction, 5 stay and 2 development) and 17 enabled operation IDs, including three metadata operations. Check live capabilities for current enablement.
 
 ## Verified sale-search adapters
 
@@ -114,6 +114,8 @@ HouseSigma: housesigma, CA; source_region toronto-on, transaction=sale. Toronto 
 
 LeBonCoin: leboncoin, FR; source_region with platform=leboncoin and region_id=paris; sale only. Only active sale offers with Paris locality and matching canonical source IDs are accepted. Asking prices are EUR and must agree with source cent amounts. Exact addresses, coordinates, contacts and inferred room counts are omitted. The provider can over-return records; RealtyCrawl enforces the requested limit and a $0.01 run cap with proxies disabled.
 
+PropertyGuru Malaysia: propertyguru_my, MY; source_region with region_id=malaysia and transaction=sale. National sale observations, including residential land. Prices are MYR; starting, guide and undisclosed prices are rejected. Land area remains source text, not dwelling floor area. Source region is retained; exact addresses, contacts and inferred bedroom counts are omitted. The $0.05 run cap can return fewer results than requested.
+
 ## Catalog and auction markets
 
 All of these selectors use location.kind=source_region, location.platform matching the platform ID and the stated country. Sale: kleinanzeigen (DE, bremen); commercialrealestate_au (AU, australia); properati (AR, argentina); infocasas (UY, montevideo); estately (US, los-angeles-ca); opensooq (JO, jordan); midland_hk (HK, hong-kong); bayut_sa (SA, riyadh); toctoc (CL, santiago); adondevivir (PE, peru); plusvalia (EC, quito). Rental: vivanuncios (MX, aguascalientes). These are bounded, verified source windows, not nationwide coverage guarantees.
@@ -178,6 +180,10 @@ Zigbang: zigbang, KR; source_region with platform=zigbang, country=KR and region
 
 Spotahome: spotahome, ES; source_region barcelona, transaction=rent. Monthly EUR rental observations, including individual rooms. Shared-home bedroom counts are not assigned to the rented room. Availability is not guaranteed, and exact address/contact fields are omitted. Proxies are disabled; the $0.01 cap can return fewer records than requested.
 
+Trade Me: trademe, NZ; source_region with platform=trademe and region_id=auckland; house rentals only. Prices are NZD per week. Auckland is the source region, not an inferred city. Native listing identity, rental mode and price wording must agree; council valuations and sale amounts are not rent. Detail enrichment and adjacent-suburb expansion are disabled. The bundled provider requires no proxy setup; its $0.02 run cap can return fewer records than requested.
+
+DDproperty: ddproperty, TH; source_region with region_id=thailand and transaction=rent. National rental observations with explicit THB monthly prices. Development project advertisements are excluded. Source region and explicit bedroom/bathroom counts are retained; exact addresses and contacts are omitted. Area text remains untyped because land and floor measurements can differ. The $0.05 run cap can return fewer results than requested.
+
 ## Shared operations
 
 The 98 listing adapters support platform search, unified search, stored listing retrieval and stored media. Airbnb and Vrbo use the separate stay search and stored-stay endpoints. Zillow supports canonical URL resolution and source-reported price history. Rightmove supports fresh native-ID lookup and canonical URL resolution. OneRoof supports stored open-home schedules in UTC. Stored observations belong to the requesting account and expire after 24 hours.
@@ -194,11 +200,11 @@ The Anjuke Actor requires a minimum request size of 10, but RealtyCrawl applies 
 
 ## Unavailable coverage
 
-The remaining 63 sources and 26 operation definitions are not enabled. Additional rental markets, merged property records, valuations, dedicated agent/agency APIs, auction bidding, additional auction markets, buildings, additional stay operations and async jobs require separate implementation and verification. Licensed MLS and public-record feeds need their own access agreements.
+The remaining 60 sources and 26 operation definitions are not enabled. Additional rental markets, merged property records, valuations, dedicated agent/agency APIs, auction bidding, additional auction markets, buildings, additional stay operations and async jobs require separate implementation and verification. Licensed MLS and public-record feeds need their own access agreements.
 
 Source failures are candidate-specific. Earlier failed actors do not override the accepted adapters listed above. The current capability response determines availability; research entries and historical samples alone do not enable a platform.
 
-Remaining examples include Flatmates, Dubizzle Egypt, BuyRentKenya, iProperty, Sahibinden, MagicBricks, Beike, LIFULL HOME’S, PortalInmobiliario, ImmoScout24 Switzerland, Bikroy, JamesEdition, Trade Me, Lianjia, Amber and Blueground. Provider access, source identity, pricing and response-contract limitations are recorded separately in the implementation backlog.
+Remaining examples include Flatmates, Dubizzle Egypt, BuyRentKenya, iProperty, Sahibinden, MagicBricks, Beike, LIFULL HOME’S, PortalInmobiliario, ImmoScout24 Switzerland, Bikroy, JamesEdition, Lianjia, Amber and Blueground. Provider access, source identity, pricing and response-contract limitations are recorded separately in the implementation backlog.
 
 ## Specialist sales and developments
 
