@@ -2,7 +2,7 @@
 title: "Coverage and evidence"
 ---
 
-The inventory covers 200 researched platforms and 43 defined API operations. This release includes 40 source adapters and 11 enabled operation IDs, including three metadata operations. Check live capabilities for current enablement.
+The inventory covers 200 researched platforms and 43 defined API operations. This release includes 60 source adapters and 11 enabled operation IDs, including three metadata operations. Check live capabilities for current enablement.
 
 ## Verified sale-search adapters
 
@@ -58,21 +58,45 @@ Property24: property24, ZA; source_region with region_id=val-de-vie-estate/paarl
 
 Cian: cian, RU; apartment sale text query Москва. Source results can include new-build and resale apartments. Hidden-address flags suppress precise location; localized room and area summaries are not converted into typed measurements. Layout images are excluded from photos. The provider can over-return records; the API still applies the requested limit.
 
+StreetEasy: streeteasy, US; source_region with region_id=brooklyn for New York sale listings. LandSearch: landsearch, US; text query texas. LandSearch includes rural/commercial land and keeps acreage separate from home square footage.
+
+Immonet: immonet, DE; source_region with region_id=AD02DE1 (a source location code, not a city name). Bien’ici: bienici, FR; text query Paris. Homegate: homegate, CH; text query Zürich. Total rooms are not interpreted as bedrooms.
+
+Boliga: boliga, DK; postal_code=8000. Sale search can include cooperative shares; asking price is not total ownership cost. Photos may be absent. FINN: finn, NO; text query Oslo (county name or source location code). Asking price is separate from totalPrice, sharedCost and collectiveDebt in listing extensions. A concrete new-build unit or contract position can appear; project inventories are not expanded.
+
+Willhaben: willhaben, AT; source_region with region_id=wien, apartment sales in Vienna only. Partial results retain extensions.source_partial; source diagnostics are not listings. Domclick: domclick, RU; text query Москва, flat sales. Total rooms and mortgage estimates are not bedrooms or asking prices.
+
+Centaline: centaline, HK; text query 太古城, Centanet sale search. Area is reported saleable square feet. SRX: srx, SG; source_region with region_id=10 (district numbers 1–28), condo sales. EdgeProp: edgeprop, SG; source_region with region_id=singapore for national condo sales. Comparative transactions are not enabled.
+
+Naver Land: naver_land, KR; text query 강남구, apartment sales. Prices are whole KRW; exclusive and supply areas retain separate labels in square metres. Invalid thumbnail values are omitted.
+
+FazWaz: fazwaz, TH; source_region with region_id=bangkok. Other supported presets: phuket, pattaya, chiang-mai, koh-samui, hua-hin, krabi, chon-buri. The reported price/currency pair is preserved, including USD; a separately converted THB estimate is not substituted.
+
+Zameen: zameen, PK; source_region with region_id=pakistan for the national Homes sale feed. Marla is preserved as an original unit without regional conversion. Emlakjet: emlakjet, TR; source_region with region_id=istanbul. Gross and net areas remain distinct; a 4+1 layout is not treated as an explicit bedroom count.
+
+Aqar: aqar, SA; text query Riyadh, apartment sales. Currency is SAR; deed area is not substituted for advertised area. Propiedades: propiedades, MX; source_region with region_id=df, Mexico City apartment sales only.
+
+Dot Property: dotproperty, PH; source_region with region_id=makati, house sales in Makati only. HomeFinder: homefinder, US; text query San-Antonio_TX. Both expose source search observations and stored media; native detail fetching is not enabled.
+
+These twenty additions expose locality only, with no exact street address or coordinates. Empty media is a valid source outcome. They share the existing sale-search and stored-resource operations; they do not enable rental, valuation, professional, or development endpoints.
+
 For every source_region selector, set location.platform to the platform slug and location.country to the country above.
 
 Every location selector above includes location.country. All adapters require transaction=sale. Start with limit=1. Only capability-advertised filters are accepted; source_region paths are not free-text geocoding.
 
 ## Shared operations
 
-All 40 adapters support platform search, unified search, stored listing retrieval and stored media. Zillow supports canonical URL resolution and source-reported price history. Rightmove supports fresh native-ID lookup and canonical URL resolution. OneRoof supports stored open-home schedules in UTC. Stored observations belong to the requesting account and expire after 24 hours.
+All 60 adapters support platform search, unified search, stored listing retrieval and stored media. Zillow supports canonical URL resolution and source-reported price history. Rightmove supports fresh native-ID lookup and canonical URL resolution. OneRoof supports stored open-home schedules in UTC. Stored observations belong to the requesting account and expire after 24 hours.
 
 Source records retain their original currencies and area units. Hidden search prices, auction text, price ranges and ambiguous room counts are not converted into exact asking prices or bedroom counts.
 
 ## Unavailable coverage
 
-The remaining 160 sources and 32 operation definitions are not enabled. Rentals, merged property records, valuations, dedicated agent/agency APIs, auction-event APIs, buildings, stays and async jobs require separate implementation and verification. Licensed MLS and public-record feeds need their own access agreements. BuyRentKenya and iProperty failed the latest capped tests; Casa.it returned no results. Other failed samples include Flatmates and Dubizzle Egypt.
+The remaining 140 sources and 32 operation definitions are not enabled. Rentals, merged property records, valuations, dedicated agent/agency APIs, auction-event APIs, buildings, stays and async jobs require separate implementation and verification. Licensed MLS and public-record feeds need their own access agreements. BuyRentKenya and iProperty failed the latest capped tests; Casa.it returned no results. Other failed samples include Flatmates and Dubizzle Egypt.
 
 Current excluded samples: Imobiliare.ro and Compass exceeded the synchronous deadline; Hemnet and Zolo returned no usable records. ImmoScout24 was interrupted by a client connection failure; Imovirtual did not complete successfully. Sahibinden returned an upstream error and MagicBricks returned no listings. These failures do not enable those sources.
+
+Additional deferred samples: Beike returned an error record; LIFULL HOME’S and Century 21 returned no listings; PortalInmobiliario, ImmoScout24 Switzerland and Zonaprop failed. Inmuebles24 and 591 need development-specific normalization; Avito lacks an unambiguous sale marker; QuintoAndar returned unpublished records without canonical listing URLs. Bikroy source identity needs further validation. These remain unavailable.
 
 ## Understand completeness
 
