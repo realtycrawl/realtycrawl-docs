@@ -2,7 +2,7 @@
 title: "Coverage and evidence"
 ---
 
-The inventory covers 200 researched platforms and 43 defined API operations. This release includes 120 source adapters (91 sale, 22 rental, 3 auction, 2 stay and 2 development) and 17 enabled operation IDs, including three metadata operations. Check live capabilities for current enablement.
+The inventory covers 200 researched platforms and 43 defined API operations. This release includes 122 source adapters (92 sale, 23 rental, 3 auction, 2 stay and 2 development) and 17 enabled operation IDs, including three metadata operations. Check live capabilities for current enablement.
 
 ## Verified sale-search adapters
 
@@ -94,6 +94,8 @@ Squarefoot: squarefoot, HK; source_region with region_id=kowloon and transaction
 
 28Hse: 28hse, HK; source_region with region_id=hong-kong and transaction=sale. Hong Kong apartment sale listings with bundled proxy. Asking prices are HKD; saleable and gross areas remain distinct sqft measurements. Source rooms are retained without guessing bedroom counts. The verified listing feed has no photos, so stored media returns an empty list. Detail mode, contact enrichment and fresh native-ID lookup are not enabled. The $0.01 cap may return fewer results than requested.
 
+Imobiliare.ro: imobiliare_ro, RO; transaction=sale; source_region bucuresti. Apartment/studio search observations retain EUR asking prices and source area; missing property category stays unknown and rooms are not bedrooms. Only source URLs and returned locations matching Bucharest are accepted.
+
 ## Catalog and auction markets
 
 All of these selectors use location.kind=source_region, location.platform matching the platform ID and the stated country. Sale: kleinanzeigen (DE, bremen); commercialrealestate_au (AU, australia); properati (AR, argentina); infocasas (UY, montevideo); estately (US, los-angeles-ca); opensooq (JO, jordan); midland_hk (HK, hong-kong); bayut_sa (SA, riyadh); toctoc (CL, santiago); adondevivir (PE, peru); plusvalia (EC, quito). Rental: vivanuncios (MX, aguascalientes). These are bounded, verified source windows, not nationwide coverage guarantees.
@@ -147,6 +149,8 @@ SpareRoom US: spareroom_us, US; rent with source_region los-angeles-ca. Uses the
 ApartmentGuide: apartmentguide, US; rent with source_region austin-tx. Austin apartment building advertisements retain starting rent and floor-plan rent ranges. Bedroom, bathroom and area ranges are preserved as source labels, not assigned to an individual unit. Source update time is separate from retrieval.
 
 ZonaProp: zonaprop, AR; rent with source_region capital-federal. Capital Federal apartment rentals preserve source ARS or USD asking rent. Expenses, total area, covered area and rooms remain separate fields. Payment period is unspecified because this feed does not state one. Development advertisements and mixed-price conflicts are rejected.
+
+RentCafe: rentcafe, US; transaction=rent; source_region phoenix-az. Detail mode is required for a canonical listing URL. Building-level USD rent ranges and bedroom/bathroom labels are preserved; exact unit price, bedrooms, bathrooms and payment period stay unset. Contact enrichment is disabled.
 
 ## Shared operations
 
