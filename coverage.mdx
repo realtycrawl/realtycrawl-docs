@@ -2,7 +2,7 @@
 title: "Coverage and evidence"
 ---
 
-The inventory covers 200 researched platforms and 43 defined API operations. This release includes 129 source adapters (99 sale, 23 rental, 3 auction, 2 stay and 2 development) and 17 enabled operation IDs, including three metadata operations. Check live capabilities for current enablement.
+The inventory covers 200 researched platforms and 43 defined API operations. This release includes 130 source adapters (99 sale, 24 rental, 3 auction, 2 stay and 2 development) and 17 enabled operation IDs, including three metadata operations. Check live capabilities for current enablement.
 
 ## Verified sale-search adapters
 
@@ -165,6 +165,8 @@ ApartmentGuide: apartmentguide, US; rent with source_region austin-tx. Austin ap
 ZonaProp: zonaprop, AR; rent with source_region capital-federal. Capital Federal apartment rentals preserve source ARS or USD asking rent. Expenses, total area, covered area and rooms remain separate fields. Payment period is unspecified because this feed does not state one. Development advertisements and mixed-price conflicts are rejected.
 
 RentCafe: rentcafe, US; transaction=rent; source_region phoenix-az. Detail mode is required for a canonical listing URL. Building-level USD rent ranges and bedroom/bathroom labels are preserved; exact unit price, bedrooms, bathrooms and payment period stay unset. Contact enrichment is disabled.
+
+Yad2: yad2, IL; source_region with platform=yad2, country=IL and region_id=tel-aviv-yafo; rental observations only. Monthly ILS prices require the source to report 12 payments per year. Fractional room totals are not bedroom counts. Exact addresses, coordinates and contacts are omitted. Search and account-owned stored listing/media reads are supported; source timestamps and immediate-entry flags do not guarantee current availability. One search page, no proxies, $0.01 per-run cap; limit is an upper bound.
 
 ## Shared operations
 
