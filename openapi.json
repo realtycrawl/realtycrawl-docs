@@ -213,7 +213,12 @@
           "immoweb",
           "immowelt",
           "boligsiden",
-          "etuovi"
+          "etuovi",
+          "immobiliare",
+          "otodom",
+          "bayut",
+          "property24",
+          "cian"
         ],
         "x-credit-unit": "successful_source_crawl"
       }
@@ -307,7 +312,12 @@
           "immoweb",
           "immowelt",
           "boligsiden",
-          "etuovi"
+          "etuovi",
+          "immobiliare",
+          "otodom",
+          "bayut",
+          "property24",
+          "cian"
         ],
         "x-credit-unit": "successful_source_crawl"
       }
@@ -500,7 +510,12 @@
           "immoweb",
           "immowelt",
           "boligsiden",
-          "etuovi"
+          "etuovi",
+          "immobiliare",
+          "otodom",
+          "bayut",
+          "property24",
+          "cian"
         ],
         "x-credit-unit": "stored_observation_read"
       }
@@ -601,7 +616,12 @@
           "immoweb",
           "immowelt",
           "boligsiden",
-          "etuovi"
+          "etuovi",
+          "immobiliare",
+          "otodom",
+          "bayut",
+          "property24",
+          "cian"
         ],
         "x-credit-unit": "stored_observation_read"
       }
