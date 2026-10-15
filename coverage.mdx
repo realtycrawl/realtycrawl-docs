@@ -190,13 +190,11 @@ The Anjuke Actor requires a minimum request size of 10, but RealtyCrawl applies 
 
 ## Unavailable coverage
 
-The remaining 80 sources and 26 operation definitions are not enabled. Additional rental markets, merged property records, valuations, dedicated agent/agency APIs, auction bidding, additional auction markets, buildings, additional stay operations and async jobs require separate implementation and verification. Licensed MLS and public-record feeds need their own access agreements. BuyRentKenya and iProperty failed the latest capped tests; Casa.it returned no results. Other failed samples include Flatmates and Dubizzle Egypt.
+The remaining 65 sources and 26 operation definitions are not enabled. Additional rental markets, merged property records, valuations, dedicated agent/agency APIs, auction bidding, additional auction markets, buildings, additional stay operations and async jobs require separate implementation and verification. Licensed MLS and public-record feeds need their own access agreements.
 
-Current excluded samples: Compass exceeded the synchronous deadline. Sahibinden returned an upstream error and MagicBricks returned no listings. These failures do not enable those sources.
+Source failures are candidate-specific. Earlier failed actors do not override the accepted adapters listed above. The current capability response determines availability; research entries and historical samples alone do not enable a platform.
 
-Additional deferred samples: Beike returned an error record; LIFULL HOME’S and Century 21 returned no listings; PortalInmobiliario and ImmoScout24 Switzerland failed. Bikroy source identity needs further validation. These remain unavailable.
-
-Additional excluded samples: SeLoger and JamesEdition failed; Oikotie, Trade Me, Lianjia and Zigbang returned no listings. Amber lacks canonical platform identity in the sampled aggregate, and Blueground lacks a usable price/location contract. These sources remain unavailable.
+Remaining examples include Flatmates, Dubizzle Egypt, BuyRentKenya, iProperty, Sahibinden, MagicBricks, Beike, LIFULL HOME’S, PortalInmobiliario, ImmoScout24 Switzerland, Bikroy, JamesEdition, Trade Me, Lianjia, Amber and Blueground. Provider access, source identity, pricing and response-contract limitations are recorded separately in the implementation backlog.
 
 ## Specialist sales and developments
 
