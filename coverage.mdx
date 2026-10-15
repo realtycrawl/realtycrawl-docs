@@ -2,7 +2,7 @@
 title: "Coverage and evidence"
 ---
 
-The inventory covers 200 researched platforms and 43 defined API operations. This release includes 123 source adapters (93 sale, 23 rental, 3 auction, 2 stay and 2 development) and 17 enabled operation IDs, including three metadata operations. Check live capabilities for current enablement.
+The inventory covers 200 researched platforms and 43 defined API operations. This release includes 125 source adapters (95 sale, 23 rental, 3 auction, 2 stay and 2 development) and 17 enabled operation IDs, including three metadata operations. Check live capabilities for current enablement.
 
 ## Verified sale-search adapters
 
@@ -98,6 +98,10 @@ Imobiliare.ro: imobiliare_ro, RO; transaction=sale; source_region bucuresti. Apa
 
 Zolo: zolo, CA; source_region with platform=zolo, country=CA and region_id=toronto-on; sale only. Prices are CAD asking prices, not mortgage payments. Area and age ranges remain source labels; extra bedrooms are not added to the base count. Search and stored listing/media reads are supported; no fresh native-ID lookup. Proxies are disabled. The $0.01 run cap can return fewer results than requested.
 
+Land And Farm: landandfarm, US; source_region with platform=landandfarm, country=US and region_id=texas; sale only. USD parcel asking prices are distinct from derived price per acre. Land area uses acres; property subtype and building details remain unknown. Proxies are disabled. The $0.01 cap may return fewer listings than requested.
+
+Casa.it: casa, IT; source_region with platform=casa, country=IT and region_id=roma; residential sale only. The provider uses an explicit sale-search URL. EUR asking prices and square metres retain their meaning; Italian room counts remain source_rooms, not bedrooms. Proxies are disabled. Search and account-owned stored listing/media are available; no fresh native-ID lookup. The $0.01 cap may return fewer listings than requested.
+
 ## Catalog and auction markets
 
 All of these selectors use location.kind=source_region, location.platform matching the platform ID and the stated country. Sale: kleinanzeigen (DE, bremen); commercialrealestate_au (AU, australia); properati (AR, argentina); infocasas (UY, montevideo); estately (US, los-angeles-ca); opensooq (JO, jordan); midland_hk (HK, hong-kong); bayut_sa (SA, riyadh); toctoc (CL, santiago); adondevivir (PE, peru); plusvalia (EC, quito). Rental: vivanuncios (MX, aguascalientes). These are bounded, verified source windows, not nationwide coverage guarantees.
@@ -176,7 +180,7 @@ Current excluded samples: Compass exceeded the synchronous deadline. Sahibinden 
 
 Additional deferred samples: Beike returned an error record; LIFULL HOME’S and Century 21 returned no listings; PortalInmobiliario and ImmoScout24 Switzerland failed. Bikroy source identity needs further validation. These remain unavailable.
 
-Additional excluded samples: SeLoger and JamesEdition failed; Oikotie, Trade Me, Lianjia and Zigbang returned no listings. Land And Farm returned a diagnostic rather than listings. Amber lacks canonical platform identity in the sampled aggregate, and Blueground lacks a usable price/location contract. These sources remain unavailable.
+Additional excluded samples: SeLoger and JamesEdition failed; Oikotie, Trade Me, Lianjia and Zigbang returned no listings. Amber lacks canonical platform identity in the sampled aggregate, and Blueground lacks a usable price/location contract. These sources remain unavailable.
 
 ## Specialist sales and developments
 
