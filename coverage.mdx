@@ -2,7 +2,7 @@
 title: "Coverage and evidence"
 ---
 
-The inventory covers 200 researched platforms and 43 defined API operations. This release includes 15 source adapters and 10 enabled operation IDs, including three metadata operations. Check live capabilities for current enablement.
+The inventory covers 200 researched platforms and 43 defined API operations. This release includes 28 source adapters and 11 enabled operation IDs, including three metadata operations. Check live capabilities for current enablement.
 
 ## Verified sale-search adapters
 
@@ -30,17 +30,29 @@ OneRoof: oneroof, NZ; house sale search. Use source_region with platform=oneroof
 
 99.co: 99co, SG; use source_region with platform=99co and region_id=singapore for island-wide residential sale search.
 
+Habitaclia: habitaclia, ES; Fotocasa: fotocasa, ES; Argenprop: argenprop, AR (apartments); Nigeria Property Centre: nigeriapropertycentre, NG (houses); Daft: daft, IE. Use location.kind=text with location.query and the stated country.
+
+realestate.co.nz: realestate_nz, NZ; source_region with region_id=auckland. Sale results can include rural properties. HTTP-only source photos are omitted; auction and negotiation text remain non-numeric.
+
+Mubawab: mubawab, MA; apartment sales, source_region with region_id=casablanca. Zimmo: zimmo, BE; source_region with region_id=gent-9000 (locality and postcode).
+
+Lamudi: lamudi, PH; nationwide house sales, source_region with region_id=philippines. Private Property: privateproperty, ZA; source_region with region_id=south-africa/1 (the path after for-sale/).
+
+FincaRaíz: fincaraiz, CO; apartment sales, source_region with region_id=bogota (city slug). MyHome: myhome, IE; source_region with region_id=dublin (county slug). PropertyPro: propertypro, NG; house sales, source_region with region_id=lagos (state slug). PropertyPro does not publish a separate native ID through this provider; the resource ID is based on the canonical listing URL.
+
+For every source_region selector, set location.platform to the platform slug and location.country to the country above.
+
 Every location selector above includes location.country. All adapters require transaction=sale. Start with limit=1. Only capability-advertised filters are accepted; source_region paths are not free-text geocoding.
 
 ## Shared operations
 
-All 15 adapters support platform search, unified search, stored listing retrieval and stored media. Zillow supports canonical URL resolution and source-reported price history. OneRoof supports stored open-home schedules in UTC. Stored observations belong to the requesting account and expire after 24 hours.
+All 28 adapters support platform search, unified search, stored listing retrieval and stored media. Zillow supports canonical URL resolution and source-reported price history. Rightmove supports fresh native-ID lookup and canonical URL resolution. OneRoof supports stored open-home schedules in UTC. Stored observations belong to the requesting account and expire after 24 hours.
 
 Source records retain their original currencies and area units. Hidden search prices, auction text, price ranges and ambiguous room counts are not converted into exact asking prices or bedroom counts.
 
 ## Unavailable coverage
 
-The remaining 185 sources and 33 operation definitions are not enabled. Fresh native-ID details (including Rightmove), rentals, merged property records, valuations, dedicated agent/agency APIs, auction-event APIs, buildings, stays and async jobs require separate implementation and verification. Licensed MLS and public-record feeds need their own access agreements. Otodom, Flatmates and Dubizzle Egypt samples did not pass acceptance.
+The remaining 172 sources and 32 operation definitions are not enabled. Rentals, merged property records, valuations, dedicated agent/agency APIs, auction-event APIs, buildings, stays and async jobs require separate implementation and verification. Licensed MLS and public-record feeds need their own access agreements. BuyRentKenya and iProperty failed the latest capped tests; Casa.it returned no results. Other failed samples include Otodom, Flatmates and Dubizzle Egypt.
 
 ## Understand completeness
 

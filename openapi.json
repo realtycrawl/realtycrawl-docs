@@ -193,7 +193,20 @@
           "hepsiemlak",
           "mercadolibre",
           "oneroof",
-          "99co"
+          "99co",
+          "realestate_nz",
+          "habitaclia",
+          "mubawab",
+          "fotocasa",
+          "argenprop",
+          "nigeriapropertycentre",
+          "zimmo",
+          "lamudi",
+          "privateproperty",
+          "daft",
+          "fincaraiz",
+          "myhome",
+          "propertypro"
         ],
         "x-credit-unit": "successful_source_crawl"
       }
@@ -267,7 +280,20 @@
           "hepsiemlak",
           "mercadolibre",
           "oneroof",
-          "99co"
+          "99co",
+          "realestate_nz",
+          "habitaclia",
+          "mubawab",
+          "fotocasa",
+          "argenprop",
+          "nigeriapropertycentre",
+          "zimmo",
+          "lamudi",
+          "privateproperty",
+          "daft",
+          "fincaraiz",
+          "myhome",
+          "propertypro"
         ],
         "x-credit-unit": "successful_source_crawl"
       }
@@ -276,7 +302,7 @@
       "get": {
         "operationId": "getPlatformListing",
         "summary": "Get listing by platform native ID",
-        "description": "Fresh native-ID details are currently unavailable. The previously tested Rightmove detail provider excludes API use on its Free plan. Use stored listing retrieval after a supported search.",
+        "description": "Fresh residential sale listing lookup by native ID is enabled for Rightmove (GB). Other platforms remain unavailable. Check live capabilities before requesting.",
         "x-research-status": "live-verified",
         "tags": [
           "platform-listings"
@@ -323,10 +349,12 @@
             }
           }
         ],
-        "x-runtime-status": "unavailable",
+        "x-runtime-status": "beta",
         "x-credit-cost": 50,
         "x-credit-unit": "successful_source_crawl",
-        "x-live-verified-platforms": []
+        "x-live-verified-platforms": [
+          "rightmove"
+        ]
       }
     },
     "/v1/listings/resolve": {
@@ -373,7 +401,8 @@
         "x-runtime-status": "beta",
         "x-credit-cost": 50,
         "x-live-verified-platforms": [
-          "zillow"
+          "zillow",
+          "rightmove"
         ],
         "x-credit-unit": "successful_source_crawl"
       }
@@ -437,7 +466,20 @@
           "hepsiemlak",
           "mercadolibre",
           "oneroof",
-          "99co"
+          "99co",
+          "realestate_nz",
+          "habitaclia",
+          "mubawab",
+          "fotocasa",
+          "argenprop",
+          "nigeriapropertycentre",
+          "zimmo",
+          "lamudi",
+          "privateproperty",
+          "daft",
+          "fincaraiz",
+          "myhome",
+          "propertypro"
         ],
         "x-credit-unit": "stored_observation_read"
       }
@@ -518,7 +560,20 @@
           "hepsiemlak",
           "mercadolibre",
           "oneroof",
-          "99co"
+          "99co",
+          "realestate_nz",
+          "habitaclia",
+          "mubawab",
+          "fotocasa",
+          "argenprop",
+          "nigeriapropertycentre",
+          "zimmo",
+          "lamudi",
+          "privateproperty",
+          "daft",
+          "fincaraiz",
+          "myhome",
+          "propertypro"
         ],
         "x-credit-unit": "stored_observation_read"
       }
