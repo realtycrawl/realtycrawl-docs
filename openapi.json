@@ -206,7 +206,14 @@
           "daft",
           "fincaraiz",
           "myhome",
-          "propertypro"
+          "propertypro",
+          "homes",
+          "centris",
+          "pisos",
+          "immoweb",
+          "immowelt",
+          "boligsiden",
+          "etuovi"
         ],
         "x-credit-unit": "successful_source_crawl"
       }
@@ -293,7 +300,14 @@
           "daft",
           "fincaraiz",
           "myhome",
-          "propertypro"
+          "propertypro",
+          "homes",
+          "centris",
+          "pisos",
+          "immoweb",
+          "immowelt",
+          "boligsiden",
+          "etuovi"
         ],
         "x-credit-unit": "successful_source_crawl"
       }
@@ -479,7 +493,14 @@
           "daft",
           "fincaraiz",
           "myhome",
-          "propertypro"
+          "propertypro",
+          "homes",
+          "centris",
+          "pisos",
+          "immoweb",
+          "immowelt",
+          "boligsiden",
+          "etuovi"
         ],
         "x-credit-unit": "stored_observation_read"
       }
@@ -573,7 +594,14 @@
           "daft",
           "fincaraiz",
           "myhome",
-          "propertypro"
+          "propertypro",
+          "homes",
+          "centris",
+          "pisos",
+          "immoweb",
+          "immowelt",
+          "boligsiden",
+          "etuovi"
         ],
         "x-credit-unit": "stored_observation_read"
       }

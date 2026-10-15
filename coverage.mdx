@@ -2,7 +2,7 @@
 title: "Coverage and evidence"
 ---
 
-The inventory covers 200 researched platforms and 43 defined API operations. This release includes 28 source adapters and 11 enabled operation IDs, including three metadata operations. Check live capabilities for current enablement.
+The inventory covers 200 researched platforms and 43 defined API operations. This release includes 35 source adapters and 11 enabled operation IDs, including three metadata operations. Check live capabilities for current enablement.
 
 ## Verified sale-search adapters
 
@@ -40,19 +40,29 @@ Lamudi: lamudi, PH; nationwide house sales, source_region with region_id=philipp
 
 FincaRaíz: fincaraiz, CO; apartment sales, source_region with region_id=bogota (city slug). MyHome: myhome, IE; source_region with region_id=dublin (county slug). PropertyPro: propertypro, NG; house sales, source_region with region_id=lagos (state slug). PropertyPro does not publish a separate native ID through this provider; the resource ID is based on the canonical listing URL.
 
+Homes.com: homes, US, text query Charlotte, NC. Centris: centris, CA (Quebec residential listings), text query Montreal. Searches expose the source search fields; richer listing details and agent modes are not enabled.
+
+Pisos: pisos, ES, apartment sales; source_region with region_id=madrid_capital (city/province slug, with underscores). Immoweb: immoweb, BE, regular apartment sales nationwide; source_region with region_id=belgium. Both return locality only; unverified precise addresses and coarse Pisos map points are omitted. Immoweb may retrieve a minimum upstream batch of ten, but the API enforces the requested result limit.
+
+Immowelt: immowelt, DE, text query Berlin. This is the source keyword search, not a strict municipal boundary: nearby or keyword-matching listings can appear. Only BUY records pass normalization. A hidden address suppresses the street and coordinates.
+
+Boligsiden: boligsiden, DK, municipality-name text query Aarhus. Etuovi: etuovi, FI, residential-sale text query Helsinki. Danish and Finnish room counts are not bedroom counts. Boligsiden asking prices are separate from public valuations and mortgage estimates; Etuovi bidding prices remain non-numeric.
+
 For every source_region selector, set location.platform to the platform slug and location.country to the country above.
 
 Every location selector above includes location.country. All adapters require transaction=sale. Start with limit=1. Only capability-advertised filters are accepted; source_region paths are not free-text geocoding.
 
 ## Shared operations
 
-All 28 adapters support platform search, unified search, stored listing retrieval and stored media. Zillow supports canonical URL resolution and source-reported price history. Rightmove supports fresh native-ID lookup and canonical URL resolution. OneRoof supports stored open-home schedules in UTC. Stored observations belong to the requesting account and expire after 24 hours.
+All 35 adapters support platform search, unified search, stored listing retrieval and stored media. Zillow supports canonical URL resolution and source-reported price history. Rightmove supports fresh native-ID lookup and canonical URL resolution. OneRoof supports stored open-home schedules in UTC. Stored observations belong to the requesting account and expire after 24 hours.
 
 Source records retain their original currencies and area units. Hidden search prices, auction text, price ranges and ambiguous room counts are not converted into exact asking prices or bedroom counts.
 
 ## Unavailable coverage
 
-The remaining 172 sources and 32 operation definitions are not enabled. Rentals, merged property records, valuations, dedicated agent/agency APIs, auction-event APIs, buildings, stays and async jobs require separate implementation and verification. Licensed MLS and public-record feeds need their own access agreements. BuyRentKenya and iProperty failed the latest capped tests; Casa.it returned no results. Other failed samples include Otodom, Flatmates and Dubizzle Egypt.
+The remaining 165 sources and 32 operation definitions are not enabled. Rentals, merged property records, valuations, dedicated agent/agency APIs, auction-event APIs, buildings, stays and async jobs require separate implementation and verification. Licensed MLS and public-record feeds need their own access agreements. BuyRentKenya and iProperty failed the latest capped tests; Casa.it returned no results. Other failed samples include Otodom, Flatmates and Dubizzle Egypt.
+
+Current excluded samples: Imobiliare.ro and Compass exceeded the synchronous deadline; Hemnet and Zolo returned no usable records. ImmoScout24 was interrupted by a client connection failure; Imovirtual did not complete successfully. These failures do not enable those sources.
 
 ## Understand completeness
 
