@@ -2,7 +2,7 @@
 title: "Coverage and evidence"
 ---
 
-The inventory covers 200 researched platforms and 43 defined API operations. This release includes 142 source adapters (102 sale, 30 rental, 3 auction, 5 stay and 2 development) and 17 enabled operation IDs, including three metadata operations. Check live capabilities for current enablement.
+The inventory covers 200 researched platforms and 43 defined API operations. This release includes 144 source adapters (103 sale, 31 rental, 3 auction, 5 stay and 2 development) and 17 enabled operation IDs, including three metadata operations. Check live capabilities for current enablement.
 
 ## Verified sale-search adapters
 
@@ -116,6 +116,8 @@ LeBonCoin: leboncoin, FR; source_region with platform=leboncoin and region_id=pa
 
 PropertyGuru Malaysia: propertyguru_my, MY; source_region with region_id=malaysia and transaction=sale. National sale observations, including residential land. Prices are MYR; starting, guide and undisclosed prices are rejected. Land area remains source text, not dwelling floor area. Source region is retained; exact addresses, contacts and inferred bedroom counts are omitted. The $0.05 run cap can return fewer results than requested.
 
+Rumah123: rumah123, ID; location.kind=source_region, location.platform=rumah123, location.region_id=jakarta-selatan and transaction=sale. House listings in Jakarta Selatan only. Asking prices are exact IDR per property; mortgage instalments and price per square metre are excluded. Land and building areas retain separate bases. No details, private contacts or exact coordinates; bundled Actor run cap $0.02.
+
 ## Catalog and auction markets
 
 All of these selectors use location.kind=source_region, location.platform matching the platform ID and the stated country. Sale: kleinanzeigen (DE, bremen); commercialrealestate_au (AU, australia); properati (AR, argentina); infocasas (UY, montevideo); estately (US, los-angeles-ca); opensooq (JO, jordan); midland_hk (HK, hong-kong); bayut_sa (SA, riyadh); toctoc (CL, santiago); adondevivir (PE, peru); plusvalia (EC, quito). Rental: vivanuncios (MX, aguascalientes). These are bounded, verified source windows, not nationwide coverage guarantees.
@@ -188,9 +190,11 @@ PropertyGuru Singapore: propertyguru, SG; source_region with platform=propertygu
 
 Domain Australia: domain, AU; source_region with platform=domain and region_id=sydney-nsw-2000, transaction=rent. Sydney NSW 2000 rental listings with explicit AUD weekly prices; price display and weekly amount must agree. Development projects are excluded. Exact addresses and contacts are omitted; no area is inferred from a unit label. Proxies are disabled and runs capped at $0.01.
 
+Flatmates: flatmates, AU; source_region with platform=flatmates, region_id=sydney and transaction=rent. Sydney room advertisements only; person and team-up profiles are excluded. Weekly AUD ranges retain min/max with amount=null. Whole-house bedroom and bathroom counts do not describe the rented room. No lister or household profiles; bundled Actor run cap $0.02.
+
 ## Shared operations
 
-The 135 listing adapters support platform search, unified search, stored listing retrieval and stored media. Airbnb, Vrbo, Agoda, Trip.com and Booking.com use the separate stay search and stored-stay endpoints. Zillow supports canonical URL resolution and source-reported price history. Rightmove supports fresh native-ID lookup and canonical URL resolution. OneRoof supports stored open-home schedules in UTC. Stored observations belong to the requesting account and expire after 24 hours.
+The 137 listing adapters support platform search, unified search, stored listing retrieval and stored media. Airbnb, Vrbo, Agoda, Trip.com and Booking.com use the separate stay search and stored-stay endpoints. Zillow supports canonical URL resolution and source-reported price history. Rightmove supports fresh native-ID lookup and canonical URL resolution. OneRoof supports stored open-home schedules in UTC. Stored observations belong to the requesting account and expire after 24 hours.
 
 Source records retain their original currencies and area units. Hidden search prices, auction text, price ranges and ambiguous room counts are not converted into exact asking prices or bedroom counts.
 
@@ -204,11 +208,11 @@ The Anjuke Actor requires a minimum request size of 10, but RealtyCrawl applies 
 
 ## Unavailable coverage
 
-The remaining 58 sources and 26 operation definitions are not enabled. Additional rental markets, merged property records, valuations, dedicated agent/agency APIs, auction bidding, additional auction markets, buildings, additional stay operations and async jobs require separate implementation and verification. Licensed MLS and public-record feeds need their own access agreements.
+The remaining 56 sources and 26 operation definitions are not enabled. Additional rental markets, merged property records, valuations, dedicated agent/agency APIs, auction bidding, additional auction markets, buildings, additional stay operations and async jobs require separate implementation and verification. Licensed MLS and public-record feeds need their own access agreements.
 
 Source failures are candidate-specific. Earlier failed actors do not override the accepted adapters listed above. The current capability response determines availability; research entries and historical samples alone do not enable a platform.
 
-Remaining examples include Flatmates, Dubizzle Egypt, BuyRentKenya, iProperty, Sahibinden, MagicBricks, Beike, LIFULL HOME’S, PortalInmobiliario, ImmoScout24 Switzerland, Bikroy, JamesEdition, Lianjia, Amber and Blueground. Provider access, source identity, pricing and response-contract limitations are recorded separately in the implementation backlog.
+Remaining examples include Booli, Dubizzle Egypt, BuyRentKenya, iProperty, Sahibinden, MagicBricks, Beike, LIFULL HOME’S, PortalInmobiliario, ImmoScout24 Switzerland, Bikroy, JamesEdition, Lianjia, Amber and Blueground. Provider access, source identity, pricing and response-contract limitations are recorded separately in the implementation backlog.
 
 ## Specialist sales and developments
 
