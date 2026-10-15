@@ -2,7 +2,7 @@
 title: "Coverage and evidence"
 ---
 
-The inventory covers 200 researched platforms and 43 defined API operations. This release includes 60 source adapters and 11 enabled operation IDs, including three metadata operations. Check live capabilities for current enablement.
+The inventory covers 200 researched platforms and 43 defined API operations. This release includes 96 source adapters (76 sale, 15 rental, 3 auction and 2 stay) and 15 enabled operation IDs, including three metadata operations. Check live capabilities for current enablement.
 
 ## Verified sale-search adapters
 
@@ -80,23 +80,69 @@ Dot Property: dotproperty, PH; source_region with region_id=makati, house sales 
 
 These twenty additions expose locality only, with no exact street address or coordinates. Empty media is a valid source outcome. They share the existing sale-search and stored-resource operations; they do not enable rental, valuation, professional, or development endpoints.
 
+Land.com: land_com, US; text query Texas. LandWatch: landwatch, US; source_region with region_id=south-carolina/gray-court (state/city slugs). Land acreage stays separate from home area; auction and lease records are excluded. NoBroker: nobroker, IN; text query Bangalore, buy listings only. Properstar: properstar, ES; source_region with region_id=spain for residential sales in Spain only. Original source prices and units are retained rather than converted currency estimates.
+
 For every source_region selector, set location.platform to the platform slug and location.country to the country above.
 
-Every location selector above includes location.country. All adapters require transaction=sale. Start with limit=1. Only capability-advertised filters are accepted; source_region paths are not free-text geocoding.
+Every location selector above includes location.country. These sale adapters require transaction=sale. Start with limit=1. Only capability-advertised filters are accepted; source_region paths are not free-text geocoding.
+
+## Catalog and auction markets
+
+All of these selectors use location.kind=source_region, location.platform matching the platform ID and the stated country. Sale: kleinanzeigen (DE, bremen); commercialrealestate_au (AU, australia); properati (AR, argentina); infocasas (UY, montevideo); estately (US, los-angeles-ca); opensooq (JO, jordan); midland_hk (HK, hong-kong); bayut_sa (SA, riyadh); toctoc (CL, santiago); adondevivir (PE, peru); plusvalia (EC, quito). Rental: vivanuncios (MX, aguascalientes). These are bounded, verified source windows, not nationwide coverage guarantees.
+
+Adondevivir and Plusvalia development advertisements are labeled in extensions.observation_kind. They do not represent individual units: price.amount, bedrooms and unit areas remain unknown. Toctoc UF ranges preserve unit_code=UF without pretending UF is a currency or substituting a CLP conversion. Commercial tender prices remain unknown. Vivanuncios rent period is unknown where the source does not specify it.
+
+Auction sources: auction (US, chicago-il), xome (US, tx) and hubzu (US, tx). Platform or unified listing search requires transaction=auction. Dedicated POST /v1/auctions/search takes one matching platform in platforms and the documented source_region, with limit. It costs 50 credits per successful source and does not accept query or cursor. Hubzu currently covers the sampled page-2 Texas window.
+
+GET /v1/auctions/\{auction_id\} returns the requesting account’s stored auction observation for 1 credit, retained for 24 hours. Starting bids, current bids, estimated values and reserve disclosures remain distinct. Unknown bids are null. Event dates and statuses are source observations, not guarantees that bidding is open; the API does not submit bids.
+
+Additional excluded samples: HouseSigma, LoopNet, Crexi and Aqarmap failed upstream; Urbania and Movoto returned no listings. Bproperty lacks verified canonical listing identity; RealtyTrac returned a conflicting market/URL and estimated value rather than a verified asking price. These sources remain unavailable.
+
+## Stay observations and Austria
+
+Airbnb: airbnb, GB, source_region=london, currency GBP. Vrbo: vrbo, US, source_region=orlando-fl, currency USD. Use POST /v1/stays/search with one matching platform, location, check_in, check_out, guests=\{"adults":2\}, currency and limit=1–50. Dates must describe a future stay of 1–30 nights. Children, infants, pets, locale, accommodation filters and cursors are not currently supported.
+
+Stay search costs 50 credits. GET /v1/stays/\{stay_id\} costs 1 credit and returns this account’s stored observation for 24 hours. Airbnb totals and Vrbo nightly observations remain separate in extensions.source_price. Taxes, fees and availability remain unknown. These are not booking quotes, full calendars, reviews or guarantees that a property can be reserved.
+
+ImmoScout24 Austria: immoscout24_at, AT; source_region=wien with transaction=sale. The verified Vienna apartment feed excludes development-project aggregates. Source room counts stay in property.rooms rather than being treated as bedrooms.
+
+Vivanuncios location hierarchies may start with a neighborhood or a city. The adapter uses the explicit CIUDAD, PROVINCIA and PAIS labels, preserving city/region and withholding precise location.
+
+Agoda returned named-hotel metadata but no result for the tested city-search contract, so it remains unavailable. A LoopNet auction candidate returned no results; Point2Homes denied the bounded API request. These do not enable those platforms.
+
+## Verified rental-search adapters
+
+All rental sources require transaction=rent and location.country. For source_region, also set location.platform to the platform slug. Start with limit=1. These adapters return source advertisements, not guaranteed availability or binding all-in rental quotes.
+
+Zumper: zumper, US; source_region with region_id=long-beach-ca (source city/state slug). Advertised rent can include source-reported fees; extensions.base_rent retains the separately reported base amount. HotPads: hotpads, US; text query New York, NY. Results can include nearby cities. Building advertisements preserve rent ranges and do not expose a floor plan as an individual unit.
+
+Rent.com: rent, US; source_region with region_id=el-dorado-ca, El Dorado County only. PadMapper: padmapper, US; source_region with region_id=san-francisco-ca (source city/state slug). Building rent ranges remain ranges; source media IDs are not converted into guessed photo URLs.
+
+Furnished Finder: furnishedfinder, US; source_region with region_id=long-beach-ca, Long Beach whole-unit listings only. Craigslist: craigslist, US; source_region with region_id=phoenix for the apartments/housing rental feed. Landlord contact and household information are not included.
+
+OpenRent: openrent, GB; text query London. Monthly rent and the separately reported weekly amount are preserved. SpareRoom: spareroom, GB; source_region with region_id=london for offered rooms. Starting rents stay in price.min; weekly and monthly billing periods remain distinct. Total rooms in a household are not bedrooms in the offered room.
+
+Pararius: pararius, NL; text query Amsterdam. Source euro cents are converted once to EUR. AtHome: athome, JP; source_region with region_id=tokyo for rental overview search. Dabang: dabang, KR; text query 강남구, monthly rentals only. Yen and won amounts are already whole currency units; Dabang deposits remain separate from monthly rent.
+
+HousingAnywhere: housinganywhere, NL; source_region with region_id=amsterdam for private rooms only. Uniplaces: uniplaces, DE; source_region with region_id=berlin. Its advertised monthly price is separate from the contract billing basis. Student.com: student_com, US; source_region with region_id=new-york-city. Starting monthly prices are not exact unit rents, and beds available are not bedroom counts.
+
+These additions expose locality only; exact street addresses and coordinates are withheld. Absent photos remain an empty media collection. They support search and stored listing/media reads, not fresh detail lookup, unit inventory, tenancy screening, booking or payment operations.
 
 ## Shared operations
 
-All 60 adapters support platform search, unified search, stored listing retrieval and stored media. Zillow supports canonical URL resolution and source-reported price history. Rightmove supports fresh native-ID lookup and canonical URL resolution. OneRoof supports stored open-home schedules in UTC. Stored observations belong to the requesting account and expire after 24 hours.
+The 94 listing adapters support platform search, unified search, stored listing retrieval and stored media. Airbnb and Vrbo use the separate stay search and stored-stay endpoints. Zillow supports canonical URL resolution and source-reported price history. Rightmove supports fresh native-ID lookup and canonical URL resolution. OneRoof supports stored open-home schedules in UTC. Stored observations belong to the requesting account and expire after 24 hours.
 
 Source records retain their original currencies and area units. Hidden search prices, auction text, price ranges and ambiguous room counts are not converted into exact asking prices or bedroom counts.
 
 ## Unavailable coverage
 
-The remaining 140 sources and 32 operation definitions are not enabled. Rentals, merged property records, valuations, dedicated agent/agency APIs, auction-event APIs, buildings, stays and async jobs require separate implementation and verification. Licensed MLS and public-record feeds need their own access agreements. BuyRentKenya and iProperty failed the latest capped tests; Casa.it returned no results. Other failed samples include Flatmates and Dubizzle Egypt.
+The remaining 104 sources and 28 operation definitions are not enabled. Additional rental markets, merged property records, valuations, dedicated agent/agency APIs, auction bidding, additional auction markets, buildings, additional stay operations and async jobs require separate implementation and verification. Licensed MLS and public-record feeds need their own access agreements. BuyRentKenya and iProperty failed the latest capped tests; Casa.it returned no results. Other failed samples include Flatmates and Dubizzle Egypt.
 
 Current excluded samples: Imobiliare.ro and Compass exceeded the synchronous deadline; Hemnet and Zolo returned no usable records. ImmoScout24 was interrupted by a client connection failure; Imovirtual did not complete successfully. Sahibinden returned an upstream error and MagicBricks returned no listings. These failures do not enable those sources.
 
 Additional deferred samples: Beike returned an error record; LIFULL HOME’S and Century 21 returned no listings; PortalInmobiliario, ImmoScout24 Switzerland and Zonaprop failed. Inmuebles24 and 591 need development-specific normalization; Avito lacks an unambiguous sale marker; QuintoAndar returned unpublished records without canonical listing URLs. Bikroy source identity needs further validation. These remain unavailable.
+
+Additional excluded samples: SeLoger, JamesEdition and ApartmentGuide failed; Oikotie, Trade Me, Lianjia and Zigbang returned no listings. RentCafe had a provider connection failure. Land And Farm returned a diagnostic rather than listings. LuxuryEstate lacks a verified market mapping, Amber lacks canonical platform identity in the sampled aggregate, and Blueground lacks a usable price/location contract. These sources remain unavailable.
 
 ## Understand completeness
 

@@ -44,7 +44,8 @@
           }
         },
         "x-runtime-status": "active",
-        "x-credit-cost": 0
+        "x-credit-cost": 0,
+        "x-verified-platforms": []
       }
     },
     "/v1/meta/capabilities": {
@@ -97,7 +98,8 @@
           }
         ],
         "x-runtime-status": "active",
-        "x-credit-cost": 0
+        "x-credit-cost": 0,
+        "x-verified-platforms": []
       }
     },
     "/v1/meta/schemas": {
@@ -132,7 +134,8 @@
           }
         },
         "x-runtime-status": "active",
-        "x-credit-cost": 0
+        "x-credit-cost": 0,
+        "x-verified-platforms": []
       }
     },
     "/v1/listings/search": {
@@ -220,7 +223,103 @@
           "property24",
           "cian"
         ],
-        "x-credit-unit": "successful_source_crawl"
+        "x-credit-unit": "successful_source_crawl",
+        "x-verified-platforms": [
+          "zillow",
+          "redfin",
+          "realtor",
+          "rightmove",
+          "idealista",
+          "realtor_ca",
+          "zoopla",
+          "realestate_au",
+          "propertyfinder",
+          "spitogatos",
+          "squareyards",
+          "hepsiemlak",
+          "mercadolibre",
+          "oneroof",
+          "99co",
+          "realestate_nz",
+          "habitaclia",
+          "mubawab",
+          "fotocasa",
+          "argenprop",
+          "nigeriapropertycentre",
+          "zimmo",
+          "propertypro",
+          "lamudi",
+          "privateproperty",
+          "daft",
+          "fincaraiz",
+          "myhome",
+          "centris",
+          "homes",
+          "pisos",
+          "immoweb",
+          "immowelt",
+          "boligsiden",
+          "etuovi",
+          "immobiliare",
+          "otodom",
+          "property24",
+          "cian",
+          "bayut",
+          "willhaben",
+          "finn",
+          "domclick",
+          "naver_land",
+          "aqar",
+          "propiedades",
+          "dotproperty",
+          "homefinder",
+          "boliga",
+          "centaline",
+          "srx",
+          "edgeprop",
+          "fazwaz",
+          "zameen",
+          "emlakjet",
+          "streeteasy",
+          "landsearch",
+          "immonet",
+          "bienici",
+          "homegate",
+          "land_com",
+          "landwatch",
+          "nobroker",
+          "properstar",
+          "zumper",
+          "hotpads",
+          "rent",
+          "padmapper",
+          "furnishedfinder",
+          "craigslist",
+          "openrent",
+          "spareroom",
+          "pararius",
+          "athome",
+          "dabang",
+          "housinganywhere",
+          "uniplaces",
+          "student_com",
+          "auction",
+          "xome",
+          "hubzu",
+          "kleinanzeigen",
+          "commercialrealestate_au",
+          "properati",
+          "infocasas",
+          "estately",
+          "opensooq",
+          "midland_hk",
+          "bayut_sa",
+          "vivanuncios",
+          "toctoc",
+          "adondevivir",
+          "plusvalia",
+          "immoscout24_at"
+        ]
       }
     },
     "/v1/{platform}/listings/search": {
@@ -319,7 +418,103 @@
           "property24",
           "cian"
         ],
-        "x-credit-unit": "successful_source_crawl"
+        "x-credit-unit": "successful_source_crawl",
+        "x-verified-platforms": [
+          "zillow",
+          "redfin",
+          "realtor",
+          "rightmove",
+          "idealista",
+          "realtor_ca",
+          "zoopla",
+          "realestate_au",
+          "propertyfinder",
+          "spitogatos",
+          "squareyards",
+          "hepsiemlak",
+          "mercadolibre",
+          "oneroof",
+          "99co",
+          "realestate_nz",
+          "habitaclia",
+          "mubawab",
+          "fotocasa",
+          "argenprop",
+          "nigeriapropertycentre",
+          "zimmo",
+          "propertypro",
+          "lamudi",
+          "privateproperty",
+          "daft",
+          "fincaraiz",
+          "myhome",
+          "centris",
+          "homes",
+          "pisos",
+          "immoweb",
+          "immowelt",
+          "boligsiden",
+          "etuovi",
+          "immobiliare",
+          "otodom",
+          "property24",
+          "cian",
+          "bayut",
+          "willhaben",
+          "finn",
+          "domclick",
+          "naver_land",
+          "aqar",
+          "propiedades",
+          "dotproperty",
+          "homefinder",
+          "boliga",
+          "centaline",
+          "srx",
+          "edgeprop",
+          "fazwaz",
+          "zameen",
+          "emlakjet",
+          "streeteasy",
+          "landsearch",
+          "immonet",
+          "bienici",
+          "homegate",
+          "land_com",
+          "landwatch",
+          "nobroker",
+          "properstar",
+          "zumper",
+          "hotpads",
+          "rent",
+          "padmapper",
+          "furnishedfinder",
+          "craigslist",
+          "openrent",
+          "spareroom",
+          "pararius",
+          "athome",
+          "dabang",
+          "housinganywhere",
+          "uniplaces",
+          "student_com",
+          "auction",
+          "xome",
+          "hubzu",
+          "kleinanzeigen",
+          "commercialrealestate_au",
+          "properati",
+          "infocasas",
+          "estately",
+          "opensooq",
+          "midland_hk",
+          "bayut_sa",
+          "vivanuncios",
+          "toctoc",
+          "adondevivir",
+          "plusvalia",
+          "immoscout24_at"
+        ]
       }
     },
     "/v1/{platform}/listings/{native_id}": {
@@ -378,6 +573,9 @@
         "x-credit-unit": "successful_source_crawl",
         "x-live-verified-platforms": [
           "rightmove"
+        ],
+        "x-verified-platforms": [
+          "rightmove"
         ]
       }
     },
@@ -428,7 +626,11 @@
           "zillow",
           "rightmove"
         ],
-        "x-credit-unit": "successful_source_crawl"
+        "x-credit-unit": "successful_source_crawl",
+        "x-verified-platforms": [
+          "zillow",
+          "rightmove"
+        ]
       }
     },
     "/v1/listings/{listing_id}": {
@@ -517,7 +719,103 @@
           "property24",
           "cian"
         ],
-        "x-credit-unit": "stored_observation_read"
+        "x-credit-unit": "stored_observation_read",
+        "x-verified-platforms": [
+          "zillow",
+          "redfin",
+          "realtor",
+          "rightmove",
+          "idealista",
+          "realtor_ca",
+          "zoopla",
+          "realestate_au",
+          "propertyfinder",
+          "spitogatos",
+          "squareyards",
+          "hepsiemlak",
+          "mercadolibre",
+          "oneroof",
+          "99co",
+          "realestate_nz",
+          "habitaclia",
+          "mubawab",
+          "fotocasa",
+          "argenprop",
+          "nigeriapropertycentre",
+          "zimmo",
+          "propertypro",
+          "lamudi",
+          "privateproperty",
+          "daft",
+          "fincaraiz",
+          "myhome",
+          "centris",
+          "homes",
+          "pisos",
+          "immoweb",
+          "immowelt",
+          "boligsiden",
+          "etuovi",
+          "immobiliare",
+          "otodom",
+          "property24",
+          "cian",
+          "bayut",
+          "willhaben",
+          "finn",
+          "domclick",
+          "naver_land",
+          "aqar",
+          "propiedades",
+          "dotproperty",
+          "homefinder",
+          "boliga",
+          "centaline",
+          "srx",
+          "edgeprop",
+          "fazwaz",
+          "zameen",
+          "emlakjet",
+          "streeteasy",
+          "landsearch",
+          "immonet",
+          "bienici",
+          "homegate",
+          "land_com",
+          "landwatch",
+          "nobroker",
+          "properstar",
+          "zumper",
+          "hotpads",
+          "rent",
+          "padmapper",
+          "furnishedfinder",
+          "craigslist",
+          "openrent",
+          "spareroom",
+          "pararius",
+          "athome",
+          "dabang",
+          "housinganywhere",
+          "uniplaces",
+          "student_com",
+          "auction",
+          "xome",
+          "hubzu",
+          "kleinanzeigen",
+          "commercialrealestate_au",
+          "properati",
+          "infocasas",
+          "estately",
+          "opensooq",
+          "midland_hk",
+          "bayut_sa",
+          "vivanuncios",
+          "toctoc",
+          "adondevivir",
+          "plusvalia",
+          "immoscout24_at"
+        ]
       }
     },
     "/v1/listings/{listing_id}/media": {
@@ -623,7 +921,103 @@
           "property24",
           "cian"
         ],
-        "x-credit-unit": "stored_observation_read"
+        "x-credit-unit": "stored_observation_read",
+        "x-verified-platforms": [
+          "zillow",
+          "redfin",
+          "realtor",
+          "rightmove",
+          "idealista",
+          "realtor_ca",
+          "zoopla",
+          "realestate_au",
+          "propertyfinder",
+          "spitogatos",
+          "squareyards",
+          "hepsiemlak",
+          "mercadolibre",
+          "oneroof",
+          "99co",
+          "realestate_nz",
+          "habitaclia",
+          "mubawab",
+          "fotocasa",
+          "argenprop",
+          "nigeriapropertycentre",
+          "zimmo",
+          "propertypro",
+          "lamudi",
+          "privateproperty",
+          "daft",
+          "fincaraiz",
+          "myhome",
+          "centris",
+          "homes",
+          "pisos",
+          "immoweb",
+          "immowelt",
+          "boligsiden",
+          "etuovi",
+          "immobiliare",
+          "otodom",
+          "property24",
+          "cian",
+          "bayut",
+          "willhaben",
+          "finn",
+          "domclick",
+          "naver_land",
+          "aqar",
+          "propiedades",
+          "dotproperty",
+          "homefinder",
+          "boliga",
+          "centaline",
+          "srx",
+          "edgeprop",
+          "fazwaz",
+          "zameen",
+          "emlakjet",
+          "streeteasy",
+          "landsearch",
+          "immonet",
+          "bienici",
+          "homegate",
+          "land_com",
+          "landwatch",
+          "nobroker",
+          "properstar",
+          "zumper",
+          "hotpads",
+          "rent",
+          "padmapper",
+          "furnishedfinder",
+          "craigslist",
+          "openrent",
+          "spareroom",
+          "pararius",
+          "athome",
+          "dabang",
+          "housinganywhere",
+          "uniplaces",
+          "student_com",
+          "auction",
+          "xome",
+          "hubzu",
+          "kleinanzeigen",
+          "commercialrealestate_au",
+          "properati",
+          "infocasas",
+          "estately",
+          "opensooq",
+          "midland_hk",
+          "bayut_sa",
+          "vivanuncios",
+          "toctoc",
+          "adondevivir",
+          "plusvalia",
+          "immoscout24_at"
+        ]
       }
     },
     "/v1/listings/{listing_id}/history": {
@@ -690,7 +1084,10 @@
         "x-live-verified-platforms": [
           "zillow"
         ],
-        "x-credit-unit": "stored_observation_read"
+        "x-credit-unit": "stored_observation_read",
+        "x-verified-platforms": [
+          "zillow"
+        ]
       }
     },
     "/v1/listings/{listing_id}/open-houses": {
@@ -756,6 +1153,9 @@
         "x-credit-cost": 1,
         "x-live-verified-platforms": [
           "oneroof"
+        ],
+        "x-verified-platforms": [
+          "oneroof"
         ]
       }
     },
@@ -819,7 +1219,8 @@
           }
         ],
         "x-runtime-status": "unavailable",
-        "x-credit-cost": 1
+        "x-credit-cost": 1,
+        "x-verified-platforms": []
       }
     },
     "/v1/properties/resolve": {
@@ -864,7 +1265,8 @@
           }
         },
         "x-runtime-status": "unavailable",
-        "x-credit-cost": 1
+        "x-credit-cost": 1,
+        "x-verified-platforms": []
       }
     },
     "/v1/properties/{property_id}": {
@@ -910,7 +1312,8 @@
           }
         ],
         "x-runtime-status": "unavailable",
-        "x-credit-cost": 1
+        "x-credit-cost": 1,
+        "x-verified-platforms": []
       }
     },
     "/v1/properties/{property_id}/listings": {
@@ -973,7 +1376,8 @@
           }
         ],
         "x-runtime-status": "unavailable",
-        "x-credit-cost": 1
+        "x-credit-cost": 1,
+        "x-verified-platforms": []
       }
     },
     "/v1/properties/{property_id}/records": {
@@ -1036,7 +1440,8 @@
           }
         ],
         "x-runtime-status": "unavailable",
-        "x-credit-cost": 1
+        "x-credit-cost": 1,
+        "x-verified-platforms": []
       }
     },
     "/v1/properties/{property_id}/transactions": {
@@ -1099,7 +1504,8 @@
           }
         ],
         "x-runtime-status": "unavailable",
-        "x-credit-cost": 1
+        "x-credit-cost": 1,
+        "x-verified-platforms": []
       }
     },
     "/v1/properties/{property_id}/tax-assessments": {
@@ -1162,7 +1568,8 @@
           }
         ],
         "x-runtime-status": "unavailable",
-        "x-credit-cost": 1
+        "x-credit-cost": 1,
+        "x-verified-platforms": []
       }
     },
     "/v1/properties/{property_id}/valuations": {
@@ -1225,7 +1632,8 @@
           }
         ],
         "x-runtime-status": "unavailable",
-        "x-credit-cost": 1
+        "x-credit-cost": 1,
+        "x-verified-platforms": []
       }
     },
     "/v1/properties/{property_id}/comparables": {
@@ -1302,7 +1710,8 @@
           }
         ],
         "x-runtime-status": "unavailable",
-        "x-credit-cost": 1
+        "x-credit-cost": 1,
+        "x-verified-platforms": []
       }
     },
     "/v1/buildings/{building_id}": {
@@ -1348,7 +1757,8 @@
           }
         ],
         "x-runtime-status": "unavailable",
-        "x-credit-cost": 1
+        "x-credit-cost": 1,
+        "x-verified-platforms": []
       }
     },
     "/v1/buildings/{building_id}/units": {
@@ -1411,7 +1821,8 @@
           }
         ],
         "x-runtime-status": "unavailable",
-        "x-credit-cost": 1
+        "x-credit-cost": 1,
+        "x-verified-platforms": []
       }
     },
     "/v1/developments/search": {
@@ -1456,7 +1867,8 @@
           }
         },
         "x-runtime-status": "unavailable",
-        "x-credit-cost": 1
+        "x-credit-cost": 1,
+        "x-verified-platforms": []
       }
     },
     "/v1/developments/{development_id}": {
@@ -1502,7 +1914,8 @@
           }
         ],
         "x-runtime-status": "unavailable",
-        "x-credit-cost": 1
+        "x-credit-cost": 1,
+        "x-verified-platforms": []
       }
     },
     "/v1/agents/search": {
@@ -1547,7 +1960,8 @@
           }
         },
         "x-runtime-status": "unavailable",
-        "x-credit-cost": 1
+        "x-credit-cost": 1,
+        "x-verified-platforms": []
       }
     },
     "/v1/agents/{agent_id}": {
@@ -1593,7 +2007,8 @@
           }
         ],
         "x-runtime-status": "unavailable",
-        "x-credit-cost": 1
+        "x-credit-cost": 1,
+        "x-verified-platforms": []
       }
     },
     "/v1/agents/{agent_id}/listings": {
@@ -1656,7 +2071,8 @@
           }
         ],
         "x-runtime-status": "unavailable",
-        "x-credit-cost": 1
+        "x-credit-cost": 1,
+        "x-verified-platforms": []
       }
     },
     "/v1/agencies/search": {
@@ -1701,7 +2117,8 @@
           }
         },
         "x-runtime-status": "unavailable",
-        "x-credit-cost": 1
+        "x-credit-cost": 1,
+        "x-verified-platforms": []
       }
     },
     "/v1/agencies/{agency_id}": {
@@ -1747,7 +2164,8 @@
           }
         ],
         "x-runtime-status": "unavailable",
-        "x-credit-cost": 1
+        "x-credit-cost": 1,
+        "x-verified-platforms": []
       }
     },
     "/v1/agencies/{agency_id}/listings": {
@@ -1810,14 +2228,15 @@
           }
         ],
         "x-runtime-status": "unavailable",
-        "x-credit-cost": 1
+        "x-credit-cost": 1,
+        "x-verified-platforms": []
       }
     },
     "/v1/auctions/search": {
       "post": {
         "operationId": "searchAuctions",
         "summary": "Search auctions",
-        "description": "Proposed interface. Enable only for documented and verified source/country capabilities. Dedicated source search contract; no blanket platform support",
+        "description": "Read-only source auction search for verified markets. Requires a documented source_region selector and one matching platform per request. Starting bids, current bids and estimates are distinct. Source event dates are not guarantees that an auction is still open. Costs 50 credits per successful source; query/cursor filters are not supported.",
         "x-research-status": "proposed",
         "tags": [
           "auctions"
@@ -1854,15 +2273,20 @@
             }
           }
         },
-        "x-runtime-status": "unavailable",
-        "x-credit-cost": 1
+        "x-runtime-status": "beta",
+        "x-credit-cost": 50,
+        "x-verified-platforms": [
+          "auction",
+          "xome",
+          "hubzu"
+        ]
       }
     },
     "/v1/auctions/{auction_id}": {
       "get": {
         "operationId": "getAuction",
         "summary": "Get auction",
-        "description": "Proposed interface. Enable only for documented and verified source/country capabilities. Dedicated source detail contract",
+        "description": "Retrieve this account’s stored auction observation by its returned auction ID, retained for 24 hours. Costs 1 credit. This does not fetch fresh bids, submit bids, or verify present auction availability.",
         "x-research-status": "proposed",
         "tags": [
           "auctions"
@@ -1900,8 +2324,13 @@
             }
           }
         ],
-        "x-runtime-status": "unavailable",
-        "x-credit-cost": 1
+        "x-runtime-status": "beta",
+        "x-credit-cost": 1,
+        "x-verified-platforms": [
+          "auction",
+          "xome",
+          "hubzu"
+        ]
       }
     },
     "/v1/markets/search": {
@@ -1946,14 +2375,15 @@
           }
         },
         "x-runtime-status": "unavailable",
-        "x-credit-cost": 1
+        "x-credit-cost": 1,
+        "x-verified-platforms": []
       }
     },
     "/v1/stays/search": {
       "post": {
         "operationId": "searchStays",
         "summary": "Search property-focused accommodation",
-        "description": "Proposed interface. Enable only for documented and verified source/country capabilities. Airbnb/Vrbo actors or approved Booking/Rapid read APIs",
+        "description": "Date-specific, read-only Airbnb London and Vrbo Orlando stay observations. One matching platform and documented source_region per request; two adults, no children/infants/pets. Currency GBP for Airbnb or USD for Vrbo. Stays of 1–30 nights, limit 1–50. Costs 50 credits. No booking guarantee, reviews, full availability calendar, cursor or additional filters.",
         "x-research-status": "proposed",
         "tags": [
           "stays"
@@ -1990,15 +2420,19 @@
             }
           }
         },
-        "x-runtime-status": "unavailable",
-        "x-credit-cost": 1
+        "x-runtime-status": "beta",
+        "x-credit-cost": 50,
+        "x-verified-platforms": [
+          "airbnb",
+          "vrbo"
+        ]
       }
     },
     "/v1/stays/{stay_id}": {
       "get": {
         "operationId": "getStay",
         "summary": "Get accommodation details",
-        "description": "Proposed interface. Enable only for documented and verified source/country capabilities. Source detail contract",
+        "description": "Read this account’s stored stay observation for 1 credit, retained 24 hours. No fresh availability lookup or booking quote.",
         "x-research-status": "proposed",
         "tags": [
           "stays"
@@ -2036,8 +2470,12 @@
             }
           }
         ],
-        "x-runtime-status": "unavailable",
-        "x-credit-cost": 1
+        "x-runtime-status": "beta",
+        "x-credit-cost": 1,
+        "x-verified-platforms": [
+          "airbnb",
+          "vrbo"
+        ]
       }
     },
     "/v1/stays/{stay_id}/quote": {
@@ -2093,7 +2531,8 @@
           }
         },
         "x-runtime-status": "unavailable",
-        "x-credit-cost": 1
+        "x-credit-cost": 1,
+        "x-verified-platforms": []
       }
     },
     "/v1/stays/{stay_id}/availability": {
@@ -2174,7 +2613,8 @@
           }
         ],
         "x-runtime-status": "unavailable",
-        "x-credit-cost": 1
+        "x-credit-cost": 1,
+        "x-verified-platforms": []
       }
     },
     "/v1/stays/{stay_id}/reviews": {
@@ -2237,7 +2677,8 @@
           }
         ],
         "x-runtime-status": "unavailable",
-        "x-credit-cost": 1
+        "x-credit-cost": 1,
+        "x-verified-platforms": []
       }
     },
     "/v1/markets/{market_id}/series": {
@@ -2309,7 +2750,8 @@
           }
         ],
         "x-runtime-status": "unavailable",
-        "x-credit-cost": 1
+        "x-credit-cost": 1,
+        "x-verified-platforms": []
       }
     },
     "/v1/locations/search": {
@@ -2354,7 +2796,8 @@
           }
         },
         "x-runtime-status": "unavailable",
-        "x-credit-cost": 1
+        "x-credit-cost": 1,
+        "x-verified-platforms": []
       }
     },
     "/v1/jobs": {
@@ -2399,7 +2842,8 @@
           }
         },
         "x-runtime-status": "unavailable",
-        "x-credit-cost": 1
+        "x-credit-cost": 1,
+        "x-verified-platforms": []
       }
     },
     "/v1/jobs/{job_id}": {
@@ -2445,7 +2889,8 @@
           }
         ],
         "x-runtime-status": "unavailable",
-        "x-credit-cost": 1
+        "x-credit-cost": 1,
+        "x-verified-platforms": []
       }
     },
     "/v1/jobs/{job_id}/results": {
@@ -2508,7 +2953,8 @@
           }
         ],
         "x-runtime-status": "unavailable",
-        "x-credit-cost": 1
+        "x-credit-cost": 1,
+        "x-verified-platforms": []
       }
     }
   },
