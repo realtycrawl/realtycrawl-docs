@@ -2724,6 +2724,7 @@
         "x-runtime-status": "beta",
         "x-credit-cost": 50,
         "x-verified-platforms": [
+          "exprealty",
           "kellerwilliams",
           "realtor"
         ]
@@ -2774,6 +2775,7 @@
         "x-runtime-status": "beta",
         "x-credit-cost": 1,
         "x-verified-platforms": [
+          "exprealty",
           "kellerwilliams",
           "realtor"
         ]

@@ -2,7 +2,7 @@
 title: "Coverage and evidence"
 ---
 
-The inventory covers 200 researched platforms and 43 defined API operations. This release includes 171 distinct source platforms (125 sale, 33 rental, 3 auction, 5 stay, 4 development and 1 additional agent-only platform) and 19 enabled operation IDs, including three metadata operations. Check live capabilities for current enablement. Realtor.com and Keller Williams support the dedicated agent operations below.
+The inventory covers 200 researched platforms and 43 defined API operations. This release includes 172 distinct source platforms (125 sale, 33 rental, 3 auction, 5 stay, 4 development and 2 additional agent-only platforms) and 19 enabled operation IDs, including three metadata operations. Check live capabilities for current enablement. Realtor.com, Keller Williams and eXp France support the dedicated agent operations below.
 
 ## Verified sale-search adapters
 
@@ -250,7 +250,7 @@ The Anjuke Actor requires a minimum request size of 10, but RealtyCrawl applies 
 
 ## Unavailable coverage
 
-The remaining 48 sources and 24 operation definitions are not enabled. Additional rental markets, merged property records, valuations, additional agent markets, agent portfolios and agency APIs, auction bidding, additional auction markets, buildings, additional stay operations and async jobs require separate implementation and verification. Licensed MLS and public-record feeds need their own access agreements.
+The remaining 28 sources and 24 operation definitions are not enabled. Additional rental markets, merged property records, valuations, additional agent markets, agent portfolios and agency APIs, auction bidding, additional auction markets, buildings, additional stay operations and async jobs require separate implementation and verification. Licensed MLS and public-record feeds need their own access agreements.
 
 Source failures are candidate-specific. Earlier failed actors do not override the accepted adapters listed above. The current capability response determines availability; research entries and historical samples alone do not enable a platform.
 
@@ -292,11 +292,13 @@ Sahibinden: sahibinden, TR; sale with source_region platform=sahibinden, country
 
 ## Agent directory observations
 
+eXp France: POST /v1/agents/search supports platforms=["exprealty"], location.kind=source_region, location.platform=exprealty, country=FR, region_id=france-directory and limit=1. Returns a source-reported French directory observation. The sampled directory card was independently matched by name, photograph and displayed registration number. Provider record UUID is explicitly qualified; it is not established as a portal-native ID, so source.native_id and profile_url remain null. Source URL identifies the directory. No current licensing, professional-credential verification, office/service-area location or contact consent is inferred. Contacts, photos, registration numbers, source status and raw enrichment are omitted. Only search and account-owned stored agent reads are available. Other countries, query/cursor, property listings, portfolios and agencies remain unsupported. Provider ceiling $0.01 using included credits; immutable build and exact bundled event pricing are checked before each run.
+
 Keller Williams: POST /v1/agents/search supports platforms=["kellerwilliams"], location.kind=source_region, location.platform=kellerwilliams, country=US, region_id=california and limit=1. Returns a bounded California directory observation with canonical kw.com profile URL, name and city/state. Costs 50 credits. Query, cursor, other states, agent listings, contact enrichment and license verification are unsupported. Provider ceiling $0.01 using included credits.
 
 Realtor.com: POST /v1/agents/search supports platforms=["realtor"], location.kind=source_region, location.platform=realtor, country=US, region_id=austin-tx, and limit 1–100. It costs 50 credits and returns bounded source relevance results. Query, cursor, ranking, portfolio and contact enrichment are unsupported.
 
-GET /v1/agents/\{agent_id\} reads the caller’s stored observation for 1 credit within 24 hours. Profiles preserve canonical identity, display name, brokerage label and city/state. Contact details, ratings and license claims are omitted. These observations do not verify credentials or recommend agents. Idempotent search replay is free.
+GET /v1/agents/\{agent_id\} reads the caller’s stored observation for 1 credit within 24 hours. Observations preserve the documented source or provider-scoped identity and display name; profile URLs, brokerage labels and city/state are present only where the source adapter establishes them. Contact details, ratings and license claims are omitted. These observations do not verify credentials or recommend agents. Idempotent search replay is free.
 
 ## Understand completeness
 
