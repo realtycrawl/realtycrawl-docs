@@ -2,9 +2,12 @@
 title: "Coverage and evidence"
 ---
 
-The inventory covers 200 researched platforms and 43 defined API operations. This release includes 172 distinct source platforms (125 sale, 33 rental, 3 auction, 5 stay, 4 development and 2 additional agent-only platforms) and 19 enabled operation IDs, including three metadata operations. Check live capabilities for current enablement. Realtor.com, Keller Williams and eXp France support the dedicated agent operations below.
+The inventory covers 200 researched platforms and 43 defined API operations. This release includes 173 distinct source platforms (126 sale, 33 rental, 3 auction, 5 stay, 4 development and 2 additional agent-only platforms) and 19 enabled operation IDs, including three metadata operations. Check live capabilities for current enablement. Realtor.com, Keller Williams and eXp France support the dedicated agent operations below.
 
 ## Verified sale-search adapters
+
+Dubizzle UAE: dubizzle, AE; sale with source_region platform=dubizzle, country=AE, region_id=dubai-apartments-for-sale and limit=1. Dubai apartment sale advertisements with source-reported completed or off-plan status. The canonical Dubai listing URL and explicit source city/category/purpose must agree. Identity uses the canonical source URL; native_id stays null because the provider numeric ID/UUID is not independently established as a portal-native identifier. Completed-advertisement AED asking prices, studio/bedroom and bathroom counts, and explicit sqft area are preserved. Off-plan prices stay null because their ownership/payment basis is unestablished; the raw amount is omitted. Completion status is source-reported only. Rental frequencies and installment/down-payment titles are rejected. Availability remains unknown. Contacts, badges, exact coordinates, narratives, timestamps and images are omitted; stored media is empty. Account-owned stored listing/media reads last 24 hours. Other emirates, rentals, query/cursor and fresh details/history are unsupported. The provider cap is $0.01/run using included credits with proxies off; immutable build or bundled-price drift fails closed.
+
 
 NewHomeSource: newhomesource, US; sale with source_region platform=newhomesource, country=US, region_id=kansas-city-mo and limit=1. Kansas City, Missouri quick-move-in single-family spec-home observations only. Numeric homeId/specId and canonical spec-detail URL must agree. Provider USD home price is separate from community/floor-plan prices and financing estimates. Square feet have unknown area basis; source half bathrooms remain separate without inferred addition. Availability is unknown. Contacts, precise location and images are omitted; stored media is empty. Account-owned stored listing/media reads last 24 hours. Other markets, floor plans, communities and fresh details/history are unsupported. Enrichment is disabled. The approved source-specific ceiling is $0.08/run using included credits; changed build or bundled prices fail closed.
 
@@ -250,7 +253,7 @@ The Anjuke Actor requires a minimum request size of 10, but RealtyCrawl applies 
 
 ## Unavailable coverage
 
-The remaining 28 sources and 24 operation definitions are not enabled. Additional rental markets, merged property records, valuations, additional agent markets, agent portfolios and agency APIs, auction bidding, additional auction markets, buildings, additional stay operations and async jobs require separate implementation and verification. Licensed MLS and public-record feeds need their own access agreements.
+The remaining 27 sources and 24 operation definitions are not enabled. Additional rental markets, merged property records, valuations, additional agent markets, agent portfolios and agency APIs, auction bidding, additional auction markets, buildings, additional stay operations and async jobs require separate implementation and verification. Licensed MLS and public-record feeds need their own access agreements.
 
 Source failures are candidate-specific. Earlier failed actors do not override the accepted adapters listed above. The current capability response determines availability; research entries and historical samples alone do not enable a platform.
 
