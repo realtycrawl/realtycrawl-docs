@@ -2,9 +2,11 @@
 title: "Coverage and evidence"
 ---
 
-The inventory covers 200 researched platforms and 43 defined API operations. This release includes 153 distinct source platforms (111 sale, 32 rental, 3 auction, 5 stay and 2 development) and 19 enabled operation IDs, including three metadata operations. Check live capabilities for current enablement. Realtor.com also supports the dedicated agent operations below.
+The inventory covers 200 researched platforms and 43 defined API operations. This release includes 155 distinct source platforms (113 sale, 32 rental, 3 auction, 5 stay and 2 development) and 19 enabled operation IDs, including three metadata operations. Check live capabilities for current enablement. Realtor.com also supports the dedicated agent operations below.
 
 ## Verified sale-search adapters
+
+Imovelweb and VivaReal: imovelweb or vivareal, BR; source_region with platform matching the source, country=BR, region_id=sao-paulo-sp and transaction=sale. São Paulo apartment-sale observations only; limit must be 1. Canonical listing URL and native ID must agree. BRL asking prices and explicit square-metre areas are preserved. Development projects, starting prices and conflicting rental amounts are rejected. Availability stays unknown. Seller enrichment and details are disabled; contacts, exact addresses, coordinates and unclassified images are omitted. Stored media is empty for the verified samples. Each provider run is capped at $0.01 using included credits.
 
 Hipflat: hipflat, TH; source_region with platform=hipflat, country=TH, region_id=bangkok and transaction=sale. Bangkok condo-sale observations only; limit must be 1. Listing ID and URL aliases must agree. Explicit THB asking prices and square-metre areas are cross-checked; availability stays unknown. Contacts, descriptions, exact addresses, coordinates and unclassified gallery images are omitted; stored media can be empty. Optional enrichment is disabled. The separate provider ceiling is $0.08/run, using included credits only; the other source caps are unchanged.
 
