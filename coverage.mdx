@@ -2,9 +2,11 @@
 title: "Coverage and evidence"
 ---
 
-The inventory covers 200 researched platforms and 43 defined API operations. This release includes 152 distinct source platforms (110 sale, 32 rental, 3 auction, 5 stay and 2 development) and 19 enabled operation IDs, including three metadata operations. Check live capabilities for current enablement. Realtor.com also supports the dedicated agent operations below.
+The inventory covers 200 researched platforms and 43 defined API operations. This release includes 153 distinct source platforms (111 sale, 32 rental, 3 auction, 5 stay and 2 development) and 19 enabled operation IDs, including three metadata operations. Check live capabilities for current enablement. Realtor.com also supports the dedicated agent operations below.
 
 ## Verified sale-search adapters
+
+Hipflat: hipflat, TH; source_region with platform=hipflat, country=TH, region_id=bangkok and transaction=sale. Bangkok condo-sale observations only; limit must be 1. Listing ID and URL aliases must agree. Explicit THB asking prices and square-metre areas are cross-checked; availability stays unknown. Contacts, descriptions, exact addresses, coordinates and unclassified gallery images are omitted; stored media can be empty. Optional enrichment is disabled. The separate provider ceiling is $0.08/run, using included credits only; the other source caps are unchanged.
 
 LIFULL HOME’S: lifull_homes, JP; source_region with platform=lifull_homes, country=JP, region_id=tokyo and transaction=sale. Tokyo resale condos only. The homes.co.jp listing ID and URL must match, with a Tokyo source address prefix. JPY asking price is checked against the published man-yen text. Layout codes are preserved without inferring bedrooms; floor area uses sqm with unknown basis. Availability stays unknown. Exact address, unit, building name and contacts are omitted. The preview image remains unclassified in extensions; media is empty. Proxy is off; provider charge is capped at $0.01 per run.
 
