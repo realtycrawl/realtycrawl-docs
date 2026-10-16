@@ -182,6 +182,7 @@
         "x-runtime-status": "beta",
         "x-credit-cost": 50,
         "x-live-verified-platforms": [
+          "sahibinden",
           "ingatlan",
           "zap",
           "vivareal",
@@ -335,6 +336,7 @@
         ],
         "x-credit-unit": "successful_source_crawl",
         "x-verified-platforms": [
+          "sahibinden",
           "ingatlan",
           "zap",
           "vivareal",
@@ -543,6 +545,7 @@
         "x-runtime-status": "beta",
         "x-credit-cost": 50,
         "x-live-verified-platforms": [
+          "sahibinden",
           "ingatlan",
           "zap",
           "vivareal",
@@ -696,6 +699,7 @@
         ],
         "x-credit-unit": "successful_source_crawl",
         "x-verified-platforms": [
+          "sahibinden",
           "ingatlan",
           "zap",
           "vivareal",
@@ -1010,6 +1014,7 @@
         "x-runtime-status": "beta",
         "x-credit-cost": 1,
         "x-live-verified-platforms": [
+          "sahibinden",
           "ingatlan",
           "zap",
           "vivareal",
@@ -1163,6 +1168,7 @@
         ],
         "x-credit-unit": "stored_observation_read",
         "x-verified-platforms": [
+          "sahibinden",
           "ingatlan",
           "zap",
           "vivareal",
@@ -1378,6 +1384,7 @@
         "x-runtime-status": "beta",
         "x-credit-cost": 1,
         "x-live-verified-platforms": [
+          "sahibinden",
           "ingatlan",
           "zap",
           "vivareal",
@@ -1531,6 +1538,7 @@
         ],
         "x-credit-unit": "stored_observation_read",
         "x-verified-platforms": [
+          "sahibinden",
           "ingatlan",
           "zap",
           "vivareal",
@@ -2594,7 +2602,7 @@
       "post": {
         "operationId": "searchAgents",
         "summary": "Search agents",
-        "description": "Read-only Realtor.com agent directory observations for US source_region austin-tx. One platform (realtor), limit 1–100, source relevance order. Costs 50 credits. Query/cursor unsupported; bounded results, no verified licenses, contact enrichment, rankings or portfolio coverage.",
+        "description": "Read-only US agent directory observations: Realtor.com (realtor, source_region austin-tx, limit 1–100) or Keller Williams (kellerwilliams, source_region california, limit 1). One matching platform per request; source order. Runtime enablement is required. Costs 50 credits. Query/cursor unsupported; no verified licenses, contact enrichment, rankings or portfolio coverage.",
         "x-research-status": "proposed",
         "tags": [
           "agents"
@@ -2634,6 +2642,7 @@
         "x-runtime-status": "beta",
         "x-credit-cost": 50,
         "x-verified-platforms": [
+          "kellerwilliams",
           "realtor"
         ]
       }
@@ -2683,6 +2692,7 @@
         "x-runtime-status": "beta",
         "x-credit-cost": 1,
         "x-verified-platforms": [
+          "kellerwilliams",
           "realtor"
         ]
       }

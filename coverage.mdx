@@ -2,7 +2,7 @@
 title: "Coverage and evidence"
 ---
 
-The inventory covers 200 researched platforms and 43 defined API operations. This release includes 158 distinct source platforms (115 sale, 32 rental, 3 auction, 5 stay and 3 development) and 19 enabled operation IDs, including three metadata operations. Check live capabilities for current enablement. Realtor.com also supports the dedicated agent operations below.
+The inventory covers 200 researched platforms and 43 defined API operations. This release includes 160 distinct source platforms (116 sale, 32 rental, 3 auction, 5 stay, 3 development and 1 additional agent-only platform) and 19 enabled operation IDs, including three metadata operations. Check live capabilities for current enablement. Realtor.com and Keller Williams support the dedicated agent operations below.
 
 ## Verified sale-search adapters
 
@@ -150,7 +150,7 @@ Auction sources: auction (US, chicago-il), xome (US, tx) and hubzu (US, tx). Pla
 
 GET /v1/auctions/\{auction_id\} returns the requesting account’s stored auction observation for 1 credit, retained for 24 hours. Starting bids, current bids, estimated values and reserve disclosures remain distinct. Unknown bids are null. Event dates and statuses are source observations, not guarantees that bidding is open; the API does not submit bids.
 
-Additional excluded samples: HouseSigma and Aqarmap failed upstream; Urbania and Movoto returned no listings. RealtyTrac returned a conflicting market/URL and estimated value rather than a verified asking price. These sources remain unavailable.
+Additional excluded samples: Aqarmap failed upstream; Movoto returned empty or invalid listings. RealtyTrac returned a conflicting market/URL and estimated value rather than a verified asking price. These sources remain unavailable.
 
 ## Stay observations and Austria
 
@@ -266,7 +266,11 @@ Sreality: sreality, CZ; source_region with region_id=praha and transaction=sale.
 
 Urbania: urbania, PE; use POST /v1/developments/search with platforms=["urbania"], source_region with platform=urbania, country=PE, region_id=peru and limit=1. Returns a promoted development observed in the nationwide apartment-sale index, not a complete project directory or individual listing. Project URL and native ID must agree. Query, cursor, transaction selectors and city filters are unsupported. Teaser prices, contacts and unclassified images are omitted; city, phase, completion date and unit counts remain unknown. Account-owned stored development reads are supported. Ordinary listing results fail closed. Provider ceiling $0.01 using included credits.
 
+Sahibinden: sahibinden, TR; sale with source_region platform=sahibinden, country=TR, region_id=istanbul and limit=1. Returns a canonical Istanbul apartment-sale observation with TRY asking price. Gross area stays gross; net area and Turkish room notation stay in source extensions. Room notation is not a bedroom count. Unified availability remains unknown. Seller contacts, precise coordinates and images are omitted. Stored listing/media reads reuse the observation; media is empty. Other cities, rentals and live detail/history lookup are unsupported. Provider ceiling $0.02 using included credits.
+
 ## Agent directory observations
+
+Keller Williams: POST /v1/agents/search supports platforms=["kellerwilliams"], location.kind=source_region, location.platform=kellerwilliams, country=US, region_id=california and limit=1. Returns a bounded California directory observation with canonical kw.com profile URL, name and city/state. Costs 50 credits. Query, cursor, other states, agent listings, contact enrichment and license verification are unsupported. Provider ceiling $0.01 using included credits.
 
 Realtor.com: POST /v1/agents/search supports platforms=["realtor"], location.kind=source_region, location.platform=realtor, country=US, region_id=austin-tx, and limit 1–100. It costs 50 credits and returns bounded source relevance results. Query, cursor, ranking, portfolio and contact enrichment are unsupported.
 
