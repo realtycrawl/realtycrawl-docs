@@ -182,6 +182,8 @@
         "x-runtime-status": "beta",
         "x-credit-cost": 50,
         "x-live-verified-platforms": [
+          "rentals_ca",
+          "booli",
           "dubizzle",
           "graana",
           "dubizzle_eg",
@@ -347,6 +349,8 @@
         ],
         "x-credit-unit": "successful_source_crawl",
         "x-verified-platforms": [
+          "rentals_ca",
+          "booli",
           "dubizzle",
           "graana",
           "dubizzle_eg",
@@ -567,6 +571,8 @@
         "x-runtime-status": "beta",
         "x-credit-cost": 50,
         "x-live-verified-platforms": [
+          "rentals_ca",
+          "booli",
           "dubizzle",
           "graana",
           "dubizzle_eg",
@@ -732,6 +738,8 @@
         ],
         "x-credit-unit": "successful_source_crawl",
         "x-verified-platforms": [
+          "rentals_ca",
+          "booli",
           "dubizzle",
           "graana",
           "dubizzle_eg",
@@ -1058,6 +1066,8 @@
         "x-runtime-status": "beta",
         "x-credit-cost": 1,
         "x-live-verified-platforms": [
+          "rentals_ca",
+          "booli",
           "dubizzle",
           "graana",
           "dubizzle_eg",
@@ -1223,6 +1233,8 @@
         ],
         "x-credit-unit": "stored_observation_read",
         "x-verified-platforms": [
+          "rentals_ca",
+          "booli",
           "dubizzle",
           "graana",
           "dubizzle_eg",
@@ -1450,6 +1462,8 @@
         "x-runtime-status": "beta",
         "x-credit-cost": 1,
         "x-live-verified-platforms": [
+          "rentals_ca",
+          "booli",
           "dubizzle",
           "graana",
           "dubizzle_eg",
@@ -1615,6 +1629,8 @@
         ],
         "x-credit-unit": "stored_observation_read",
         "x-verified-platforms": [
+          "rentals_ca",
+          "booli",
           "dubizzle",
           "graana",
           "dubizzle_eg",
