@@ -182,6 +182,8 @@
         "x-runtime-status": "beta",
         "x-credit-cost": 50,
         "x-live-verified-platforms": [
+          "funda",
+          "remax",
           "sahibinden",
           "ingatlan",
           "zap",
@@ -336,6 +338,8 @@
         ],
         "x-credit-unit": "successful_source_crawl",
         "x-verified-platforms": [
+          "funda",
+          "remax",
           "sahibinden",
           "ingatlan",
           "zap",
@@ -545,6 +549,8 @@
         "x-runtime-status": "beta",
         "x-credit-cost": 50,
         "x-live-verified-platforms": [
+          "funda",
+          "remax",
           "sahibinden",
           "ingatlan",
           "zap",
@@ -699,6 +705,8 @@
         ],
         "x-credit-unit": "successful_source_crawl",
         "x-verified-platforms": [
+          "funda",
+          "remax",
           "sahibinden",
           "ingatlan",
           "zap",
@@ -1014,6 +1022,8 @@
         "x-runtime-status": "beta",
         "x-credit-cost": 1,
         "x-live-verified-platforms": [
+          "funda",
+          "remax",
           "sahibinden",
           "ingatlan",
           "zap",
@@ -1168,6 +1178,8 @@
         ],
         "x-credit-unit": "stored_observation_read",
         "x-verified-platforms": [
+          "funda",
+          "remax",
           "sahibinden",
           "ingatlan",
           "zap",
@@ -1384,6 +1396,8 @@
         "x-runtime-status": "beta",
         "x-credit-cost": 1,
         "x-live-verified-platforms": [
+          "funda",
+          "remax",
           "sahibinden",
           "ingatlan",
           "zap",
@@ -1538,6 +1552,8 @@
         ],
         "x-credit-unit": "stored_observation_read",
         "x-verified-platforms": [
+          "funda",
+          "remax",
           "sahibinden",
           "ingatlan",
           "zap",
