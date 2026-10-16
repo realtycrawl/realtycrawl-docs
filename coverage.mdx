@@ -2,7 +2,7 @@
 title: "Coverage and evidence"
 ---
 
-The inventory covers 200 researched platforms and 43 defined API operations. This release includes 168 distinct source platforms (123 sale, 32 rental, 3 auction, 5 stay, 4 development and 1 additional agent-only platform) and 19 enabled operation IDs, including three metadata operations. Check live capabilities for current enablement. Realtor.com and Keller Williams support the dedicated agent operations below.
+The inventory covers 200 researched platforms and 43 defined API operations. This release includes 169 distinct source platforms (123 sale, 33 rental, 3 auction, 5 stay, 4 development and 1 additional agent-only platform) and 19 enabled operation IDs, including three metadata operations. Check live capabilities for current enablement. Realtor.com and Keller Williams support the dedicated agent operations below.
 
 ## Verified sale-search adapters
 
@@ -179,6 +179,8 @@ Agoda and Trip.com searches bind observations to the requested dates. Hotel disp
 Booking.com: booking, FR; source_region with platform=booking and region_id=paris, currency=USD. Search one future stay of 1–30 nights for two adults and one room, with no children, infants or pets. Hotel and apartment observations retain the all-in total_stay price including source-reported taxes and fees, without guaranteeing availability. Details, room enrichment, monitoring and proxies are disabled. The $0.01 cap may return fewer results than requested.
 
 ## Verified rental-search adapters
+
+Amber: amber, AU; rent with source_region platform=amber, country=AU, region_id=arncliffe-sydney and limit=1. Returns Sydney-labelled accommodation advertisements from the Arncliffe source search. The canonical Amber page derives from the source name/slug relationship, not the external operator link. Numeric provider inventory ID remains qualified separately; native_id is null and resource identity uses the canonical URL. AUD/week advertised starting rates become price.min with null exact amount and maximum. The minimum may cover shared sleeping space; it is not a private-room, whole-dwelling, per-person or all-in booking quote. Availability, bedroom/bathroom counts and municipality remain unknown. Contacts, exact locations, images, reviews, deposits and operator links are omitted. Stored listing/media reads reuse the account-owned observation for 24 hours; media is empty. Other markets, query/cursor, fresh details/history, stay quotes and booking are unsupported. Provider deduplication is disabled so customers do not share a cached search scope. Provider ceiling $0.01 using included credits; pinned build and bundled prices are checked before each run.
 
 SUUMO: suumo, JP; source_region with platform=suumo, country=JP, region_id=shinjuku and transaction=rent. One-page Shinjuku rental observations, which may include whole buildings. Match the listing bc ID and jnc group URL; provider field names do not establish building or unit identity. JPY monthly asking rent is converted from explicit yen or man-yen text; fees are separate, and missing fees are not zero. Layout codes do not establish bedrooms. Area requires an explicit square-metre unit, with unknown basis. Property type and availability remain unknown. Exact addresses, building names and contacts are omitted. Mixed gallery images remain unclassified; media is empty. No proxy or contact enrichment; $0.01 provider cap.
 
