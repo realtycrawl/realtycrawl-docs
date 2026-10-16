@@ -2,7 +2,7 @@
 title: "Coverage and evidence"
 ---
 
-The inventory covers 200 researched platforms and 43 defined API operations. This release includes 167 distinct source platforms (123 sale, 32 rental, 3 auction, 5 stay, 3 development and 1 additional agent-only platform) and 19 enabled operation IDs, including three metadata operations. Check live capabilities for current enablement. Realtor.com and Keller Williams support the dedicated agent operations below.
+The inventory covers 200 researched platforms and 43 defined API operations. This release includes 168 distinct source platforms (123 sale, 32 rental, 3 auction, 5 stay, 4 development and 1 additional agent-only platform) and 19 enabled operation IDs, including three metadata operations. Check live capabilities for current enablement. Realtor.com and Keller Williams support the dedicated agent operations below.
 
 ## Verified sale-search adapters
 
@@ -303,3 +303,6 @@ Runtime capability responses are authoritative for enablement. Research evidence
 ```bash
 curl "https://realtycrawl.dev/v1/meta/capabilities?platform=rightmove&country=GB"
 ```
+
+
+Fang: fang, CN; use POST /v1/developments/search with platforms=["fang"], source_region with platform=fang, country=CN, region_id=beijing and limit=1. Returns Beijing residential project advertisements marketed on sale. Canonical project URL/ID, explicit city and observed source query must agree. Source CNY/sqm unit price and starting per-home total are separate extensions, cross-checked against displayed units; neither is an individual-home asking price or whole-project valuation. Bedroom and area ranges stay ranges. Project marketing status does not establish unit availability. Geography is provider-reported; phase, completion date and unit counts remain unknown. Contacts, precise addresses, coordinates and photos are omitted. Account-owned stored development reads last 24 hours. No listing, unit, valuation, query, cursor or transaction selector is supported. Enrichment and monitoring are off. Search costs 50 credits; stored reads cost 1. Provider ceiling $0.01 using included credits; pinned build and bundled pricing are checked before each run.
