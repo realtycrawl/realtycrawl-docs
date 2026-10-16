@@ -2,9 +2,13 @@
 title: "Coverage and evidence"
 ---
 
-The inventory covers 200 researched platforms and 43 defined API operations. This release includes 188 distinct source platforms (132 sale, 36 rental, 4 commercial lease, 5 auction-source, 5 stay, 4 development and 2 additional agent-only platforms) and 19 enabled operation IDs, including three metadata operations. Check live capabilities for current enablement. Realtor.com, Keller Williams and eXp France support the dedicated agent operations below.
+The inventory covers 200 researched platforms and 43 defined API operations. This release includes 190 distinct source platforms (134 sale, 36 rental, 4 commercial lease, 5 auction-source, 5 stay, 4 development and 2 additional agent-only platforms) and 19 enabled operation IDs, including three metadata operations. Check live capabilities for current enablement. Realtor.com, Keller Williams and eXp France support the dedicated agent operations below.
 
 ## Verified sale-search adapters
+
+Logic-Immo: logicimmo, FR; sale with source_region platform=logicimmo, country=FR, region_id=paris-apartments and limit=1. First native Logic-Immo apartment advertisement in the Paris source order, skipping syndicated portal redirects. Source JSON, brand/portal, rendered detail link, native/metadata ID, Paris geography, BUY/APARTMENT category and displayed EUR asking price must agree. Explicit bedrooms stay distinct from room count; area uses the displayed square-metre precision. Restricted consideration such as viager is omitted. No source details, contacts, precise address, photos, availability or history.
+
+Bikroy: bikroy, BD; sale with source_region platform=bikroy, country=BD, region_id=dhaka-apartment-advertisements and limit=1. First explicit apartment/flat sale advertisement in the Dhaka flat-search window. Canonical source URL/category, explicit bedroom field and displayed BDT asking price with Indian grouping must agree. A bedroom number in the title must match the separate count; arbitrary leading numbers do not establish bedroom counts. Down payments and instalment consideration are omitted. Individual municipality, exact address, scalar area, bathrooms, photos and availability remain unknown; opaque URL suffixes are not asserted as native IDs.
 
 Movoto: movoto, US; sale with source_region platform=movoto, country=US, region_id=austin-residential-sales and limit=1. Austin public sale advertisements with matching displayed card, structured residence URL and USD offer. Source bedroom/bathroom counts and sqft are preserved with unknown area basis. Generic SEO SingleFamilyResidence does not establish the actual subtype; property_type is unknown. DOM UUID and URL pid differ, so native_id is null and identity uses canonical URL. Structured InStock is not treated as housing availability.
 
@@ -211,7 +215,7 @@ Dubizzle Egypt: dubizzle_eg, EG; sale with source_region platform=dubizzle_eg, c
 
 Rentals.ca: rentals_ca, CA; rent with source_region platform=rentals_ca, country=CA, region_id=edmonton-ab and limit=1. Edmonton apartment rental advertisements only. Embedded source ID must match the displayed card and canonical Rentals.ca URL. Canadian-dollar rental minimum/maximum remain advertisement ranges, with null scalar amount and billing period. Bedroom/bathroom ranges are separate source extensions and do not describe one available unit. Availability, area, contacts, exact address/coordinates, photos and source timestamps are omitted. No fresh details, units or history; stored media is empty.
 
-The 15 Firecrawl adapters each use one uncached HTML-only read from the confirmed Firecrawl Free plan. No LLM, browser actions, persistent cookies or automatic source retry. A fresh allowance read requires the confirmed 1,000-credit free plan and more than 50 remaining credits. All 15 accepted Firecrawl sources share an atomic cap of 50 attempts per billing period across deployment environments; failures consume a slot. No paid overages or automatic upgrades. Account-owned listing/media observations last 24 hours. Search costs 50 application credits, stored reads cost 1 and replay is free. Runtime enablement and provider key are required; exhausted allowance fails closed.
+The 17 Firecrawl adapters each use one uncached HTML-only read from the confirmed Firecrawl Free plan. No LLM, browser actions, persistent cookies or automatic source retry. A fresh allowance read requires the confirmed 1,000-credit free plan and more than 50 remaining credits. All 17 accepted Firecrawl sources share an atomic cap of 100 attempts per billing period across deployment environments; failures consume a slot. No paid overages or automatic upgrades. Account-owned listing/media observations last 24 hours. Search costs 50 application credits, stored reads cost 1 and replay is free. Runtime enablement and provider key are required; exhausted allowance fails closed.
 
 ## Verified commercial lease-search adapters
 
@@ -299,7 +303,7 @@ The remaining 20 sources and 24 operation definitions are not enabled. Additiona
 
 Source failures are candidate-specific. Earlier failed actors do not override the accepted adapters listed above. The current capability response determines availability; research entries and historical samples alone do not enable a platform.
 
-Remaining sources: Facebook Marketplace Housing, REW, CoStar, Ten-X, Logic-Immo, Lianjia, Beike / KE, Rumah.com legacy, Makaan, Aqarmap, Sotheby's International Realty, Bikroy Property. Preparation, source access, pricing and hosted acceptance limitations are tracked in the implementation backlog.
+Remaining sources: Facebook Marketplace Housing, REW, CoStar, Ten-X, Lianjia, Beike / KE, Rumah.com legacy, Makaan, Aqarmap, Sotheby's International Realty. Preparation, source access, pricing and hosted acceptance limitations are tracked in the implementation backlog.
 
 ## Specialist sales and developments
 
@@ -364,6 +368,6 @@ REW remains disabled: its first free HTML discovery succeeded, but its hosted Fi
 
 Availability is specific to country and operation. Send the documented country and inspect `/v1/meta/capabilities?platform=jamesedition&country=FR` (for example). Unfiltered registry geographies can include prepared research contracts and do not establish enablement in those markets.
 
-Logic-Immo/Bikroy remain disabled after Preview contract errors. Aqarmap returned a provider error on first-stage production. Sotheby’s became inconsistent on the replacement production build and remains disabled. All failures charged zero application credits; no failed source was retried.
+Logic-Immo/Bikroy now pass Preview and exact staged production after corrections based on saved failed responses, including the explicit space/hyphen bedroom-title variant. Logic-Immo skips syndicated external-portal redirects; Bikroy accepts explicit flat-sale titles with separate bedroom evidence. Aqarmap remains disabled after its provider error. Sotheby’s failed response was a Security Check page with source status202 and remains disabled. No unchanged failed-source request was repeated. All failed source attempts charged zero application credits.
 
 Lianjia’s separately public homepage sample returned unresolved templates and no rendered property records. Its blocked resale-search contract and Beike’s blocked resale search remain unsupported; no cookies, login or repeated source requests were used.
