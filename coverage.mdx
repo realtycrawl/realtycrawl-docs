@@ -2,7 +2,7 @@
 title: "Coverage and evidence"
 ---
 
-The inventory covers 200 researched platforms and 43 defined API operations. This release includes 193 distinct source platforms (137 sale, 36 rental, 4 commercial lease, 5 auction-source, 5 stay, 4 development and 2 additional agent-only platforms) and 19 enabled operation IDs, including three metadata operations. Check live capabilities for current enablement. Realtor.com, Keller Williams and eXp France support the dedicated agent operations below.
+The inventory covers 200 researched platforms and 43 defined API operations. This release includes 193 distinct source platforms (137 sale, 36 rental, 4 commercial lease, 5 auction-source, 5 stay, 4 development and 2 additional agent-only platforms) and 20 enabled operation IDs, including three metadata operations. Check live capabilities for current enablement. Realtor.com, Keller Williams and eXp France support the dedicated agent operations below.
 
 ## Verified sale-search adapters
 
@@ -305,7 +305,7 @@ The Anjuke Actor requires a minimum request size of 10, but RealtyCrawl applies 
 
 ## Unavailable coverage
 
-The remaining 7 sources and 24 operation definitions are not enabled. Additional rental markets, merged property records, valuations, additional agent markets, agent portfolios and agency APIs, auction bidding, additional auction markets, buildings, additional stay operations and async jobs require separate implementation and verification. Licensed MLS and public-record feeds need their own access agreements.
+The remaining 7 sources and 23 operation definitions are not enabled. Additional rental markets, merged property records, valuations, additional agent markets, agent portfolios and agency APIs, auction bidding, additional auction markets, buildings, additional stay operations and async jobs require separate implementation and verification. Licensed MLS and public-record feeds need their own access agreements.
 
 Source failures are candidate-specific. Earlier failed actors do not override the accepted adapters listed above. The current capability response determines availability; research entries and historical samples alone do not enable a platform.
 
@@ -383,3 +383,12 @@ Logic-Immo/Bikroy now pass Preview and exact staged production after corrections
 Lianjia’s separately public homepage sample returned unresolved templates and no rendered property records. Its blocked resale-search contract and Beike’s blocked resale search remain unsupported; no cookies, login or repeated source requests were used.
 
 The regional REW and Aqarmap contracts above apply only to their explicitly accepted sources. Original Toronto/Greater Cairo selectors remain unsupported; live capabilities and the documented scope control availability. Ten-X Texas passed Preview but returned SOURCE_UNAVAILABLE/503 on staged production with zero application credits and remains disabled, without a retry. The earlier nationwide Ten-X scope also remains unsupported. Source observations are not a complete inventory or a guarantee of freshness beyond the recorded observation.
+
+
+## Source locality autocomplete
+
+POST /v1/locations/search is verified for HotPads (hotpads, US cities and boroughs) and Realestate.com.au (realestate_au, Australian suburbs). Request one platform, a locality prefix of 2–60 ASCII letters/digits/spaces/simple punctuation beginning with a letter, and explicit limit=1. Example: {"platforms":["hotpads"],"query":"Brooklyn","limit":1}; for Australia use {"platforms":["realestate_au"],"query":"Bondi","limit":1}. Country is determined by the selected source contract and validated source state/type fields. Postal-code-only queries, addresses, individual listings, cursor, location filters and mixed-source aggregation are unsupported.
+
+Each response has one provider-observed locality, a namespaced source-specific ID, source display name, country, type, source_platform and null geometry. These IDs are not cross-platform canonical geography IDs or guaranteed selectors for listing search; use the separate documented search selectors. Coordinates, boundaries, exact addresses and unrelated source fields are omitted. Completeness and total counts remain unknown; source provenance and observation time appear in meta.sources.
+
+Successful autocomplete costs 50 credits, with a $0.01 included-credit provider ceiling; idempotent replay is free and failed requests settle zero credits. Actor execution can produce more rows than requested; maxItems is not asserted as a source-processing guarantee. Runtime separately limits dataset retrieval to one result, verifies the exact immutable build and bundled pricing before execution, and never automatically retries the source. Both adapters passed Preview and exact staged production, including response validation, 100 credits reconciled per environment, disposable audit cleanup and identical zero-credit replays. These are additional operations on existing platforms, so distinct enabled platform coverage remains 193.
