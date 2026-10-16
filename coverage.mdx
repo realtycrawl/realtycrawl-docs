@@ -2,7 +2,7 @@
 title: "Coverage and evidence"
 ---
 
-The inventory covers 200 researched platforms and 43 defined API operations. This release includes 169 distinct source platforms (123 sale, 33 rental, 3 auction, 5 stay, 4 development and 1 additional agent-only platform) and 19 enabled operation IDs, including three metadata operations. Check live capabilities for current enablement. Realtor.com and Keller Williams support the dedicated agent operations below.
+The inventory covers 200 researched platforms and 43 defined API operations. This release includes 171 distinct source platforms (125 sale, 33 rental, 3 auction, 5 stay, 4 development and 1 additional agent-only platform) and 19 enabled operation IDs, including three metadata operations. Check live capabilities for current enablement. Realtor.com and Keller Williams support the dedicated agent operations below.
 
 ## Verified sale-search adapters
 
@@ -177,6 +177,10 @@ Vivanuncios location hierarchies may start with a neighborhood or a city. The ad
 Agoda and Trip.com searches bind observations to the requested dates. Hotel display names are replaced by neutral city-level observation titles; contacts, reviews and exact addresses are omitted. Proxies, reviews and additional detail requests are disabled. Each source has a $0.01 run cap, which can return fewer records than requested.
 
 Booking.com: booking, FR; source_region with platform=booking and region_id=paris, currency=USD. Search one future stay of 1–30 nights for two adults and one room, with no children, infants or pets. Hotel and apartment observations retain the all-in total_stay price including source-reported taxes and fees, without guaranteeing availability. Details, room enrichment, monitoring and proxies are disabled. The $0.01 cap may return fewer results than requested.
+
+Graana: graana, PK; sale with source_region platform=graana, country=PK, region_id=karachi-page-2 and limit=1. Returns Karachi flat-sale observations from page 2 of the source residential-sale search. Portal-native ID is verified against the primary source; the Actor does not supply a detail slug, so URL remains null. PKR asking price, bedrooms/bathrooms and sqft area with unknown basis are preserved. Source city ID 169 supplies Karachi; no polygon or precise location is inferred. Availability remains unknown. Contacts, raw descriptions, exact addresses, images, source timestamps and detail enrichment are omitted. Account-owned stored listing/media reads last 24 hours; media is empty. Other source pages, markets, rentals, query/cursor, fresh details/history and property records are unsupported. Provider ceiling $0.01 using included credits; immutable build and bundled event prices are checked before each run.
+
+Dubizzle Egypt: dubizzle_eg, EG; sale with source_region platform=dubizzle_eg, country=EG, region_id=egypt-apartments-for-sale and limit=1. Returns source-reported cash apartment-sale advertisements from the Egypt-wide category. Native ID/canonical URL suffix, country/domain, apartment category, sale purpose and cash/price attributes must agree. EGP asking price must match the formatted and attribute amounts. Installments, down payments, rentals and conflicting price shapes fail closed. Bedrooms/bathrooms and sqm area with unknown basis are retained; municipality and availability remain unknown. No independent detail-page verification is asserted. Contacts, precise locations, descriptions, source timestamps, seller enrichment and photos are omitted. Stored listing/media reads last 24 hours, with empty media. Other categories, query/cursor, fresh details/history and records operations are unsupported. Provider ceiling $0.01 using included credits; immutable build and exact bundled pricing are checked before each run.
 
 ## Verified rental-search adapters
 
