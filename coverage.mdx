@@ -2,7 +2,7 @@
 title: "Coverage and evidence"
 ---
 
-The inventory covers 200 researched platforms and 43 defined API operations. This release includes 151 distinct source platforms (110 sale, 31 rental, 3 auction, 5 stay and 2 development) and 19 enabled operation IDs, including three metadata operations. Check live capabilities for current enablement. Realtor.com also supports the dedicated agent operations below.
+The inventory covers 200 researched platforms and 43 defined API operations. This release includes 152 distinct source platforms (110 sale, 32 rental, 3 auction, 5 stay and 2 development) and 19 enabled operation IDs, including three metadata operations. Check live capabilities for current enablement. Realtor.com also supports the dedicated agent operations below.
 
 ## Verified sale-search adapters
 
@@ -160,6 +160,8 @@ Booking.com: booking, FR; source_region with platform=booking and region_id=pari
 
 ## Verified rental-search adapters
 
+SUUMO: suumo, JP; source_region with platform=suumo, country=JP, region_id=shinjuku and transaction=rent. One-page Shinjuku rental observations, which may include whole buildings. Match the listing bc ID and jnc group URL; provider field names do not establish building or unit identity. JPY monthly asking rent is converted from explicit yen or man-yen text; fees are separate, and missing fees are not zero. Layout codes do not establish bedrooms. Area requires an explicit square-metre unit, with unknown basis. Property type and availability remain unknown. Exact addresses, building names and contacts are omitted. Mixed gallery images remain unclassified; media is empty. No proxy or contact enrichment; $0.01 provider cap.
+
 All rental sources require transaction=rent and location.country. For source_region, also set location.platform to the platform slug. Start with limit=1. These adapters return source advertisements, not guaranteed availability or binding all-in rental quotes.
 
 Zumper: zumper, US; source_region with region_id=long-beach-ca (source city/state slug). Advertised rent can include source-reported fees; extensions.base_rent retains the separately reported base amount. HotPads: hotpads, US; text query New York, NY. Results can include nearby cities. Building advertisements preserve rent ranges and do not expose a floor plan as an individual unit.
@@ -222,7 +224,7 @@ The Anjuke Actor requires a minimum request size of 10, but RealtyCrawl applies 
 
 ## Unavailable coverage
 
-The remaining 49 sources and 24 operation definitions are not enabled. Additional rental markets, merged property records, valuations, additional agent markets, agent portfolios and agency APIs, auction bidding, additional auction markets, buildings, additional stay operations and async jobs require separate implementation and verification. Licensed MLS and public-record feeds need their own access agreements.
+The remaining 48 sources and 24 operation definitions are not enabled. Additional rental markets, merged property records, valuations, additional agent markets, agent portfolios and agency APIs, auction bidding, additional auction markets, buildings, additional stay operations and async jobs require separate implementation and verification. Licensed MLS and public-record feeds need their own access agreements.
 
 Source failures are candidate-specific. Earlier failed actors do not override the accepted adapters listed above. The current capability response determines availability; research entries and historical samples alone do not enable a platform.
 
