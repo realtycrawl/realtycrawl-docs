@@ -2,9 +2,13 @@
 title: "Coverage and evidence"
 ---
 
-The inventory covers 200 researched platforms and 43 defined API operations. This release includes 155 distinct source platforms (113 sale, 32 rental, 3 auction, 5 stay and 2 development) and 19 enabled operation IDs, including three metadata operations. Check live capabilities for current enablement. Realtor.com also supports the dedicated agent operations below.
+The inventory covers 200 researched platforms and 43 defined API operations. This release includes 157 distinct source platforms (115 sale, 32 rental, 3 auction, 5 stay and 2 development) and 19 enabled operation IDs, including three metadata operations. Check live capabilities for current enablement. Realtor.com also supports the dedicated agent operations below.
 
 ## Verified sale-search adapters
+
+ZAP: zap, BR; source_region with platform=zap, country=BR, region_id=sao-paulo-sp and transaction=sale. São Paulo apartment-sale observations only; limit must be 1. Native ID and canonical ZAP URL must agree. BRL asking prices and explicit sqm areas are preserved. Developments, starting prices and rental amounts are rejected. Availability stays unknown; seller/details enrichment and unclassified images are omitted. Stored media can be empty. Provider ceiling $0.01 using included credits.
+
+Ingatlan: ingatlan, HU; source_region with platform=ingatlan, country=HU, region_id=budapest and transaction=sale. Budapest apartment-sale observations only; limit must be 1. Numeric advert ID must match its canonical ingatlan.com URL. HUF asking prices and explicit sqm areas are preserved. Whole/half-room counts remain source extensions, not bedrooms; no inferred price-per-sqm. Availability stays unknown. Contacts, exact address, coordinates and unclassified media are omitted. Provider ceiling $0.01 using included credits.
 
 Imovelweb and VivaReal: imovelweb or vivareal, BR; source_region with platform matching the source, country=BR, region_id=sao-paulo-sp and transaction=sale. São Paulo apartment-sale observations only; limit must be 1. Canonical listing URL and native ID must agree. BRL asking prices and explicit square-metre areas are preserved. Development projects, starting prices and conflicting rental amounts are rejected. Availability stays unknown. Seller enrichment and details are disabled; contacts, exact addresses, coordinates and unclassified images are omitted. Stored media is empty for the verified samples. Each provider run is capped at $0.01 using included credits.
 
