@@ -2,7 +2,7 @@
 title: "Coverage and evidence"
 ---
 
-The inventory covers 200 researched platforms and 43 defined API operations. This release includes 157 distinct source platforms (115 sale, 32 rental, 3 auction, 5 stay and 2 development) and 19 enabled operation IDs, including three metadata operations. Check live capabilities for current enablement. Realtor.com also supports the dedicated agent operations below.
+The inventory covers 200 researched platforms and 43 defined API operations. This release includes 158 distinct source platforms (115 sale, 32 rental, 3 auction, 5 stay and 3 development) and 19 enabled operation IDs, including three metadata operations. Check live capabilities for current enablement. Realtor.com also supports the dedicated agent operations below.
 
 ## Verified sale-search adapters
 
@@ -263,6 +263,8 @@ QuintoAndar: quintoandar, BR; source_region with region_id=sao-paulo-sp-brasil a
 ImmoScout24 Germany: immoscout24, DE; source_region with region_id=berlin and transaction=sale. Berlin apartment observations only. German room counts remain source_rooms, not bedrooms. Missing prices stay null, and purchase prices are EUR per property. Informational records are omitted. The provider minimum batch is 20 listings; the API respects your requested result limit and a $0.04 source charge cap. Detail and incremental enrichment are disabled.
 
 Sreality: sreality, CZ; source_region with region_id=praha and transaction=sale. Prague apartment sale observations only. priceCzk is the CZK price for the property, not the price per m². Czech layouts such as 3+1 remain source_layout, not bedrooms. Details and third-party AI enrichment are disabled; proxies are explicitly disabled. The $0.01 cap can return fewer results than requested.
+
+Urbania: urbania, PE; use POST /v1/developments/search with platforms=["urbania"], source_region with platform=urbania, country=PE, region_id=peru and limit=1. Returns a promoted development observed in the nationwide apartment-sale index, not a complete project directory or individual listing. Project URL and native ID must agree. Query, cursor, transaction selectors and city filters are unsupported. Teaser prices, contacts and unclassified images are omitted; city, phase, completion date and unit counts remain unknown. Account-owned stored development reads are supported. Ordinary listing results fail closed. Provider ceiling $0.01 using included credits.
 
 ## Agent directory observations
 

@@ -2493,7 +2493,7 @@
       "post": {
         "operationId": "searchDevelopments",
         "summary": "Search developments",
-        "description": "Read-only development observations: Inmuebles24 (MX, source_region mexico) or 591 (TW, source_region taipei). One platform per request; limit 1–100. Costs 50 credits. No query, cursor, unit availability or completion guarantees. Completion dates preserve month precision.",
+        "description": "Read-only development observations: Inmuebles24 (MX, source_region mexico), 591 (TW, source_region taipei), or Urbania (PE, source_region peru; limit 1 only). Urbania observes promoted projects from the nationwide apartment-sale index; it does not filter by city or establish unit availability or project prices. Sources require runtime enablement; consult capabilities. One platform per request; other sources accept limit 1–100. Costs 50 credits. No query, cursor, unit availability or completion guarantees. Completion dates preserve month precision.",
         "x-research-status": "proposed",
         "tags": [
           "developments"
@@ -2534,6 +2534,7 @@
         "x-credit-cost": 50,
         "x-verified-platforms": [
           "591",
+          "urbania",
           "inmuebles24"
         ]
       }
@@ -2584,6 +2585,7 @@
         "x-credit-cost": 1,
         "x-verified-platforms": [
           "591",
+          "urbania",
           "inmuebles24"
         ]
       }
