@@ -2,9 +2,13 @@
 title: "Coverage and evidence"
 ---
 
-The inventory covers 200 researched platforms and 43 defined API operations. This release includes 180 distinct source platforms (130 sale, 36 rental, 3 auction, 5 stay, 4 development and 2 additional agent-only platforms) and 19 enabled operation IDs, including three metadata operations. Check live capabilities for current enablement. Realtor.com, Keller Williams and eXp France support the dedicated agent operations below.
+The inventory covers 200 researched platforms and 43 defined API operations. This release includes 185 distinct source platforms (132 sale, 36 rental, 3 commercial lease, 3 auction, 5 stay, 4 development and 2 additional agent-only platforms) and 19 enabled operation IDs, including three metadata operations. Check live capabilities for current enablement. Realtor.com, Keller Williams and eXp France support the dedicated agent operations below.
 
 ## Verified sale-search adapters
+
+Movoto: movoto, US; sale with source_region platform=movoto, country=US, region_id=austin-residential-sales and limit=1. Austin public sale advertisements with matching displayed card, structured residence URL and USD offer. Source bedroom/bathroom counts and sqft are preserved with unknown area basis. Generic SEO SingleFamilyResidence does not establish the actual subtype; property_type is unknown. DOM UUID and URL pid differ, so native_id is null and identity uses canonical URL. Structured InStock is not treated as housing availability.
+
+Coldwell Banker: coldwellbanker, US; sale with source_region platform=coldwellbanker, country=US, region_id=austin-public-listings and limit=1. Austin condo advertisements from the public listing subset. Portal data-pid and detail URL must agree; MLS IDs are omitted. USD asking money and source bedrooms/sqft are preserved with unknown area basis. Full bathrooms stay a separate extension because total/half counts are unknown. Source Coming Soon and other status labels do not imply availability. No login or access to authenticated MLS inventory.
 
 BuyRentKenya: buyrentkenya, KE; sale with source_region platform=buyrentkenya, country=KE, region_id=nairobi-apartments and limit=1. Nairobi apartment advertisements; source ItemList and displayed canonical URL must agree. Native ID stays null because the card UUID/URL number are not established as portal-native IDs. Source bedroom/bathroom counts and explicit floor sqm are preserved with unknown area basis. Numeric consideration remains unknown; KSh currency is qualified as Kenyan-market KES. No availability, exact location, contacts or photos.
 
@@ -175,7 +179,7 @@ Auction sources: auction (US, chicago-il), xome (US, tx) and hubzu (US, tx). Pla
 
 GET /v1/auctions/\{auction_id\} returns the requesting account’s stored auction observation for 1 credit, retained for 24 hours. Starting bids, current bids, estimated values and reserve disclosures remain distinct. Unknown bids are null. Event dates and statuses are source observations, not guarantees that bidding is open; the API does not submit bids.
 
-Additional excluded samples: Aqarmap failed upstream; Movoto returned empty or invalid listings. RealtyTrac returned a conflicting market/URL and estimated value rather than a verified asking price. These sources remain unavailable.
+Earlier Apify samples for Aqarmap and Movoto were rejected. Movoto now has an accepted replacement Firecrawl contract above. Aqarmap remains disabled after a provider error on staged production, despite passing Preview. RealtyTrac remains unavailable because its sample returned a conflicting market/URL and estimated value rather than a verified asking price.
 
 ## Stay observations and Austria
 
@@ -199,7 +203,15 @@ Dubizzle Egypt: dubizzle_eg, EG; sale with source_region platform=dubizzle_eg, c
 
 Rentals.ca: rentals_ca, CA; rent with source_region platform=rentals_ca, country=CA, region_id=edmonton-ab and limit=1. Edmonton apartment rental advertisements only. Embedded source ID must match the displayed card and canonical Rentals.ca URL. Canadian-dollar rental minimum/maximum remain advertisement ranges, with null scalar amount and billing period. Bedroom/bathroom ranges are separate source extensions and do not describe one available unit. Availability, area, contacts, exact address/coordinates, photos and source timestamps are omitted. No fresh details, units or history; stored media is empty.
 
-The seven Firecrawl adapters each use one uncached HTML-only read from the confirmed Firecrawl Free plan. No LLM, browser actions, persistent cookies or automatic source retry. A fresh allowance read requires the confirmed 1,000-credit free plan and more than 50 remaining credits. All seven accepted Firecrawl sources share an atomic cap of 50 attempts per billing period across deployment environments; failures consume a slot. No paid overages or automatic upgrades. Account-owned listing/media observations last 24 hours. Search costs 50 application credits, stored reads cost 1 and replay is free. Runtime enablement and provider key are required; exhausted allowance fails closed.
+The 12 Firecrawl adapters each use one uncached HTML-only read from the confirmed Firecrawl Free plan. No LLM, browser actions, persistent cookies or automatic source retry. A fresh allowance read requires the confirmed 1,000-credit free plan and more than 50 remaining credits. All 12 accepted Firecrawl sources share an atomic cap of 50 attempts per billing period across deployment environments; failures consume a slot. No paid overages or automatic upgrades. Account-owned listing/media observations last 24 hours. Search costs 50 application credits, stored reads cost 1 and replay is free. Runtime enablement and provider key are required; exhausted allowance fails closed.
+
+## Verified commercial lease-search adapters
+
+CommercialCafe: commercialcafe, US; lease with source_region platform=commercialcafe, country=US, region_id=new-york-state-offices and limit=1. New York state office-space advertisements, skipping coworking promotions. Source canonical listing URL, card ID/value and office category must agree. Currency is qualified as US-market USD; scalar lease money, exact building area, municipality and available-unit inventory remain unknown. Space/area display ranges are extensions only. Shared Yardi record IDs are not asserted as portal-native property identities.
+
+CommercialSearch: commercialsearch, US; lease with source_region platform=commercialsearch, country=US, region_id=new-york-state-offices and limit=1. Same strict office advertisement contract as CommercialCafe, bound to CommercialSearch canonical URLs. The sources can share Yardi advertisements and do not establish distinct property identities. No coworking teaser rate, whole-building consideration, exact area or unit inventory is inferred.
+
+CityFeet: cityfeet, US; lease with source_region platform=cityfeet, country=US, region_id=new-york-commercial-leases and limit=1. New York City office-space advertisements with displayed geography, source CS identifier and canonical URL agreement. Source rate, area range and space counts do not establish whole-asset rent, building area or available-unit inventory. Scalar money/area and native ID remain unknown; source display ranges remain extensions. Currency is qualified as US-market USD.
 
 ## Verified rental-search adapters
 
@@ -277,7 +289,7 @@ The remaining 20 sources and 24 operation definitions are not enabled. Additiona
 
 Source failures are candidate-specific. Earlier failed actors do not override the accepted adapters listed above. The current capability response determines availability; research entries and historical samples alone do not enable a platform.
 
-Remaining sources: REW, Facebook Marketplace Housing, CoStar, CommercialCafe, CommercialSearch, CityFeet, Ten-X, Logic-Immo, Lianjia, Beike / KE, Rumah.com legacy, Makaan, Aqarmap, Sotheby's International Realty, Movoto, Foreclosure.com, RealtyTrac, PropertyShark, Coldwell Banker, Bikroy Property. Provider access, source identity, pricing and response-contract limitations remain tracked in the implementation backlog.
+Remaining sources: Facebook Marketplace Housing, REW, CoStar, Ten-X, Logic-Immo, Lianjia, Beike / KE, Rumah.com legacy, Makaan, Aqarmap, Sotheby's International Realty, Foreclosure.com, RealtyTrac, PropertyShark, Bikroy Property. Provider access, source identity, pricing and response-contract limitations remain tracked in the implementation backlog.
 
 ## Specialist sales and developments
 
@@ -341,3 +353,5 @@ Fang: fang, CN; use POST /v1/developments/search with platforms=["fang"], source
 REW remains disabled: its first free HTML discovery succeeded, but its hosted Firecrawl request returned a provider error. Zero application credits charged; no retry or production attempt. The failed Apify route also remains disabled.
 
 Availability is specific to country and operation. Send the documented country and inspect `/v1/meta/capabilities?platform=jamesedition&country=FR` (for example). Unfiltered registry geographies can include prepared research contracts and do not establish enablement in those markets.
+
+Logic-Immo/Bikroy remain disabled after Preview contract errors. Aqarmap returned a provider error on first-stage production. Sotheby’s became inconsistent on the replacement production build and remains disabled. All failures charged zero application credits; no failed source was retried.
