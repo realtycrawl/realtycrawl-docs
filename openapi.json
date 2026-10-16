@@ -182,6 +182,7 @@
         "x-runtime-status": "beta",
         "x-credit-cost": 50,
         "x-live-verified-platforms": [
+          "newhomesource",
           "immoscout24_ch",
           "portalinmobiliario",
           "batdongsan",
@@ -342,6 +343,7 @@
         ],
         "x-credit-unit": "successful_source_crawl",
         "x-verified-platforms": [
+          "newhomesource",
           "immoscout24_ch",
           "portalinmobiliario",
           "batdongsan",
@@ -557,6 +559,7 @@
         "x-runtime-status": "beta",
         "x-credit-cost": 50,
         "x-live-verified-platforms": [
+          "newhomesource",
           "immoscout24_ch",
           "portalinmobiliario",
           "batdongsan",
@@ -717,6 +720,7 @@
         ],
         "x-credit-unit": "successful_source_crawl",
         "x-verified-platforms": [
+          "newhomesource",
           "immoscout24_ch",
           "portalinmobiliario",
           "batdongsan",
@@ -1038,6 +1042,7 @@
         "x-runtime-status": "beta",
         "x-credit-cost": 1,
         "x-live-verified-platforms": [
+          "newhomesource",
           "immoscout24_ch",
           "portalinmobiliario",
           "batdongsan",
@@ -1198,6 +1203,7 @@
         ],
         "x-credit-unit": "stored_observation_read",
         "x-verified-platforms": [
+          "newhomesource",
           "immoscout24_ch",
           "portalinmobiliario",
           "batdongsan",
@@ -1420,6 +1426,7 @@
         "x-runtime-status": "beta",
         "x-credit-cost": 1,
         "x-live-verified-platforms": [
+          "newhomesource",
           "immoscout24_ch",
           "portalinmobiliario",
           "batdongsan",
@@ -1580,6 +1587,7 @@
         ],
         "x-credit-unit": "stored_observation_read",
         "x-verified-platforms": [
+          "newhomesource",
           "immoscout24_ch",
           "portalinmobiliario",
           "batdongsan",
@@ -1814,7 +1822,7 @@
       "get": {
         "operationId": "getListingOpenHouses",
         "summary": "getListingOpenHouses",
-        "description": "Returns this account’s stored OneRoof open-home schedule after a successful New Zealand search. Timestamps and timezone are UTC as published by the source. Observations expire after 24 hours; this operation does not refresh the source.",
+        "description": "Returns this account\u2019s stored OneRoof open-home schedule after a successful New Zealand search. Timestamps and timezone are UTC as published by the source. Observations expire after 24 hours; this operation does not refresh the source.",
         "x-research-status": "live-verified",
         "tags": [
           "listings"
@@ -2549,7 +2557,7 @@
       "post": {
         "operationId": "searchDevelopments",
         "summary": "Search developments",
-        "description": "Read-only development observations: Inmuebles24 (MX, source_region mexico), 591 (TW, source_region taipei), or Urbania (PE, source_region peru; limit 1 only). Urbania observes promoted projects from the nationwide apartment-sale index; it does not filter by city or establish unit availability or project prices. Sources require runtime enablement; consult capabilities. One platform per request; other sources accept limit 1–100. Costs 50 credits. No query, cursor, unit availability or completion guarantees. Completion dates preserve month precision.",
+        "description": "Read-only development observations: Inmuebles24 (MX, source_region mexico), 591 (TW, source_region taipei), or Urbania (PE, source_region peru; limit 1 only). Urbania observes promoted projects from the nationwide apartment-sale index; it does not filter by city or establish unit availability or project prices. Sources require runtime enablement; consult capabilities. One platform per request; other sources accept limit 1\u2013100. Costs 50 credits. No query, cursor, unit availability or completion guarantees. Completion dates preserve month precision.",
         "x-research-status": "proposed",
         "tags": [
           "developments"
@@ -2599,7 +2607,7 @@
       "get": {
         "operationId": "getDevelopment",
         "summary": "Get development",
-        "description": "Read this account’s stored development observation for 1 credit, retained 24 hours. No fresh lookup or unit availability check.",
+        "description": "Read this account\u2019s stored development observation for 1 credit, retained 24 hours. No fresh lookup or unit availability check.",
         "x-research-status": "proposed",
         "tags": [
           "developments"
@@ -2650,7 +2658,7 @@
       "post": {
         "operationId": "searchAgents",
         "summary": "Search agents",
-        "description": "Read-only US agent directory observations: Realtor.com (realtor, source_region austin-tx, limit 1–100) or Keller Williams (kellerwilliams, source_region california, limit 1). One matching platform per request; source order. Runtime enablement is required. Costs 50 credits. Query/cursor unsupported; no verified licenses, contact enrichment, rankings or portfolio coverage.",
+        "description": "Read-only US agent directory observations: Realtor.com (realtor, source_region austin-tx, limit 1\u2013100) or Keller Williams (kellerwilliams, source_region california, limit 1). One matching platform per request; source order. Runtime enablement is required. Costs 50 credits. Query/cursor unsupported; no verified licenses, contact enrichment, rankings or portfolio coverage.",
         "x-research-status": "proposed",
         "tags": [
           "agents"
@@ -2699,7 +2707,7 @@
       "get": {
         "operationId": "getAgent",
         "summary": "Get agent",
-        "description": "Read this account’s stored agent directory observation for 1 credit, retained 24 hours. No fresh lookup, license verification or recommendation.",
+        "description": "Read this account\u2019s stored agent directory observation for 1 credit, retained 24 hours. No fresh lookup, license verification or recommendation.",
         "x-research-status": "proposed",
         "tags": [
           "agents"
@@ -3020,7 +3028,7 @@
       "get": {
         "operationId": "getAuction",
         "summary": "Get auction",
-        "description": "Retrieve this account’s stored auction observation by its returned auction ID, retained for 24 hours. Costs 1 credit. This does not fetch fresh bids, submit bids, or verify present auction availability.",
+        "description": "Retrieve this account\u2019s stored auction observation by its returned auction ID, retained for 24 hours. Costs 1 credit. This does not fetch fresh bids, submit bids, or verify present auction availability.",
         "x-research-status": "proposed",
         "tags": [
           "auctions"
@@ -3117,7 +3125,7 @@
       "post": {
         "operationId": "searchStays",
         "summary": "Search property-focused accommodation",
-        "description": "Date-specific, read-only Airbnb London, Vrbo Orlando, Agoda Bangkok, Trip.com Tokyo and Booking.com Paris stay observations. One matching platform and documented source_region per request; two adults, no children/infants/pets. Currency GBP for Airbnb; USD for Vrbo, Agoda, Trip.com and Booking.com. Stays of 1–30 nights, limit 1–50. Costs 50 credits. No booking guarantee, reviews, full availability calendar, cursor or additional filters.",
+        "description": "Date-specific, read-only Airbnb London, Vrbo Orlando, Agoda Bangkok, Trip.com Tokyo and Booking.com Paris stay observations. One matching platform and documented source_region per request; two adults, no children/infants/pets. Currency GBP for Airbnb; USD for Vrbo, Agoda, Trip.com and Booking.com. Stays of 1\u201330 nights, limit 1\u201350. Costs 50 credits. No booking guarantee, reviews, full availability calendar, cursor or additional filters.",
         "x-research-status": "proposed",
         "tags": [
           "stays"
@@ -3169,7 +3177,7 @@
       "get": {
         "operationId": "getStay",
         "summary": "Get accommodation details",
-        "description": "Read this account’s stored stay observation for 1 credit, retained 24 hours. No fresh availability lookup or booking quote.",
+        "description": "Read this account\u2019s stored stay observation for 1 credit, retained 24 hours. No fresh availability lookup or booking quote.",
         "x-research-status": "proposed",
         "tags": [
           "stays"
