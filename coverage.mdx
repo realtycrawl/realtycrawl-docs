@@ -305,11 +305,15 @@ The Anjuke Actor requires a minimum request size of 10, but RealtyCrawl applies 
 
 ## Unavailable coverage
 
-The remaining 20 sources and 24 operation definitions are not enabled. Additional rental markets, merged property records, valuations, additional agent markets, agent portfolios and agency APIs, auction bidding, additional auction markets, buildings, additional stay operations and async jobs require separate implementation and verification. Licensed MLS and public-record feeds need their own access agreements.
+The remaining 7 sources and 24 operation definitions are not enabled. Additional rental markets, merged property records, valuations, additional agent markets, agent portfolios and agency APIs, auction bidding, additional auction markets, buildings, additional stay operations and async jobs require separate implementation and verification. Licensed MLS and public-record feeds need their own access agreements.
 
 Source failures are candidate-specific. Earlier failed actors do not override the accepted adapters listed above. The current capability response determines availability; research entries and historical samples alone do not enable a platform.
 
 Remaining sources: Facebook Marketplace Housing, CoStar, Ten-X, Lianjia, Beike / KE, Rumah.com legacy, Makaan. Preparation, source access, pricing and hosted acceptance limitations are tracked in the implementation backlog.
+
+Marketplace remains unavailable after two distinct hosted failures. The category-only input and the changed apartment keyword plus rental-category input each returned Furniture/dining chairs in Preview. Matching echoed query fields do not establish a real estate result; category, explicit property details and returned geography must independently agree. Both failures charged zero application credits. A successful discovery sample does not establish reliable hosted coverage.
+
+Beike replacement research found [Just One API’s listing endpoint](https://docs.justoneapi.com/zh/api/beike/resale-housing-list-v1) and [details endpoint](https://docs.justoneapi.com/zh/api/beike/resale-housing-details-v1), but both official pages explicitly mark them deprecated and warn of future removal. No current replacement or credential was established. This does not provide Lianjia access.
 
 ## Specialist sales and developments
 
