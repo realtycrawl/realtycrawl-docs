@@ -2,7 +2,17 @@
 title: "Coverage and evidence"
 ---
 
-The inventory covers 200 researched platforms and 43 defined API operations. This release includes 193 distinct source platforms (137 sale, 36 rental, 4 commercial lease, 5 auction-source, 5 stay, 4 development and 2 additional agent-only platforms) and 31 enabled operation IDs, including three metadata operations. Check live capabilities for current enablement. Realtor.com, Keller Williams and eXp France support the dedicated agent operations below.
+The inventory covers 201 researched platforms and 43 defined API operations. This release includes 194 distinct source platforms (the original 193 accepted portal/professional sources plus the supplemental official FHFA dataset) and 33 enabled operation IDs, including three metadata operations. Check live capabilities for current enablement. Realtor.com, Keller Williams and eXp France support the dedicated agent operations below.
+
+## Official FHFA market data
+
+FHFA is a supplemental government aggregate-data source added to the original 200-platform catalog; the original portal coverage remains 193/200. It does not replace any blocked portal or add listing/property-record access. RealtyCrawl independently wraps the official public dataset. Source: FHFA House Price Index®.
+
+`POST /v1/markets/search` requires platforms=["fhfa"] and either a state name/two-letter-code query or one US text/source_region location (region_id=state code). The 50 states and DC are supported; limit 1–51, default 20, alphabetical state-name order. Query and location are exclusive. No cursor, national, metro or ZIP selector. Search returns account-owned market IDs retained 24h.
+
+`GET /v1/markets/{market_id}/series` requires this account's unexpired market ID and series=purchase_only_sa or purchase_only_nsa. Returns quarterly Purchase-Only FHFA HPI levels, index_1991_q1_100. Periods are quarter-start ISO dates; optional from/to must be quarter-start dates, inclusive, 1991 onward. Methodology, attribution and FHFA's low-sample warning are retained. Source release time stays unknown; history is revision-prone and release-lagged. These are aggregate modeled indices, not median prices, property valuations, rents, comparables or property transaction records.
+
+Both operations fetch the fixed official public TXT and cost 50 application credits on success; failures and idempotent replay cost 0. No API key or paid upstream provider is required. Fresh retrieval uses one attempt, 12-second timeout, 1MiB response ceiling and strict whole-dataset validation. Account isolation and selector expiry apply before source execution. Existing 7-day idempotency replay remains a previous response snapshot and can outlive 24h selector retention. There is no automatic source retry.
 
 ## Verified sale-search adapters
 
@@ -305,7 +315,7 @@ The Anjuke Actor requires a minimum request size of 10, but RealtyCrawl applies 
 
 ## Unavailable coverage
 
-The remaining 7 sources and 12 operation definitions are not enabled. The missing operation groups are property/public-record reads, valuations/comparables, named market search/series, and stay quotes/availability. Additional markets and contracts within enabled families still require their own implementation and verification. Licensed MLS and public-record feeds need their own access agreements.
+The remaining 7 sources and 10 operation definitions are not enabled. The missing operation groups are property/public-record reads, valuations/comparables and stay quotes/availability. Additional markets and contracts within enabled families still require their own implementation and verification. Licensed MLS and public-record feeds need their own access agreements.
 
 Source failures are candidate-specific. Earlier failed actors do not override the accepted adapters listed above. The current capability response determines availability; research entries and historical samples alone do not enable a platform.
 
@@ -418,7 +428,7 @@ Vrbo calendar availability remains unavailable. Its separate discovery ignored t
 
 `GET /v1/buildings/{building_id}` is enabled for eligible HotPads (hotpads, US) rental building advertisements returned by this account’s `New York, NY` text search. Observed locality is NY/NJ; the search window is not a municipal boundary. Use `extensions.building_id` from a fresh eligible search result in the same account within 24 hours. Arbitrary source URLs/native IDs are unsupported. Successful source detail costs 50 credits and retains explicit floor plans for 24 hours.
 
-`GET /v1/buildings/{building_id}/units` reads those retained floor plans for 1 credit per page, without another provider request. Use limit1–100 (default20) and the returned account/observation-bound cursor with the same page size. Only records with explicit floor-plan evidence are returned as `kind=floor_plan`. Unit-like labels without that evidence are omitted. Source-reported model rents preserve monthly USD amounts or ranges; no service fees or all-in totals are inferred. Model IDs are provider/building-scoped observations, not verified portal-native unit IDs. Availability dates remain unknown.
+`GET /v1/buildings/{building_id}/units` reads those retained floor plans for 1 credit per page, without another provider request. Use limit1–100 (default 20) and the returned account/observation-bound cursor with the same page size. Only records with explicit floor-plan evidence are returned as `kind=floor_plan`. Unit-like labels without that evidence are omitted. Source-reported model rents preserve monthly USD amounts or ranges; no service fees or all-in totals are inferred. Model IDs are provider/building-scoped observations, not verified portal-native unit IDs. Availability dates remain unknown.
 
 The discovery sample mixed 30 model/unit-like records and yielded 15 accepted floor plans. This is not the building’s physical-unit count or a guarantee of a future result count. Building counts, occupancy, complete unit inventory and current availability remain unknown. Street/contact details and raw payloads are omitted. Pagination totals describe only retained floor plans. Missing, expired or unrelated-account building selectors and floor-plan observations return 404 with zero credits. Idempotent replay costs zero. Source execution uses the existing credential, pinned build and exact bundled pricing at a $0.01 included-credit ceiling, with separate execution/retrieval limits and no application retry. Other HotPads listing/locality operations retain their existing scope.
 
@@ -436,7 +446,7 @@ Use exactly one platform, propertyfinder, country AE, a source_region location a
 
 The two portfolio GET routes accept only the original professional ID in the same account, with limit1 and no cursor. Missing, expired and unrelated-account selectors return404. The source listing agent or broker ID must independently match the retained owner, in addition to the provider's portfolio fields. Each request fetches one source-associated residential sale advertisement, not a complete portfolio. An agency listed in Dubai can advertise in another UAE emirate. Returned listing geography comes from its own source emirate label, not the directory location.
 
-Directory searches and fresh portfolio calls cost50 credits each. Retained professional/listing reads cost1; failures and idempotent replay cost0. Source prices are AED asking observations, status remains unknown, area basis remains unknown, and pagination totals are unknown with no continuation. Contacts, staff, nationality, license/rating claims, exact addresses/coordinates, narrative, photos and source update time are omitted. No sold-price comparable, valuation, completeness or current availability claim.
+Directory searches and fresh portfolio calls cost 50 credits each. Retained professional/listing reads cost1; failures and idempotent replay cost 0. Source prices are AED asking observations, status remains unknown, area basis remains unknown, and pagination totals are unknown with no continuation. Contacts, staff, nationality, license/rating claims, exact addresses/coordinates, narrative, photos and source update time are omitted. No sold-price comparable, valuation, completeness or current availability claim.
 
 The existing Apify credential is reused with pinned build and exact bundled event pricing, $0.01/run,35 seconds,1024MB,maxItems1 and independent retrieval limit1. Profile enrichment and automatic portfolio-slice probing are disabled. Immobiliare and Rightmove agency candidates from the earlier batch remain disabled; there is no unchanged failed-source retry.
 

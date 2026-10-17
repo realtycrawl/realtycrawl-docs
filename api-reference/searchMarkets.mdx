@@ -3,6 +3,6 @@ title: "Search markets"
 openapi: "POST /v1/markets/search"
 ---
 
-<Warning>This operation is defined in the API contract but is not currently enabled.</Warning>
+Search official FHFA Purchase-Only state HPI markets. platforms=["fhfa"], query matches state name or two-letter code, or US text/source_region location (region_id=state code); choose exactly query or location. 50 states and DC only. Limit 1–51 (default20), alphabetical state-name order, no cursor. Each successful live dataset request costs 50 credits. Returned market IDs are account-owned selectors retained 24 hours. No portal, national or metropolitan geography is inferred. Requires separate FHFA runtime enablement. Source: FHFA House Price Index®.
 
-<Note>Check [live capabilities](https://realtycrawl.dev/v1/meta/capabilities) before calling this operation. A documented contract does not imply active coverage for every source or country.</Note>
+<Note>Check [live capabilities](https://realtycrawl.dev/v1/meta/capabilities?platform=fhfa) before calling. Source: FHFA House Price Index®. Both operations fetch fresh official data and cost50 credits on success; errors and idempotent replays cost0. Published history can be revised.</Note>
