@@ -3770,7 +3770,7 @@
       "post": {
         "operationId": "createReadJob",
         "summary": "Request asynchronous read collection",
-        "description": "Proposed interface. Enable only for documented and verified source/country capabilities. Apify/Bright Data async collection semantics",
+        "description": "Create a durable one-request job for one Trulia Seattle sale listing or one Vrbo Orlando dated stay. Require max_items=1 and params.limit=1, the exact source selectors and creation plus underlying search scopes. Reserve50 credits at202 acceptance; failed/expired jobs refund that reservation. No automatic source retries. Status/results retained24 hours. No bulk, exhaustive-inventory, verified sale or availability guarantee.",
         "x-research-status": "proposed",
         "tags": [
           "jobs"
@@ -3807,16 +3807,19 @@
             }
           }
         },
-        "x-runtime-status": "unavailable",
-        "x-credit-cost": 1,
-        "x-verified-platforms": []
+        "x-runtime-status": "beta",
+        "x-credit-cost": 50,
+        "x-verified-platforms": [
+          "trulia",
+          "vrbo"
+        ]
       }
     },
     "/v1/jobs/{job_id}": {
       "get": {
         "operationId": "getReadJob",
         "summary": "Get read collection status",
-        "description": "Proposed interface. Enable only for documented and verified source/country capabilities. Proposed job contract",
+        "description": "Read this account\u2019s durable job status for1 credit, without a source request. Retention24 hours. Idempotent replay is free and returns the original snapshot. Pending/failed result requests return409 with zero charge; unrelated/expired jobs return404.",
         "x-research-status": "proposed",
         "tags": [
           "jobs"
@@ -3854,16 +3857,19 @@
             }
           }
         ],
-        "x-runtime-status": "unavailable",
+        "x-runtime-status": "beta",
         "x-credit-cost": 1,
-        "x-verified-platforms": []
+        "x-verified-platforms": [
+          "trulia",
+          "vrbo"
+        ]
       }
     },
     "/v1/jobs/{job_id}/results": {
       "get": {
         "operationId": "getReadJobResults",
         "summary": "Read completed collection results",
-        "description": "Proposed interface. Enable only for documented and verified source/country capabilities. Proposed job contract",
+        "description": "Read this account\u2019s durable job successful one-item retained result for1 credit, without a source request. Retention24 hours. Idempotent replay is free and returns the original snapshot. Pending/failed result requests return409 with zero charge; unrelated/expired jobs return404.",
         "x-research-status": "proposed",
         "tags": [
           "jobs"
@@ -3906,8 +3912,8 @@
             "schema": {
               "type": "integer",
               "minimum": 1,
-              "maximum": 100,
-              "default": 20
+              "maximum": 1,
+              "default": 1
             }
           },
           {
@@ -3918,9 +3924,12 @@
             }
           }
         ],
-        "x-runtime-status": "unavailable",
+        "x-runtime-status": "beta",
         "x-credit-cost": 1,
-        "x-verified-platforms": []
+        "x-verified-platforms": [
+          "trulia",
+          "vrbo"
+        ]
       }
     }
   },
@@ -6952,10 +6961,11 @@
               "max_items": {
                 "type": "integer",
                 "minimum": 1,
-                "maximum": 10000
+                "maximum": 1
               },
               "client_request_id": {
-                "type": "string"
+                "type": "string",
+                "maxLength": 128
               }
             },
             "required": [
@@ -6977,10 +6987,11 @@
               "max_items": {
                 "type": "integer",
                 "minimum": 1,
-                "maximum": 10000
+                "maximum": 1
               },
               "client_request_id": {
-                "type": "string"
+                "type": "string",
+                "maxLength": 128
               }
             },
             "required": [
@@ -6990,7 +7001,8 @@
             ],
             "additionalProperties": false
           }
-        ]
+        ],
+        "description": "One durable source request: Trulia Seattle sale listing or Vrbo Orlando dated stay. max_items and params.limit must both equal1. The creating key must also grant the corresponding underlying search. No continuation or automatic retry."
       },
       "Job": {
         "type": "object",

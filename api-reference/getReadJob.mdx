@@ -3,6 +3,10 @@ title: "Get read collection status"
 openapi: "GET /v1/jobs/{job_id}"
 ---
 
-<Warning>This operation is defined in the API contract but is not currently enabled.</Warning>
+Read this account’s retained job status for **1 credit**, without another source request. Jobs transition from `queued` to `running`, then `succeeded` or `failed`. `result_count` counts retained observations only. A failed job exposes a typed source outcome and refunds its source reservation; failed work is never automatically retried.
 
-<Note>Check [live capabilities](https://realtycrawl.dev/v1/meta/capabilities) before calling this operation. A documented contract does not imply active coverage for every source or country.</Note>
+Use the job ID returned by [createReadJob](/api-reference/createReadJob). Poll sparingly and use a new idempotency key for each fresh status read: replaying a status key is free but returns its original snapshot. A repeated creation also returns its original queued snapshot.
+
+Unrelated-account, different-environment or expired jobs return 404 with zero charge. Job retention is 24 hours from creation. An API key authorized for status reads can read its account’s jobs; dispatch still requires the original creating key to remain active with its underlying search scope. No arbitrary provider run ID lookup.
+
+<Note>Fresh job status/result reads expire after 24 hours. The existing API idempotency-response cache lasts seven days and can replay an earlier response after that window. A replay preserves its original snapshot; it does not refresh status or execute a source again.</Note>

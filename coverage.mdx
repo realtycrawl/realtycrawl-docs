@@ -2,7 +2,7 @@
 title: "Coverage and evidence"
 ---
 
-The inventory covers 200 researched platforms and 43 defined API operations. This release includes 193 distinct source platforms (137 sale, 36 rental, 4 commercial lease, 5 auction-source, 5 stay, 4 development and 2 additional agent-only platforms) and 28 enabled operation IDs, including three metadata operations. Check live capabilities for current enablement. Realtor.com, Keller Williams and eXp France support the dedicated agent operations below.
+The inventory covers 200 researched platforms and 43 defined API operations. This release includes 193 distinct source platforms (137 sale, 36 rental, 4 commercial lease, 5 auction-source, 5 stay, 4 development and 2 additional agent-only platforms) and 31 enabled operation IDs, including three metadata operations. Check live capabilities for current enablement. Realtor.com, Keller Williams and eXp France support the dedicated agent operations below.
 
 ## Verified sale-search adapters
 
@@ -305,7 +305,7 @@ The Anjuke Actor requires a minimum request size of 10, but RealtyCrawl applies 
 
 ## Unavailable coverage
 
-The remaining 7 sources and 15 operation definitions are not enabled. Additional rental markets, merged property records, valuations, additional agent markets, agent portfolios and agency APIs, auction bidding, additional auction markets, additional building sources and unit contracts, additional stay operations and async jobs require separate implementation and verification. Licensed MLS and public-record feeds need their own access agreements.
+The remaining 7 sources and 12 operation definitions are not enabled. The missing operation groups are property/public-record reads, valuations/comparables, named market search/series, and stay quotes/availability. Additional markets and contracts within enabled families still require their own implementation and verification. Licensed MLS and public-record feeds need their own access agreements.
 
 Source failures are candidate-specific. Earlier failed actors do not override the accepted adapters listed above. The current capability response determines availability; research entries and historical samples alone do not enable a platform.
 
@@ -439,3 +439,14 @@ The two portfolio GET routes accept only the original professional ID in the sam
 Directory searches and fresh portfolio calls cost50 credits each. Retained professional/listing reads cost1; failures and idempotent replay cost0. Source prices are AED asking observations, status remains unknown, area basis remains unknown, and pagination totals are unknown with no continuation. Contacts, staff, nationality, license/rating claims, exact addresses/coordinates, narrative, photos and source update time are omitted. No sold-price comparable, valuation, completeness or current availability claim.
 
 The existing Apify credential is reused with pinned build and exact bundled event pricing, $0.01/run,35 seconds,1024MB,maxItems1 and independent retrieval limit1. Profile enrichment and automatic portfolio-slice probing are disabled. Immobiliare and Rightmove agency candidates from the earlier batch remain disabled; there is no unchanged failed-source retry.
+
+
+## Durable bounded read jobs
+
+`createReadJob`, `getReadJob` and `getReadJobResults` support one Trulia Seattle sale observation or one Vrbo Orlando dated stay per job. Set `max_items=1` and `params.limit=1`, use exactly one matching platform and its documented source selectors. The creating key must allow both creation and the underlying search operation. Other platform jobs, bulk collection and continuation are unsupported.
+
+HTTP 202 acceptance charges one 50-credit source reservation, refunded if the job fails or expires. Successful status/result reads cost 1 credit each; idempotent replay is free and returns the original snapshot. A repeated creation does not refresh queued status. Source dispatch is claimed once with no automatic retry. Queued jobs expire after 20 minutes; stalled running work fails after 2 minutes and is reconciled on maintenance. At most three unfinished jobs per account; status/results last 24 hours from creation. Unrelated-account and expired job IDs return 404 without charge. Pending/failed result reads return 409 without charge.
+
+The durable result preserves source semantics: Trulia asking consideration, Vrbo dated price observations and unknown availability. One retained result is not full inventory, a verified closed transaction, a complete fee-inclusive quote or an availability calendar. The existing provider credential is reused with pinned builds, current bundled-price checks and the existing $0.01 per-run ceiling. The three job operations add no new distinct platform.
+
+Fresh job reads expire after 24 hours; the existing seven-day idempotency-response cache can still replay an earlier account/key-owned snapshot. A replay does not refresh progress or issue another source request.

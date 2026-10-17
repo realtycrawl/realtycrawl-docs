@@ -3,6 +3,27 @@ title: "Request asynchronous read collection"
 openapi: "POST /v1/jobs"
 ---
 
-<Warning>This operation is defined in the API contract but is not currently enabled.</Warning>
+Submit one durable source request for one **Trulia Seattle sale listing** or one **Vrbo Orlando dated stay**. Other platforms and bulk collection are unsupported. Check [live capabilities](https://realtycrawl.dev/v1/meta/capabilities) before submission.
 
-<Note>Check [live capabilities](https://realtycrawl.dev/v1/meta/capabilities) before calling this operation. A documented contract does not imply active coverage for every source or country.</Note>
+Set `max_items` and `params.limit` to `1`. Supply exactly one matching platform and the existing source selectors. Trulia uses `transaction: "sale"` and `location: {kind: "source_region", platform: "trulia", country: "US", region_id: "seattle-wa"}`. Vrbo uses region `orlando-fl`, future ISO check-in/out dates for 1–30 nights, two adults with no children/infants/pets, and currency USD. No partial results, cursor or extra source filters.
+
+```json
+{
+  "operation": "listings.search",
+  "params": {
+    "platforms": ["trulia"],
+    "location": {"kind": "source_region", "platform": "trulia", "country": "US", "region_id": "seattle-wa"},
+    "transaction": "sale",
+    "limit": 1
+  },
+  "max_items": 1
+}
+```
+
+The creating live key must allow `createReadJob` and the corresponding `searchListings` or `searchStays` operation. Use an `Idempotency-Key` and `X-Max-Credits: 50`. HTTP 202 returns a queued job and its status URL in the `Location` header. The50-credit source reservation is charged once and refunded if the job fails or expires; status/results cost 1 credit each. Replays are free and return the original snapshot, so a repeated creation does not refresh its status.
+
+Jobs are stored durably and dispatched once. A post-response worker starts promptly; the maintenance worker can dispatch queued work on its existing 10-minute schedule. There is no source retry after an unknown or failed dispatch. Queued work expires after 20 minutes; stalled work fails after 2 minutes and is reconciled on maintenance. At most three unfinished jobs per account. Status/results are private to the account and retained 24 hours from creation.
+
+<Note>One source observation is not bulk inventory, a verified closed transaction, a booking quote or current availability. Trulia retains asking-price semantics; Vrbo preserves dated source price observations with unknown availability and fee completeness.</Note>
+
+<Note>Fresh job status/result reads expire after 24 hours. The existing API idempotency-response cache lasts seven days and can replay an earlier response after that window. A replay preserves its original snapshot; it does not refresh status or execute a source again.</Note>

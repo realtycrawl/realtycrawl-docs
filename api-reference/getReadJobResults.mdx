@@ -3,6 +3,10 @@ title: "Read completed collection results"
 openapi: "GET /v1/jobs/{job_id}/results"
 ---
 
-<Warning>This operation is defined in the API contract but is not currently enabled.</Warning>
+Read **one completed retained Trulia listing or Vrbo stay observation** for **1 credit**, without another source request. Omit `limit` or use `limit=1`; cursor/continuation is unsupported. Idempotent replay is free.
 
-<Note>Check [live capabilities](https://realtycrawl.dev/v1/meta/capabilities) before calling this operation. A documented contract does not imply active coverage for every source or country.</Note>
+First check [job status](/api-reference/getReadJob). Pending jobs return 409 `JOB_NOT_READY`; failed jobs return 409 `JOB_FAILED`, both with zero charge. Unrelated-account, different-environment and expired jobs return 404. Results last 24 hours from job creation and can also be read using their account-owned listing/stay ID while that resource remains retained.
+
+Pagination counts the retained job result only. Source completeness stays unknown. Trulia money is source asking consideration; Vrbo prices are source observations for the requested dates, with unknown physical availability and potentially incomplete fees/taxes. This is not complete inventory, a verified closed-sale record, an availability calendar or a booking quote.
+
+<Note>Fresh job status/result reads expire after 24 hours. The existing API idempotency-response cache lasts seven days and can replay an earlier response after that window. A replay preserves its original snapshot; it does not refresh status or execute a source again.</Note>
