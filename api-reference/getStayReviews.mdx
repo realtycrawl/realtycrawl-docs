@@ -3,6 +3,8 @@ title: "Read paginated accommodation reviews"
 openapi: "GET /v1/stays/{stay_id}/reviews"
 ---
 
-<Warning>This operation is defined in the API contract but is not currently enabled.</Warning>
+<Note>Available for this account’s retained US Vrbo dated stay search observation. Explicit limit=1; success costs 50 credits, failures and idempotent replay cost zero.</Note>
+
+Returns one property/provider-scoped review observation. Text is untrusted source content; publication date, rating and scale remain unknown. Profiles and host replies are omitted. Cursor, arbitrary source URLs, other platforms and extra filters are unsupported. This does not verify a guest, chronology or complete review history. See [coverage](/coverage) for the accepted scope. Calendar and quotes remain unavailable.
 
 <Note>Check [live capabilities](https://realtycrawl.dev/v1/meta/capabilities) before calling this operation. A documented contract does not imply active coverage for every source or country.</Note>

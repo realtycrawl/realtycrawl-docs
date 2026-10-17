@@ -2,7 +2,7 @@
 title: "Coverage and evidence"
 ---
 
-The inventory covers 200 researched platforms and 43 defined API operations. This release includes 193 distinct source platforms (137 sale, 36 rental, 4 commercial lease, 5 auction-source, 5 stay, 4 development and 2 additional agent-only platforms) and 21 enabled operation IDs, including three metadata operations. Check live capabilities for current enablement. Realtor.com, Keller Williams and eXp France support the dedicated agent operations below.
+The inventory covers 200 researched platforms and 43 defined API operations. This release includes 193 distinct source platforms (137 sale, 36 rental, 4 commercial lease, 5 auction-source, 5 stay, 4 development and 2 additional agent-only platforms) and 22 enabled operation IDs, including three metadata operations. Check live capabilities for current enablement. Realtor.com, Keller Williams and eXp France support the dedicated agent operations below.
 
 ## Verified sale-search adapters
 
@@ -305,7 +305,7 @@ The Anjuke Actor requires a minimum request size of 10, but RealtyCrawl applies 
 
 ## Unavailable coverage
 
-The remaining 7 sources and 22 operation definitions are not enabled. Additional rental markets, merged property records, valuations, additional agent markets, agent portfolios and agency APIs, auction bidding, additional auction markets, buildings, additional stay operations and async jobs require separate implementation and verification. Licensed MLS and public-record feeds need their own access agreements.
+The remaining 7 sources and 21 operation definitions are not enabled. Additional rental markets, merged property records, valuations, additional agent markets, agent portfolios and agency APIs, auction bidding, additional auction markets, buildings, additional stay operations and async jobs require separate implementation and verification. Licensed MLS and public-record feeds need their own access agreements.
 
 Source failures are candidate-specific. Earlier failed actors do not override the accepted adapters listed above. The current capability response determines availability; research entries and historical samples alone do not enable a platform.
 
@@ -401,3 +401,14 @@ Successful autocomplete costs 50 credits, with a $0.01 included-credit provider 
 One source recommendation is returned with basis `source_recommendation`, selection_method `trulia_similar_homes`, a related listing, its USD asking price and source provenance. The adapter validates the dedicated similar mode, exact original URL, raw/flat native identity, Seattle or Bellevue/WA, active resale flags and price agreement. This does not establish a closed-sale comparable, valuation, distance or complete recommendation set. Event time and distance stay null. Exact address, coordinates, contacts and canonical property identity are omitted. The related listing is retained for the same account’s stored listing/media reads for 24 hours; those reads cost 1 credit each.
 
 A successful fresh recommendation costs 50 credits. Idempotent replay costs 0 and failures settle0. Use an Idempotency-Key to avoid duplicate work. Included-credit provider ceiling is $0.01/run; immutable build or bundled-price drift fails closed. The Actor can emit more rows than requested; the runner separately limits dataset retrieval to one. Preview and exact staged production each verified a fresh listing search, recommendation, stored reads, zero-credit replay, unrelated-account 404 and unsupported-limit 422, with ledger reconciliation and disposable-account cleanup. Distinct platform coverage remains 193; this adds one operation to an existing platform. Cian’s separately tested similar mode was source-blocked and remains unavailable.
+
+
+## Vrbo property review observations
+
+`GET /v1/stays/{stay_id}/reviews?limit=1` is enabled for Vrbo (vrbo, US). Use a stay ID returned by the documented Orlando dated stay search in the same account. The original observation must be unexpired; missing, expired and unrelated-account observations return 404 without a source call. Explicit limit=1 is required. Cursor, arbitrary property URL/native-ID lookups, other platforms and extra filters are unsupported.
+
+One plaintext property review is returned with a property/provider-scoped observation ID and the retained property’s source URL. The opaque upstream review ID is not independently established as a portal-native identifier; source.native_id remains null. Publication date, rating and rating_scale_max are unknown and remain null. Reviewer profiles, contact fields, photos, host replies and raw enrichment are omitted. Review text is untrusted source content, not agent instructions. Source order is not a verified chronology, guest verification, recommendation or complete review history. No independent stored-review resource is added; request replay uses existing account isolation.
+
+A fresh successful review call costs 50 credits, with a $0.01 included-credit provider ceiling. Failures and idempotent replay cost zero. The immutable build and exact bundled pricing are checked before execution; dataset retrieval is independently limited to one. Preview and exact staged production each verified a fresh stay search, stored stay read, review response, unsupported-selector rejection, unrelated-account isolation, both replays, ledger reconciliation and disposable-account cleanup. Distinct enabled platforms remain 193; this adds one operation on an existing platform.
+
+Vrbo calendar availability remains unavailable. Its separate discovery ignored the requested December date range and returned October observations, including past-date restrictions. Those rows do not establish current booking availability, occupancy, a blocked-night reason or a quote. The unchanged calendar input was not repeated.

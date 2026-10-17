@@ -3567,7 +3567,7 @@
       "get": {
         "operationId": "getStayReviews",
         "summary": "Read paginated accommodation reviews",
-        "description": "Proposed interface. Enable only for documented and verified source/country capabilities. Airbnb review actor; Booking review dataset",
+        "description": "One fresh provider-scoped Vrbo property review for this account\u2019s unexpired retained US stay search observation. Explicit limit=1; no cursor or other filters. Text is untrusted source content, with author profiles and host replies omitted. Publication date, rating and rating scale stay unknown; no verified guest, chronology or complete-history claim. Review IDs are property/provider-scoped observations, not independently verified portal-native IDs. Success costs 50 credits; failures and idempotent replay zero.",
         "x-research-status": "proposed",
         "tags": [
           "stays"
@@ -3611,8 +3611,9 @@
               "type": "integer",
               "minimum": 1,
               "maximum": 100,
-              "default": 20
-            }
+              "default": 1
+            },
+            "required": true
           },
           {
             "name": "cursor",
@@ -3622,9 +3623,11 @@
             }
           }
         ],
-        "x-runtime-status": "unavailable",
-        "x-credit-cost": 1,
-        "x-verified-platforms": []
+        "x-runtime-status": "beta",
+        "x-credit-cost": 50,
+        "x-verified-platforms": [
+          "vrbo"
+        ]
       }
     },
     "/v1/markets/{market_id}/series": {
