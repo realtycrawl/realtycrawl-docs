@@ -3,6 +3,10 @@ title: "Get a building"
 openapi: "GET /v1/buildings/{building_id}"
 ---
 
-<Warning>This operation is defined in the API contract but is not currently enabled.</Warning>
+<Note>Available for HotPads rental building observations from this account’s unexpired New York-area search (NY/NJ). A successful fresh detail costs 50 credits; failures and idempotent replay cost zero.</Note>
 
-<Note>Check [live capabilities](https://realtycrawl.dev/v1/meta/capabilities) before calling this operation. A documented contract does not imply active coverage for every source or country.</Note>
+First search HotPads rentals using location `New York, NY`. Eligible building advertisements include `extensions.building_id`. Pass that ID here in the same account within 24 hours. Arbitrary URLs, native IDs and observations owned by another account are unsupported.
+
+Returns building name and locality with source provenance. Explicit floor plans from this response are retained for 24 hours and can be read through [building floor plans](/api-reference/getBuildingUnits). Physical-unit counts, occupancy, current availability and complete inventory remain unknown.
+
+<Note>Check [live capabilities](https://realtycrawl.dev/v1/meta/capabilities) before calling this operation. Coverage is source and country specific.</Note>

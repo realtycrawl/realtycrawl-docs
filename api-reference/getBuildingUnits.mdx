@@ -3,6 +3,12 @@ title: "Get advertised units and floor plans"
 openapi: "GET /v1/buildings/{building_id}/units"
 ---
 
-<Warning>This operation is defined in the API contract but is not currently enabled.</Warning>
+<Note>Available after a successful HotPads building detail request in the same account. Each stored page costs 1 credit; failures and idempotent replay cost zero. This route makes no fresh source call.</Note>
 
-<Note>Check [live capabilities](https://realtycrawl.dev/v1/meta/capabilities) before calling this operation. A documented contract does not imply active coverage for every source or country.</Note>
+Use the `building_id` from the original rental search after calling [building details](/api-reference/getBuilding). Returns only explicit floor plans with `kind=floor_plan`, model labels, source-reported monthly USD rent or ranges, bedrooms, bathrooms and area. Availability dates and portal-native model identities remain unknown.
+
+Unit-like records without explicit floor-plan evidence are omitted. These are advertised models, not verified physical units. Pagination totals count retained floor plans only. No occupancy, complete unit inventory, current availability or all-in booking quote is implied. Observations expire after 24 hours; missing, expired or unrelated-account observations return 404.
+
+Use `limit` from 1–100 (default 20) and the returned opaque cursor with the same page size. Cursors are tied to the account and retained observation. See [coverage](/coverage) for scope.
+
+<Note>Check [live capabilities](https://realtycrawl.dev/v1/meta/capabilities) before calling this operation. Coverage is source and country specific.</Note>

@@ -2640,8 +2640,8 @@
       "get": {
         "operationId": "getBuilding",
         "summary": "Get a building",
-        "description": "Proposed interface. Enable only for documented and verified source/country capabilities. StreetEasy / Apartments / Zillow detail subject to contract",
-        "x-research-status": "proposed",
+        "description": "Fetch one HotPads building detail using building_id from this account\u2019s unexpired retained New York-area rental building search observation (NY/NJ). Costs 50 credits. Saves explicit floor plans for 24 hours. No arbitrary URL/native-ID lookup, occupancy, physical-unit count or complete inventory guarantee.",
+        "x-research-status": "source_contract_accepted",
         "tags": [
           "buildings"
         ],
@@ -2678,17 +2678,19 @@
             }
           }
         ],
-        "x-runtime-status": "unavailable",
-        "x-credit-cost": 1,
-        "x-verified-platforms": []
+        "x-runtime-status": "beta",
+        "x-credit-cost": 50,
+        "x-verified-platforms": [
+          "hotpads"
+        ]
       }
     },
     "/v1/buildings/{building_id}/units": {
       "get": {
         "operationId": "getBuildingUnits",
         "summary": "Get advertised units and floor plans",
-        "description": "Proposed interface. Enable only for documented and verified source/country capabilities. Unit expansion; completeness explicitly scoped",
-        "x-research-status": "proposed",
+        "description": "Read this account\u2019s retained floor plans from a successful HotPads getBuilding request, for 24 hours. Costs 1 credit per stored page. Only records with explicit floor-plan evidence are returned with kind=floor_plan; unit-like records are omitted. Pagination totals count retained floor plans only. No fresh source call, physical-unit inventory or availability guarantee.",
+        "x-research-status": "source_contract_accepted",
         "tags": [
           "buildings"
         ],
@@ -2742,9 +2744,11 @@
             }
           }
         ],
-        "x-runtime-status": "unavailable",
+        "x-runtime-status": "beta",
         "x-credit-cost": 1,
-        "x-verified-platforms": []
+        "x-verified-platforms": [
+          "hotpads"
+        ]
       }
     },
     "/v1/developments/search": {
