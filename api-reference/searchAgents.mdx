@@ -3,4 +3,23 @@ title: "Search agents"
 openapi: "POST /v1/agents/search"
 ---
 
-<Note>Check [live capabilities](https://realtycrawl.dev/v1/meta/capabilities) before calling this operation. A documented contract does not imply active coverage for every source or country.</Note>
+<Note>Property Finder UAE supports the dubai-marina-directory source window, one platform propertyfinder, country AE and explicit limit=1. Query, cursor and extra filters are unsupported. Success costs50 credits; failures and replay cost0.</Note>
+
+Existing Realtor, Keller Williams and eXp source windows remain available as documented in [coverage](/coverage).
+
+```json
+{
+  "platforms": [
+    "propertyfinder"
+  ],
+  "location": {
+    "kind": "source_region",
+    "platform": "propertyfinder",
+    "country": "AE",
+    "region_id": "dubai-marina-directory"
+  },
+  "limit": 1
+}
+```
+
+The source-classified directory card is retained privately in this account for24 hours. Contacts, demographics, licenses, ratings, staff and exact location are omitted. Source update time and completeness remain unknown. Use the returned ID for the retained read and separately supported residential sale portfolio route. See [coverage](/coverage) and [live capabilities](https://realtycrawl.dev/v1/meta/capabilities).

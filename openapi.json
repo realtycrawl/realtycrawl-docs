@@ -2858,8 +2858,8 @@
       "post": {
         "operationId": "searchAgents",
         "summary": "Search agents",
-        "description": "Read-only US agent directory observations: Realtor.com (realtor, source_region austin-tx, limit 1\u2013100) or Keller Williams (kellerwilliams, source_region california, limit 1). One matching platform per request; source order. Runtime enablement is required. Costs 50 credits. Query/cursor unsupported; no verified licenses, contact enrichment, rankings or portfolio coverage.",
-        "x-research-status": "proposed",
+        "description": "Read-only US agent directory observations: Realtor.com (realtor, source_region austin-tx, limit 1\u2013100) or Keller Williams (kellerwilliams, source_region california, limit 1). One matching platform per request; source order. Runtime enablement is required. Costs 50 credits. Query/cursor unsupported; no verified licenses, contact enrichment, rankings or portfolio coverage. Property Finder AE additionally supports source_region dubai-marina-directory, explicit limit1 and no query/cursor/filters; source-scoped directory card, no contacts or credentials verification.",
+        "x-research-status": "source_contract_accepted",
         "tags": [
           "agents"
         ],
@@ -2898,6 +2898,7 @@
         "x-runtime-status": "beta",
         "x-credit-cost": 50,
         "x-verified-platforms": [
+          "propertyfinder",
           "exprealty",
           "kellerwilliams",
           "realtor"
@@ -2908,8 +2909,8 @@
       "get": {
         "operationId": "getAgent",
         "summary": "Get agent",
-        "description": "Read this account\u2019s stored agent directory observation for 1 credit, retained 24 hours. No fresh lookup, license verification or recommendation.",
-        "x-research-status": "proposed",
+        "description": "Read this account\u2019s stored agent directory observation for 1 credit, retained 24 hours. No fresh lookup, license verification or recommendation. Property Finder UAE retained directory observations are included; this read does not refresh the source.",
+        "x-research-status": "source_contract_accepted",
         "tags": [
           "agents"
         ],
@@ -2949,6 +2950,7 @@
         "x-runtime-status": "beta",
         "x-credit-cost": 1,
         "x-verified-platforms": [
+          "propertyfinder",
           "exprealty",
           "kellerwilliams",
           "realtor"
@@ -2959,8 +2961,8 @@
       "get": {
         "operationId": "getAgentListings",
         "summary": "Get professional listing portfolio",
-        "description": "Proposed interface. Enable only for documented and verified source/country capabilities. Source portfolio pagination contract",
-        "x-research-status": "proposed",
+        "description": "One fresh Property Finder UAE residential sale portfolio advertisement for this account\u2019s unexpired professional observation. Limit 1, no cursor or extra selectors. Listing agent/broker identity must match the retained owner. Source asking AED price and coarse emirate only; no complete portfolio, current availability, sold-price comparable or source update-time claim. Contacts, precise location and photos omitted. Successful source call 50 credits; failures/replay zero.",
+        "x-research-status": "source_contract_accepted",
         "tags": [
           "agents"
         ],
@@ -3002,8 +3004,8 @@
             "schema": {
               "type": "integer",
               "minimum": 1,
-              "maximum": 100,
-              "default": 20
+              "maximum": 1,
+              "default": 1
             }
           },
           {
@@ -3014,17 +3016,19 @@
             }
           }
         ],
-        "x-runtime-status": "unavailable",
-        "x-credit-cost": 1,
-        "x-verified-platforms": []
+        "x-runtime-status": "beta",
+        "x-credit-cost": 50,
+        "x-verified-platforms": [
+          "propertyfinder"
+        ]
       }
     },
     "/v1/agencies/search": {
       "post": {
         "operationId": "searchAgencies",
         "summary": "Search agencies",
-        "description": "Proposed interface. Enable only for documented and verified source/country capabilities. Dedicated source search contract; no blanket platform support",
-        "x-research-status": "proposed",
+        "description": "One source-classified Property Finder Dubai agency directory card, using propertyfinder/AE/source_region dubai-directory and explicit limit1. No query, cursor or other filters. Contacts, staff, license/reputation and exact locations omitted. Retained in the same account24h. Success50 credits; failures/replay zero.",
+        "x-research-status": "source_contract_accepted",
         "tags": [
           "agencies"
         ],
@@ -3055,22 +3059,24 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/EntitySearchRequest"
+                "$ref": "#/components/schemas/AgencySearchRequest"
               }
             }
           }
         },
-        "x-runtime-status": "unavailable",
-        "x-credit-cost": 1,
-        "x-verified-platforms": []
+        "x-runtime-status": "beta",
+        "x-credit-cost": 50,
+        "x-verified-platforms": [
+          "propertyfinder"
+        ]
       }
     },
     "/v1/agencies/{agency_id}": {
       "get": {
         "operationId": "getAgency",
         "summary": "Get agency",
-        "description": "Proposed interface. Enable only for documented and verified source/country capabilities. Dedicated source detail contract",
-        "x-research-status": "proposed",
+        "description": "Read this account\u2019s unexpired Property Finder Dubai agency directory observation for1 credit, without a fresh provider call. Missing, expired and unrelated-account IDs return404. No arbitrary source URL/native ID lookup or licensing/reputation verification.",
+        "x-research-status": "source_contract_accepted",
         "tags": [
           "agencies"
         ],
@@ -3107,17 +3113,19 @@
             }
           }
         ],
-        "x-runtime-status": "unavailable",
+        "x-runtime-status": "beta",
         "x-credit-cost": 1,
-        "x-verified-platforms": []
+        "x-verified-platforms": [
+          "propertyfinder"
+        ]
       }
     },
     "/v1/agencies/{agency_id}/listings": {
       "get": {
         "operationId": "getAgencyListings",
         "summary": "Get professional listing portfolio",
-        "description": "Proposed interface. Enable only for documented and verified source/country capabilities. Source portfolio pagination contract",
-        "x-research-status": "proposed",
+        "description": "One fresh Property Finder UAE residential sale portfolio advertisement for this account\u2019s unexpired professional observation. Limit 1, no cursor or extra selectors. Listing agent/broker identity must match the retained owner. Source asking AED price and coarse emirate only; no complete portfolio, current availability, sold-price comparable or source update-time claim. Contacts, precise location and photos omitted. Successful source call 50 credits; failures/replay zero.",
+        "x-research-status": "source_contract_accepted",
         "tags": [
           "agencies"
         ],
@@ -3159,8 +3167,8 @@
             "schema": {
               "type": "integer",
               "minimum": 1,
-              "maximum": 100,
-              "default": 20
+              "maximum": 1,
+              "default": 1
             }
           },
           {
@@ -3171,9 +3179,11 @@
             }
           }
         ],
-        "x-runtime-status": "unavailable",
-        "x-credit-cost": 1,
-        "x-verified-platforms": []
+        "x-runtime-status": "beta",
+        "x-credit-cost": 50,
+        "x-verified-platforms": [
+          "propertyfinder"
+        ]
       }
     },
     "/v1/auctions/search": {
@@ -7976,6 +7986,40 @@
         "required": [
           "platforms",
           "query",
+          "limit"
+        ],
+        "additionalProperties": false
+      },
+      "AgencySearchRequest": {
+        "type": "object",
+        "properties": {
+          "platforms": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "minItems": 1,
+            "maxItems": 1
+          },
+          "query": {
+            "type": "string"
+          },
+          "location": {
+            "$ref": "#/components/schemas/LocationSelector"
+          },
+          "limit": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 1,
+            "default": 1
+          },
+          "cursor": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "platforms",
+          "location",
           "limit"
         ],
         "additionalProperties": false

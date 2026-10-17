@@ -2,7 +2,7 @@
 title: "Coverage and evidence"
 ---
 
-The inventory covers 200 researched platforms and 43 defined API operations. This release includes 193 distinct source platforms (137 sale, 36 rental, 4 commercial lease, 5 auction-source, 5 stay, 4 development and 2 additional agent-only platforms) and 24 enabled operation IDs, including three metadata operations. Check live capabilities for current enablement. Realtor.com, Keller Williams and eXp France support the dedicated agent operations below.
+The inventory covers 200 researched platforms and 43 defined API operations. This release includes 193 distinct source platforms (137 sale, 36 rental, 4 commercial lease, 5 auction-source, 5 stay, 4 development and 2 additional agent-only platforms) and 28 enabled operation IDs, including three metadata operations. Check live capabilities for current enablement. Realtor.com, Keller Williams and eXp France support the dedicated agent operations below.
 
 ## Verified sale-search adapters
 
@@ -305,7 +305,7 @@ The Anjuke Actor requires a minimum request size of 10, but RealtyCrawl applies 
 
 ## Unavailable coverage
 
-The remaining 7 sources and 19 operation definitions are not enabled. Additional rental markets, merged property records, valuations, additional agent markets, agent portfolios and agency APIs, auction bidding, additional auction markets, additional building sources and unit contracts, additional stay operations and async jobs require separate implementation and verification. Licensed MLS and public-record feeds need their own access agreements.
+The remaining 7 sources and 15 operation definitions are not enabled. Additional rental markets, merged property records, valuations, additional agent markets, agent portfolios and agency APIs, auction bidding, additional auction markets, additional building sources and unit contracts, additional stay operations and async jobs require separate implementation and verification. Licensed MLS and public-record feeds need their own access agreements.
 
 Source failures are candidate-specific. Earlier failed actors do not override the accepted adapters listed above. The current capability response determines availability; research entries and historical samples alone do not enable a platform.
 
@@ -423,6 +423,19 @@ Vrbo calendar availability remains unavailable. Its separate discovery ignored t
 The discovery sample mixed 30 model/unit-like records and yielded 15 accepted floor plans. This is not the building’s physical-unit count or a guarantee of a future result count. Building counts, occupancy, complete unit inventory and current availability remain unknown. Street/contact details and raw payloads are omitted. Pagination totals describe only retained floor plans. Missing, expired or unrelated-account building selectors and floor-plan observations return 404 with zero credits. Idempotent replay costs zero. Source execution uses the existing credential, pinned build and exact bundled pricing at a $0.01 included-credit ceiling, with separate execution/retrieval limits and no application retry. Other HotPads listing/locality operations retain their existing scope.
 
 
-## Agency directory investigation remains unavailable
+## Earlier agency directory investigation
 
-Batch84 implemented and tested the dedicated Immobiliare Pomezia agency directory and account-retained agency reads. Preview passed 11 checks, but the identical staged production source run timed out at its unchanged 35-second limit and returned 503 with zero response credits. The release was not promoted; both agency operations remain unavailable. The earlier Rightmove agency discovery also timed out. Neither source was retried. Directory cards, sales totals and listing counters do not establish listing portfolios. Current production coverage remains 193 platforms and 24 operations; 7 platforms and 19 operations remain unavailable.
+Batch84 implemented and tested the dedicated Immobiliare Pomezia agency directory and account-retained agency reads. Preview passed 11 checks, but the identical staged production source run timed out at its unchanged 35-second limit and returned 503 with zero response credits. The release was not promoted; that batch did not enable either agency operation. The earlier Rightmove agency discovery also timed out. Neither source was retried. Directory cards, sales totals and listing counters do not establish listing portfolios. The coverage count for that batch remained 193 platforms and 24 operations.
+
+
+## Property Finder professional directories and bounded portfolios
+
+Property Finder UAE supports six professional operations: agent and agency directory searches, retained agent and agency reads, and one residential sale portfolio advertisement per professional. Four operation IDs are newly enabled: agency search/read and the two portfolio routes. Existing Realtor, Keller Williams and eXp agent windows remain unchanged. Existing platform search proofs are historical without rescraping.
+
+Use exactly one platform, propertyfinder, country AE, a source_region location and explicit limit=1. Agency search uses region_id=dubai-directory; agent search uses region_id=dubai-marina-directory. Query, cursor and other directory filters are unsupported. Returned IDs identify source-scoped observations owned by the requesting account, retained24 hours. Agency native directory IDs are opaque and can differ from the numeric suffix of the source profile slug. Neither is a license identifier.
+
+The two portfolio GET routes accept only the original professional ID in the same account, with limit1 and no cursor. Missing, expired and unrelated-account selectors return404. The source listing agent or broker ID must independently match the retained owner, in addition to the provider's portfolio fields. Each request fetches one source-associated residential sale advertisement, not a complete portfolio. An agency listed in Dubai can advertise in another UAE emirate. Returned listing geography comes from its own source emirate label, not the directory location.
+
+Directory searches and fresh portfolio calls cost50 credits each. Retained professional/listing reads cost1; failures and idempotent replay cost0. Source prices are AED asking observations, status remains unknown, area basis remains unknown, and pagination totals are unknown with no continuation. Contacts, staff, nationality, license/rating claims, exact addresses/coordinates, narrative, photos and source update time are omitted. No sold-price comparable, valuation, completeness or current availability claim.
+
+The existing Apify credential is reused with pinned build and exact bundled event pricing, $0.01/run,35 seconds,1024MB,maxItems1 and independent retrieval limit1. Profile enrichment and automatic portfolio-slice probing are disabled. Immobiliare and Rightmove agency candidates from the earlier batch remain disabled; there is no unchanged failed-source retry.

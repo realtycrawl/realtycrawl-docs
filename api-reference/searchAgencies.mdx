@@ -3,8 +3,21 @@ title: "Search agencies"
 openapi: "POST /v1/agencies/search"
 ---
 
-<Warning>This operation is defined in the API contract but is not currently enabled.</Warning>
+<Note>Property Finder UAE supports the dubai-directory source window, one platform propertyfinder, country AE and explicit limit=1. Query, cursor and extra filters are unsupported. Success costs50 credits; failures and replay cost0.</Note>
 
-<Note>Check [live capabilities](https://realtycrawl.dev/v1/meta/capabilities) before calling this operation. A documented contract does not imply active coverage for every source or country.</Note>
+```json
+{
+  "platforms": [
+    "propertyfinder"
+  ],
+  "location": {
+    "kind": "source_region",
+    "platform": "propertyfinder",
+    "country": "AE",
+    "region_id": "dubai-directory"
+  },
+  "limit": 1
+}
+```
 
-The prepared Immobiliare Pomezia agency contract passed Preview but timed out in exact staged production. It remains disabled; see [coverage](/coverage).
+The source-classified directory card is retained privately in this account for24 hours. Contacts, demographics, licenses, ratings, staff and exact location are omitted. Source update time and completeness remain unknown. Use the returned ID for the retained read and separately supported residential sale portfolio route. See [coverage](/coverage) and [live capabilities](https://realtycrawl.dev/v1/meta/capabilities).

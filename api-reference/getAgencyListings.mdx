@@ -3,6 +3,8 @@ title: "Get professional listing portfolio"
 openapi: "GET /v1/agencies/{agency_id}/listings"
 ---
 
-<Warning>This operation is defined in the API contract but is not currently enabled.</Warning>
+<Note>Available for this account’s unexpired Property Finder UAE agency directory observation. One fresh residential sale portfolio advertisement, limit=1, no cursor. Success costs50 credits; failures and idempotent replay cost0.</Note>
 
-<Note>Check [live capabilities](https://realtycrawl.dev/v1/meta/capabilities) before calling this operation. A documented contract does not imply active coverage for every source or country.</Note>
+Use the original professional ID from the same account. Missing, expired and unrelated-account IDs return404; schema-invalid limits return400 and unsupported cursors return422. Listing agent or broker identity must match the retained owner.
+
+The listing has its own UAE emirate locality, source asking AED price, unknown status and unknown area basis. A Dubai professional may advertise in another emirate. Completeness and pagination totals remain unknown; no full portfolio, availability, sold-price comparable, valuation or source update-time claim. Contacts, exact location and photos are omitted. The returned listing ID supports ordinary account-owned listing reads for24 hours. See [coverage](/coverage).
