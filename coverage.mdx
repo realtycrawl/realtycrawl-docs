@@ -2,7 +2,7 @@
 title: "Coverage and evidence"
 ---
 
-The inventory covers 200 researched platforms and 43 defined API operations. This release includes 193 distinct source platforms (137 sale, 36 rental, 4 commercial lease, 5 auction-source, 5 stay, 4 development and 2 additional agent-only platforms) and 20 enabled operation IDs, including three metadata operations. Check live capabilities for current enablement. Realtor.com, Keller Williams and eXp France support the dedicated agent operations below.
+The inventory covers 200 researched platforms and 43 defined API operations. This release includes 193 distinct source platforms (137 sale, 36 rental, 4 commercial lease, 5 auction-source, 5 stay, 4 development and 2 additional agent-only platforms) and 21 enabled operation IDs, including three metadata operations. Check live capabilities for current enablement. Realtor.com, Keller Williams and eXp France support the dedicated agent operations below.
 
 ## Verified sale-search adapters
 
@@ -305,7 +305,7 @@ The Anjuke Actor requires a minimum request size of 10, but RealtyCrawl applies 
 
 ## Unavailable coverage
 
-The remaining 7 sources and 23 operation definitions are not enabled. Additional rental markets, merged property records, valuations, additional agent markets, agent portfolios and agency APIs, auction bidding, additional auction markets, buildings, additional stay operations and async jobs require separate implementation and verification. Licensed MLS and public-record feeds need their own access agreements.
+The remaining 7 sources and 22 operation definitions are not enabled. Additional rental markets, merged property records, valuations, additional agent markets, agent portfolios and agency APIs, auction bidding, additional auction markets, buildings, additional stay operations and async jobs require separate implementation and verification. Licensed MLS and public-record feeds need their own access agreements.
 
 Source failures are candidate-specific. Earlier failed actors do not override the accepted adapters listed above. The current capability response determines availability; research entries and historical samples alone do not enable a platform.
 
@@ -392,3 +392,12 @@ POST /v1/locations/search is verified for HotPads (hotpads, US cities and boroug
 Each response has one provider-observed locality, a namespaced source-specific ID, source display name, country, type, source_platform and null geometry. These IDs are not cross-platform canonical geography IDs or guaranteed selectors for listing search; use the separate documented search selectors. Coordinates, boundaries, exact addresses and unrelated source fields are omitted. Completeness and total counts remain unknown; source provenance and observation time appear in meta.sources.
 
 Successful autocomplete costs 50 credits, with a $0.01 included-credit provider ceiling; idempotent replay is free and failed requests settle zero credits. Actor execution can produce more rows than requested; maxItems is not asserted as a source-processing guarantee. Runtime separately limits dataset retrieval to one result, verifies the exact immutable build and bundled pricing before execution, and never automatically retries the source. Both adapters passed Preview and exact staged production, including response validation, 100 credits reconciled per environment, disposable audit cleanup and identical zero-credit replays. These are additional operations on existing platforms, so distinct enabled platform coverage remains 193.
+
+
+## Source-reported similar homes
+
+`GET /v1/listings/{listing_id}/similar?limit=1` is enabled for Trulia (trulia, US). First search the documented Seattle sale scope and use the returned listing ID from the same account. The retained original observation must be unexpired. Explicit limit=1 is required; cursor, arbitrary URLs, other platforms/markets and extra filters are unsupported. A missing, expired or unrelated-account observation returns 404 without a source call.
+
+One source recommendation is returned with basis `source_recommendation`, selection_method `trulia_similar_homes`, a related listing, its USD asking price and source provenance. The adapter validates the dedicated similar mode, exact original URL, raw/flat native identity, Seattle or Bellevue/WA, active resale flags and price agreement. This does not establish a closed-sale comparable, valuation, distance or complete recommendation set. Event time and distance stay null. Exact address, coordinates, contacts and canonical property identity are omitted. The related listing is retained for the same account’s stored listing/media reads for 24 hours; those reads cost 1 credit each.
+
+A successful fresh recommendation costs 50 credits. Idempotent replay costs 0 and failures settle0. Use an Idempotency-Key to avoid duplicate work. Included-credit provider ceiling is $0.01/run; immutable build or bundled-price drift fails closed. The Actor can emit more rows than requested; the runner separately limits dataset retrieval to one. Preview and exact staged production each verified a fresh listing search, recommendation, stored reads, zero-credit replay, unrelated-account 404 and unsupported-limit 422, with ledger reconciliation and disposable-account cleanup. Distinct platform coverage remains 193; this adds one operation to an existing platform. Cian’s separately tested similar mode was source-blocked and remains unavailable.

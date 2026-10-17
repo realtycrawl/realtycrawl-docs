@@ -2083,7 +2083,7 @@
       "get": {
         "operationId": "getSimilarListings",
         "summary": "getSimilarListings",
-        "description": "Proposed interface. Enable only for documented and verified source/country capabilities. Separate source recommendation contract required",
+        "description": "One fresh Trulia similar-home recommendation for this account\u2019s retained Seattle sale listing. Recommended homes may be in Seattle or Bellevue, WA; no distance is inferred. Requires explicit limit=1; no cursor. Source asking-price observations use basis source_recommendation, not verified closed-sale comparables, valuations or distance estimates. Original listing observations expire after 24 hours. Success costs 50 credits; failures and idempotent replay cost zero. Availability is gated per platform and operation.",
         "x-research-status": "proposed",
         "tags": [
           "listings"
@@ -2138,9 +2138,11 @@
             }
           }
         ],
-        "x-runtime-status": "unavailable",
-        "x-credit-cost": 1,
-        "x-verified-platforms": []
+        "x-runtime-status": "beta",
+        "x-credit-cost": 50,
+        "x-verified-platforms": [
+          "trulia"
+        ]
       }
     },
     "/v1/properties/resolve": {

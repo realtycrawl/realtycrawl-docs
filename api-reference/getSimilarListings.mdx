@@ -3,6 +3,8 @@ title: "Get Similar Listings"
 openapi: "GET /v1/listings/{listing_id}/similar"
 ---
 
-<Warning>This operation is defined in the API contract but is not currently enabled.</Warning>
+<Note>Available for this account’s retained Trulia Seattle sale listing with explicit limit=1. Success costs 50 credits; failures and idempotent replay cost 0.</Note>
+
+The result is a source recommendation with an asking price. It is not a verified closed-sale comparable, valuation or distance estimate. Original observations expire after 24 hours; missing, expired and unrelated-account observations return404. Cursor, arbitrary source URLs, other markets and unsupported filters are rejected before source execution. See [coverage](/coverage) for the accepted scope.
 
 <Note>Check [live capabilities](https://realtycrawl.dev/v1/meta/capabilities) before calling this operation. A documented contract does not imply active coverage for every source or country.</Note>
