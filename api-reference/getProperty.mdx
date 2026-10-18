@@ -6,3 +6,7 @@ openapi: "GET /v1/properties/{property_id}"
 Read this account’s unexpired NYC PLUTO tax-lot property observation for1 credit. Requires returned property_id;24h retention. Property type parcel; source BBL reference. Borough-level location only; owner/contact/address/geometry omitted. Building year is source approximate and normalized only for single-building parcels; source units are tax attributes, not available inventory. No fresh source fetch, title, ownership or historical identity verification.
 
 <Note>Check [live capabilities](https://realtycrawl.dev/v1/meta/capabilities?platform=nyc_pluto). Independent wrapper for NYC Open Data. Existing idempotency replay remains a prior snapshot and can outlive 24h selector retention.</Note>
+
+## Zillow source-scoped alternative
+
+First observe an Austin single-family Zillow sale listing in this account. Resolve with platform=zillow, native_id=its ZPID and country=US. A fresh pinned source detail independently confirms the ZPID and canonical URL, costing 50 credits on success. The returned property has a zillow_zpid reference, separate from NYC BBL identity. Retained property details and one explicitly associated advertisement cost 1 credit each and last 24 hours. Errors and replay cost 0. No cadastral/cross-portal match, title, ownership, private AVM or complete listing inventory is inferred.

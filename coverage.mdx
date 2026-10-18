@@ -2,7 +2,19 @@
 title: "Coverage and evidence"
 ---
 
-The inventory covers 202 researched platforms and 43 defined API operations. This release includes 195 distinct source platforms (the original 193 accepted portal/professional sources plus the supplemental official FHFA and NYC Open Data datasets) and 38 enabled operation IDs, including three metadata operations. Check live capabilities for current enablement. Realtor.com, Keller Williams and eXp France support the dedicated agent operations below.
+The inventory covers 202 researched platforms and 43 defined API operations. This release includes 195 distinct source platforms (the original 193 accepted portal/professional sources plus the supplemental official FHFA and NYC Open Data datasets) and 42 enabled operation IDs, including three metadata operations. Check live capabilities for current enablement. Realtor.com, Keller Williams and eXp France support the dedicated agent operations below.
+
+## Additional bounded property and calendar operations
+
+These contracts extend existing sources without increasing the distinct-platform count. All require an unexpired account-owned resource. Fresh source calls cost 50 credits, retained reads cost 1, and errors/replay cost zero. Existing seven-day replay snapshots can outlive 24-hour selector retention.
+
+Zillow property resolution requires platform zillow, native_id and country US after this account observes its Austin single-family sale listing. Fresh detail must independently match the retained canonical URL and ZPID. Property details and one explicitly associated advertisement are retained for 24 hours. Identity stays Zillow-scoped, without cadastral/cross-portal association, complete inventory, ownership or availability guarantees.
+
+NYC DOF valuation returns one current-year final-roll tax-purpose market assessed total value for an exact retained A1 parcel. Limit 1, no cursor. as_of has source_roll_year precision; extraction and dataset update dates are separate. This is not a private AVM, daily current value, asking/sale price, tax bill or appraisal. Range/model/confidence remain unknown.
+
+Airbnb calendar reads source-reported day observations for a retained UK stay from London search. from/to are inclusive within one strictly future month, within 330 days. Omit limit or supply the exact requested day count, maximum 31; no cursor. Every source-month day and identity is validated before range selection. Nightly status/minimum nights are not occupancy, check-in eligibility, prices or a booking guarantee.
+
+Booking stay discovery now uses the documented explicit Paris destination ID and limit 1. The free-text autocomplete path returned HTTP403 and is not retried. Dated quotes preserve two-adult, no-child, one-room USD hotel context and reconciled source base/combined taxes and fees. Completeness remains partial: room capacity, a uniquely bookable room/rate, every mandatory charge and cancellation terms can be unknown. No all-in or booking guarantee.
 
 ## Official NYC public property records
 
@@ -329,7 +341,7 @@ The Anjuke Actor requires a minimum request size of 10, but RealtyCrawl applies 
 
 ## Unavailable coverage
 
-The remaining 7 sources and 5 operation definitions are not enabled. The missing operation groups are property-to-listing association, valuations/comparables and stay quotes/availability. Additional markets and contracts within enabled families still require their own implementation and verification. Licensed MLS and public-record feeds need their own access agreements.
+The remaining 7 sources and 1 operation definition are not enabled: property comparables. Recommendations and tax-purpose estimates do not establish adjusted comparable sales. Additional markets and contracts within enabled families still require their own implementation and verification. Licensed MLS and public-record feeds need their own access agreements.
 
 Source failures are candidate-specific. Earlier failed actors do not override the accepted adapters listed above. The current capability response determines availability; research entries and historical samples alone do not enable a platform.
 

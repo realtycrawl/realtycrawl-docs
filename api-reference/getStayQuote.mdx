@@ -1,8 +1,10 @@
 ---
-title: "Get a dated guest-specific price quote"
+title: "Read a dated partial hotel offer"
 openapi: "POST /v1/stays/{stay_id}/quote"
 ---
 
-<Warning>This operation is defined in the API contract but is not currently enabled.</Warning>
+Fresh Booking.com hotel-level price observation for this account’s retained Paris stay, explicit future1–30 nights,two adults,no children/infants/pets,one room,USD,no locale. Fully dated URL binds guest context. Reported base plus combined taxes/fees must reconcile. Completeness stays partial: unique bookable room/rate, all mandatory charges and cancellation are unestablished. No booking/payment/price guarantee. Costs50 credits;errors/replay0.
 
-<Note>Check [live capabilities](https://realtycrawl.dev/v1/meta/capabilities) before calling this operation. A documented contract does not imply active coverage for every source or country.</Note>
+Booking stay discovery requires explicit limit 1 and the documented Paris source region. It uses the provider-supported Paris destination ID; free-text autocomplete is not used. No unique hotel returns 404 at zero credits. Unknown room capacity is not inferred from hotel-level guest context; the quoted offer remains partial and does not identify a uniquely bookable room/rate.
+
+<Note>Use this account’s unexpired 24-hour stay observation. Errors and prior-response replay cost zero. The existing seven-day replay cache returns a previous snapshot and can outlive selector retention.</Note>

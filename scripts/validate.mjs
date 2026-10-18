@@ -23,14 +23,14 @@ assert.equal(spec.servers[0].url,'https://realtycrawl.dev');
 const coverage=readFileSync('coverage.mdx','utf8');
 const researched=Number(coverage.match(/inventory covers (\d+) researched platforms/)?.[1]);
 const enabled=Number(coverage.match(/release includes (\d+) distinct source platforms/)?.[1]);
-const unavailable=Number(coverage.match(/remaining (\d+) sources and (\d+) operation definitions/)?.[1]);
+const unavailable=Number(coverage.match(/remaining (\d+) sources and (\d+) operation definitions?/)?.[1]);
 assert(Number.isSafeInteger(researched)&&Number.isSafeInteger(enabled)&&Number.isSafeInteger(unavailable),'Missing coverage totals');
 assert.equal(enabled+unavailable,researched,'Source coverage totals disagree');
 const ops=Object.values(spec.paths).flatMap(methods=>Object.values(methods));
 const activeOps=ops.filter(op=>['active','beta'].includes(op['x-runtime-status'])).length;
 assert.equal(Number(coverage.match(/(\d+) defined API operations/)?.[1]),ops.length);
 assert.equal(Number(coverage.match(/(\d+) enabled operation IDs/)?.[1]),activeOps);
-assert.equal(Number(coverage.match(/remaining \d+ sources and (\d+) operation definitions/)?.[1]),ops.length-activeOps);
+assert.equal(Number(coverage.match(/remaining \d+ sources and (\d+) operation definitions?/)?.[1]),ops.length-activeOps);
 
 if(process.argv.includes('--live')){
  const r=await fetch('https://realtycrawl.dev/v1/openapi.json',{signal:AbortSignal.timeout(30000)});

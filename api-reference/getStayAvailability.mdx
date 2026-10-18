@@ -1,8 +1,8 @@
 ---
-title: "Read calendar observations"
+title: "Read source calendar day observations"
 openapi: "GET /v1/stays/{stay_id}/availability"
 ---
 
-<Warning>This operation is defined in the API contract but is not currently enabled.</Warning>
+Use an Airbnb UK stay previously observed by this account’s London source search. Provide from/to inclusive within one strictly future calendar month, within 330 days. Omit limit or use the exact requested day count, maximum 31; no cursor. One provider calendar row is fetched for the source month; every day, listing identity, month and counts are validated before selecting the requested range. Success costs 50 credits; errors and prior-response replay cost 0. Status preserves source nightly available/unavailable and minimum_nights. Unavailable does not mean occupied or booked, and available does not guarantee check-in eligibility or a bookable stay. Other restrictions, prices and occupancy estimates are omitted.
 
-<Note>Check [live capabilities](https://realtycrawl.dev/v1/meta/capabilities) before calling this operation. A documented contract does not imply active coverage for every source or country.</Note>
+<Note>Check [live capabilities](https://realtycrawl.dev/v1/meta/capabilities) before calling. Retained selectors are private to this account for 24 hours. The existing seven-day idempotency replay cache returns a prior response snapshot and can outlive selector retention.</Note>
