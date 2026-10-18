@@ -16,7 +16,9 @@ await Promise.all(Array.from({ length: 3 }, async () => {
     const page = queue.shift();
     const response = await fetch(`https://realtycrawl.dev/docs/${page}`, { signal: AbortSignal.timeout(30000) });
     assert.equal(response.status, 200, `${page}: HTTP ${response.status}`);
-    assert.equal(new URL(response.url).hostname, 'docs.realtycrawl.dev');
+    const url = new URL(response.url);
+    assert.equal(url.origin, 'https://realtycrawl.dev');
+    assert(url.pathname === '/docs' || url.pathname.startsWith('/docs/'), `${page}: outside the documentation subpath`);
     const html = await response.text();
     const title = html.match(/<title>(.*?)<\/title>/s)?.[1];
     assert(title?.includes('RealtyCrawl'), `${page}: missing RealtyCrawl title`);
