@@ -2149,7 +2149,7 @@
       "post": {
         "operationId": "resolveProperty",
         "summary": "Resolve a NYC tax-lot property",
-        "description": "Resolve one exact current NYC non-condominium tax lot from official DCP PLUTO. Supply parcel_id=ten-digit BBL, jurisdiction=US-NY-NYC,country=US; alternatively platform=nyc_pluto,native_id=BBL,country=US. No address/geocoder, condo billing/unit-lot or historical split/merge inference. Success costs50 credits and stores account-owned property/record/assessment observations24h. Confidence unknown, method exact_current_nyc_tax_lot_bbl. Source: NYC Open Data DCP PLUTO. Independent wrapper, no title/ownership/unit/availability verification. Zillow alternative: platform zillow,native_id,country US requires this account\u2019s previously retained Austin single-family sale listing. Fresh resolution costs50 credits; returned source-scoped ZPID identity is not a cadastral/global identity. Property and one associated-advertisement snapshots last24h; stored reads1credit,errors/replay0. No address geocoding or cross-platform association.",
+        "description": "Resolve one exact current NYC non-condominium tax lot from official DCP PLUTO. Supply parcel_id=ten-digit BBL, jurisdiction=US-NY-NYC,country=US; alternatively platform=nyc_pluto,native_id=BBL,country=US. No address/geocoder, condo billing/unit-lot or historical split/merge inference. Success costs50 credits and stores account-owned property/record/assessment observations24h. Confidence unknown, method exact_current_nyc_tax_lot_bbl. Source: NYC Open Data DCP PLUTO. Independent wrapper, no title/ownership/unit/availability verification. Zillow alternative:resolve platform=zillow,native_id=ZPID,country=US directly for an Austin single-family sale home. No prior listing lookup;independently validated native identity,bare canonical URL,market,type,status and USD asking price. Source update time unknown;observed_at is retrieval. Private24h property and associated advertisement reads cost1credit;source resolution50,errors/replay0. No address geocoding,cadastral/cross-platform match or history guarantee.",
         "x-research-status": "source_contract_accepted",
         "tags": [
           "properties"
@@ -2198,7 +2198,7 @@
       "get": {
         "operationId": "getProperty",
         "summary": "Read a retained property",
-        "description": "Read this account\u2019s unexpired NYC PLUTO tax-lot property observation for1 credit. Requires returned property_id;24h retention. Property type parcel; source BBL reference. Borough-level location only; owner/contact/address/geometry omitted. Building year is source approximate and normalized only for single-building parcels; source units are tax attributes, not available inventory. No fresh source fetch, title, ownership or historical identity verification. Zillow alternative: platform zillow,native_id,country US requires this account\u2019s previously retained Austin single-family sale listing. Fresh resolution costs50 credits; returned source-scoped ZPID identity is not a cadastral/global identity. Property and one associated-advertisement snapshots last24h; stored reads1credit,errors/replay0. No address geocoding or cross-platform association.",
+        "description": "Read this account\u2019s unexpired NYC PLUTO tax-lot property observation for1 credit. Requires returned property_id;24h retention. Property type parcel; source BBL reference. Borough-level location only; owner/contact/address/geometry omitted. Building year is source approximate and normalized only for single-building parcels; source units are tax attributes, not available inventory. No fresh source fetch, title, ownership or historical identity verification. Zillow alternative:resolve platform=zillow,native_id=ZPID,country=US directly for an Austin single-family sale home. No prior listing lookup;independently validated native identity,bare canonical URL,market,type,status and USD asking price. Source update time unknown;observed_at is retrieval. Private24h property and associated advertisement reads cost1credit;source resolution50,errors/replay0. No address geocoding,cadastral/cross-platform match or history guarantee.",
         "x-research-status": "source_contract_accepted",
         "tags": [
           "properties"
@@ -2248,7 +2248,7 @@
       "get": {
         "operationId": "getPropertyListings",
         "summary": "Read a source-associated property advertisement",
-        "description": "One retained Austin single-family Zillow sale advertisement explicitly associated with the source-scoped ZPID property. Resolve a previously observed Zillow native_id with platform zillow and country US first. Same-account24h property ID, limit1(default1),no cursor. One credit; errors/replay0. No cadastral/cross-portal matching, complete listing inventory, title/ownership or availability guarantee.",
+        "description": "Read one account-owned24h Zillow source-associated Austin single-family sale advertisement after direct native-ZPID property resolution. Limit1 (default1),no cursor. Asking price is a source observation,not availability or valuation. No cadastral/cross-portal identity,complete inventory,title or ownership. Exact location,contacts,narrative,media and unitless areas omitted. Stored read1credit;errors/replay0.",
         "x-research-status": "source_contract_accepted",
         "tags": [
           "properties"
@@ -2577,9 +2577,9 @@
     "/v1/properties/{property_id}/comparables": {
       "get": {
         "operationId": "getPropertyComparables",
-        "summary": "getPropertyComparables",
-        "description": "Proposed interface. Enable only for documented and verified source/country capabilities. RentCast valuation comparables or licensed comps",
-        "x-research-status": "proposed",
+        "summary": "Read an unadjusted provider-selected comparable home",
+        "description": "One positive-price provider-selected comparable-home observation for this account\u2019s unexpired Austin single-family Zillow property. Limit1 (default1), no cursor, omitted basis or source_recommendation only. Price kind unknown; zero-price sold rows excluded. No verified sale/date/distance, adjusted valuation, appraisal or complete set. Success50 credits; errors/replay0. Comparison IDs are not automatically retained property selectors.",
+        "x-research-status": "source_contract_prepared",
         "tags": [
           "properties"
         ],
@@ -2625,9 +2625,11 @@
                 "closed_sale",
                 "active_listing",
                 "rental_listing",
-                "closed_lease"
+                "closed_lease",
+                "source_recommendation"
               ]
-            }
+            },
+            "description": "Only source_recommendation is accepted; omission has that meaning. Other bases are not enabled."
           },
           {
             "name": "limit",
@@ -2636,7 +2638,7 @@
               "type": "integer",
               "minimum": 1,
               "maximum": 100,
-              "default": 20
+              "default": 1
             }
           },
           {
@@ -2647,9 +2649,11 @@
             }
           }
         ],
-        "x-runtime-status": "unavailable",
-        "x-credit-cost": 1,
-        "x-verified-platforms": []
+        "x-runtime-status": "beta",
+        "x-credit-cost": 50,
+        "x-verified-platforms": [
+          "zillow"
+        ]
       }
     },
     "/v1/buildings/{building_id}": {

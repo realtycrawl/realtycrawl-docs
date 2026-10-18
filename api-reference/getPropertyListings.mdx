@@ -3,6 +3,8 @@ title: "Read a source-associated property advertisement"
 openapi: "GET /v1/properties/{property_id}/listings"
 ---
 
-Resolve platform zillow, native_id and country US after this account observes its Austin single-family sale listing. The fresh resolver independently confirms exact ZPID, canonical URL, market and sale mode. It returns a Zillow-scoped property identity, without cadastral or cross-portal association. This route reads one retained associated advertisement, limit 1 (default 1), no cursor. Success costs 1 credit; errors and prior-response replay cost 0. Source asking price is not availability, sold consideration or an AVM. Contacts, exact address/geometry, narrative and media are omitted. No full listing inventory or ownership claim.
+Resolve platform zillow, native_id and country US directly for an Austin single-family sale home. No prior listing lookup is required. The fresh resolver independently confirms exact ZPID, canonical URL, market and sale mode. It returns a Zillow-scoped property identity, without cadastral or cross-portal association. This route reads one retained associated advertisement, limit 1 (default 1), no cursor. Success costs 1 credit; errors and prior-response replay cost 0. Source asking price is not availability, sold consideration or an AVM. Contacts, exact address/geometry, narrative and media are omitted. No full listing inventory or ownership claim.
 
 <Note>Check [live capabilities](https://realtycrawl.dev/v1/meta/capabilities) before calling. Retained selectors are private to this account for 24 hours. The existing seven-day idempotency replay cache returns a prior response snapshot and can outlive selector retention.</Note>
+
+The associated advertisement preserves the independently returned native ZPID and bare canonical URL. Source update time is unknown. Unitless areas and listing history are not inferred.

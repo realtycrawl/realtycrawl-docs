@@ -1,8 +1,10 @@
 ---
-title: "Get Property Comparables"
+title: "Read an unadjusted comparable-home recommendation"
 openapi: "GET /v1/properties/{property_id}/comparables"
 ---
 
-<Warning>This operation is defined in the API contract but is not currently enabled.</Warning>
+Use this account’s unexpired Austin single-family Zillow property from source-scoped resolution. One fresh provider-selected comparable-home observation, limit 1 (default 1), no cursor. Omit basis or use source_recommendation; closed_sale, active_listing, rental_listing and closed_lease bases are unsupported. Success costs 50 credits; no data, errors and prior-response replay cost zero.
 
-<Note>Check [live capabilities](https://realtycrawl.dev/v1/meta/capabilities) before calling this operation. A documented contract does not imply active coverage for every source or country.</Note>
+The provider’s dedicated comparable_homes field establishes the selection relationship. Returned positive-price records have price.kind=unknown: the source does not establish asking, sold or estimated-value meaning. Zero-price sold rows are omitted. Event date, distance, adjustments and listing remain null. This is an unadjusted source recommendation, without verified closed sales, arm’s-length consideration, exhaustive matching, appraisal or valuation guarantees. Exact address/geometry, media, contacts and owner information are omitted. Comparison property IDs are source-scoped and are not automatically retained selectors for getProperty.
+
+<Note>Check [live capabilities](https://realtycrawl.dev/v1/meta/capabilities?platform=zillow). The original property selector is private to this account for 24 hours. Existing seven-day idempotency replay returns a prior snapshot and can outlive selector retention.</Note>
