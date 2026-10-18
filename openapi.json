@@ -2577,9 +2577,9 @@
     "/v1/properties/{property_id}/comparables": {
       "get": {
         "operationId": "getPropertyComparables",
-        "summary": "Read an unadjusted provider-selected comparable home",
-        "description": "One positive-price provider-selected comparable-home observation for this account\u2019s unexpired Austin single-family Zillow property. Limit1 (default1), no cursor, omitted basis or source_recommendation only. Price kind unknown; zero-price sold rows excluded. No verified sale/date/distance, adjusted valuation, appraisal or complete set. Success50 credits; errors/replay0. Comparison IDs are not automatically retained property selectors.",
-        "x-research-status": "source_contract_prepared",
+        "summary": "getPropertyComparables",
+        "description": "Proposed interface. Enable only for documented and verified source/country capabilities. RentCast valuation comparables or licensed comps",
+        "x-research-status": "proposed",
         "tags": [
           "properties"
         ],
@@ -2625,11 +2625,9 @@
                 "closed_sale",
                 "active_listing",
                 "rental_listing",
-                "closed_lease",
-                "source_recommendation"
+                "closed_lease"
               ]
-            },
-            "description": "Only source_recommendation is accepted; omission has that meaning. Other bases are not enabled."
+            }
           },
           {
             "name": "limit",
@@ -2638,7 +2636,7 @@
               "type": "integer",
               "minimum": 1,
               "maximum": 100,
-              "default": 1
+              "default": 20
             }
           },
           {
@@ -2649,11 +2647,9 @@
             }
           }
         ],
-        "x-runtime-status": "beta",
-        "x-credit-cost": 50,
-        "x-verified-platforms": [
-          "zillow"
-        ]
+        "x-runtime-status": "unavailable",
+        "x-credit-cost": 1,
+        "x-verified-platforms": []
       }
     },
     "/v1/buildings/{building_id}": {

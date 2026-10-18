@@ -2,11 +2,7 @@
 title: "Coverage and evidence"
 ---
 
-The inventory covers 202 researched platforms and 43 defined API operations. This release includes 195 distinct source platforms (the original 193 accepted portal/professional sources plus the supplemental official FHFA and NYC Open Data datasets) and 43 enabled operation IDs, including three metadata operations. Check live capabilities for current enablement. Realtor.com, Keller Williams and eXp France support the dedicated agent operations below.
-
-## Unadjusted property comparable recommendations
-
-For a retained Austin single-family Zillow source property, getPropertyComparables returns one fresh provider-selected comparable_home with basis source_recommendation and price.kind unknown. Limit 1 (default 1), no cursor, omitted basis or source_recommendation only. Zero-price sold rows are excluded. No verified sale price/date, distance, adjustment, asking/estimate meaning, exhaustive set or appraisal. Comparison IDs are not automatically retained property selectors. Success 50 credits; errors and prior-response replay zero. Private 24h subject retention and existing seven-day prior snapshots apply.
+The inventory covers 202 researched platforms and 43 defined API operations. This release includes 195 distinct source platforms (the original 193 accepted portal/professional sources plus the supplemental official FHFA and NYC Open Data datasets) and 42 enabled operation IDs, including three metadata operations. Check live capabilities for current enablement. Realtor.com, Keller Williams and eXp France support the dedicated agent operations below.
 
 ## Additional bounded property and calendar operations
 
@@ -345,7 +341,7 @@ The Anjuke Actor requires a minimum request size of 10, but RealtyCrawl applies 
 
 ## Unavailable coverage
 
-The remaining 7 sources and 0 operation definitions are not enabled. All 43 operation definitions have an accepted bounded source contract; this does not enable every source, country or selector. Unadjusted comparable-home recommendations and tax-purpose estimates do not establish adjusted comparable sales. Additional markets and contracts within enabled families still require their own implementation and verification. Licensed MLS and public-record feeds need their own access agreements.
+The remaining 7 sources and 1 operation definition are not enabled: property comparables. Recommendations and tax-purpose estimates do not establish adjusted comparable sales. Additional markets and contracts within enabled families still require their own implementation and verification. Licensed MLS and public-record feeds need their own access agreements.
 
 Source failures are candidate-specific. Earlier failed actors do not override the accepted adapters listed above. The current capability response determines availability; research entries and historical samples alone do not enable a platform.
 
