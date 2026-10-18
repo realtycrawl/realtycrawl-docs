@@ -2,7 +2,21 @@
 title: "Coverage and evidence"
 ---
 
-The inventory covers 201 researched platforms and 43 defined API operations. This release includes 194 distinct source platforms (the original 193 accepted portal/professional sources plus the supplemental official FHFA dataset) and 33 enabled operation IDs, including three metadata operations. Check live capabilities for current enablement. Realtor.com, Keller Williams and eXp France support the dedicated agent operations below.
+The inventory covers 202 researched platforms and 43 defined API operations. This release includes 195 distinct source platforms (the original 193 accepted portal/professional sources plus the supplemental official FHFA and NYC Open Data datasets) and 38 enabled operation IDs, including three metadata operations. Check live capabilities for current enablement. Realtor.com, Keller Williams and eXp France support the dedicated agent operations below.
+
+## Official NYC public property records
+
+NYC Open Data is a distinct supplemental source, not a replacement for any of the seven blocked portals. RealtyCrawl independently wraps DCP PLUTO and DOF Rolling Calendar Sales. Source: NYC Department of City Planning / Department of Finance.
+
+`POST /v1/properties/resolve` accepts an exact ten-digit current NYC BBL, country US and jurisdiction US-NY-NYC; alternatively platform nyc_pluto, native_id BBL and country US. No address/geocoder inference, condominium billing/unit-lot or historical split/merge matching. Source borough/block/lot and current PLUTO version must agree. Success costs 50 credits and retains this account's property/record/assessment snapshot for 24h. Returned method exact_current_nyc_tax_lot_bbl has unknown confidence; it does not establish title or ownership.
+
+`GET /v1/properties/{property_id}`, `/records` and `/tax-assessments` use this account's returned unexpired property ID. Each costs 1 credit and reads retained data without upstream access. Records/assessments accept limit 1 (default 1), no cursor. Source type parcel; coarse location only, no owner/contact/precise address/geometry. Source year built is approximate and normalized only for single-building parcels. Unit counts are tax-record attributes, not available unit inventory. Gross floor area uses only the documented PTS/CAMA source codes; estimated primary-building areas are not promoted.
+
+Tax-assessment snapshots preserve source-assessed land/total amounts in USD, distinct from market valuations, asking/sale prices, tax balances, bills and AVMs. Tax year, roll phase and assessment date remain unknown. Source update time is dataset-wide; event_at=null. No complete assessment history.
+
+`GET /v1/properties/{property_id}/transactions` fetches one newest DOF source entry for a retained current A1 one-family parcel. Exact borough/block/lot, sale-time A1/category 01/tax-class 1 must agree. Limit1 (default 1), no cursor. Source-reported USD amount preserves zero cash consideration and date precision day; provider row IDs are dataset-scoped. No arm's-length transfer, whole-parcel consideration allocation, current ownership, deed/title or complete-history inference. Success50 credits; no matching rolling-window entry 404 at zero credits.
+
+Fresh resolution and sale lookup each use one official metadata query and one bounded data query. No upstream key, paid account, redirect or automatic retry. Existing account/key scope and24h expiry checks precede source execution. Errors and idempotent replay cost 0; the existing 7-day replay cache remains a previous response snapshot and can outlive selector retention. Public datasets can be updated/replaced; source freshness and schema changes fail closed.
 
 ## Official FHFA market data
 
@@ -315,7 +329,7 @@ The Anjuke Actor requires a minimum request size of 10, but RealtyCrawl applies 
 
 ## Unavailable coverage
 
-The remaining 7 sources and 10 operation definitions are not enabled. The missing operation groups are property/public-record reads, valuations/comparables and stay quotes/availability. Additional markets and contracts within enabled families still require their own implementation and verification. Licensed MLS and public-record feeds need their own access agreements.
+The remaining 7 sources and 5 operation definitions are not enabled. The missing operation groups are property-to-listing association, valuations/comparables and stay quotes/availability. Additional markets and contracts within enabled families still require their own implementation and verification. Licensed MLS and public-record feeds need their own access agreements.
 
 Source failures are candidate-specific. Earlier failed actors do not override the accepted adapters listed above. The current capability response determines availability; research entries and historical samples alone do not enable a platform.
 

@@ -1,8 +1,8 @@
 ---
-title: "Resolve physical property identity"
+title: "Resolve a NYC tax-lot property"
 openapi: "POST /v1/properties/resolve"
 ---
 
-<Warning>This operation is defined in the API contract but is not currently enabled.</Warning>
+Resolve one exact current NYC non-condominium tax lot from official DCP PLUTO. Supply parcel_id=ten-digit BBL, jurisdiction=US-NY-NYC,country=US; alternatively platform=nyc_pluto,native_id=BBL,country=US. No address/geocoder, condo billing/unit-lot or historical split/merge inference. Success costs 50 credits and stores account-owned property/record/assessment observations24h. Confidence unknown, method exact_current_nyc_tax_lot_bbl. Source: NYC Open Data DCP PLUTO. Independent wrapper, no title/ownership/unit/availability verification.
 
-<Note>Check [live capabilities](https://realtycrawl.dev/v1/meta/capabilities) before calling this operation. A documented contract does not imply active coverage for every source or country.</Note>
+<Note>Check [live capabilities](https://realtycrawl.dev/v1/meta/capabilities?platform=nyc_pluto). Independent wrapper for NYC Open Data. Existing idempotency replay remains a prior snapshot and can outlive 24h selector retention.</Note>

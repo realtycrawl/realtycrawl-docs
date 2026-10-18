@@ -1,8 +1,8 @@
 ---
-title: "Get Property Transactions"
+title: "Read latest recorded one-family sale"
 openapi: "GET /v1/properties/{property_id}/transactions"
 ---
 
-<Warning>This operation is defined in the API contract but is not currently enabled.</Warning>
+Retrieve one newest DOF Rolling Calendar Sales entry for this account’s retained non-condominium NYC A1 one-family tax lot. Exact borough/block/lot plus current and sale-time A1 category/tax-class 1 must agree. Limit 1 (default 1), no cursor. Fresh metadata+bounded dataset query costs 50 credits on success; no entry 404 and errors/replay 0. Source sale amount including zero consideration is preserved, not interpreted as an arm’s-length valuation or whole-parcel consideration allocation. Date precision day, no timezone inferred. Dataset-scoped row ID, source/methodology and rolling-window limits included. No current ownership, deed/title or complete history claim.
 
-<Note>Check [live capabilities](https://realtycrawl.dev/v1/meta/capabilities) before calling this operation. A documented contract does not imply active coverage for every source or country.</Note>
+<Note>Check [live capabilities](https://realtycrawl.dev/v1/meta/capabilities?platform=nyc_pluto). Independent wrapper for NYC Open Data. Existing idempotency replay remains a prior snapshot and can outlive 24h selector retention.</Note>

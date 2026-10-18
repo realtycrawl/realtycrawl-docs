@@ -2148,9 +2148,9 @@
     "/v1/properties/resolve": {
       "post": {
         "operationId": "resolveProperty",
-        "summary": "Resolve physical property identity",
-        "description": "Proposed interface. Enable only for documented and verified source/country capabilities. Address/parcel providers; ambiguous results retained",
-        "x-research-status": "proposed",
+        "summary": "Resolve a NYC tax-lot property",
+        "description": "Resolve one exact current NYC non-condominium tax lot from official DCP PLUTO. Supply parcel_id=ten-digit BBL, jurisdiction=US-NY-NYC,country=US; alternatively platform=nyc_pluto,native_id=BBL,country=US. No address/geocoder, condo billing/unit-lot or historical split/merge inference. Success costs50 credits and stores account-owned property/record/assessment observations24h. Confidence unknown, method exact_current_nyc_tax_lot_bbl. Source: NYC Open Data DCP PLUTO. Independent wrapper, no title/ownership/unit/availability verification.",
+        "x-research-status": "source_contract_accepted",
         "tags": [
           "properties"
         ],
@@ -2186,17 +2186,19 @@
             }
           }
         },
-        "x-runtime-status": "unavailable",
-        "x-credit-cost": 1,
-        "x-verified-platforms": []
+        "x-runtime-status": "beta",
+        "x-credit-cost": 50,
+        "x-verified-platforms": [
+          "nyc_pluto"
+        ]
       }
     },
     "/v1/properties/{property_id}": {
       "get": {
         "operationId": "getProperty",
-        "summary": "getProperty",
-        "description": "Proposed interface. Enable only for documented and verified source/country capabilities. Property identity and records",
-        "x-research-status": "proposed",
+        "summary": "Read a retained property",
+        "description": "Read this account’s unexpired NYC PLUTO tax-lot property observation for1 credit. Requires returned property_id;24h retention. Property type parcel; source BBL reference. Borough-level location only; owner/contact/address/geometry omitted. Building year is source approximate and normalized only for single-building parcels; source units are tax attributes, not available inventory. No fresh source fetch, title, ownership or historical identity verification.",
+        "x-research-status": "source_contract_accepted",
         "tags": [
           "properties"
         ],
@@ -2233,9 +2235,11 @@
             }
           }
         ],
-        "x-runtime-status": "unavailable",
+        "x-runtime-status": "beta",
         "x-credit-cost": 1,
-        "x-verified-platforms": []
+        "x-verified-platforms": [
+          "nyc_pluto"
+        ]
       }
     },
     "/v1/properties/{property_id}/listings": {
@@ -2305,9 +2309,9 @@
     "/v1/properties/{property_id}/records": {
       "get": {
         "operationId": "getPropertyRecords",
-        "summary": "getPropertyRecords",
-        "description": "Proposed interface. Enable only for documented and verified source/country capabilities. ATTOM / RentCast / licensed records",
-        "x-research-status": "proposed",
+        "summary": "Read a property-record snapshot",
+        "description": "Read this account’s retained single DCP PLUTO tax-lot record snapshot for1 credit.24h retention,limit1(default1),no cursor. Source version, building class, tax-lot attributes and limitations preserved. No owner/contact/precise address data or arbitrary documents, deed/title/history claims. Source update time is dataset-wide; event_at remains unknown.",
+        "x-research-status": "source_contract_accepted",
         "tags": [
           "properties"
         ],
@@ -2361,17 +2365,19 @@
             }
           }
         ],
-        "x-runtime-status": "unavailable",
+        "x-runtime-status": "beta",
         "x-credit-cost": 1,
-        "x-verified-platforms": []
+        "x-verified-platforms": [
+          "nyc_pluto"
+        ]
       }
     },
     "/v1/properties/{property_id}/transactions": {
       "get": {
         "operationId": "getPropertyTransactions",
-        "summary": "getPropertyTransactions",
-        "description": "Proposed interface. Enable only for documented and verified source/country capabilities. Recorded or licensed transactions",
-        "x-research-status": "proposed",
+        "summary": "Read latest recorded one-family sale",
+        "description": "Retrieve one newest DOF Rolling Calendar Sales entry for this account’s retained non-condominium NYC A1 one-family tax lot. Exact borough/block/lot plus current and sale-time A1 category/tax-class1 must agree. Limit1(default1),no cursor. Fresh metadata+bounded dataset query costs50 credits on success; no entry404 and errors/replay0. Source sale amount includingzero consideration is preserved, not interpreted as an arm’s-length valuation or whole-parcel consideration allocation. Date precision day, no timezone inferred. Dataset-scoped row ID, source/methodology and rolling-window limits included. No current ownership, deed/title or complete history claim.",
+        "x-research-status": "source_contract_accepted",
         "tags": [
           "properties"
         ],
@@ -2425,17 +2431,19 @@
             }
           }
         ],
-        "x-runtime-status": "unavailable",
-        "x-credit-cost": 1,
-        "x-verified-platforms": []
+        "x-runtime-status": "beta",
+        "x-credit-cost": 50,
+        "x-verified-platforms": [
+          "nyc_pluto"
+        ]
       }
     },
     "/v1/properties/{property_id}/tax-assessments": {
       "get": {
         "operationId": "getPropertyTaxAssessments",
-        "summary": "getPropertyTaxAssessments",
-        "description": "Proposed interface. Enable only for documented and verified source/country capabilities. Specific assessment endpoint entitlement",
-        "x-research-status": "proposed",
+        "summary": "Read tax-assessed values",
+        "description": "Read this account’s retained single NYC DOF PTS tax-assessed-value snapshot via DCP PLUTO for1 credit.24h retention,limit1(default1),no cursor. USD assessed land/total values remain distinct from asking/sale prices, tax due, market valuations or AVMs. Tax year,roll phase and assessment date remain unknown; event_at=null. No tax-bill balance or assessment history. Requires the returned property_id.",
+        "x-research-status": "source_contract_accepted",
         "tags": [
           "properties"
         ],
@@ -2489,9 +2497,11 @@
             }
           }
         ],
-        "x-runtime-status": "unavailable",
+        "x-runtime-status": "beta",
         "x-credit-cost": 1,
-        "x-verified-platforms": []
+        "x-verified-platforms": [
+          "nyc_pluto"
+        ]
       }
     },
     "/v1/properties/{property_id}/valuations": {
