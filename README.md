@@ -1,6 +1,6 @@
 # RealtyCrawl documentation
 
-Mintlify source for [docs.realtycrawl.dev](https://docs.realtycrawl.dev). The public OpenAPI contract includes proposed operations: check live capabilities before calling a source.
+Mintlify source for [docs.realtycrawl.dev](https://realtycrawl.dev/docs). The public OpenAPI contract includes proposed operations: check live capabilities before calling a source.
 
 ## Develop
 
@@ -16,7 +16,7 @@ npx mint dev
 
 Connect this repository in Mintlify with branch `main` and content directory `/`. Set the custom domain to `docs.realtycrawl.dev` and use the DNS record provided by Mintlify. Commits to the connected branch deploy the site. The application redirects its former `/docs` routes here.
 
-[Documentation](https://docs.realtycrawl.dev) · [MCP](https://github.com/realtycrawl/realtycrawl-mcp) · [Agent skills](https://github.com/realtycrawl/realtycrawl-agent-skills) · [Examples](https://github.com/realtycrawl/realtycrawl-api-examples)
+[Documentation](https://realtycrawl.dev/docs) · [MCP](https://github.com/realtycrawl/realtycrawl-mcp) · [Agent skills](https://github.com/realtycrawl/realtycrawl-agent-skills) · [Examples](https://github.com/realtycrawl/realtycrawl-api-examples)
 
 ## Release compatibility
 
