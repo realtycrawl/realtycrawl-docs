@@ -14,7 +14,7 @@ const queue = [...pages];
 await Promise.all(Array.from({ length: 3 }, async () => {
   while (queue.length) {
     const page = queue.shift();
-    const response = await fetch(`https://docs.realtycrawl.dev/${page}`, { signal: AbortSignal.timeout(30000) });
+    const response = await fetch(`https://realtycrawl.dev/docs/${page}`, { signal: AbortSignal.timeout(30000) });
     assert.equal(response.status, 200, `${page}: HTTP ${response.status}`);
     assert.equal(new URL(response.url).hostname, 'docs.realtycrawl.dev');
     const html = await response.text();
