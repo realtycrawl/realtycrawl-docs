@@ -4,3 +4,7 @@ openapi: "GET /v1/listings/{listing_id}"
 ---
 
 <Note>Check [live capabilities](https://realtycrawl.dev/v1/meta/capabilities) before calling this operation. A documented contract does not imply active coverage for every source or country.</Note>
+
+## Marketplace retained observations
+
+Facebook Marketplace supports account-owned 24-hour listing observations from its fixed Manhattan-centered 10 km apartment-rental circle. Numeric prices, billing period and availability remain unknown; exact item location and contacts are omitted. Stored media returns an empty array for this source. Native detail, resolution and history are unavailable. A successful stored read costs 1 credit; failures and prior-response replay 0. This read does not issue a source request.

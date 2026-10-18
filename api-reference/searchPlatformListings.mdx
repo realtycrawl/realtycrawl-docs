@@ -4,3 +4,26 @@ openapi: "POST /v1/{platform}/listings/search"
 ---
 
 <Note>Check [live capabilities](https://realtycrawl.dev/v1/meta/capabilities) before calling this operation. A documented contract does not imply active coverage for every source or country.</Note>
+
+## Marketplace apartment observations
+
+Facebook Marketplace supports one source-order apartment rental advertisement in a fixed 10 km circle centered on 40.75, -73.98. Cities may be in New York or New Jersey. Use this request body for platform search:
+
+```json
+{
+  "transaction": "rent",
+  "location": {
+    "kind": "source_region",
+    "platform": "facebook_marketplace",
+    "country": "US",
+    "region_id": "manhattan-centered-10km-apartment-rental-advertisements"
+  },
+  "limit": 1
+}
+```
+
+For unified search, add `"platforms": ["facebook_marketplace"]`. The provider query uses fixed raw amount bounds of 500–6,000 USD. These do not establish recurring rent and are not supported customer price filters. Unsupported filters, sale, cursors or larger pages fail before source access.
+
+Source property category, unit details/counts, canonical listing/share identity and actual item distance must agree. Numeric prices, billing period, deposit basis, availability, exact item location, contacts, photos and source update time are unknown or omitted. A source product ID is not assumed to be the native listing ID. This observation does not establish complete inventory or housing availability.
+
+The four accepted source operations are platform search, unified search, retained account-owned listing and stored media. Media is an empty array for this source. Native-ID detail, resolution and listing history remain unavailable. Fresh searches cost 50 credits, retained reads 1, errors and prior-response replay 0. Account selectors expire after 24 hours; existing seven-day replay snapshots can outlive selector retention.

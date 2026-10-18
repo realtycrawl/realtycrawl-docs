@@ -2,7 +2,31 @@
 title: "Coverage and evidence"
 ---
 
-The inventory covers 202 researched platforms and 43 defined API operations. This release includes 195 distinct source platforms (the original 193 accepted portal/professional sources plus the supplemental official FHFA and NYC Open Data datasets) and 43 enabled operation IDs, including three metadata operations. Check live capabilities for current enablement. Realtor.com, Keller Williams and eXp France support the dedicated agent operations below.
+The inventory covers 202 researched platforms and 43 defined API operations. This release includes 196 distinct source platforms (the original 194 accepted portal/professional sources plus the supplemental official FHFA and NYC Open Data datasets) and 43 enabled operation IDs, including three metadata operations. Check live capabilities for current enablement. Realtor.com, Keller Williams and eXp France support the dedicated agent operations below.
+
+## Marketplace apartment observations
+
+Facebook Marketplace supports one source-order apartment rental advertisement in a fixed 10 km circle centered on 40.75, -73.98. Cities may be in New York or New Jersey. Use this request body for platform search:
+
+```json
+{
+  "transaction": "rent",
+  "location": {
+    "kind": "source_region",
+    "platform": "facebook_marketplace",
+    "country": "US",
+    "region_id": "manhattan-centered-10km-apartment-rental-advertisements"
+  },
+  "limit": 1
+}
+```
+
+For unified search, add `"platforms": ["facebook_marketplace"]`. The provider query uses fixed raw amount bounds of 500–6,000 USD. These do not establish recurring rent and are not supported customer price filters. Unsupported filters, sale, cursors or larger pages fail before source access.
+
+Source property category, unit details/counts, canonical listing/share identity and actual item distance must agree. Numeric prices, billing period, deposit basis, availability, exact item location, contacts, photos and source update time are unknown or omitted. A source product ID is not assumed to be the native listing ID. This observation does not establish complete inventory or housing availability.
+
+The four accepted source operations are platform search, unified search, retained account-owned listing and stored media. Media is an empty array for this source. Native-ID detail, resolution and listing history remain unavailable. Fresh searches cost 50 credits, retained reads 1, errors and prior-response replay 0. Account selectors expire after 24 hours; existing seven-day replay snapshots can outlive selector retention.
+
 
 ## Unadjusted property comparable recommendations
 
@@ -22,7 +46,7 @@ Booking stay discovery now uses the documented explicit Paris destination ID and
 
 ## Official NYC public property records
 
-NYC Open Data is a distinct supplemental source, not a replacement for any of the seven blocked portals. RealtyCrawl independently wraps DCP PLUTO and DOF Rolling Calendar Sales. Source: NYC Department of City Planning / Department of Finance.
+NYC Open Data is a distinct supplemental source, not a replacement for any of the six blocked portals. RealtyCrawl independently wraps DCP PLUTO and DOF Rolling Calendar Sales. Source: NYC Department of City Planning / Department of Finance.
 
 `POST /v1/properties/resolve` accepts an exact ten-digit current NYC BBL, country US and jurisdiction US-NY-NYC; alternatively platform nyc_pluto, native_id BBL and country US. No address/geocoder inference, condominium billing/unit-lot or historical split/merge matching. Source borough/block/lot and current PLUTO version must agree. Success costs 50 credits and retains this account's property/record/assessment snapshot for 24h. Returned method exact_current_nyc_tax_lot_bbl has unknown confidence; it does not establish title or ownership.
 
@@ -36,7 +60,7 @@ Fresh resolution and sale lookup each use one official metadata query and one bo
 
 ## Official FHFA market data
 
-FHFA is a supplemental government aggregate-data source added to the original 200-platform catalog; the original portal coverage remains 193/200. It does not replace any blocked portal or add listing/property-record access. RealtyCrawl independently wraps the official public dataset. Source: FHFA House Price Index®.
+FHFA is a supplemental government aggregate-data source added to the original 200-platform catalog; the original portal coverage is now 194/200. It does not replace any blocked portal or add listing/property-record access. RealtyCrawl independently wraps the official public dataset. Source: FHFA House Price Index®.
 
 `POST /v1/markets/search` requires platforms=["fhfa"] and either a state name/two-letter-code query or one US text/source_region location (region_id=state code). The 50 states and DC are supported; limit 1–51, default 20, alphabetical state-name order. Query and location are exclusive. No cursor, national, metro or ZIP selector. Search returns account-owned market IDs retained 24h.
 
@@ -345,11 +369,11 @@ The Anjuke Actor requires a minimum request size of 10, but RealtyCrawl applies 
 
 ## Unavailable coverage
 
-The remaining 7 sources and 0 operation definitions are not enabled. All 43 operation definitions have an accepted bounded source contract; this does not enable every source, country or selector. Unadjusted comparable-home recommendations and tax-purpose estimates do not establish adjusted comparable sales. Additional markets and contracts within enabled families still require their own implementation and verification. Licensed MLS and public-record feeds need their own access agreements.
+The remaining 6 sources and 0 operation definitions are not enabled. All 43 operation definitions have an accepted bounded source contract; this does not enable every source, country or selector. Unadjusted comparable-home recommendations and tax-purpose estimates do not establish adjusted comparable sales. Additional markets and contracts within enabled families still require their own implementation and verification. Licensed MLS and public-record feeds need their own access agreements.
 
 Source failures are candidate-specific. Earlier failed actors do not override the accepted adapters listed above. The current capability response determines availability; research entries and historical samples alone do not enable a platform.
 
-Remaining sources: Facebook Marketplace Housing, CoStar, Ten-X, Lianjia, Beike / KE, Rumah.com legacy, Makaan. Preparation, source access, pricing and hosted acceptance limitations are tracked in the implementation backlog.
+Remaining sources: CoStar, Ten-X, Lianjia, Beike / KE, Rumah.com legacy, Makaan. Preparation, source access, pricing and hosted acceptance limitations are tracked in the implementation backlog.
 
 Marketplace remains unavailable after two distinct hosted failures. The category-only input and the changed apartment keyword plus rental-category input each returned Furniture/dining chairs in Preview. Matching echoed query fields do not establish a real estate result; category, explicit property details and returned geography must independently agree. Both failures charged zero application credits. A successful discovery sample does not establish reliable hosted coverage.
 
