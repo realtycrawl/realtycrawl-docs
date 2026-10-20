@@ -3,4 +3,10 @@ title: "Get listing by platform native ID"
 openapi: "GET /v1/{platform}/listings/{native_id}"
 ---
 
-<Note>Check [live capabilities](https://realtycrawl.dev/v1/meta/capabilities) before calling this operation. A documented contract does not imply active coverage for every source or country.</Note>
+<Note>Check [live capabilities](https://realtycrawl.dev/v1/meta/capabilities) before calling. Fresh residential sale details are available for Rightmove (GB) and Redfin (US), within each source's verified contract.</Note>
+
+For Redfin, first resolve a supported listing URL or search listings using the same account. Use the returned source `native_id` for this request while that account's listing observation is retained (24 hours). The number after `/home/` in a Redfin URL is a property ID and is distinct from the native listing ID. A missing, expired or unrelated account's observation returns `404`.
+
+This route performs a fresh source lookup and costs 50 credits when successful. Use `GET /v1/listings/{listing_id}` for the retained observation, or its `/media` route for retained photos, at 1 credit per successful read. Idempotent replays are free.
+
+Redfin support is limited to the qualified active US sale listing shape. Photos are source-reported; availability, estimates, history, contacts and exact address/coordinates are not established by this endpoint.

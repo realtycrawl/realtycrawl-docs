@@ -3,4 +3,8 @@ title: "Resolve a listing URL or source ID"
 openapi: "POST /v1/listings/resolve"
 ---
 
-<Note>Check [live capabilities](https://realtycrawl.dev/v1/meta/capabilities) before calling this operation. A documented contract does not imply active coverage for every source or country.</Note>
+<Note>Check [live capabilities](https://realtycrawl.dev/v1/meta/capabilities) before calling. Canonical Zillow US, Rightmove GB and active Redfin US sale listing URLs are supported within their verified contracts. Native-ID inputs to this resolver remain unavailable.</Note>
+
+A successful resolution returns a matched source listing and saves an account-owned listing observation for 24 hours. For Redfin, use the candidate's `source.native_id` with `GET /v1/redfin/listings/{native_id}` for a subsequent fresh detail lookup using the same account. The URL's `/home/` number identifies a property and is distinct from that listing ID.
+
+Read the saved listing or its media using the candidate's opaque `id` through `GET /v1/listings/{listing_id}` and `GET /v1/listings/{listing_id}/media`. Source resolution costs 50 credits when successful; retained reads cost 1 credit and idempotent replays are free. Estimates, complete source history, contacts and current availability are not implied by a match.
