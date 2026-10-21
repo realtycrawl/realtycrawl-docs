@@ -19,18 +19,19 @@ for(const file of walk('.').filter(f=>f.endsWith('.mdx'))){
  for(const m of text.matchAll(/(?:href="|\]\()\/(?!\/)([^"#)]+)(?:#[^" )]*)?["\)]/g))assert(existsSync(m[1])||existsSync(m[1]+'.mdx'),`Broken local link ${m[1]} in ${file}`);
 }
 assert.equal(spec.servers[0].url,'https://realtycrawl.dev');
-// Keep the reader-facing totals consistent when a source is added or withheld.
-const coverage=readFileSync('coverage.mdx','utf8');
-const researched=Number(coverage.match(/inventory covers (\d+) researched platforms/)?.[1]);
-const enabled=Number(coverage.match(/release includes (\d+) distinct source platforms/)?.[1]);
-const unavailable=Number(coverage.match(/remaining (\d+) sources and (\d+) operation definitions?/)?.[1]);
-assert(Number.isSafeInteger(researched)&&Number.isSafeInteger(enabled)&&Number.isSafeInteger(unavailable),'Missing coverage totals');
-assert.equal(enabled+unavailable,researched,'Source coverage totals disagree');
-const ops=Object.values(spec.paths).flatMap(methods=>Object.values(methods));
-const activeOps=ops.filter(op=>['active','beta'].includes(op['x-runtime-status'])).length;
-assert.equal(Number(coverage.match(/(\d+) defined API operations/)?.[1]),ops.length);
-assert.equal(Number(coverage.match(/(\d+) enabled operation IDs/)?.[1]),activeOps);
-assert.equal(Number(coverage.match(/remaining \d+ sources and (\d+) operation definitions?/)?.[1]),ops.length-activeOps);
+// Validate structured release totals rather than parsing prose that can change independently.
+const snapshot=JSON.parse(readFileSync('coverage.json','utf8'));
+assert(/^\d{4}-\d{2}-\d{2}$/.test(snapshot.asOf),'Missing snapshot date');
+assert.equal(snapshot.activePlatforms+snapshot.unavailablePlatforms.length+snapshot.retiredPlatforms.length,snapshot.catalogPlatforms);
+assert.equal(snapshot.activeBindings+snapshot.documentedBetaBindings,snapshot.callableBindings);
+const nonCallable=[...snapshot.unavailablePlatforms,...snapshot.retiredPlatforms];
+assert.equal(new Set(nonCallable).size,nonCallable.length,'Overlapping unavailable/retired sources');
+assert.equal(snapshot.freshSourceVerification,false,'A dated snapshot is not fresh source verification');
+assert.equal(snapshot.authority,'https://realtycrawl.dev/v1/meta/capabilities');
+const ops=Object.values(spec.paths).flatMap(methods=>Object.entries(methods).filter(([method])=>['get','post','put','patch','delete'].includes(method)).map(([,op])=>op));
+assert.equal(snapshot.operationDefinitions,ops.length);
+assert.equal(new Set(ops.map(op=>op.operationId)).size,ops.length,'Duplicate operation IDs');
+for(const key of ['activePlatforms','activeBindings','documentedBetaBindings','callableBindings'])assert(Number.isSafeInteger(snapshot[key])&&snapshot[key]>=0,`Invalid ${key}`);
 
 if(process.argv.includes('--live')){
  const r=await fetch('https://realtycrawl.dev/v1/openapi.json',{signal:AbortSignal.timeout(30000)});

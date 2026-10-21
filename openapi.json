@@ -158,6 +158,16 @@
               }
             }
           },
+          "410": {
+            "description": "SOURCE_RETIRED: the requested marketplace permanently ceased operations; no provider call or retry.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
           "default": {
             "description": "Typed error response",
             "content": {
@@ -574,6 +584,16 @@
               }
             }
           },
+          "410": {
+            "description": "SOURCE_RETIRED: the requested marketplace permanently ceased operations; no provider call or retry.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
           "default": {
             "description": "Typed error response",
             "content": {
@@ -985,7 +1005,7 @@
       "get": {
         "operationId": "getPlatformListing",
         "summary": "Get listing by platform native ID",
-        "description": "Fresh residential sale listing lookup by native ID for Rightmove (GB). Redfin (US) requires this account’s unexpired retained listing observation; its listing ID is distinct from the property ID in /home/ URLs. Check live capabilities for source enablement.",
+        "description": "Fresh sale details for Rightmove GB, Redfin US, LoopNet Austin commercial listings and Trulia Seattle observations. Redfin, LoopNet and Trulia require this account’s unexpired retained observation. Redfin listing IDs differ from URL property IDs; Trulia native_id is the property URL handle, distinct from Listing ID. Check live capabilities; prepared adapters remain disabled until hosted acceptance. Prepared realestate.com.au Haymarket apartment sale details require this account’s retained native listing ID. Source buy status is not confirmed availability. Price guides, unzoned inspections, agent portraits and floorplans are not converted into exact prices, schedules or photos.",
         "x-research-status": "live-verified",
         "tags": [
           "platform-listings"
@@ -997,6 +1017,16 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/getPlatformListingResponse"
+                }
+              }
+            }
+          },
+          "410": {
+            "description": "SOURCE_RETIRED: the requested marketplace permanently ceased operations; no provider call or retry.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             }
@@ -1036,20 +1066,66 @@
         "x-credit-cost": 50,
         "x-credit-unit": "successful_source_crawl",
         "x-live-verified-platforms": [
+          "realestate_au",
+          "trulia",
+          "loopnet",
           "redfin",
           "rightmove"
         ],
         "x-verified-platforms": [
+          "realestate_au",
+          "trulia",
+          "loopnet",
           "redfin",
           "rightmove"
-        ]
+        ],
+        "x-prepared-platforms": [
+          "zoopla",
+          "idealista",
+          "pap",
+          "rumah123",
+          "propertyguru_my",
+          "propertyguru",
+          "ddproperty",
+          "realtor",
+          "realtor_ca",
+          "propertyfinder",
+          "domain",
+          "fotocasa",
+          "immowelt",
+          "housing",
+          "nobroker",
+          "immoweb",
+          "funda",
+          "daft",
+          "99acres",
+          "pisos",
+          "seloger",
+          "immobiliare",
+          "leboncoin",
+          "bayut",
+          "bayut_sa",
+          "property24",
+          "lianjia",
+          "beike"
+        ],
+        "x-prepared-status": "implementation_only_source_and_hosted_verification_deferred",
+        "x-prepared-cost-holds": {
+          "pisos": "platform_usage_outside_cap",
+          "seloger": "platform_usage_outside_cap",
+          "immobiliare": "startup_and_detail_exceed_cap"
+        },
+        "x-prepared-access-holds": {
+          "lianjia": "unchanged_provider_build_previously_blocked",
+          "beike": "shared_provider_build_previously_blocked"
+        }
       }
     },
     "/v1/listings/resolve": {
       "post": {
         "operationId": "resolveListing",
         "summary": "Resolve a listing URL or source ID",
-        "description": "Resolve a canonical Zillow US, Rightmove GB or active Redfin US sale listing URL. Returns an exact source listing identifier and saves an account-owned observation. Check live capabilities for current source enablement; estimates, source history and contacts are not implied by resolution.",
+        "description": "Resolve a canonical Zillow US, Rightmove GB, Redfin US, LoopNet Austin or Trulia Seattle sale listing URL and save an account-owned observation. Check live capabilities for current enablement; prepared adapters remain disabled until hosted acceptance. Source price history is available only where separately supported; availability, valuations, auctions and contacts are not implied. Prepared realestate.com.au support is restricted to Haymarket, NSW apartment sale URLs; check live capabilities before use. Price guides remain display text with unknown numeric amounts.",
         "x-research-status": "live-verified",
         "tags": [
           "listings"
@@ -1061,6 +1137,16 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/resolveListingResponse"
+                }
+              }
+            }
+          },
+          "410": {
+            "description": "SOURCE_RETIRED: the requested marketplace permanently ceased operations; no provider call or retry.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             }
@@ -1090,15 +1176,61 @@
         "x-credit-cost": 50,
         "x-live-verified-platforms": [
           "zillow",
+          "realestate_au",
+          "trulia",
+          "loopnet",
           "redfin",
           "rightmove"
         ],
         "x-credit-unit": "successful_source_crawl",
         "x-verified-platforms": [
           "zillow",
+          "realestate_au",
+          "trulia",
+          "loopnet",
           "redfin",
           "rightmove"
-        ]
+        ],
+        "x-prepared-platforms": [
+          "zoopla",
+          "idealista",
+          "pap",
+          "rumah123",
+          "propertyguru_my",
+          "propertyguru",
+          "ddproperty",
+          "realtor",
+          "realtor_ca",
+          "propertyfinder",
+          "domain",
+          "fotocasa",
+          "immowelt",
+          "housing",
+          "nobroker",
+          "immoweb",
+          "funda",
+          "daft",
+          "99acres",
+          "pisos",
+          "seloger",
+          "immobiliare",
+          "leboncoin",
+          "bayut",
+          "bayut_sa",
+          "property24",
+          "lianjia",
+          "beike"
+        ],
+        "x-prepared-status": "implementation_only_source_and_hosted_verification_deferred",
+        "x-prepared-cost-holds": {
+          "pisos": "platform_usage_outside_cap",
+          "seloger": "platform_usage_outside_cap",
+          "immobiliare": "startup_and_detail_exceed_cap"
+        },
+        "x-prepared-access-holds": {
+          "lianjia": "unchanged_provider_build_previously_blocked",
+          "beike": "shared_provider_build_previously_blocked"
+        }
       }
     },
     "/v1/listings/{listing_id}": {
@@ -1956,7 +2088,7 @@
       "get": {
         "operationId": "getListingHistory",
         "summary": "getListingHistory",
-        "description": "Verified for the platforms listed in x-live-verified-platforms. Consult /v1/meta/capabilities for current enablement and accepted selectors. Sale searches only. Stored listing, media and history observations expire after 24 hours; they do not trigger a fresh crawl.",
+        "description": "Read source-reported listing history retained by this account for24 hours from an accepted Zillow or Trulia detail observation. Trulia historical dates have date precision; abbreviated prices remain display text with unknown numeric amounts. Sold labels reflect the source and do not establish independently verified closing prices or title records. Check capabilities for current enablement. Prepared Zoopla support is unverified and unavailable: only a retained first-publication date and display-only historical price label are implemented; no timezone, complete price-change history or sold records. Prepared PAP support is unverified and unavailable: only a retained reported publication date is implemented, with unknown historical price and no complete change/sold history.",
         "x-research-status": "live-verified",
         "tags": [
           "listings"
@@ -2014,12 +2146,19 @@
         "x-runtime-status": "beta",
         "x-credit-cost": 1,
         "x-live-verified-platforms": [
-          "zillow"
+          "zillow",
+          "trulia"
         ],
         "x-credit-unit": "stored_observation_read",
         "x-verified-platforms": [
-          "zillow"
-        ]
+          "zillow",
+          "trulia"
+        ],
+        "x-prepared-platforms": [
+          "zoopla",
+          "pap"
+        ],
+        "x-prepared-status": "publication_date_only_implementation_unverified"
       }
     },
     "/v1/listings/{listing_id}/open-houses": {
@@ -6889,7 +7028,8 @@
               "active",
               "unavailable",
               "retired"
-            ]
+            ],
+            "description": "active: accepted source integration; beta: explicitly enabled provider-documentation/offline-tested integration without live source acceptance; research/unavailable/retired: not callable. Check the exact operation and evidence_level."
           },
           "required_selectors": {
             "type": "array",
@@ -8103,5 +8243,8 @@
     {
       "url": "https://realtycrawl.dev"
     }
-  ]
+  ],
+  "externalDocs": {
+    "url": "https://realtycrawl.dev/docs"
+  }
 }

@@ -3,6 +3,4 @@ title: "Read a named source market series"
 openapi: "GET /v1/markets/{market_id}/series"
 ---
 
-Fetch fresh official FHFA quarterly Purchase-Only state HPI for this account’s retained market ID. series=purchase_only_sa or purchase_only_nsa; unit index_1991_q1_100. Optional inclusive from/to must be quarter-start dates (YYYY-01/04/07/10-01), 1991 onward. Periods are quarter-start dates. Costs 50 credits per successful dataset request; no results in range returns404 with zero credits. Published history is revised and release-lagged. Includes source methodology, attribution and low-sample warning where provided. Not median price, property valuation, rents, comparables or property transaction history. Selectors expire after24h; existing7-day idempotency replay remains a prior response snapshot.
-
-<Note>Check [live capabilities](https://realtycrawl.dev/v1/meta/capabilities?platform=fhfa) before calling. Source: FHFA House Price Index®. Both operations fetch fresh official data and cost50 credits on success; errors and idempotent replays cost0. Published history can be revised.</Note>
+<Note>Check [live capabilities](https://realtycrawl.dev/v1/meta/capabilities) before calling this operation. A documented contract does not imply active coverage for every source or country.</Note>

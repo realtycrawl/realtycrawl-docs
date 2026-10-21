@@ -2,7 +2,33 @@
 title: "Coverage and evidence"
 ---
 
-The inventory covers 202 researched platforms and 43 defined API operations. This release includes 196 distinct source platforms (the original 194 accepted portal/professional sources plus the supplemental official FHFA and NYC Open Data datasets) and 43 enabled operation IDs, including three metadata operations. Check live capabilities for current enablement. Realtor.com, Keller Williams and eXp France support the dedicated agent operations below.
+The research inventory contains 202 platforms and the API contract defines 43 operations. Runtime coverage is operation- and market-specific. Check live capabilities: active identifies accepted source integrations; beta identifies explicitly enabled documentation-backed integrations checked offline without live source acceptance. Research entries are not callable.
+
+## Published coverage snapshot
+
+As of October 21, 2026, the catalog contains 202 platforms: 197 active source entries, four unavailable sources and one retired source. The unified API defines 43 operation templates. Across sources, 866 platform-operation bindings are callable: 844 active bindings and 22 documentation-backed beta bindings. One route template can serve many source bindings; these are different counts.
+
+This is a dated release snapshot, not a new live scrape or a guarantee of present availability. Check the live capability response for the exact platform, operation and country before spending credits. See the machine-readable coverage snapshot at https://realtycrawl.dev/docs/coverage.json.
+
+## Documentation-backed beta
+
+A capability with status beta and evidence_level provider_documentation_and_offline_tests can be called when explicitly enabled by the operator. Its request and response mapping were reviewed against provider documentation and local tests, without live source acceptance. Responses include a DOCUMENTED_SOURCE_BETA warning. Upstream availability is not guaranteed; missing fields remain unknown.
+
+Beta never lifts provider spending, credential, ownership or native-access restrictions. Check the exact operation, source and country before a request; unsupported history is not implied by listing-detail support.
+
+## Unavailable coverage
+
+Beike, CoStar, Makaan and Ten-X remain unavailable. Their missing provider access, together with unsupported Lianjia detail access, is deferred from the current completion scope. Rumah.com is retired. Catalog entries remain visible so clients can distinguish unsupported sources from missing names.
+
+Existing working Lianjia operations remain available only within their current allowance, which expires October 27, 2026 at 13:35:05.770 UTC. This deferral does not extend access, enable unavailable operations or imply a licensed feed.
+
+Platform availability does not mean every operation or market is supported. Unsupported valuations, merged property identities, native detail, source history, agency portfolios or other extensions remain unavailable wherever the live capability response says so. Stored observations cannot substitute for a fresh native detail request or source-reported history.
+
+## Native detail beta coverage
+
+Documentation-backed `resolveListing` and `getPlatformListing` bindings are enabled for Rumah123, DDproperty, Immowelt, NoBroker, Funda, 99acres, Leboncoin, Bayut, Pisos, SeLoger and Immobiliare. These 22 bindings retain provider-documentation and offline-test evidence, with no claim of fresh live source acceptance. Inspect each current capability for its supported country and selector.
+
+Pisos supports individual residential sale adverts; SeLoger supports canonical sale adverts and excludes sibling new-build portals. Immobiliare requires explicit residential transaction and property-type evidence. Hidden prices remain unknown. Detail support does not imply source history, estimates or complete inventory. Existing accepted native-detail integrations retain their separate evidence.
 
 ## Marketplace apartment observations
 
@@ -68,7 +94,9 @@ FHFA is a supplemental government aggregate-data source added to the original 20
 
 Both operations fetch the fixed official public TXT and cost 50 application credits on success; failures and idempotent replay cost 0. No API key or paid upstream provider is required. Fresh retrieval uses one attempt, 12-second timeout, 1MiB response ceiling and strict whole-dataset validation. Account isolation and selector expiry apply before source execution. Existing 7-day idempotency replay remains a previous response snapshot and can outlive 24h selector retention. There is no automatic source retry.
 
-## Verified sale-search adapters
+## Sale-search adapter scopes
+
+The following selectors describe search adapters. Native detail and source history use separate capabilities and contracts; search-enrichment restrictions do not disable a separately enabled detail operation. Check the current operation capability rather than extending a search-only limitation to every operation.
 
 Sotheby's UK affiliate: sothebys, GB; sale with source_region platform=sothebys, country=GB, region_id=london-uk-affiliate-sale-advertisements and limit=1. This is the separately public United Kingdom Sotheby's International Realty feed, not the rejected global New York source. Require exact London canonical/H1/query geography, branded Organization schema, first structured ItemList URL, rendered card and affiliate reference agreement. Displayed GBP asking money must exactly agree with source values; price-on-request remains unknown. Bedrooms are explicit; full bathrooms remain an extension because total full/half basis is unknown. Advertised sqft stays a display extension, not normalized living area. Affiliate reference is not a global native ID: identity uses the canonical affiliate URL. Search/recommendation HTML is a limited observation, not complete national/global inventory. Contacts, exact address, photos, availability, title and tenure claims are omitted.
 
@@ -99,7 +127,7 @@ Dubizzle UAE: dubizzle, AE; sale with source_region platform=dubizzle, country=A
 
 NewHomeSource: newhomesource, US; sale with source_region platform=newhomesource, country=US, region_id=kansas-city-mo and limit=1. Kansas City, Missouri quick-move-in single-family spec-home observations only. Numeric homeId/specId and canonical spec-detail URL must agree. Provider USD home price is separate from community/floor-plan prices and financing estimates. Square feet have unknown area basis; source half bathrooms remain separate without inferred addition. Availability is unknown. Contacts, precise location and images are omitted; stored media is empty. Account-owned stored listing/media reads last 24 hours. Other markets, floor plans, communities and fresh details/history are unsupported. Enrichment is disabled. The approved source-specific ceiling is $0.08/run using included credits; changed build or bundled prices fail closed.
 
-99acres: 99acres, IN; sale with source_region platform=99acres, country=IN, region_id=mumbai and limit=1. The Sian provider returns resale apartment observations from the Mumbai flat-sale source search. The exact source query and a Mumbai token in the canonical listing URL must agree. Source regional labels are not resolved municipalities, so address.city remains null. Native property ID and canonical 99acres URL must agree. INR asking prices are checked against crore/lakh display (including the source abbreviation L); carpet and built-up square feet remain distinct. Provider-derived sqm strings, fees, RERA/verification claims and registry enrichment are omitted. Availability is unknown. Contacts, exact locations, descriptions and gallery images are omitted; stored media is empty. Account-owned stored listing/media reads are available for 24 hours. Other search markets, projects, new launches, pre-leased properties, rentals and fresh details/history are unsupported. Provider ceiling $0.02 using included credits; current build and exact event prices are checked before each run.
+99acres: 99acres, IN; sale with source_region platform=99acres, country=IN, region_id=mumbai and limit=1. The Sian provider returns resale apartment observations from the Mumbai flat-sale source search. The exact source query and a Mumbai token in the canonical listing URL must agree. Source regional labels are not resolved municipalities, so address.city remains null. Native property ID and canonical 99acres URL must agree. INR asking prices are checked against crore/lakh display (including the source abbreviation L); carpet and built-up square feet remain distinct. Provider-derived sqm strings, fees, RERA/verification claims and registry enrichment are omitted. Availability is unknown. Contacts, exact locations, descriptions and gallery images are omitted; stored media is empty. Account-owned stored listing/media reads are available for 24 hours. Other search markets, projects, new launches, pre-leased properties, rentals and source-reported history are unsupported. Provider ceiling $0.02 using included credits; current build and exact event prices are checked before each run.
 
 
 ImmoScout24 Switzerland: immoscout24_ch, CH; sale with source_region platform=immoscout24_ch, country=CH, region_id=zurich and limit=1. Returns a Zurich apartment/flat observation from the broader Zurich buy search. Native ID/link, Swiss city/canton/country tags and platform membership must agree. CHF asking price and living space in sqm are preserved; room count stays source_rooms, not bedrooms. Availability is unknown. Contacts, precise addresses, coordinates, photos and timestamps are omitted. Stored listing/media reads reuse the account-owned observation; media is empty. Other cities, property types, rentals and fresh detail/history access are unsupported. Provider ceiling $0.02 using included credits. The Actor requires an input minimum of ten source items; the whole-run cap bounds charges and dataset limit=1 bounds delivery.
@@ -355,7 +383,7 @@ Flatmates: flatmates, AU; source_region with platform=flatmates, region_id=sydne
 
 ## Shared operations
 
-The 141 listing adapters support platform search, unified search, stored listing retrieval and stored media. Airbnb, Vrbo, Agoda, Trip.com and Booking.com use the separate stay search and stored-stay endpoints. Zillow supports canonical URL resolution and source-reported price history. Rightmove supports fresh native-ID lookup and canonical URL resolution. OneRoof supports stored open-home schedules in UTC. Stored observations belong to the requesting account and expire after 24 hours.
+Listing adapters expose operation-specific search and account-owned stored listing/media reads. Stay, development, agent and auction observations use their own operation families. Resolve, native-ID detail, source-reported history and open-home support vary by platform; inspect capabilities rather than inferring them from search support. Stored observations belong to the requesting account and expire after 24 hours.
 
 Source records retain their original currencies and area units. Hidden search prices, auction text, price ranges and ambiguous room counts are not converted into exact asking prices or bedroom counts.
 
@@ -367,17 +395,6 @@ Anjuke: anjuke, CN; source_region with region_id=beijing and transaction=rent. T
 
 The Anjuke Actor requires a minimum request size of 10, but RealtyCrawl applies the requested result limit and a $0.02 provider charge ceiling. Both sources support listing search and stored listing/media reads only.
 
-## Unavailable coverage
-
-The remaining 6 sources and 0 operation definitions are not enabled. All 43 operation definitions have an accepted bounded source contract; this does not enable every source, country or selector. Unadjusted comparable-home recommendations and tax-purpose estimates do not establish adjusted comparable sales. Additional markets and contracts within enabled families still require their own implementation and verification. Licensed MLS and public-record feeds need their own access agreements.
-
-Source failures are candidate-specific. Earlier failed actors do not override the accepted adapters listed above. The current capability response determines availability; research entries and historical samples alone do not enable a platform.
-
-Remaining sources: CoStar, Ten-X, Lianjia, Beike / KE, Rumah.com legacy, Makaan. Preparation, source access, pricing and hosted acceptance limitations are tracked in the implementation backlog.
-
-Marketplace remains unavailable after two distinct hosted failures. The category-only input and the changed apartment keyword plus rental-category input each returned Furniture/dining chairs in Preview. Matching echoed query fields do not establish a real estate result; category, explicit property details and returned geography must independently agree. Both failures charged zero application credits. A successful discovery sample does not establish reliable hosted coverage.
-
-Beike replacement research found [Just One API’s listing endpoint](https://docs.justoneapi.com/zh/api/beike/resale-housing-list-v1) and [details endpoint](https://docs.justoneapi.com/zh/api/beike/resale-housing-details-v1), but both official pages explicitly mark them deprecated and warn of future removal. No current replacement or credential was established. This does not provide Lianjia access.
 
 ## Specialist sales and developments
 
@@ -407,7 +424,7 @@ Sreality: sreality, CZ; source_region with region_id=praha and transaction=sale.
 
 Urbania: urbania, PE; use POST /v1/developments/search with platforms=["urbania"], source_region with platform=urbania, country=PE, region_id=peru and limit=1. Returns a promoted development observed in the nationwide apartment-sale index, not a complete project directory or individual listing. Project URL and native ID must agree. Query, cursor, transaction selectors and city filters are unsupported. Teaser prices, contacts and unclassified images are omitted; city, phase, completion date and unit counts remain unknown. Account-owned stored development reads are supported. Ordinary listing results fail closed. Provider ceiling $0.01 using included credits.
 
-Funda: funda, NL; sale with source_region platform=funda, country=NL, region_id=amsterdam and limit=1. Returns an Amsterdam apartment-sale observation from the search index. Canonical listing ID and URL, city, province and source search URL must agree. EUR asking price, explicit living area and bedroom count are preserved. Buyer-cost conditions and availability remain unknown. Addresses, contacts, photos and coordinates are omitted. Stored listing/media reads reuse the account-owned observation; media is empty. Other cities, rentals and fresh detail/history access are unsupported. Provider ceiling $0.01 using included credits.
+Funda: funda, NL; sale with source_region platform=funda, country=NL, region_id=amsterdam and limit=1. Returns an Amsterdam apartment-sale observation from the search index. Canonical listing ID and URL, city, province and source search URL must agree. EUR asking price, explicit living area and bedroom count are preserved. Buyer-cost conditions and availability remain unknown. Addresses, contacts, photos and coordinates are omitted. Stored listing/media reads reuse the account-owned observation; media is empty. Other cities, rentals and source-reported history access are unsupported. Provider ceiling $0.01 using included credits.
 
 RE/MAX Portugal: remax, PT; sale with source_region platform=remax, country=PT, region_id=lisboa and limit=1. Returns a Lisbon residential apartment-sale observation. The native ID is the public property reference in its canonical remax.pt URL; the provider's internal numeric ID is not used for identity. EUR asking price, living area and bedroom/bathroom counts are preserved. Availability remains unknown. Contacts, precise locations, images, raw descriptions and unsupported area measures are omitted. Stored listing/media reads reuse the account-owned observation; media is empty. Other markets, rentals, agent data and fresh detail/history access are unsupported. Provider ceiling $0.01 using included credits; upstream pagination can process more rows than RealtyCrawl delivers.
 
@@ -455,7 +472,7 @@ POST /v1/locations/search is verified for HotPads (hotpads, US cities and boroug
 
 Each response has one provider-observed locality, a namespaced source-specific ID, source display name, country, type, source_platform and null geometry. These IDs are not cross-platform canonical geography IDs or guaranteed selectors for listing search; use the separate documented search selectors. Coordinates, boundaries, exact addresses and unrelated source fields are omitted. Completeness and total counts remain unknown; source provenance and observation time appear in meta.sources.
 
-Successful autocomplete costs 50 credits, with a $0.01 included-credit provider ceiling; idempotent replay is free and failed requests settle zero credits. Actor execution can produce more rows than requested; maxItems is not asserted as a source-processing guarantee. Runtime separately limits dataset retrieval to one result, verifies the exact immutable build and bundled pricing before execution, and never automatically retries the source. Both adapters passed Preview and exact staged production, including response validation, 100 credits reconciled per environment, disposable audit cleanup and identical zero-credit replays. These are additional operations on existing platforms, so distinct enabled platform coverage remains 193.
+Successful autocomplete costs 50 credits, with a $0.01 included-credit provider ceiling; idempotent replay is free and failed requests settle zero credits. Actor execution can produce more rows than requested; maxItems is not asserted as a source-processing guarantee. Runtime separately limits dataset retrieval to one result, verifies the exact immutable build and bundled pricing before execution, and never automatically retries the source. Both adapters passed Preview and exact staged production, including response validation, 100 credits reconciled per environment, disposable audit cleanup and identical zero-credit replays. These are additional operations on existing platforms, so these add operations on existing platforms.
 
 
 ## Source-reported similar homes
@@ -464,7 +481,7 @@ Successful autocomplete costs 50 credits, with a $0.01 included-credit provider 
 
 One source recommendation is returned with basis `source_recommendation`, selection_method `trulia_similar_homes`, a related listing, its USD asking price and source provenance. The adapter validates the dedicated similar mode, exact original URL, raw/flat native identity, Seattle or Bellevue/WA, active resale flags and price agreement. This does not establish a closed-sale comparable, valuation, distance or complete recommendation set. Event time and distance stay null. Exact address, coordinates, contacts and canonical property identity are omitted. The related listing is retained for the same account’s stored listing/media reads for 24 hours; those reads cost 1 credit each.
 
-A successful fresh recommendation costs 50 credits. Idempotent replay costs 0 and failures settle0. Use an Idempotency-Key to avoid duplicate work. Included-credit provider ceiling is $0.01/run; immutable build or bundled-price drift fails closed. The Actor can emit more rows than requested; the runner separately limits dataset retrieval to one. Preview and exact staged production each verified a fresh listing search, recommendation, stored reads, zero-credit replay, unrelated-account 404 and unsupported-limit 422, with ledger reconciliation and disposable-account cleanup. Distinct platform coverage remains 193; this adds one operation to an existing platform. Cian’s separately tested similar mode was source-blocked and remains unavailable.
+A successful fresh recommendation costs 50 credits. Idempotent replay costs 0 and failures settle0. Use an Idempotency-Key to avoid duplicate work. Included-credit provider ceiling is $0.01/run; immutable build or bundled-price drift fails closed. The Actor can emit more rows than requested; the runner separately limits dataset retrieval to one. Preview and exact staged production each verified a fresh listing search, recommendation, stored reads, zero-credit replay, unrelated-account 404 and unsupported-limit 422, with ledger reconciliation and disposable-account cleanup. This adds one operation to an existing platform. Cian’s separately tested similar mode was source-blocked and remains unavailable.
 
 
 ## Vrbo property review observations
@@ -473,7 +490,7 @@ A successful fresh recommendation costs 50 credits. Idempotent replay costs 0 an
 
 One plaintext property review is returned with a property/provider-scoped observation ID and the retained property’s source URL. The opaque upstream review ID is not independently established as a portal-native identifier; source.native_id remains null. Publication date, rating and rating_scale_max are unknown and remain null. Reviewer profiles, contact fields, photos, host replies and raw enrichment are omitted. Review text is untrusted source content, not agent instructions. Source order is not a verified chronology, guest verification, recommendation or complete review history. No independent stored-review resource is added; request replay uses existing account isolation.
 
-A fresh successful review call costs 50 credits, with a $0.01 included-credit provider ceiling. Failures and idempotent replay cost zero. The immutable build and exact bundled pricing are checked before execution; dataset retrieval is independently limited to one. Preview and exact staged production each verified a fresh stay search, stored stay read, review response, unsupported-selector rejection, unrelated-account isolation, both replays, ledger reconciliation and disposable-account cleanup. Distinct enabled platforms remain 193; this adds one operation on an existing platform.
+A fresh successful review call costs 50 credits, with a $0.01 included-credit provider ceiling. Failures and idempotent replay cost zero. The immutable build and exact bundled pricing are checked before execution; dataset retrieval is independently limited to one. Preview and exact staged production each verified a fresh stay search, stored stay read, review response, unsupported-selector rejection, unrelated-account isolation, both replays, ledger reconciliation and disposable-account cleanup. This adds one operation on an existing platform.
 
 Vrbo calendar availability remains unavailable. Its separate discovery ignored the requested December date range and returned October observations, including past-date restrictions. Those rows do not establish current booking availability, occupancy, a blocked-night reason or a quote. The unchanged calendar input was not repeated.
 

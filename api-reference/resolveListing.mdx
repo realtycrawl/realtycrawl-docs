@@ -3,7 +3,7 @@ title: "Resolve a listing URL or source ID"
 openapi: "POST /v1/listings/resolve"
 ---
 
-<Note>Check [live capabilities](https://realtycrawl.dev/v1/meta/capabilities) before calling. Canonical Zillow US, Rightmove GB and active Redfin US sale listing URLs are supported within their verified contracts. Native-ID inputs to this resolver remain unavailable.</Note>
+<Note>Check [live capabilities](https://realtycrawl.dev/v1/meta/capabilities) for the exact source, operation and country. Native detail availability is distinct from search and stored-read support. Documentation-backed beta bindings are described in [coverage](/coverage); preserve their evidence level and warnings.</Note>
 
 A successful resolution returns a matched source listing and saves an account-owned listing observation for 24 hours. For Redfin, use the candidate's `source.native_id` with `GET /v1/redfin/listings/{native_id}` for a subsequent fresh detail lookup using the same account. The URL's `/home/` number identifies a property and is distinct from that listing ID.
 

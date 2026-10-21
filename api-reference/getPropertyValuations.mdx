@@ -3,6 +3,4 @@ title: "Read a final-roll NYC tax-purpose market estimate"
 openapi: "GET /v1/properties/{property_id}/valuations"
 ---
 
-Use this account’s unexpired resolved NYC A1 one-family tax lot. Fresh official DOF dataset 8y4t-faws metadata and one bounded query require exact BBL, current source roll year, record type 1, final period 3 and tax class 1. Limit 1 (default 1), no cursor. Success costs 50 credits; no data, errors and prior-response replay cost 0. The estimate is the published final market assessed total value in USD for statutory tax purposes. It is distinct from PLUTO actual assessed values, asking/sale prices, tax bills, private AVMs and appraisals. as_of is a source roll year, with as_of_precision=source_roll_year. data_extracted_at and dataset update time have separate meanings; no daily valuation date is inferred. Range, model and confidence remain unknown. No comparable selection or current market guarantee.
-
-<Note>Check [live capabilities](https://realtycrawl.dev/v1/meta/capabilities) before calling. Retained selectors are private to this account for 24 hours. The existing seven-day idempotency replay cache returns a prior response snapshot and can outlive selector retention.</Note>
+<Note>Check [live capabilities](https://realtycrawl.dev/v1/meta/capabilities) before calling this operation. A documented contract does not imply active coverage for every source or country.</Note>

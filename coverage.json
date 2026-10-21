@@ -1,0 +1,32 @@
+{
+  "asOf": "2026-10-21",
+  "catalogPlatforms": 202,
+  "activePlatforms": 197,
+  "unavailablePlatforms": [
+    "beike",
+    "costar",
+    "makaan",
+    "tenx"
+  ],
+  "retiredPlatforms": [
+    "rumah_com"
+  ],
+  "operationDefinitions": 43,
+  "activeBindings": 844,
+  "documentedBetaBindings": 22,
+  "callableBindings": 866,
+  "betaEvidenceLevel": "provider_documentation_and_offline_tests",
+  "deferredProviderPlatforms": [
+    "makaan",
+    "lianjia",
+    "beike",
+    "costar",
+    "tenx"
+  ],
+  "preservedLimitedAccess": {
+    "platform": "lianjia",
+    "expiresAt": "2026-10-27T13:35:05.770Z"
+  },
+  "authority": "https://realtycrawl.dev/v1/meta/capabilities",
+  "freshSourceVerification": false
+}
