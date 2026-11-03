@@ -1,0 +1,5 @@
+/* Match the dashboard brand: 32px icon, 18px name, and 10px gap. */
+#navbar .nav-logo {
+  height: 32px;
+  width: auto;
+}
