@@ -1,0 +1,44 @@
+---
+title: "Subscriptions and credit usage"
+description: "Understand monthly allowances, permanent credits, renewals, and request charges."
+keywords: ["subscriptions", "credits", "billing", "renewals"]
+---
+
+Choose a monthly plan from [your billing dashboard](https://realtycrawl.dev/dashboard/payments). Each successful payment provides a monthly credit allowance. Check source availability and operation costs before subscribing.
+
+## Monthly plans
+
+| Plan | Monthly price (USD) | Monthly credits |
+| --- | ---: | ---: |
+| Starter | $15 | 2,500 |
+| Growth | $49 | 20,000 |
+| Pro | $299 | 150,000 |
+| Enterprise | By agreement | By agreement |
+
+Eligible new accounts receive 500 free credits once without a payment card. The free allowance does not renew when you cancel or resubscribe. Existing signup eligibility restrictions continue to apply.
+
+Monthly credits expire at billing-period end and do not roll over. Your dashboard shows the remaining allowance and expiry. There are no automatic usage overage charges.
+
+## Existing credits
+
+Credits already in your account before the subscription migration remain nonexpiring and usable without an active subscription. Subscribing does not remove this balance. Existing customers are not enrolled automatically. Older checkouts retain their original purchase terms.
+
+Requests spend expiring monthly credits before nonexpiring credits. Your dashboard shows both balances.
+
+## Request charges
+
+Zillow listing searches use 3 credits per returned listing. Other source crawls generally use 50 credits per successful source, and stored-observation reads use 1 credit. Read each operation's contract because batch and multi-source requests can reserve more than one operation charge. Public metadata and successful idempotent replays are free.
+
+Use `X-Max-Credits` to bound a request and inspect the actual response charge. Failed provider work releases its reservation to the allowance that funded it; this does not extend the allowance's expiry. If a request uses multiple balances, its unused reservation returns to the corresponding balances.
+
+When available credits cannot fund a request, execution stops with an insufficient-credit error. No automatic recharge or overage purchase occurs. See the [error reference](/errors) and review your allowance in the dashboard.
+
+## Renewals and payment failures
+
+A new allowance becomes available after successful renewal payment. Failed renewals do not issue another allowance. Already-paid credits keep their original expiry, and nonexpiring credits remain available unless your account is under payment review.
+
+## Change or cancel a plan
+
+Manage billing from your dashboard. Upgrades require payment and add a prorated allowance increase for the remaining period without resetting usage. Downgrades and cancellation take effect at period end. If an immediate upgrade has no amount due and would add credits, contact support to arrange the change at renewal.
+
+After cancellation, the paid allowance stays usable until expiry and nonexpiring credits remain available afterward. The billing portal provides invoices, payment-method updates, and cancellation controls.
