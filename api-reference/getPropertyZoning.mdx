@@ -1,0 +1,8 @@
+---
+title: "Parcel zoning observations"
+openapi: "GET /v1/properties/{property_id}/zoning"
+---
+
+Read district labels and floor-area ratios retained with the exact NYC PLUTO tax-lot observation owned by your account. District entries retain their original source field and code. Built, residential, commercial and community-facility ratios remain source values; missing fields and split-zone flags stay unknown.
+
+verification remains source_reported_unverified and interpretation is null. These source records do not establish present zoning, development entitlement or a legal conclusion. This retained read costs one credit and makes no source request. Older observations without zoning fields return SOURCE_DATA_UNAVAILABLE; resolve the supported parcel again to collect current fields.

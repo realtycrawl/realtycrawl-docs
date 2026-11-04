@@ -104,7 +104,11 @@
               "api-reference/getListingTaxHistory",
               "api-reference/getListingSchools",
               "api-reference/getListingNearby",
-              "api-reference/getListingProfessional"
+              "api-reference/getListingProfessional",
+              "api-reference/getListingEnergy",
+              "api-reference/getListingRisk",
+              "api-reference/getListingLeaseTerms",
+              "api-reference/getListingLayoutOptions"
             ]
           },
           {
@@ -126,7 +130,8 @@
               "api-reference/getPropertyTransactions",
               "api-reference/getPropertyTaxAssessments",
               "api-reference/getPropertyValuations",
-              "api-reference/getPropertyComparables"
+              "api-reference/getPropertyComparables",
+              "api-reference/getPropertyZoning"
             ]
           },
           {
@@ -171,7 +176,8 @@
             "pages": [
               "api-reference/searchMarkets",
               "api-reference/getMarketSeries",
-              "api-reference/getMarket"
+              "api-reference/getMarket",
+              "api-reference/getMarketSummary"
             ]
           },
           {
@@ -181,7 +187,10 @@
               "api-reference/getStay",
               "api-reference/getStayQuote",
               "api-reference/getStayAvailability",
-              "api-reference/getStayReviews"
+              "api-reference/getStayReviews",
+              "api-reference/getStayMedia",
+              "api-reference/getStayContext",
+              "api-reference/getStayDetails"
             ]
           },
           {

@@ -1,0 +1,8 @@
+---
+title: "Property energy labels"
+openapi: "GET /v1/listings/{listing_id}/energy"
+---
+
+Read energy labels and explicit numeric observations actually retained with a supported source listing. EPC, DPE, GES, BER and other source labels keep their own rating system and literal class, including BER numeric suffixes and source letter case. Unknown measurement units and issue dates remain null. These are unverified source observations, not independently checked certificates.
+
+One credit per successful retained read, with no source request or retention renewal. Missing sections return SOURCE_DATA_UNAVAILABLE; malformed retained data is rejected. Preserve each entry’s source and observation time. Documentation-backed mappings have offline contract evidence without new live acceptance.

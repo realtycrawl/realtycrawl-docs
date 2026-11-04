@@ -1,0 +1,8 @@
+---
+title: "Read collected accommodation context"
+openapi: "GET /v1/stays/{stay_id}/context"
+---
+
+Read source room labels, explicit room measurements, advert descriptions and typed amenities where supplied. Booking.com, Agoda, Trip.com, Airbnb and VRBO have different retained fields. Unknown sections remain unavailable. Source star classifications and category scores retain their category and unknown scale; they do not become a verified or averaged guest rating.
+
+Booking.com search-offer flags remain dated source observations with bookable_offer_verified=false. Source policies and offer flags do not guarantee current cancellation terms, breakfast, room inventory or a bookable price. This retained read costs one credit, makes no source request and does not extend expiry.

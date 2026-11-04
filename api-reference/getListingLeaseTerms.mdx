@@ -1,0 +1,8 @@
+---
+title: "Commercial lease terms"
+openapi: "GET /v1/listings/{listing_id}/lease-terms"
+---
+
+Read advertised commercial space counts, area ranges and explicitly labeled asking rates collected with your account’s CommercialCafe, CommercialSearch, CityFeet or PropertyShark search observation. Each rate preserves the source currency, price period and per-area unit. Unknown or unlabeled rate meanings remain unknown.
+
+These are advertisement observations, not independently verified units, present availability, total occupancy costs or agreed lease terms. Building asking price and advertised space rate are separate meanings. individual_units_verified and availability_verified remain false. This retained read costs one credit and makes no source request or retention renewal. Missing saved sections return SOURCE_DATA_UNAVAILABLE.

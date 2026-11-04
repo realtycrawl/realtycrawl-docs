@@ -26,3 +26,59 @@ node examples/node/02-search.mjs
 ## Keep the evidence
 
 Read data together with meta.completeness, meta.sources, warnings and pagination. Keep price currency, period, area units, source URL and observation time. Never replace unknown values with zero.
+
+## Read collected stay context
+
+Replace STAY_ID with your account-owned Booking.com, Agoda or Trip.com observation ID. Read context or replace context with media for the collected photos. Each request costs 1 credit and preserves the original search dates; it does not refresh availability or create a booking quote.
+
+```bash
+curl "https://realtycrawl.dev/v1/stays/$STAY_ID/context" \
+  -H "Authorization: Bearer $REALTYCRAWL_API_KEY" \
+  -H "X-Max-Credits: 1"
+```
+
+## Filter a dated source search
+
+Check the Booking.com capability first. This illustrative search keeps its Paris region, USD currency and two-adult context, adds a source nightly price band and source star class, and reserves 50 credits. The returned price can still be a total-stay observation; preserve its period. Airbnb, VRBO and Trip.com accept different filter sets.
+
+```bash
+curl "https://realtycrawl.dev/v1/stays/search" \
+  -H "Authorization: Bearer $REALTYCRAWL_API_KEY" \
+  -H "Content-Type: application/json" \
+  -H "X-Max-Credits: 50" \
+  -H "Idempotency-Key: booking-filter-example" \
+  --data '{"platforms":["booking"],"location":{"kind":"source_region","platform":"booking","country":"FR","region_id":"paris"},"check_in":"2026-12-01","check_out":"2026-12-03","guests":{"adults":2},"currency":"USD","limit":1,"price":{"min":80,"max":400,"currency":"USD","period":"night"},"source_filters":{"booking":{"star_ratings":[4]}}}'
+```
+
+## Read retained energy observations
+
+Use the listing ID returned by your own supported source search or detail request. This read costs 1 credit and does not refresh the source. Missing energy observations remain unavailable; an unknown unit is never supplied by inference.
+
+```bash
+curl "https://realtycrawl.dev/v1/listings/$LISTING_ID/energy" \
+  -H "Authorization: Bearer $REALTYCRAWL_API_KEY" \
+  -H "X-Max-Credits: 1"
+```
+
+## Read advertised commercial lease terms
+
+Use a listing_id returned by your own supported commercial search. This one-credit read returns the ranges and labeled rates already collected; it does not refresh the source or confirm availability.
+
+```bash
+curl 'https://realtycrawl.dev/v1/listings/YOUR_LISTING_ID/lease-terms' \
+  -H "Authorization: Bearer $REALTYCRAWL_API_KEY" \
+  -H 'X-Max-Credits: 1'
+```
+
+## Filter an exact Domain bedroom count
+
+The source URL contract accepts equal min/max for 1, 2 or 3 bedrooms, apartment type and native price ordering in the existing Sydney NSW 2000 rental window. This is a documentation-backed beta request, not a fresh live sample.
+
+```bash
+curl 'https://realtycrawl.dev/v1/domain/listings/search' \
+  -H "Authorization: Bearer $REALTYCRAWL_API_KEY" \
+  -H 'Content-Type: application/json' \
+  -H 'Idempotency-Key: domain-exact-bedrooms-example' \
+  -H 'X-Max-Credits: 50' \
+  --data '{"location":{"kind":"source_region","platform":"domain","country":"AU","region_id":"sydney-nsw-2000"},"transaction":"rent","property_types":["apartment"],"bedrooms":{"min":2,"max":2},"sort":"price_asc","limit":1}'
+```

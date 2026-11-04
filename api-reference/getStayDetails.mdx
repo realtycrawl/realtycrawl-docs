@@ -1,0 +1,8 @@
+---
+title: "Refresh accommodation details"
+openapi: "GET /v1/stays/{stay_id}/details"
+---
+
+Use the stay_id returned by your own supported Booking.com, Trip.com or VRBO dated search. This documentation-backed beta requires explicit operator enablement. The existing retained source identity, country, dates and two-adult context constrain the request; arbitrary hotel URLs or replacement dates are unsupported.
+
+One bounded fresh detail costs 50 credits on success. Failures cost zero. Responses retain typed source details and available photos/context; missing prices, room facts and policies remain unknown. VRBO details do not establish a dated room quote. No reviews, seller expansion or booking transaction is requested. Check current capabilities before executing.

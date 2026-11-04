@@ -6,3 +6,5 @@ openapi: "GET /v1/listings/{listing_id}/facts"
 Read a saved listing’s explicit property facts, normalized property values, price context and source-supplied features. Supported source sections vary; missing information remains null or unavailable. Search observations are not represented as full detail collection.
 
 Facts are retained for 24 hours and cost one credit to read. This operation makes no fresh source call. Rightmove tenure, living costs, floor plans and stations, Idealista amenities and parking, and other explicit normalized source features can appear in details where supplied.
+
+Exact REW details retain separate full/partial bathrooms, literal tenure and unverified gross-tax observations. Booli last bids and historical asking amounts remain source facts, separate from normalized asking price and verified transactions; total rooms are not bedrooms. Coldwell Banker explicit area units, monthly HOA amounts and separately displayed taxes preserve their source meaning, with payment unknown.

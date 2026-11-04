@@ -1,0 +1,8 @@
+---
+title: "Read collected accommodation photos"
+openapi: "GET /v1/stays/{stay_id}/media"
+---
+
+Read the public source photos actually collected with your account’s Booking.com, Agoda, Trip.com, Airbnb or VRBO observation. This is a retained media read, not a fresh detail or photo-collection request.
+
+Missing source media returns CAPABILITY_UNAVAILABLE. An explicitly supplied empty gallery stays empty. Older dated searches can omit photos even when another output mode supports them. Only validated source CDN links are retained; no contacts or provider credentials are copied. Original observations expire after 24 hours. One credit per successful read.

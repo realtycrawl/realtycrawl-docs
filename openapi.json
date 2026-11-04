@@ -1,9 +1,9 @@
 {
   "openapi": "3.1.0",
   "info": {
-    "title": "RealtyCrawl proposed unified API",
+    "title": "RealtyCrawl API",
     "version": "0.1.0",
-    "description": "Research draft dated 2026-10-13. No production server or enabled platform coverage is implied. Country and operation capabilities must be checked."
+    "description": "Unified real estate API with source-specific operations, markets and access requirements. Check current capabilities before source requests. Documentation-backed beta contracts require explicit configuration and do not establish fresh live source acceptance."
   },
   "jsonSchemaDialect": "https://json-schema.org/draft/2020-12/schema",
   "security": [
@@ -16,7 +16,7 @@
       "get": {
         "operationId": "listPlatforms",
         "summary": "List platform research and availability states",
-        "description": "Proposed interface. Enable only for documented and verified source/country capabilities. Platform registry",
+        "description": "Return the platform registry, including documented, research and retired entries. Catalog presence does not establish current source availability.",
         "x-research-status": "proposed",
         "tags": [
           "meta"
@@ -52,7 +52,7 @@
       "get": {
         "operationId": "listCapabilities",
         "summary": "Describe source and country capabilities",
-        "description": "Proposed interface. Enable only for documented and verified source/country capabilities. Per-provider contracts",
+        "description": "Describe current source, country and operation availability, including supported selectors, filters, ordering and evidence levels.",
         "x-research-status": "proposed",
         "tags": [
           "meta"
@@ -106,7 +106,7 @@
       "get": {
         "operationId": "listSchemas",
         "summary": "List schema versions",
-        "description": "Proposed interface. Enable only for documented and verified source/country capabilities. Canonical contract",
+        "description": "List the current public API schemas and schema versions.",
         "x-research-status": "proposed",
         "tags": [
           "meta"
@@ -615,6 +615,9 @@
               "default": "json"
             }
           }
+        ],
+        "x-documented-platforms": [
+          "591"
         ]
       }
     },
@@ -1104,7 +1107,10 @@
               "settlement": "returned_listings"
             }
           }
-        }
+        },
+        "x-documented-platforms": [
+          "591"
+        ]
       }
     },
     "/v1/{platform}/listings/{native_id}": {
@@ -1285,33 +1291,81 @@
           "beike": "shared_provider_build_previously_blocked"
         },
         "x-documented-platforms": [
-          "zillow",
-          "zoopla",
-          "idealista",
-          "pap",
-          "rumah123",
-          "propertyguru_my",
-          "propertyguru",
-          "ddproperty",
-          "realtor",
-          "realtor_ca",
-          "propertyfinder",
-          "domain",
-          "fotocasa",
-          "immowelt",
-          "housing",
-          "nobroker",
-          "immoweb",
-          "funda",
-          "daft",
           "99acres",
-          "pisos",
-          "seloger",
-          "immobiliare",
-          "leboncoin",
+          "apartmentguide",
+          "apartmentlist",
+          "apartments",
+          "aqar",
+          "athome",
+          "auction",
           "bayut",
           "bayut_sa",
-          "property24"
+          "booli",
+          "centaline",
+          "centris",
+          "coldwellbanker",
+          "commercialrealestate_au",
+          "dabang",
+          "daft",
+          "ddproperty",
+          "domain",
+          "fazwaz",
+          "fincaraiz",
+          "flatmates",
+          "fotocasa",
+          "funda",
+          "furnishedfinder",
+          "habitaclia",
+          "hemnet",
+          "homes",
+          "housing",
+          "housinganywhere",
+          "idealista",
+          "immobiliare",
+          "immonet",
+          "immoscout24",
+          "immoscout24_ch",
+          "immoweb",
+          "immowelt",
+          "imovelweb",
+          "imovirtual",
+          "kleinanzeigen",
+          "lamudi",
+          "landwatch",
+          "leboncoin",
+          "mercadolibre",
+          "metrocuadrado",
+          "naver_land",
+          "nobroker",
+          "openrent",
+          "opensooq",
+          "pap",
+          "pisos",
+          "properstar",
+          "property24",
+          "propertyfinder",
+          "propertyguru",
+          "propertyguru_my",
+          "propiedades",
+          "quintoandar",
+          "realtor",
+          "realtor_ca",
+          "rent",
+          "rumah123",
+          "seloger",
+          "spareroom",
+          "spareroom_us",
+          "spotahome",
+          "sreality",
+          "srx",
+          "trademe",
+          "uniplaces",
+          "vivareal",
+          "zap",
+          "zillow",
+          "zonaprop",
+          "zoopla",
+          "zumper"
         ]
       }
     },
@@ -1463,32 +1517,87 @@
           }
         ],
         "x-documented-platforms": [
-          "zoopla",
-          "idealista",
-          "pap",
-          "rumah123",
-          "propertyguru_my",
-          "propertyguru",
-          "ddproperty",
-          "realtor",
-          "realtor_ca",
-          "propertyfinder",
-          "domain",
-          "fotocasa",
-          "immowelt",
-          "housing",
-          "nobroker",
-          "immoweb",
-          "funda",
-          "daft",
           "99acres",
-          "pisos",
-          "seloger",
-          "immobiliare",
-          "leboncoin",
+          "amber",
+          "apartmentguide",
+          "apartmentlist",
+          "apartments",
+          "aqar",
+          "athome",
+          "auction",
           "bayut",
           "bayut_sa",
-          "property24"
+          "booli",
+          "centaline",
+          "centris",
+          "coldwellbanker",
+          "commercialrealestate_au",
+          "dabang",
+          "daft",
+          "ddproperty",
+          "domain",
+          "dotproperty",
+          "fazwaz",
+          "fincaraiz",
+          "flatmates",
+          "fotocasa",
+          "funda",
+          "furnishedfinder",
+          "habitaclia",
+          "hemnet",
+          "homes",
+          "housing",
+          "housinganywhere",
+          "idealista",
+          "immobiliare",
+          "immonet",
+          "immoscout24",
+          "immoscout24_ch",
+          "immoweb",
+          "immowelt",
+          "imobiliare_ro",
+          "imovelweb",
+          "imovirtual",
+          "kleinanzeigen",
+          "lamudi",
+          "landwatch",
+          "leboncoin",
+          "mercadolibre",
+          "metrocuadrado",
+          "naver_land",
+          "nobroker",
+          "openrent",
+          "opensooq",
+          "pap",
+          "pisos",
+          "properstar",
+          "property24",
+          "propertyfinder",
+          "propertyguru",
+          "propertyguru_my",
+          "propiedades",
+          "quintoandar",
+          "realtor",
+          "realtor_ca",
+          "rent",
+          "rew",
+          "rumah123",
+          "seloger",
+          "spareroom",
+          "spareroom_us",
+          "spotahome",
+          "sreality",
+          "srx",
+          "streeteasy",
+          "student_com",
+          "trademe",
+          "uniplaces",
+          "vivareal",
+          "zap",
+          "zolo",
+          "zonaprop",
+          "zoopla",
+          "zumper"
         ]
       }
     },
@@ -1941,6 +2050,9 @@
           "adondevivir",
           "plusvalia",
           "immoscout24_at"
+        ],
+        "x-documented-platforms": [
+          "591"
         ]
       }
     },
@@ -2410,6 +2522,9 @@
           "adondevivir",
           "plusvalia",
           "immoscout24_at"
+        ],
+        "x-documented-platforms": [
+          "591"
         ]
       }
     },
@@ -5074,6 +5189,9 @@
         "x-credit-cost": 50,
         "x-verified-platforms": [
           "airbnb"
+        ],
+        "x-documented-platforms": [
+          "vrbo"
         ]
       }
     },
@@ -5660,6 +5778,7 @@
         "x-verified-platforms": [],
         "x-documented-platforms": [
           "28hse",
+          "591",
           "99acres",
           "99co",
           "adondevivir",
@@ -6373,36 +6492,91 @@
         "x-verified-platforms": [],
         "x-documented-platforms": [
           "99acres",
+          "amber",
+          "apartmentguide",
+          "apartmentlist",
+          "apartments",
+          "aqar",
+          "athome",
+          "auction",
           "bayut",
           "bayut_sa",
+          "booli",
+          "centaline",
+          "centris",
+          "coldwellbanker",
+          "commercialrealestate_au",
+          "dabang",
           "daft",
           "ddproperty",
           "domain",
+          "dotproperty",
+          "fazwaz",
+          "fincaraiz",
+          "flatmates",
           "fotocasa",
           "funda",
+          "furnishedfinder",
+          "habitaclia",
+          "hemnet",
+          "homes",
           "housing",
+          "housinganywhere",
           "idealista",
           "immobiliare",
+          "immonet",
+          "immoscout24",
+          "immoscout24_ch",
           "immoweb",
           "immowelt",
+          "imobiliare_ro",
+          "imovelweb",
+          "imovirtual",
+          "kleinanzeigen",
+          "lamudi",
+          "landwatch",
           "leboncoin",
           "loopnet",
+          "mercadolibre",
+          "metrocuadrado",
+          "naver_land",
           "nobroker",
+          "openrent",
+          "opensooq",
           "pap",
           "pisos",
+          "properstar",
           "property24",
           "propertyfinder",
           "propertyguru",
           "propertyguru_my",
+          "propiedades",
+          "quintoandar",
           "realestate_au",
           "realtor",
           "realtor_ca",
           "redfin",
+          "rent",
+          "rew",
           "rightmove",
           "rumah123",
           "seloger",
+          "spareroom",
+          "spareroom_us",
+          "spotahome",
+          "sreality",
+          "srx",
+          "streeteasy",
+          "student_com",
+          "trademe",
           "trulia",
-          "zoopla"
+          "uniplaces",
+          "vivareal",
+          "zap",
+          "zolo",
+          "zonaprop",
+          "zoopla",
+          "zumper"
         ],
         "description": "Collect 1–5 unique canonical listing URLs or supported native IDs for one source, sequentially with existing provider caps and no retries. Every selector is preflighted before dispatch; unsupported selectors reject the request before collection. Native IDs retain any account-owned prior-observation requirement. Reserve 50 credits per requested item and charge 50 per successful detail; item failures cost zero. A shared 50-second dispatch deadline prevents new starts. Already-started work is awaited under its adapter timeout and successful completed work is charged. This is documentation-backed orchestration, not fresh upstream acceptance.",
         "requestBody": {
@@ -6866,6 +7040,830 @@
         "x-data-freshness": "retained",
         "x-credit-cost": 1,
         "x-credit-unit": "stored_observation_read"
+      }
+    },
+    "/v1/stays/{stay_id}/media": {
+      "get": {
+        "operationId": "getStayMedia",
+        "summary": "Read collected accommodation photos",
+        "description": "Read source-published photos actually collected in this account’s retained Booking.com, Agoda or Trip.com dated-search observation. Only documented public source CDN URLs are returned. Missing media returns CAPABILITY_UNAVAILABLE; a supplied empty gallery remains empty. No source refresh; original 24-hour retention and source identity are preserved.",
+        "x-research-status": "retained_response_and_offline_tests",
+        "tags": [
+          "stays"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response; meta discloses source completeness",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/getStayMediaResponse"
+                }
+              },
+              "text/csv": {
+                "schema": {
+                  "type": "string",
+                  "description": "Data rows only; request, row count and credits are in headers."
+                }
+              },
+              "application/x-ndjson": {
+                "schema": {
+                  "type": "string",
+                  "description": "One JSON data item per line; metadata is in headers."
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Typed error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "stay_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          {
+            "name": "fields",
+            "in": "query",
+            "description": "Response-only comma-separated field paths relative to data items; up to 32 paths. Source requests and billing are unchanged.",
+            "schema": {
+              "type": "string",
+              "maxLength": 4127
+            }
+          },
+          {
+            "name": "format",
+            "in": "query",
+            "description": "Response-only export format. JSON retains the envelope; CSV/NDJSON contain data records, with request/credit metadata in headers. Errors stay JSON.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "json",
+                "csv",
+                "ndjson"
+              ],
+              "default": "json"
+            }
+          }
+        ],
+        "x-runtime-status": "beta",
+        "x-credit-cost": 1,
+        "x-credit-unit": "stored_observation_read",
+        "x-verified-platforms": [],
+        "x-documented-platforms": [
+          "agoda",
+          "airbnb",
+          "booking",
+          "trip",
+          "vrbo"
+        ],
+        "x-data-freshness": "retained"
+      }
+    },
+    "/v1/stays/{stay_id}/context": {
+      "get": {
+        "operationId": "getStayContext",
+        "summary": "Read collected accommodation context",
+        "description": "Read explicit room observations, source star classifications and category scores from a retained Booking.com, Agoda or Trip.com dated search. Booking source offer observations preserve their dated search context and do not establish a bookable room/rate, occupancy, cancellation terms or meal entitlement. Scores keep unknown rating scales; source room area is not whole-property floor area. No source call; original retention is unchanged.",
+        "x-research-status": "retained_response_and_offline_tests",
+        "tags": [
+          "stays"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response; meta discloses source completeness",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/getStayContextResponse"
+                }
+              },
+              "text/csv": {
+                "schema": {
+                  "type": "string",
+                  "description": "Data rows only; request, row count and credits are in headers."
+                }
+              },
+              "application/x-ndjson": {
+                "schema": {
+                  "type": "string",
+                  "description": "One JSON data item per line; metadata is in headers."
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Typed error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "stay_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          {
+            "name": "fields",
+            "in": "query",
+            "description": "Response-only comma-separated field paths relative to data items; up to 32 paths. Source requests and billing are unchanged.",
+            "schema": {
+              "type": "string",
+              "maxLength": 4127
+            }
+          },
+          {
+            "name": "format",
+            "in": "query",
+            "description": "Response-only export format. JSON retains the envelope; CSV/NDJSON contain data records, with request/credit metadata in headers. Errors stay JSON.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "json",
+                "csv",
+                "ndjson"
+              ],
+              "default": "json"
+            }
+          }
+        ],
+        "x-runtime-status": "beta",
+        "x-credit-cost": 1,
+        "x-credit-unit": "stored_observation_read",
+        "x-verified-platforms": [],
+        "x-documented-platforms": [
+          "agoda",
+          "airbnb",
+          "booking",
+          "trip",
+          "vrbo"
+        ],
+        "x-data-freshness": "retained"
+      }
+    },
+    "/v1/listings/{listing_id}/energy": {
+      "get": {
+        "operationId": "getListingEnergy",
+        "summary": "Property energy labels",
+        "tags": [
+          "listings"
+        ],
+        "x-runtime-status": "beta",
+        "x-research-status": "documented",
+        "x-verified-platforms": [],
+        "x-documented-platforms": [
+          "boliga",
+          "boligsiden",
+          "century21",
+          "immoweb",
+          "immowelt",
+          "myhome",
+          "pap",
+          "seloger",
+          "zimmo"
+        ],
+        "description": "Read source-reported energy labels from your saved listing observation. Values are unverified source statements; no source refresh or independently verified energy certificate. Missing data is unavailable.",
+        "parameters": [
+          {
+            "name": "listing_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          {
+            "name": "fields",
+            "in": "query",
+            "description": "Response-only comma-separated field paths relative to data items; up to 32 paths. Source requests and billing are unchanged.",
+            "schema": {
+              "type": "string",
+              "maxLength": 4127
+            }
+          },
+          {
+            "name": "format",
+            "in": "query",
+            "description": "Response-only export format. JSON retains the envelope; CSV/NDJSON contain data records, with request/credit metadata in headers. Errors stay JSON.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "json",
+                "csv",
+                "ndjson"
+              ],
+              "default": "json"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Source observation; inspect meta for evidence and completeness.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/getListingEnergyResponse"
+                }
+              },
+              "text/csv": {
+                "schema": {
+                  "type": "string",
+                  "description": "Data rows only; request, row count and credits are in headers."
+                }
+              },
+              "application/x-ndjson": {
+                "schema": {
+                  "type": "string",
+                  "description": "One JSON data item per line; metadata is in headers."
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Typed error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "x-data-freshness": "retained",
+        "x-credit-cost": 1,
+        "x-credit-unit": "successful_retained_read",
+        "x-evidence-level": "provider_documentation_and_offline_tests"
+      }
+    },
+    "/v1/listings/{listing_id}/risk": {
+      "get": {
+        "operationId": "getListingRisk",
+        "summary": "Flooding and planning context",
+        "tags": [
+          "listings"
+        ],
+        "x-runtime-status": "beta",
+        "x-research-status": "documented",
+        "x-verified-platforms": [],
+        "x-documented-platforms": [
+          "zimmo"
+        ],
+        "description": "Read literal source flooding and planning codes from your saved observation. No verified hazard, insurance, legal-use or planning determination. Missing data is unavailable.",
+        "parameters": [
+          {
+            "name": "listing_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          {
+            "name": "fields",
+            "in": "query",
+            "description": "Response-only comma-separated field paths relative to data items; up to 32 paths. Source requests and billing are unchanged.",
+            "schema": {
+              "type": "string",
+              "maxLength": 4127
+            }
+          },
+          {
+            "name": "format",
+            "in": "query",
+            "description": "Response-only export format. JSON retains the envelope; CSV/NDJSON contain data records, with request/credit metadata in headers. Errors stay JSON.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "json",
+                "csv",
+                "ndjson"
+              ],
+              "default": "json"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Source observation; inspect meta for evidence and completeness.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/getListingRiskResponse"
+                }
+              },
+              "text/csv": {
+                "schema": {
+                  "type": "string",
+                  "description": "Data rows only; request, row count and credits are in headers."
+                }
+              },
+              "application/x-ndjson": {
+                "schema": {
+                  "type": "string",
+                  "description": "One JSON data item per line; metadata is in headers."
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Typed error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "x-data-freshness": "retained",
+        "x-credit-cost": 1,
+        "x-credit-unit": "successful_retained_read",
+        "x-evidence-level": "provider_documentation_and_offline_tests"
+      }
+    },
+    "/v1/stays/{stay_id}/details": {
+      "get": {
+        "operationId": "getStayDetails",
+        "summary": "Refresh accommodation details",
+        "description": "Collect one source detail observation using your account’s retained accommodation identity. Original source market and date restrictions apply. Documentation-backed beta requires explicit contract enablement; no booking or availability guarantee.",
+        "x-research-status": "documented",
+        "tags": [
+          "stays"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response; meta discloses source completeness",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/getStayDetailsResponse"
+                }
+              },
+              "text/csv": {
+                "schema": {
+                  "type": "string",
+                  "description": "Data rows only; request, row count and credits are in headers."
+                }
+              },
+              "application/x-ndjson": {
+                "schema": {
+                  "type": "string",
+                  "description": "One JSON data item per line; metadata is in headers."
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Typed error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "stay_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          {
+            "name": "fields",
+            "in": "query",
+            "description": "Response-only comma-separated field paths relative to data items; up to 32 paths. Source requests and billing are unchanged.",
+            "schema": {
+              "type": "string",
+              "maxLength": 4127
+            }
+          },
+          {
+            "name": "format",
+            "in": "query",
+            "description": "Response-only export format. JSON retains the envelope; CSV/NDJSON contain data records, with request/credit metadata in headers. Errors stay JSON.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "json",
+                "csv",
+                "ndjson"
+              ],
+              "default": "json"
+            }
+          }
+        ],
+        "x-runtime-status": "beta",
+        "x-credit-cost": 50,
+        "x-verified-platforms": [],
+        "x-documented-platforms": [
+          "booking",
+          "trip",
+          "vrbo"
+        ],
+        "x-evidence-level": "provider_documentation_and_offline_tests",
+        "x-data-freshness": "source_request",
+        "x-credit-unit": "successful_source_request"
+      }
+    },
+    "/v1/properties/{property_id}/zoning": {
+      "get": {
+        "operationId": "getPropertyZoning",
+        "summary": "Parcel zoning observations",
+        "description": "Read literal district labels and source floor-area ratios retained from NYC DCP PLUTO. No legal-use, development-capacity, zoning-opinion or approval determination. Missing fields remain unavailable.",
+        "x-research-status": "documented",
+        "tags": [
+          "properties"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response; meta discloses source completeness",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/getPropertyZoningResponse"
+                }
+              },
+              "text/csv": {
+                "schema": {
+                  "type": "string",
+                  "description": "Data rows only; request, row count and credits are in headers."
+                }
+              },
+              "application/x-ndjson": {
+                "schema": {
+                  "type": "string",
+                  "description": "One JSON data item per line; metadata is in headers."
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Typed error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "property_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          {
+            "name": "fields",
+            "in": "query",
+            "description": "Response-only comma-separated field paths relative to data items; up to 32 paths. Source requests and billing are unchanged.",
+            "schema": {
+              "type": "string",
+              "maxLength": 4127
+            }
+          },
+          {
+            "name": "format",
+            "in": "query",
+            "description": "Response-only export format. JSON retains the envelope; CSV/NDJSON contain data records, with request/credit metadata in headers. Errors stay JSON.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "json",
+                "csv",
+                "ndjson"
+              ],
+              "default": "json"
+            }
+          }
+        ],
+        "x-runtime-status": "beta",
+        "x-credit-cost": 1,
+        "x-verified-platforms": [],
+        "x-documented-platforms": [
+          "nyc_pluto"
+        ],
+        "x-evidence-level": "provider_documentation_and_offline_tests",
+        "x-data-freshness": "retained",
+        "x-credit-unit": "successful_retained_read"
+      }
+    },
+    "/v1/markets/{market_id}/summary": {
+      "get": {
+        "operationId": "getMarketSummary",
+        "summary": "State index growth summary",
+        "tags": [
+          "markets"
+        ],
+        "description": "Calculate quarterly, annual and five-year annualized changes from the latest published FHFA state index. Source revisions and release lag apply; no property valuation, transaction-price or forecast claim.",
+        "parameters": [
+          {
+            "name": "market_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          {
+            "name": "fields",
+            "in": "query",
+            "description": "Response-only comma-separated field paths relative to data items; up to 32 paths. Source requests and billing are unchanged.",
+            "schema": {
+              "type": "string",
+              "maxLength": 4127
+            }
+          },
+          {
+            "name": "format",
+            "in": "query",
+            "description": "Response-only export format. JSON retains the envelope; CSV/NDJSON contain data records, with request/credit metadata in headers. Errors stay JSON.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "json",
+                "csv",
+                "ndjson"
+              ],
+              "default": "json"
+            }
+          },
+          {
+            "name": "series",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "purchase_only_sa",
+                "purchase_only_nsa"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Source observation; inspect meta for evidence and completeness.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/getMarketSummaryResponse"
+                }
+              },
+              "text/csv": {
+                "schema": {
+                  "type": "string",
+                  "description": "Data rows only; request, row count and credits are in headers."
+                }
+              },
+              "application/x-ndjson": {
+                "schema": {
+                  "type": "string",
+                  "description": "One JSON data item per line; metadata is in headers."
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Typed error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "x-runtime-status": "beta",
+        "x-verified-platforms": [],
+        "x-data-freshness": "source_request",
+        "x-credit-cost": 50,
+        "x-credit-unit": "successful_source_request",
+        "x-documented-platforms": [
+          "fhfa"
+        ],
+        "x-research-status": "documented",
+        "x-evidence-level": "provider_documentation_and_offline_tests"
+      }
+    },
+    "/v1/listings/{listing_id}/lease-terms": {
+      "get": {
+        "operationId": "getListingLeaseTerms",
+        "summary": "Commercial lease terms",
+        "tags": [
+          "listings"
+        ],
+        "x-runtime-status": "beta",
+        "x-research-status": "documented",
+        "x-verified-platforms": [],
+        "x-documented-platforms": [
+          "cityfeet",
+          "commercialcafe",
+          "commercialsearch",
+          "propertyshark"
+        ],
+        "description": "Read advertised space counts, area ranges and explicitly labeled asking rates from your saved source observation. No physical-unit inventory, complete charges, current availability or lease agreement is verified.",
+        "parameters": [
+          {
+            "name": "listing_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          {
+            "name": "fields",
+            "in": "query",
+            "description": "Response-only comma-separated field paths relative to data items; up to 32 paths. Source requests and billing are unchanged.",
+            "schema": {
+              "type": "string",
+              "maxLength": 4127
+            }
+          },
+          {
+            "name": "format",
+            "in": "query",
+            "description": "Response-only export format. JSON retains the envelope; CSV/NDJSON contain data records, with request/credit metadata in headers. Errors stay JSON.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "json",
+                "csv",
+                "ndjson"
+              ],
+              "default": "json"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Source observation; inspect meta for evidence and completeness.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/getListingLeaseTermsResponse"
+                }
+              },
+              "text/csv": {
+                "schema": {
+                  "type": "string",
+                  "description": "Data rows only; request, row count and credits are in headers."
+                }
+              },
+              "application/x-ndjson": {
+                "schema": {
+                  "type": "string",
+                  "description": "One JSON data item per line; metadata is in headers."
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Typed error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "x-data-freshness": "retained",
+        "x-credit-cost": 1,
+        "x-credit-unit": "successful_retained_read",
+        "x-evidence-level": "provider_documentation_and_offline_tests"
+      }
+    },
+    "/v1/listings/{listing_id}/layout-options": {
+      "get": {
+        "operationId": "getListingLayoutOptions",
+        "summary": "Advertised rental layouts",
+        "tags": [
+          "listings"
+        ],
+        "x-runtime-status": "beta",
+        "x-research-status": "documented",
+        "x-verified-platforms": [],
+        "x-documented-platforms": [
+          "point2homes",
+          "rentals_ca"
+        ],
+        "description": "Read source-advertised bedroom, bathroom, area and price ranges. These are aggregate advertisement attributes, not identified floor plans, individual units or verified availability. Price periods remain source-specific.",
+        "parameters": [
+          {
+            "name": "listing_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          {
+            "name": "fields",
+            "in": "query",
+            "description": "Response-only comma-separated field paths relative to data items; up to 32 paths. Source requests and billing are unchanged.",
+            "schema": {
+              "type": "string",
+              "maxLength": 4127
+            }
+          },
+          {
+            "name": "format",
+            "in": "query",
+            "description": "Response-only export format. JSON retains the envelope; CSV/NDJSON contain data records, with request/credit metadata in headers. Errors stay JSON.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "json",
+                "csv",
+                "ndjson"
+              ],
+              "default": "json"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Source observation; inspect meta for evidence and completeness.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/getListingLayoutOptionsResponse"
+                }
+              },
+              "text/csv": {
+                "schema": {
+                  "type": "string",
+                  "description": "Data rows only; request, row count and credits are in headers."
+                }
+              },
+              "application/x-ndjson": {
+                "schema": {
+                  "type": "string",
+                  "description": "One JSON data item per line; metadata is in headers."
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Typed error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "x-data-freshness": "retained",
+        "x-credit-cost": 1,
+        "x-credit-unit": "successful_retained_read",
+        "x-evidence-level": "provider_documentation_and_offline_tests"
       }
     }
   },
@@ -9524,6 +10522,126 @@
           },
           "cursor": {
             "type": "string"
+          },
+          "price": {
+            "type": "object",
+            "properties": {
+              "min": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 10000000
+              },
+              "max": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 10000000
+              },
+              "currency": {
+                "type": "string",
+                "enum": [
+                  "USD",
+                  "GBP"
+                ]
+              },
+              "period": {
+                "const": "night"
+              }
+            },
+            "required": [
+              "currency",
+              "period"
+            ],
+            "additionalProperties": false
+          },
+          "bedrooms": {
+            "type": "object",
+            "properties": {
+              "min": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 100
+              },
+              "max": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 100
+              }
+            },
+            "required": [],
+            "additionalProperties": false
+          },
+          "bathrooms": {
+            "type": "object",
+            "properties": {
+              "min": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 100
+              },
+              "max": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 100
+              }
+            },
+            "required": [],
+            "additionalProperties": false
+          },
+          "beds": {
+            "type": "object",
+            "properties": {
+              "min": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 100
+              },
+              "max": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 100
+              }
+            },
+            "required": [],
+            "additionalProperties": false
+          },
+          "amenities": {
+            "type": "array",
+            "minItems": 1,
+            "maxItems": 12,
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "pool",
+                "hot_tub",
+                "wifi",
+                "air_conditioning",
+                "kitchen",
+                "washer",
+                "pets_allowed",
+                "parking",
+                "oceanfront",
+                "beachfront",
+                "fireplace",
+                "gym"
+              ]
+            }
+          },
+          "sort": {
+            "type": "string",
+            "enum": [
+              "source_order",
+              "price_asc",
+              "price_desc",
+              "rating_desc",
+              "distance"
+            ]
+          },
+          "source_filters": {
+            "type": "object",
+            "description": "Provider-documented accommodation filters in a matching booking or trip namespace. Unsupported keys and source combinations reject.",
+            "maxProperties": 1,
+            "additionalProperties": true
           }
         },
         "required": [
@@ -9907,6 +11025,37 @@
             "type": "array",
             "items": {
               "type": "string"
+            }
+          },
+          "documented_regions": {
+            "type": "array",
+            "description": "Source region selectors with individual evidence levels. A documented selector does not establish fresh live acceptance.",
+            "items": {
+              "type": "object",
+              "properties": {
+                "region_id": {
+                  "type": "string"
+                },
+                "country": {
+                  "type": "string"
+                },
+                "label": {
+                  "type": "string"
+                },
+                "state": {
+                  "type": "string"
+                },
+                "evidence_level": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "region_id",
+                "country",
+                "label",
+                "evidence_level"
+              ],
+              "additionalProperties": false
             }
           }
         },
@@ -12100,6 +13249,1226 @@
         "properties": {
           "data": {
             "$ref": "#/components/schemas/Market"
+          },
+          "meta": {
+            "$ref": "#/components/schemas/Meta"
+          }
+        },
+        "required": [
+          "data",
+          "meta"
+        ],
+        "additionalProperties": false
+      },
+      "StayRoomContext": {
+        "type": "object",
+        "properties": {
+          "bedrooms": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 100
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "bathrooms": {
+            "anyOf": [
+              {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 100
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "beds": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 100
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "kitchens": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 100
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "living_rooms": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 100
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "source_room_label": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 2000
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "room_area": {
+            "anyOf": [
+              {
+                "type": "object",
+                "properties": {
+                  "value": {
+                    "type": "number",
+                    "exclusiveMinimum": 0,
+                    "maximum": 100000
+                  },
+                  "unit": {
+                    "const": "sqm"
+                  },
+                  "basis": {
+                    "const": "source_room_area"
+                  }
+                },
+                "required": [
+                  "value",
+                  "unit",
+                  "basis"
+                ],
+                "additionalProperties": false
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "additionalProperties": false
+      },
+      "StaySourceRating": {
+        "type": "object",
+        "properties": {
+          "kind": {
+            "enum": [
+              "source_star_classification",
+              "source_category_score"
+            ]
+          },
+          "category": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 500
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "value": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 100
+          },
+          "scale": {
+            "type": "null"
+          },
+          "source": {
+            "$ref": "#/components/schemas/Source"
+          }
+        },
+        "required": [
+          "kind",
+          "category",
+          "value",
+          "scale",
+          "source"
+        ],
+        "additionalProperties": false
+      },
+      "StayOfferObservation": {
+        "type": "object",
+        "properties": {
+          "free_cancellation": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "no_prepayment": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "breakfast_included": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "source_meal_plan": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 2000
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "scope": {
+            "const": "dated_search_offer_observation"
+          },
+          "bookable_offer_verified": {
+            "const": false
+          }
+        },
+        "required": [
+          "scope",
+          "bookable_offer_verified"
+        ],
+        "additionalProperties": false
+      },
+      "StayContext": {
+        "type": "object",
+        "properties": {
+          "stay_id": {
+            "type": "string"
+          },
+          "room": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/StayRoomContext"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "ratings": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/StaySourceRating"
+            },
+            "maxItems": 64
+          },
+          "source_offer_observations": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/StayOfferObservation"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "check_in": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "check_out": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "origin": {
+            "const": "source_reported"
+          },
+          "completeness": {
+            "const": "unknown"
+          },
+          "source": {
+            "$ref": "#/components/schemas/Source"
+          },
+          "description": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 50000
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "amenities": {
+            "anyOf": [
+              {
+                "type": "array",
+                "maxItems": 500,
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "type": "string",
+                      "maxLength": 1000
+                    },
+                    "category": {
+                      "anyOf": [
+                        {
+                          "type": "string",
+                          "maxLength": 500
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ]
+                    },
+                    "available": {
+                      "anyOf": [
+                        {
+                          "type": "boolean"
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ]
+                    }
+                  },
+                  "required": [
+                    "name",
+                    "category",
+                    "available"
+                  ],
+                  "additionalProperties": false
+                }
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "source_policies": {
+            "anyOf": [
+              {
+                "type": "object",
+                "properties": {
+                  "checkInFrom": {
+                    "anyOf": [
+                      {
+                        "type": "string",
+                        "maxLength": 300
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "checkInUntil": {
+                    "anyOf": [
+                      {
+                        "type": "string",
+                        "maxLength": 300
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "checkOutFrom": {
+                    "anyOf": [
+                      {
+                        "type": "string",
+                        "maxLength": 300
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "checkOutUntil": {
+                    "anyOf": [
+                      {
+                        "type": "string",
+                        "maxLength": 300
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  }
+                },
+                "required": [],
+                "additionalProperties": false
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "required": [
+          "stay_id",
+          "room",
+          "ratings",
+          "source_offer_observations",
+          "check_in",
+          "check_out",
+          "origin",
+          "completeness",
+          "source"
+        ],
+        "additionalProperties": false
+      },
+      "getStayMediaResponse": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Media"
+            },
+            "maxItems": 200
+          },
+          "meta": {
+            "$ref": "#/components/schemas/Meta"
+          }
+        },
+        "required": [
+          "data",
+          "meta"
+        ],
+        "additionalProperties": false
+      },
+      "getStayContextResponse": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/StayContext"
+          },
+          "meta": {
+            "$ref": "#/components/schemas/Meta"
+          }
+        },
+        "required": [
+          "data",
+          "meta"
+        ],
+        "additionalProperties": false
+      },
+      "ListingEnergyCertificate": {
+        "type": "object",
+        "properties": {
+          "kind": {
+            "type": "string",
+            "enum": [
+              "epc",
+              "dpe",
+              "ges",
+              "ber",
+              "source_energy_label"
+            ]
+          },
+          "rating": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 80
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "value": {
+            "anyOf": [
+              {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1000000
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "unit": {
+            "anyOf": [
+              {
+                "const": "kWh/m2"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "issued_at": {
+            "type": "null"
+          },
+          "source": {
+            "$ref": "#/components/schemas/Source"
+          }
+        },
+        "required": [
+          "kind",
+          "rating",
+          "value",
+          "unit",
+          "issued_at",
+          "source"
+        ],
+        "additionalProperties": false
+      },
+      "ListingEnergy": {
+        "type": "object",
+        "properties": {
+          "certificates": {
+            "type": "array",
+            "minItems": 1,
+            "maxItems": 20,
+            "items": {
+              "$ref": "#/components/schemas/ListingEnergyCertificate"
+            }
+          },
+          "origin": {
+            "const": "source_reported"
+          },
+          "completeness": {
+            "const": "unknown"
+          },
+          "source": {
+            "$ref": "#/components/schemas/Source"
+          }
+        },
+        "required": [
+          "certificates",
+          "origin",
+          "completeness",
+          "source"
+        ],
+        "additionalProperties": false
+      },
+      "ListingRisk": {
+        "type": "object",
+        "properties": {
+          "flooding": {
+            "type": "array",
+            "maxItems": 50,
+            "items": {
+              "type": "object",
+              "properties": {
+                "source_type": {
+                  "type": "string",
+                  "maxLength": 100
+                },
+                "source_status": {
+                  "type": "string",
+                  "maxLength": 100
+                },
+                "source": {
+                  "$ref": "#/components/schemas/Source"
+                }
+              },
+              "required": [
+                "source_type",
+                "source_status",
+                "source"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "planning": {
+            "type": "array",
+            "maxItems": 50,
+            "items": {
+              "type": "object",
+              "properties": {
+                "source_type": {
+                  "type": "string",
+                  "maxLength": 100
+                },
+                "source_status": {
+                  "anyOf": [
+                    {
+                      "type": "string",
+                      "maxLength": 100
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                },
+                "source_destination": {
+                  "anyOf": [
+                    {
+                      "type": "string",
+                      "maxLength": 100
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                },
+                "source": {
+                  "$ref": "#/components/schemas/Source"
+                }
+              },
+              "required": [
+                "source_type",
+                "source_status",
+                "source_destination",
+                "source"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "verification": {
+            "const": "source_reported_unverified"
+          },
+          "origin": {
+            "const": "source_reported"
+          },
+          "completeness": {
+            "const": "unknown"
+          },
+          "source": {
+            "$ref": "#/components/schemas/Source"
+          }
+        },
+        "required": [
+          "flooding",
+          "planning",
+          "verification",
+          "origin",
+          "completeness",
+          "source"
+        ],
+        "additionalProperties": false
+      },
+      "getListingEnergyResponse": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/ListingEnergy"
+          },
+          "meta": {
+            "$ref": "#/components/schemas/Meta"
+          }
+        },
+        "required": [
+          "data",
+          "meta"
+        ],
+        "additionalProperties": false
+      },
+      "getListingRiskResponse": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/ListingRisk"
+          },
+          "meta": {
+            "$ref": "#/components/schemas/Meta"
+          }
+        },
+        "required": [
+          "data",
+          "meta"
+        ],
+        "additionalProperties": false
+      },
+      "getStayDetailsResponse": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/Stay"
+          },
+          "meta": {
+            "$ref": "#/components/schemas/Meta"
+          }
+        },
+        "required": [
+          "data",
+          "meta"
+        ],
+        "additionalProperties": false
+      },
+      "PropertyZoning": {
+        "type": "object",
+        "properties": {
+          "property_id": {
+            "type": "string"
+          },
+          "districts": {
+            "type": "array",
+            "maxItems": 9,
+            "items": {
+              "type": "object",
+              "properties": {
+                "kind": {
+                  "type": "string",
+                  "enum": [
+                    "zoning",
+                    "overlay",
+                    "special",
+                    "limited_height",
+                    "historic",
+                    "landmark"
+                  ]
+                },
+                "source_field": {
+                  "type": "string"
+                },
+                "code": {
+                  "type": "string",
+                  "maxLength": 300
+                }
+              },
+              "required": [
+                "kind",
+                "source_field",
+                "code"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "source_floor_area_ratios": {
+            "type": "object",
+            "properties": {
+              "built": {
+                "anyOf": [
+                  {
+                    "type": "number",
+                    "minimum": 0,
+                    "maximum": 1000000
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "residential": {
+                "anyOf": [
+                  {
+                    "type": "number",
+                    "minimum": 0,
+                    "maximum": 1000000
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "commercial": {
+                "anyOf": [
+                  {
+                    "type": "number",
+                    "minimum": 0,
+                    "maximum": 1000000
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "community_facility": {
+                "anyOf": [
+                  {
+                    "type": "number",
+                    "minimum": 0,
+                    "maximum": 1000000
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              }
+            },
+            "required": [
+              "built",
+              "residential",
+              "commercial",
+              "community_facility"
+            ],
+            "additionalProperties": false
+          },
+          "split_zoning": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "origin": {
+            "const": "source_reported"
+          },
+          "verification": {
+            "const": "source_reported_unverified"
+          },
+          "interpretation": {
+            "type": "null"
+          },
+          "source": {
+            "$ref": "#/components/schemas/Source"
+          }
+        },
+        "required": [
+          "property_id",
+          "districts",
+          "source_floor_area_ratios",
+          "split_zoning",
+          "origin",
+          "verification",
+          "interpretation",
+          "source"
+        ],
+        "additionalProperties": false
+      },
+      "MarketSummary": {
+        "type": "object",
+        "properties": {
+          "market_id": {
+            "type": "string"
+          },
+          "series": {
+            "type": "string",
+            "enum": [
+              "purchase_only_sa",
+              "purchase_only_nsa"
+            ]
+          },
+          "period": {
+            "type": "string",
+            "format": "date"
+          },
+          "value": {
+            "type": "number",
+            "exclusiveMinimum": 0
+          },
+          "unit": {
+            "const": "index_1991_q1_100"
+          },
+          "frequency": {
+            "const": "quarterly"
+          },
+          "changes": {
+            "type": "object",
+            "properties": {
+              "quarter_over_quarter_percent": {
+                "anyOf": [
+                  {
+                    "type": "number"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "year_over_year_percent": {
+                "anyOf": [
+                  {
+                    "type": "number"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "five_year_annualized_percent": {
+                "anyOf": [
+                  {
+                    "type": "number"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              }
+            },
+            "required": [
+              "quarter_over_quarter_percent",
+              "year_over_year_percent",
+              "five_year_annualized_percent"
+            ],
+            "additionalProperties": false
+          },
+          "origin": {
+            "const": "derived_from_source_index"
+          },
+          "methodology": {
+            "type": "string"
+          },
+          "source": {
+            "$ref": "#/components/schemas/Source"
+          }
+        },
+        "required": [
+          "market_id",
+          "series",
+          "period",
+          "value",
+          "unit",
+          "frequency",
+          "changes",
+          "origin",
+          "methodology",
+          "source"
+        ],
+        "additionalProperties": false
+      },
+      "getPropertyZoningResponse": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/PropertyZoning"
+          },
+          "meta": {
+            "$ref": "#/components/schemas/Meta"
+          }
+        },
+        "required": [
+          "data",
+          "meta"
+        ],
+        "additionalProperties": false
+      },
+      "getMarketSummaryResponse": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/MarketSummary"
+          },
+          "meta": {
+            "$ref": "#/components/schemas/Meta"
+          }
+        },
+        "required": [
+          "data",
+          "meta"
+        ],
+        "additionalProperties": false
+      },
+      "ListingLeaseTerms": {
+        "type": "object",
+        "properties": {
+          "listing_id": {
+            "type": "string"
+          },
+          "individual_units_verified": {
+            "const": false
+          },
+          "availability_verified": {
+            "const": false
+          },
+          "origin": {
+            "const": "source_reported"
+          },
+          "completeness": {
+            "const": "unknown"
+          },
+          "source": {
+            "$ref": "#/components/schemas/Source"
+          },
+          "advertised_space_count": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 100000
+          },
+          "area_range": {
+            "type": "object",
+            "properties": {
+              "min": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 10000000000
+              },
+              "max": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 10000000000
+              },
+              "source_label": {
+                "anyOf": [
+                  {
+                    "type": "string",
+                    "maxLength": 300
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "unit": {
+                "const": "sqft"
+              },
+              "basis": {
+                "const": "advertised_space_range"
+              }
+            },
+            "required": [
+              "min",
+              "max",
+              "source_label",
+              "unit",
+              "basis"
+            ],
+            "additionalProperties": false
+          },
+          "asking_rate": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Money"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "source_rate_label": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 300
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "required": [
+          "listing_id",
+          "individual_units_verified",
+          "availability_verified",
+          "origin",
+          "completeness",
+          "source",
+          "advertised_space_count",
+          "area_range",
+          "asking_rate",
+          "source_rate_label"
+        ],
+        "additionalProperties": false
+      },
+      "ListingLayoutOptions": {
+        "type": "object",
+        "properties": {
+          "listing_id": {
+            "type": "string"
+          },
+          "individual_units_verified": {
+            "const": false
+          },
+          "availability_verified": {
+            "const": false
+          },
+          "origin": {
+            "const": "source_reported"
+          },
+          "completeness": {
+            "const": "unknown"
+          },
+          "source": {
+            "$ref": "#/components/schemas/Source"
+          },
+          "bedroom_range": {
+            "type": "object",
+            "properties": {
+              "min": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 10000000000
+              },
+              "max": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 10000000000
+              },
+              "source_label": {
+                "anyOf": [
+                  {
+                    "type": "string",
+                    "maxLength": 300
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              }
+            },
+            "required": [
+              "min",
+              "max",
+              "source_label"
+            ],
+            "additionalProperties": false
+          },
+          "bathroom_range": {
+            "type": "object",
+            "properties": {
+              "min": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 10000000000
+              },
+              "max": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 10000000000
+              },
+              "source_label": {
+                "anyOf": [
+                  {
+                    "type": "string",
+                    "maxLength": 300
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              }
+            },
+            "required": [
+              "min",
+              "max",
+              "source_label"
+            ],
+            "additionalProperties": false
+          },
+          "area_range": {
+            "anyOf": [
+              {
+                "type": "object",
+                "properties": {
+                  "min": {
+                    "type": "number",
+                    "minimum": 0,
+                    "maximum": 10000000000
+                  },
+                  "max": {
+                    "type": "number",
+                    "minimum": 0,
+                    "maximum": 10000000000
+                  },
+                  "source_label": {
+                    "anyOf": [
+                      {
+                        "type": "string",
+                        "maxLength": 300
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "unit": {
+                    "const": "sqft"
+                  },
+                  "basis": {
+                    "const": "advertised_layout_range"
+                  }
+                },
+                "required": [
+                  "min",
+                  "max",
+                  "source_label",
+                  "unit",
+                  "basis"
+                ],
+                "additionalProperties": false
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "advertised_price_range": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Money"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "required": [
+          "listing_id",
+          "individual_units_verified",
+          "availability_verified",
+          "origin",
+          "completeness",
+          "source",
+          "bedroom_range",
+          "bathroom_range",
+          "area_range",
+          "advertised_price_range"
+        ],
+        "additionalProperties": false
+      },
+      "getListingLeaseTermsResponse": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/ListingLeaseTerms"
+          },
+          "meta": {
+            "$ref": "#/components/schemas/Meta"
+          }
+        },
+        "required": [
+          "data",
+          "meta"
+        ],
+        "additionalProperties": false
+      },
+      "getListingLayoutOptionsResponse": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/ListingLayoutOptions"
           },
           "meta": {
             "$ref": "#/components/schemas/Meta"

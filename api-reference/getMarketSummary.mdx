@@ -1,0 +1,8 @@
+---
+title: "State index growth summary"
+openapi: "GET /v1/markets/{market_id}/summary"
+---
+
+Use a saved FHFA state market_id and the required purchase_only_sa or purchase_only_nsa series. A fresh request reads the same official quarterly index source as getMarketSeries, then derives quarter-over-quarter, year-over-year and annualized five-year changes.
+
+Changes use index-level ratios and retain the source methodology; missing comparison periods remain null. This is aggregate index growth, not a home valuation, transaction price or forecast. A successful fresh summary costs 50 credits. Unsupported date overrides are rejected.

@@ -37,3 +37,30 @@ Use fields and format query parameters on data operations. Fields are comma-sepa
 ```bash
 curl "https://realtycrawl.dev/v1/listings/LISTING_ID?fields=id,price,property.address&format=csv" -H "Authorization: Bearer $REALTYCRAWL_API_KEY" -H "X-Max-Credits: 1"
 ```
+
+## Stay context unknowns
+
+The stay context preserves each source’s actual fields. This illustrative excerpt shows selected Agoda context fields; it is not a complete response envelope. A missing room object and missing source-offer observations remain null, while a reported rating value retains its unknown scale. Full examples on the Booking.com, Agoda and Trip.com endpoint pages include source identity and dates.
+
+```json
+{
+  "stay_id": "YOUR_STAY_ID",
+  "room": null,
+  "ratings": [{"kind": "source_star_classification", "category": null, "value": 5, "scale": null}],
+  "source_offer_observations": null,
+  "origin": "source_reported",
+  "completeness": "unknown"
+}
+```
+
+## Advertised offer ranges
+
+Commercial lease terms retain advertised_space_count, area_range and asking_rate with original currency, period and per_area_unit. Rental layout options retain bedroom_range, bathroom_range and any advertised area/price ranges. These values describe source advertisements and remain separate from the normalized property and listing price.
+
+individual_units_verified and availability_verified remain false. A source display range does not establish physical-unit records, present availability, an agreed lease or complete charges. Unknown billing periods and missing measurements stay null.
+
+## Exact source detail facts
+
+Source-specific fields under ListingFacts.details retain their own child provenance. REW stores separate full/partial bath counts, literal tenure, parking/heating/cooling and gross-tax observations. Its source MLS reference does not become a native listing identity.
+
+Booli stores source total rooms, monthly association and operating fees, and separate last-bid/historical-asking/sold-or-removed observations while normalized asking price and status remain unknown. Coldwell Banker stores explicit total/full/half baths, original living/land units, monthly HOA fees and separate general/financial tax observations with payment unknown. Synthetic response examples use illustrative source identities rather than attaching their fields to a real listing.

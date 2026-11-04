@@ -44,3 +44,7 @@ Expanded selectors use provider documentation and offline tests. Preserve DOCUME
 ```
 
 For unified search add "platforms":["zillow"]. Response options fields and format belong in the URL query, not the JSON body. CSV/NDJSON contain data records; JSON retains meta. Response shaping does not change source cost or completeness.
+
+## Source URL filter contracts
+
+Redfin supports condo-only filtering with the existing US ZIP selector. Domain supports exact 1–3 bedrooms (min=max), apartment type and native price ordering in Sydney NSW 2000 rent mode. Property24 supports positive integer ZAR price bounds, minimum bedrooms 1–5 and one documented type within its existing source-area path. Unsupported bounds are rejected before collection; source scopes, result limits and spending ceilings stay in force. These mappings have documentation and offline-test evidence, not new live acceptance.

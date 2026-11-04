@@ -1,0 +1,8 @@
+---
+title: "Advertised rental layouts"
+openapi: "GET /v1/listings/{listing_id}/layout-options"
+---
+
+Read bedroom, bathroom, area and price ranges collected with your account’s supported Rentals.ca or Point2Homes rental advertisement. The source can advertise several layouts together; it does not identify individual floor-plan or unit records. Missing area and price-period values remain null.
+
+individual_units_verified and availability_verified remain false. Preserve the source, observation time and advertised range basis. This retained read costs one credit and makes no source request or retention renewal. Older observations without the section return SOURCE_DATA_UNAVAILABLE.
