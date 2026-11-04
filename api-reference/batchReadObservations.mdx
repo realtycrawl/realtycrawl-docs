@@ -1,0 +1,12 @@
+---
+title: "Read a batch of saved source observations"
+openapi: "POST /v1/observations/batch"
+---
+
+Send one to 25 unique resources as operation/id pairs, using the returned IDs from your own account. Allowed operations are getListing, getAuction, getStay, getDevelopment, getAgent, getAgency, getProperty and getMarket. Each result is the same public data returned by that operation.
+
+This request makes no source calls and does not renew retention. Missing, expired or inaccessible resources have per-item failure outcomes. Reserve one credit per requested resource; successful reads cost one credit each and failures cost zero. Existing idempotent replays are free.
+
+Field projection and CSV/NDJSON exports apply to the batch outcomes.
+
+Scoped keys require batchReadObservations plus each selected read operation (or wildcard access). A disallowed read produces an INSUFFICIENT_SCOPE item and costs zero.

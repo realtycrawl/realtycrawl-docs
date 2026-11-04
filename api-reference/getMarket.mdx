@@ -1,0 +1,6 @@
+---
+title: "Read a saved market definition"
+openapi: "GET /v1/markets/{market_id}"
+---
+
+Use the market_id returned by FHFA market discovery to read your account’s saved state-market definition. This costs one credit and does not fetch a fresh index series. The observation expires after 24 hours; use getMarketSeries for quarterly index values.

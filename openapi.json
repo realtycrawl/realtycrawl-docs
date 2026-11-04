@@ -5659,9 +5659,191 @@
         "x-research-status": "provider_documentation_and_offline_tests",
         "x-verified-platforms": [],
         "x-documented-platforms": [
-          "zillow"
+          "28hse",
+          "99acres",
+          "99co",
+          "adondevivir",
+          "amber",
+          "anjuke",
+          "apartmentguide",
+          "apartmentlist",
+          "apartments",
+          "aqar",
+          "aqarmap",
+          "argenprop",
+          "athome",
+          "auction",
+          "avito",
+          "batdongsan",
+          "bayut",
+          "bayut_sa",
+          "bienici",
+          "bikroy",
+          "blueground",
+          "boliga",
+          "boligsiden",
+          "booli",
+          "bproperty",
+          "buyrentkenya",
+          "casa",
+          "centaline",
+          "centris",
+          "century21",
+          "cian",
+          "cityfeet",
+          "coldwellbanker",
+          "commercialcafe",
+          "commercialrealestate_au",
+          "commercialsearch",
+          "comparis",
+          "compass",
+          "craigslist",
+          "crexi",
+          "dabang",
+          "daft",
+          "ddproperty",
+          "domain",
+          "domclick",
+          "dotproperty",
+          "dubizzle",
+          "dubizzle_eg",
+          "edgeprop",
+          "emlakjet",
+          "estately",
+          "etuovi",
+          "facebook_marketplace",
+          "fazwaz",
+          "fincaraiz",
+          "finn",
+          "flatmates",
+          "foreclosure",
+          "fotocasa",
+          "funda",
+          "furnishedfinder",
+          "graana",
+          "habitaclia",
+          "hemnet",
+          "hepsiemlak",
+          "hipflat",
+          "homefinder",
+          "homegate",
+          "homes",
+          "hotpads",
+          "housesigma",
+          "housing",
+          "housinganywhere",
+          "hubzu",
+          "idealista",
+          "immobiliare",
+          "immonet",
+          "immoscout24",
+          "immoscout24_at",
+          "immoscout24_ch",
+          "immoweb",
+          "immowelt",
+          "imobiliare_ro",
+          "imovelweb",
+          "imovirtual",
+          "infocasas",
+          "ingatlan",
+          "iproperty",
+          "jamesedition",
+          "kleinanzeigen",
+          "lamudi",
+          "land_com",
+          "landandfarm",
+          "landsearch",
+          "landwatch",
+          "leboncoin",
+          "lifull_homes",
+          "logicimmo",
+          "loopnet",
+          "luxuryestate",
+          "magicbricks",
+          "mercadolibre",
+          "metrocuadrado",
+          "midland_hk",
+          "movoto",
+          "mubawab",
+          "myhome",
+          "naver_land",
+          "newhomesource",
+          "nigeriapropertycentre",
+          "nobroker",
+          "oikotie",
+          "olx_br",
+          "oneroof",
+          "onthemarket",
+          "openrent",
+          "opensooq",
+          "otodom",
+          "padmapper",
+          "pap",
+          "pararius",
+          "pisos",
+          "plusvalia",
+          "point2homes",
+          "portalinmobiliario",
+          "primelocation",
+          "privateproperty",
+          "properati",
+          "properstar",
+          "property24",
+          "propertyfinder",
+          "propertyguru",
+          "propertyguru_my",
+          "propertypro",
+          "propertyshark",
+          "propiedades",
+          "quintoandar",
+          "realcommercial",
+          "realestate_au",
+          "realestate_nz",
+          "realtor",
+          "realtor_ca",
+          "realtytrac",
+          "redfin",
+          "remax",
+          "rent",
+          "rentals_ca",
+          "rentcafe",
+          "rew",
+          "rightmove",
+          "rumah123",
+          "sahibinden",
+          "seloger",
+          "sothebys",
+          "spareroom",
+          "spareroom_us",
+          "spitogatos",
+          "spotahome",
+          "squarefoot",
+          "squareyards",
+          "sreality",
+          "srx",
+          "streeteasy",
+          "student_com",
+          "suumo",
+          "toctoc",
+          "trademe",
+          "trulia",
+          "uniplaces",
+          "vivanuncios",
+          "vivareal",
+          "willhaben",
+          "xome",
+          "yad2",
+          "zameen",
+          "zap",
+          "zigbang",
+          "zillow",
+          "zimmo",
+          "zolo",
+          "zonaprop",
+          "zoopla",
+          "zumper"
         ],
-        "description": "Documentation-backed beta. Reads this account’s unexpired Zillow detail observation; first collect detail with URL resolution or native-ID detail. Missing sections return CAPABILITY_UNAVAILABLE; explicit empty sections are preserved. Source observations do not establish school assignment, a tax bill, verified professional identity or sold comparables. No source call; retained for 24 hours.",
+        "description": "Read explicit property facts from this account’s unexpired retained listing observation. Existing normalized search or detail fields are preserved with source identity; facts, amenities and features are supplied only where present. Missing or unknown-only facts return CAPABILITY_UNAVAILABLE. No fresh source request or enrichment; retention is 24 hours. New source bindings are documentation/offline-test backed.",
         "parameters": [
           {
             "name": "listing_id",
@@ -5748,7 +5930,7 @@
         "x-documented-platforms": [
           "zillow"
         ],
-        "description": "Documentation-backed beta. Reads this account’s unexpired Zillow detail observation; first collect detail with URL resolution or native-ID detail. Missing sections return CAPABILITY_UNAVAILABLE; explicit empty sections are preserved. Source observations do not establish school assignment, a tax bill, verified professional identity or sold comparables. No source call; retained for 24 hours.",
+        "description": "Read the source-supplied section from this account’s unexpired retained listing. Missing sections return CAPABILITY_UNAVAILABLE; explicitly empty source collections remain empty. Source associations are operation-specific. School information does not establish attendance assignment; attribution does not verify identity or licensing; tax and nearby-home observations are not tax bills or verified comparable sales. No source request; retained for 24 hours.",
         "parameters": [
           {
             "name": "listing_id",
@@ -5833,9 +6015,10 @@
         "x-research-status": "provider_documentation_and_offline_tests",
         "x-verified-platforms": [],
         "x-documented-platforms": [
+          "streeteasy",
           "zillow"
         ],
-        "description": "Documentation-backed beta. Reads this account’s unexpired Zillow detail observation; first collect detail with URL resolution or native-ID detail. Missing sections return CAPABILITY_UNAVAILABLE; explicit empty sections are preserved. Source observations do not establish school assignment, a tax bill, verified professional identity or sold comparables. No source call; retained for 24 hours.",
+        "description": "Read the source-supplied section from this account’s unexpired retained listing. Missing sections return CAPABILITY_UNAVAILABLE; explicitly empty source collections remain empty. Source associations are operation-specific. School information does not establish attendance assignment; attribution does not verify identity or licensing; tax and nearby-home observations are not tax bills or verified comparable sales. No source request; retained for 24 hours.",
         "parameters": [
           {
             "name": "listing_id",
@@ -5922,7 +6105,7 @@
         "x-documented-platforms": [
           "zillow"
         ],
-        "description": "Documentation-backed beta. Reads this account’s unexpired Zillow detail observation; first collect detail with URL resolution or native-ID detail. Missing sections return CAPABILITY_UNAVAILABLE; explicit empty sections are preserved. Source observations do not establish school assignment, a tax bill, verified professional identity or sold comparables. No source call; retained for 24 hours.",
+        "description": "Read the source-supplied section from this account’s unexpired retained listing. Missing sections return CAPABILITY_UNAVAILABLE; explicitly empty source collections remain empty. Source associations are operation-specific. School information does not establish attendance assignment; attribution does not verify identity or licensing; tax and nearby-home observations are not tax bills or verified comparable sales. No source request; retained for 24 hours.",
         "parameters": [
           {
             "name": "listing_id",
@@ -6007,9 +6190,10 @@
         "x-research-status": "provider_documentation_and_offline_tests",
         "x-verified-platforms": [],
         "x-documented-platforms": [
+          "rightmove",
           "zillow"
         ],
-        "description": "Documentation-backed beta. Reads this account’s unexpired Zillow detail observation; first collect detail with URL resolution or native-ID detail. Missing sections return CAPABILITY_UNAVAILABLE; explicit empty sections are preserved. Source observations do not establish school assignment, a tax bill, verified professional identity or sold comparables. No source call; retained for 24 hours.",
+        "description": "Read the source-supplied section from this account’s unexpired retained listing. Missing sections return CAPABILITY_UNAVAILABLE; explicitly empty source collections remain empty. Source associations are operation-specific. School information does not establish attendance assignment; attribution does not verify identity or licensing; tax and nearby-home observations are not tax bills or verified comparable sales. No source request; retained for 24 hours.",
         "parameters": [
           {
             "name": "listing_id",
@@ -6175,6 +6359,513 @@
             }
           }
         ]
+      }
+    },
+    "/v1/{platform}/listings/batch": {
+      "post": {
+        "operationId": "batchPlatformListings",
+        "summary": "Collect a bounded batch of source listing details",
+        "tags": [
+          "platform-listings"
+        ],
+        "x-runtime-status": "beta",
+        "x-research-status": "provider_documentation_and_offline_tests",
+        "x-verified-platforms": [],
+        "x-documented-platforms": [
+          "99acres",
+          "bayut",
+          "bayut_sa",
+          "daft",
+          "ddproperty",
+          "domain",
+          "fotocasa",
+          "funda",
+          "housing",
+          "idealista",
+          "immobiliare",
+          "immoweb",
+          "immowelt",
+          "leboncoin",
+          "loopnet",
+          "nobroker",
+          "pap",
+          "pisos",
+          "property24",
+          "propertyfinder",
+          "propertyguru",
+          "propertyguru_my",
+          "realestate_au",
+          "realtor",
+          "realtor_ca",
+          "redfin",
+          "rightmove",
+          "rumah123",
+          "seloger",
+          "trulia",
+          "zoopla"
+        ],
+        "description": "Collect 1–5 unique canonical listing URLs or supported native IDs for one source, sequentially with existing provider caps and no retries. Every selector is preflighted before dispatch; unsupported selectors reject the request before collection. Native IDs retain any account-owned prior-observation requirement. Reserve 50 credits per requested item and charge 50 per successful detail; item failures cost zero. A shared 50-second dispatch deadline prevents new starts. Already-started work is awaited under its adapter timeout and successful completed work is charged. This is documentation-backed orchestration, not fresh upstream acceptance.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PlatformListingBatchRequest"
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "platform",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          {
+            "name": "fields",
+            "in": "query",
+            "description": "Response-only comma-separated field paths relative to data items; up to 32 paths. Source requests and billing are unchanged.",
+            "schema": {
+              "type": "string",
+              "maxLength": 4127
+            }
+          },
+          {
+            "name": "format",
+            "in": "query",
+            "description": "Response-only export format. JSON retains the envelope; CSV/NDJSON contain data records, with request/credit metadata in headers. Errors stay JSON.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "json",
+                "csv",
+                "ndjson"
+              ],
+              "default": "json"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Source observation; inspect meta for evidence and completeness.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/batchPlatformListingsResponse"
+                }
+              },
+              "text/csv": {
+                "schema": {
+                  "type": "string",
+                  "description": "Data rows only; request, row count and credits are in headers."
+                }
+              },
+              "application/x-ndjson": {
+                "schema": {
+                  "type": "string",
+                  "description": "One JSON data item per line; metadata is in headers."
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Typed error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "x-data-freshness": "source",
+        "x-credit-cost": 50,
+        "x-credit-unit": "successful_source_detail",
+        "x-credit-pricing": {
+          "type": "per_item",
+          "creditsPerItem": 50,
+          "limitParameter": "items",
+          "maxItems": 5
+        }
+      }
+    },
+    "/v1/observations/batch": {
+      "post": {
+        "operationId": "batchReadObservations",
+        "summary": "Read a batch of saved source observations",
+        "tags": [
+          "observations"
+        ],
+        "x-runtime-status": "beta",
+        "x-research-status": "provider_documentation_and_offline_tests",
+        "x-verified-platforms": [],
+        "x-documented-platforms": [
+          "28hse",
+          "591",
+          "99acres",
+          "99co",
+          "adondevivir",
+          "agoda",
+          "airbnb",
+          "amber",
+          "anjuke",
+          "apartmentguide",
+          "apartmentlist",
+          "apartments",
+          "aqar",
+          "aqarmap",
+          "argenprop",
+          "athome",
+          "auction",
+          "avito",
+          "batdongsan",
+          "bayut",
+          "bayut_sa",
+          "bienici",
+          "bikroy",
+          "blueground",
+          "boliga",
+          "boligsiden",
+          "booking",
+          "booli",
+          "bproperty",
+          "buyrentkenya",
+          "casa",
+          "centaline",
+          "centris",
+          "century21",
+          "cian",
+          "cityfeet",
+          "coldwellbanker",
+          "commercialcafe",
+          "commercialrealestate_au",
+          "commercialsearch",
+          "comparis",
+          "compass",
+          "craigslist",
+          "crexi",
+          "dabang",
+          "daft",
+          "ddproperty",
+          "domain",
+          "domclick",
+          "dotproperty",
+          "dubizzle",
+          "dubizzle_eg",
+          "edgeprop",
+          "emlakjet",
+          "estately",
+          "etuovi",
+          "exprealty",
+          "facebook_marketplace",
+          "fang",
+          "fazwaz",
+          "fhfa",
+          "fincaraiz",
+          "finn",
+          "flatmates",
+          "foreclosure",
+          "fotocasa",
+          "funda",
+          "furnishedfinder",
+          "graana",
+          "habitaclia",
+          "hemnet",
+          "hepsiemlak",
+          "hipflat",
+          "homefinder",
+          "homegate",
+          "homes",
+          "hotpads",
+          "housesigma",
+          "housing",
+          "housinganywhere",
+          "hubzu",
+          "idealista",
+          "immobiliare",
+          "immonet",
+          "immoscout24",
+          "immoscout24_at",
+          "immoscout24_ch",
+          "immoweb",
+          "immowelt",
+          "imobiliare_ro",
+          "imovelweb",
+          "imovirtual",
+          "infocasas",
+          "ingatlan",
+          "inmuebles24",
+          "iproperty",
+          "jamesedition",
+          "kellerwilliams",
+          "kleinanzeigen",
+          "lamudi",
+          "land_com",
+          "landandfarm",
+          "landsearch",
+          "landwatch",
+          "leboncoin",
+          "lifull_homes",
+          "logicimmo",
+          "loopnet",
+          "luxuryestate",
+          "magicbricks",
+          "mercadolibre",
+          "metrocuadrado",
+          "midland_hk",
+          "movoto",
+          "mubawab",
+          "myhome",
+          "naver_land",
+          "newhomesource",
+          "nigeriapropertycentre",
+          "nobroker",
+          "nyc_pluto",
+          "oikotie",
+          "olx_br",
+          "oneroof",
+          "onthemarket",
+          "openrent",
+          "opensooq",
+          "otodom",
+          "padmapper",
+          "pap",
+          "pararius",
+          "pisos",
+          "plusvalia",
+          "point2homes",
+          "portalinmobiliario",
+          "primelocation",
+          "privateproperty",
+          "properati",
+          "properstar",
+          "property24",
+          "propertyfinder",
+          "propertyguru",
+          "propertyguru_my",
+          "propertypro",
+          "propertyshark",
+          "propiedades",
+          "quintoandar",
+          "realcommercial",
+          "realestate_au",
+          "realestate_nz",
+          "realtor",
+          "realtor_ca",
+          "realtytrac",
+          "redfin",
+          "remax",
+          "rent",
+          "rentals_ca",
+          "rentcafe",
+          "rew",
+          "rightmove",
+          "rumah123",
+          "sahibinden",
+          "seloger",
+          "sothebys",
+          "spareroom",
+          "spareroom_us",
+          "spitogatos",
+          "spotahome",
+          "squarefoot",
+          "squareyards",
+          "sreality",
+          "srx",
+          "streeteasy",
+          "student_com",
+          "suumo",
+          "toctoc",
+          "trademe",
+          "trip",
+          "trulia",
+          "uniplaces",
+          "urbania",
+          "vivanuncios",
+          "vivareal",
+          "vrbo",
+          "willhaben",
+          "xome",
+          "yad2",
+          "zameen",
+          "zap",
+          "zigbang",
+          "zillow",
+          "zimmo",
+          "zolo",
+          "zonaprop",
+          "zoopla",
+          "zumper"
+        ],
+        "description": "Read 1–25 unique account-owned retained observations using their existing public read operation and returned resource ID. Supports listings, auctions, stays, developments, agent and agency profiles, source properties and market definitions. Each outcome preserves the original public data and source context. Missing, expired or inaccessible observations report per-item sanitized failures. No source request; original retention is not extended. Reserve 1 credit per requested item and charge 1 per successful read, zero for failures and idempotent replays. A scoped key needs batchReadObservations plus each selected individual read operation, or wildcard access; insufficient per-item scopes fail without data or charge.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ObservationBatchRequest"
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "fields",
+            "in": "query",
+            "description": "Response-only comma-separated field paths relative to data items; up to 32 paths. Source requests and billing are unchanged.",
+            "schema": {
+              "type": "string",
+              "maxLength": 4127
+            }
+          },
+          {
+            "name": "format",
+            "in": "query",
+            "description": "Response-only export format. JSON retains the envelope; CSV/NDJSON contain data records, with request/credit metadata in headers. Errors stay JSON.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "json",
+                "csv",
+                "ndjson"
+              ],
+              "default": "json"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Source observation; inspect meta for evidence and completeness.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/batchReadObservationsResponse"
+                }
+              },
+              "text/csv": {
+                "schema": {
+                  "type": "string",
+                  "description": "Data rows only; request, row count and credits are in headers."
+                }
+              },
+              "application/x-ndjson": {
+                "schema": {
+                  "type": "string",
+                  "description": "One JSON data item per line; metadata is in headers."
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Typed error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "x-data-freshness": "retained",
+        "x-credit-cost": 1,
+        "x-credit-unit": "successful_stored_observation_read",
+        "x-credit-pricing": {
+          "type": "per_item",
+          "creditsPerItem": 1,
+          "limitParameter": "resources",
+          "maxItems": 25
+        }
+      }
+    },
+    "/v1/markets/{market_id}": {
+      "get": {
+        "operationId": "getMarket",
+        "summary": "Read a saved market definition",
+        "tags": [
+          "markets"
+        ],
+        "description": "Read this account’s unexpired FHFA state-market definition by the returned market_id. No fresh dataset or index-series request. Retained for 24 hours; one credit per successful read.",
+        "parameters": [
+          {
+            "name": "market_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          {
+            "name": "fields",
+            "in": "query",
+            "description": "Response-only comma-separated field paths relative to data items; up to 32 paths. Source requests and billing are unchanged.",
+            "schema": {
+              "type": "string",
+              "maxLength": 4127
+            }
+          },
+          {
+            "name": "format",
+            "in": "query",
+            "description": "Response-only export format. JSON retains the envelope; CSV/NDJSON contain data records, with request/credit metadata in headers. Errors stay JSON.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "json",
+                "csv",
+                "ndjson"
+              ],
+              "default": "json"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Source observation; inspect meta for evidence and completeness.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/getMarketResponse"
+                }
+              },
+              "text/csv": {
+                "schema": {
+                  "type": "string",
+                  "description": "Data rows only; request, row count and credits are in headers."
+                }
+              },
+              "application/x-ndjson": {
+                "schema": {
+                  "type": "string",
+                  "description": "One JSON data item per line; metadata is in headers."
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Typed error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "x-runtime-status": "beta",
+        "x-verified-platforms": [
+          "fhfa"
+        ],
+        "x-data-freshness": "retained",
+        "x-credit-cost": 1,
+        "x-credit-unit": "stored_observation_read"
       }
     }
   },
@@ -10452,6 +11143,42 @@
           },
           "source": {
             "$ref": "#/components/schemas/Source"
+          },
+          "property": {
+            "$ref": "#/components/schemas/PropertySummary"
+          },
+          "price": {
+            "$ref": "#/components/schemas/Money"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "active",
+              "pending",
+              "contingent",
+              "sold",
+              "rented",
+              "withdrawn",
+              "expired",
+              "off_market",
+              "unknown"
+            ]
+          },
+          "transaction": {
+            "type": "string",
+            "enum": [
+              "sale",
+              "rent",
+              "lease",
+              "auction"
+            ]
+          },
+          "observation_kind": {
+            "type": "string"
+          },
+          "details": {
+            "type": "object",
+            "additionalProperties": true
           }
         },
         "required": [
@@ -11092,6 +11819,287 @@
             "items": {
               "$ref": "#/components/schemas/ZillowBatchItem"
             }
+          },
+          "meta": {
+            "$ref": "#/components/schemas/Meta"
+          }
+        },
+        "required": [
+          "data",
+          "meta"
+        ],
+        "additionalProperties": false
+      },
+      "PlatformListingBatchSelector": {
+        "oneOf": [
+          {
+            "type": "object",
+            "properties": {
+              "url": {
+                "type": "string",
+                "format": "uri",
+                "maxLength": 4096
+              }
+            },
+            "required": [
+              "url"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "properties": {
+              "native_id": {
+                "type": "string",
+                "pattern": "^[A-Za-z0-9_.:~-]{1,256}$"
+              }
+            },
+            "required": [
+              "native_id"
+            ],
+            "additionalProperties": false
+          }
+        ]
+      },
+      "PlatformListingBatchRequest": {
+        "type": "object",
+        "properties": {
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PlatformListingBatchSelector"
+            },
+            "minItems": 1,
+            "maxItems": 5,
+            "uniqueItems": true
+          }
+        },
+        "required": [
+          "items"
+        ],
+        "additionalProperties": false
+      },
+      "PlatformListingBatchItem": {
+        "type": "object",
+        "properties": {
+          "index": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 4
+          },
+          "selector": {
+            "$ref": "#/components/schemas/PlatformListingBatchSelector"
+          },
+          "status": {
+            "enum": [
+              "success",
+              "failed"
+            ]
+          },
+          "listing": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Listing"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "error_code": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "required": [
+          "index",
+          "selector",
+          "status",
+          "listing",
+          "error_code"
+        ],
+        "additionalProperties": false
+      },
+      "batchPlatformListingsResponse": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PlatformListingBatchItem"
+            },
+            "minItems": 1,
+            "maxItems": 5
+          },
+          "meta": {
+            "$ref": "#/components/schemas/Meta"
+          }
+        },
+        "required": [
+          "data",
+          "meta"
+        ],
+        "additionalProperties": false
+      },
+      "ObservationReadSelector": {
+        "type": "object",
+        "properties": {
+          "operation": {
+            "type": "string",
+            "enum": [
+              "getListing",
+              "getAuction",
+              "getStay",
+              "getDevelopment",
+              "getAgent",
+              "getAgency",
+              "getProperty",
+              "getMarket"
+            ]
+          },
+          "id": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_.:~-]{1,256}$"
+          }
+        },
+        "required": [
+          "operation",
+          "id"
+        ],
+        "additionalProperties": false
+      },
+      "ObservationBatchRequest": {
+        "type": "object",
+        "properties": {
+          "resources": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ObservationReadSelector"
+            },
+            "minItems": 1,
+            "maxItems": 25,
+            "uniqueItems": true
+          }
+        },
+        "required": [
+          "resources"
+        ],
+        "additionalProperties": false
+      },
+      "ObservationBatchItem": {
+        "type": "object",
+        "properties": {
+          "index": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 24
+          },
+          "operation": {
+            "type": "string",
+            "enum": [
+              "getListing",
+              "getAuction",
+              "getStay",
+              "getDevelopment",
+              "getAgent",
+              "getAgency",
+              "getProperty",
+              "getMarket"
+            ]
+          },
+          "id": {
+            "type": "string"
+          },
+          "status": {
+            "enum": [
+              "success",
+              "failed"
+            ]
+          },
+          "data": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Listing"
+              },
+              {
+                "$ref": "#/components/schemas/Auction"
+              },
+              {
+                "$ref": "#/components/schemas/Stay"
+              },
+              {
+                "$ref": "#/components/schemas/Development"
+              },
+              {
+                "$ref": "#/components/schemas/Agent"
+              },
+              {
+                "$ref": "#/components/schemas/Agency"
+              },
+              {
+                "$ref": "#/components/schemas/Property"
+              },
+              {
+                "$ref": "#/components/schemas/Market"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "error_code": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "required": [
+          "index",
+          "operation",
+          "id",
+          "status",
+          "data",
+          "error_code"
+        ],
+        "additionalProperties": false
+      },
+      "batchReadObservationsResponse": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ObservationBatchItem"
+            },
+            "minItems": 1,
+            "maxItems": 25
+          },
+          "meta": {
+            "$ref": "#/components/schemas/Meta"
+          }
+        },
+        "required": [
+          "data",
+          "meta"
+        ],
+        "additionalProperties": false
+      },
+      "getMarketResponse": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/Market"
           },
           "meta": {
             "$ref": "#/components/schemas/Meta"

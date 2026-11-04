@@ -28,6 +28,8 @@ curl https://realtycrawl.dev/v1/openapi.json
 
 Zillow detail preserves supported facts, tax history, schools, nearby homes and embedded professional attribution under extensions.zillow. Dedicated section routes read the same account-owned observation for 1 credit. Rightmove retains supported floor plans, tenure, costs and stations; idealista retains explicit amenities and parking. Missing data remains unknown. Documentation-backed features carry DOCUMENTED_SOURCE_BETA warnings.
 
+Across supported listing sources, the facts route also returns explicit normalized search or detail property values with original source identity. New source facts, school and attribution sections are documentation/offline-test backed. Bulk saved reads retain the same public data as each individual operation, rather than returning internal storage objects.
+
 ## Projection and export
 
 Use fields and format query parameters on data operations. Fields are comma-separated paths relative to each data item; numeric array indexes use media[0].url. Up to 32 paths are accepted. JSON keeps data and meta; CSV/NDJSON export data records with request, row-count and charged-credit headers. Errors stay JSON. Response options do not change source input, billing or idempotency; replays can use another format without a source call. POST bodies contain only operation parameters.

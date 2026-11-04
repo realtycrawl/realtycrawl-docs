@@ -2,7 +2,7 @@
 title: "Coverage and evidence"
 ---
 
-The research inventory contains 202 platforms and the current API contract defines 49 operations. Runtime coverage is operation- and market-specific. Check live capabilities: active identifies accepted source integrations; beta identifies explicitly enabled documentation-backed integrations checked offline without live source acceptance. Research entries are not callable.
+The research inventory contains 202 platforms and the current API contract defines 52 operations. Runtime coverage is operation- and market-specific. Check live capabilities: active identifies accepted source integrations; beta identifies explicitly enabled documentation-backed integrations checked offline without live source acceptance. Research entries are not callable.
 
 ## Published coverage snapshot
 
@@ -539,3 +539,11 @@ HTTP 202 acceptance charges one 50-credit source reservation, refunded if the jo
 The durable result preserves source semantics: Trulia asking consideration, Vrbo dated price observations and unknown availability. One retained result is not full inventory, a verified closed transaction, a complete fee-inclusive quote or an availability calendar. The existing provider credential is reused with pinned builds, current bundled-price checks and the existing $0.01 per-run ceiling. The three job operations add no new distinct platform.
 
 Fresh job reads expire after 24 hours; the existing seven-day idempotency-response cache can still replay an earlier account/key-owned snapshot. A replay does not refresh progress or issue another source request.
+
+## Expanded platform workflows
+
+The current contract documents property facts for 183 listing sources, bounded detail batches for 31 additional sources, and bulk retained reads across all 196 in-scope sources. These bindings use existing source selectors, markets, spending ceilings and account-owned observations. New source bindings have offline evidence; check live capabilities for enablement.
+
+StreetEasy schools and Rightmove embedded brokerage attribution are source-specific. The FHFA catalog also includes a saved market-definition read. Missing fields remain unknown, and unavailable, deferred and retired integrations receive no new access.
+
+Source-detail batches accept 1–5 items and charge 50 credits per successful detail. Saved-observation batches accept 1–25 public read operation/ID pairs and charge 1 credit per successful read. Failed items and existing idempotent replays are free. Saved reads make no source calls and do not extend retention.

@@ -112,7 +112,8 @@
             "pages": [
               "api-reference/searchPlatformListings",
               "api-reference/getPlatformListing",
-              "api-reference/batchZillowListings"
+              "api-reference/batchZillowListings",
+              "api-reference/batchPlatformListings"
             ]
           },
           {
@@ -169,7 +170,8 @@
             "group": "Markets",
             "pages": [
               "api-reference/searchMarkets",
-              "api-reference/getMarketSeries"
+              "api-reference/getMarketSeries",
+              "api-reference/getMarket"
             ]
           },
           {
@@ -194,6 +196,12 @@
               "api-reference/createReadJob",
               "api-reference/getReadJob",
               "api-reference/getReadJobResults"
+            ]
+          },
+          {
+            "group": "Observations",
+            "pages": [
+              "api-reference/batchReadObservations"
             ]
           }
         ]

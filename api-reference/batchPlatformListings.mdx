@@ -1,0 +1,8 @@
+---
+title: "Collect a bounded batch of source listing details"
+openapi: "POST /v1/{platform}/listings/batch"
+---
+
+Send one to five canonical source URLs or supported native IDs in items. Batches use the existing per-source detail contracts, including retained-selector requirements and provider spending ceilings. All selectors are preflighted before source dispatch.
+
+A 50-second dispatch deadline stops new items. Already-started work is awaited under the adapter timeout, and each successful detail costs 50 credits. Failed items and idempotent replays cost zero. Inspect each indexed outcome before using its listing. No automatic retry or broader market coverage is implied.
