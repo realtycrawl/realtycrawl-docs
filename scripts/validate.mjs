@@ -29,8 +29,10 @@ assert.equal(new Set(nonCallable).size,nonCallable.length,'Overlapping unavailab
 assert.equal(snapshot.freshSourceVerification,false,'A dated snapshot is not fresh source verification');
 assert.equal(snapshot.authority,'https://realtycrawl.dev/v1/meta/capabilities');
 const ops=Object.values(spec.paths).flatMap(methods=>Object.entries(methods).filter(([method])=>['get','post','put','patch','delete'].includes(method)).map(([,op])=>op));
-assert.equal(snapshot.operationDefinitions,ops.length);
+assert(Number.isSafeInteger(snapshot.operationDefinitions)&&snapshot.operationDefinitions>0&&snapshot.operationDefinitions<=ops.length,'Dated release definitions must not exceed the current contract');
 assert.equal(new Set(ops.map(op=>op.operationId)).size,ops.length,'Duplicate operation IDs');
+const coverageIntro=readFileSync('coverage.mdx','utf8').split(/^## /m)[0];
+assert(coverageIntro.includes(`API contract defines ${ops.length} operations`),'Current coverage intro must match this contract; dated release counts are separate');
 for(const key of ['activePlatforms','activeBindings','documentedBetaBindings','callableBindings'])assert(Number.isSafeInteger(snapshot[key])&&snapshot[key]>=0,`Invalid ${key}`);
 
 if(process.argv.includes('--live')){

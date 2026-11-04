@@ -8,3 +8,7 @@ openapi: "POST /v1/listings/resolve"
 A successful resolution returns a matched source listing and saves an account-owned listing observation for 24 hours. For Redfin, use the candidate's `source.native_id` with `GET /v1/redfin/listings/{native_id}` for a subsequent fresh detail lookup using the same account. The URL's `/home/` number identifies a property and is distinct from that listing ID.
 
 Read the saved listing or its media using the candidate's opaque `id` through `GET /v1/listings/{listing_id}` and `GET /v1/listings/{listing_id}/media`. Source resolution costs 50 credits when successful; retained reads cost 1 credit and idempotent replays are free. Estimates, complete source history, contacts and current availability are not implied by a match.
+
+## Zillow direct detail
+
+Use a numeric ZPID without a retained-listing prerequisite. Zillow URL/native resolution accepts transaction sale/rent and status active/sold; sold requires sale. Native GET selectors go in the query string. This listing lookup is separate from the Austin source-property resolver. Expanded modes are documentation-backed beta and do not establish nationwide live acceptance. Successful fresh detail costs 50 credits; retained sections cost 1 credit each.

@@ -2,7 +2,7 @@
 title: "Coverage and evidence"
 ---
 
-The research inventory contains 202 platforms and the API contract defines 43 operations. Runtime coverage is operation- and market-specific. Check live capabilities: active identifies accepted source integrations; beta identifies explicitly enabled documentation-backed integrations checked offline without live source acceptance. Research entries are not callable.
+The research inventory contains 202 platforms and the current API contract defines 49 operations. Runtime coverage is operation- and market-specific. Check live capabilities: active identifies accepted source integrations; beta identifies explicitly enabled documentation-backed integrations checked offline without live source acceptance. Research entries are not callable.
 
 ## Published coverage snapshot
 
@@ -20,9 +20,17 @@ Beta never lifts provider spending, credential, ownership or native-access restr
 
 Beike, CoStar, Makaan and Ten-X remain unavailable. Their missing provider access, together with unsupported Lianjia detail access, is deferred from the current completion scope. Rumah.com is retired. Catalog entries remain visible so clients can distinguish unsupported sources from missing names.
 
-Existing working Lianjia operations remain available only within their current allowance, which expires October 27, 2026 at 13:35:05.770 UTC. This deferral does not extend access, enable unavailable operations or imply a licensed feed.
+The original Lianjia allowance ended October 27, 2026 at 13:35:05.770 UTC. Check current capabilities for availability. This deferral does not renew access, enable unavailable operations or imply a licensed feed.
 
 Platform availability does not mean every operation or market is supported. Unsupported valuations, merged property identities, native detail, source history, agency portfolios or other extensions remain unavailable wherever the live capability response says so. Stored observations cannot substitute for a fresh native detail request or source-reported history.
+
+## Expanded Zillow listing workflows
+
+The current contract adds five retained Zillow detail sections: facts and virtual tours, source-reported tax history, nearby schools, nearby homes and embedded listing professional attribution. Direct listing lookup accepts a numeric ZPID without a prior account observation. This is distinct from the Austin-only source-property resolver. The bounded batch endpoint accepts 1–5 ZPIDs, dispatches sequentially within 50 seconds and reports each outcome. Reserve 50 credits per ID and charge only successful details; retained section reads cost 1 credit.
+
+Expanded Zillow sale/rent/sold modes, supported filters and these additional listing operations are backed by provider documentation and offline checks. They are separate from the dated production snapshot above. Source schools do not establish assignment; source tax observations are not tax bills; nearby homes are not verified sold comparables. Missing sections remain unknown. Check operation-level capabilities before calling.
+
+Data operations also support response-only field projection and JSON/CSV/NDJSON exports. These options change presentation without changing source cost or idempotency. POST response options belong in the URL query. Rightmove and idealista retain their supported richer fields in source-specific extensions.
 
 ## Native detail beta coverage
 

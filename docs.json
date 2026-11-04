@@ -99,14 +99,20 @@
               "api-reference/getListingMedia",
               "api-reference/getListingHistory",
               "api-reference/getListingOpenHouses",
-              "api-reference/getSimilarListings"
+              "api-reference/getSimilarListings",
+              "api-reference/getListingFacts",
+              "api-reference/getListingTaxHistory",
+              "api-reference/getListingSchools",
+              "api-reference/getListingNearby",
+              "api-reference/getListingProfessional"
             ]
           },
           {
             "group": "Platform listings",
             "pages": [
               "api-reference/searchPlatformListings",
-              "api-reference/getPlatformListing"
+              "api-reference/getPlatformListing",
+              "api-reference/batchZillowListings"
             ]
           },
           {

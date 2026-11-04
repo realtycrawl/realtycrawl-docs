@@ -1,0 +1,10 @@
+---
+title: "Read embedded listing professional attribution"
+openapi: "GET /v1/listings/{listing_id}/agent"
+---
+
+RealtyCrawl returns this account’s source observation, retained for 24 hours. This Zillow section is documentation-backed beta, validated with saved source fixtures and offline tests; it is not fresh live acceptance. Resolve a Zillow URL or fetch a ZPID detail first, then use the returned listing ID. Missing sections return CAPABILITY_UNAVAILABLE; explicit empty sections remain empty.
+
+Returns embedded listing attribution with professional and brokerage names. This does not establish verified directory identity, licensing, ownership or contact channels.
+
+A successful retained read costs 1 credit. No fresh source request occurs. Preserve source provenance, observation times and DOCUMENTED_SOURCE_BETA warnings.

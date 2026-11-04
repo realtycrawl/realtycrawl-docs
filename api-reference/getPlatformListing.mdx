@@ -10,3 +10,7 @@ For Redfin, first resolve a supported listing URL or search listings using the s
 This route performs a fresh source lookup and costs 50 credits when successful. Use `GET /v1/listings/{listing_id}` for the retained observation, or its `/media` route for retained photos, at 1 credit per successful read. Idempotent replays are free.
 
 Redfin support is limited to the qualified active US sale listing shape. Photos are source-reported; availability, estimates, history, contacts and exact address/coordinates are not established by this endpoint.
+
+## Zillow direct detail
+
+Use a numeric ZPID without a retained-listing prerequisite. Zillow URL/native resolution accepts transaction sale/rent and status active/sold; sold requires sale. Native GET selectors go in the query string. This listing lookup is separate from the Austin source-property resolver. Expanded modes are documentation-backed beta and do not establish nationwide live acceptance. Successful fresh detail costs 50 credits; retained sections cost 1 credit each.

@@ -27,3 +27,20 @@ For unified search, add `"platforms": ["facebook_marketplace"]`. The provider qu
 Source property category, unit details/counts, canonical listing/share identity and actual item distance must agree. Numeric prices, billing period, deposit basis, availability, exact item location, contacts, photos and source update time are unknown or omitted. A source product ID is not assumed to be the native listing ID. This observation does not establish complete inventory or housing availability.
 
 The four accepted source operations are platform search, unified search, retained account-owned listing and stored media. Media is an empty array for this source. Native-ID detail, resolution and listing history remain unavailable. Fresh searches cost 50 credits, retained reads 1, errors and prior-response replay 0. Account selectors expire after 24 hours; existing seven-day replay snapshots can outlive selector retention.
+
+## Zillow search billing
+
+Zillow costs 3 credits per returned listing. The default limit is 10. Reserve 3 times the requested limit; unused credits are refunded. Ten requested listings reserve 30 credits, while three returned listings cost 9 credits. A successful empty Zillow result costs zero. Other platforms cost 50 credits per successful source crawl. Unified requests combine platform reservations and refund failed platforms. Read X-Credits-Used for the final charge.
+
+
+## Zillow filters and modes
+
+Zillow accepts contiguous-US location.bbox, sale/rent transactions, active status, or transaction sale with status ["sold"]. Price bounds require USD (one_time sale or month rent); bedrooms use integer bounds, bathrooms numeric bounds, and area uses living sqft. Supported property types include single_family, condo, townhouse, multi_family, manufactured, land and apartment. Sort supports source_order, price_asc, price_desc and newest. Limit remains 1–100. Cursor, listed_since, include and property grouping remain unsupported.
+
+Expanded selectors use provider documentation and offline tests. Preserve DOCUMENTED_SOURCE_BETA warnings; earlier live evidence establishes sale plus bounding box only. Other platforms retain source-specific restrictions. Native URLs in source_filters.zillow.search_url must contain a validated searchQueryState matching location.bbox and requested mode. Explicit normalized bounds, types and sort take precedence over corresponding native filter families.
+
+```json
+{"location":{"kind":"bbox","bbox":[-97.82,30.2,-97.65,30.35]},"transaction":"sale","price":{"min":200000,"max":900000,"currency":"USD"},"bedrooms":{"min":2},"property_types":["single_family"],"sort":"price_asc","limit":10}
+```
+
+For unified search add "platforms":["zillow"]. Response options fields and format belong in the URL query, not the JSON body. CSV/NDJSON contain data records; JSON retains meta. Response shaping does not change source cost or completeness.

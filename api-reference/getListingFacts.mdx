@@ -1,0 +1,10 @@
+---
+title: "Read property facts and virtual tours"
+openapi: "GET /v1/listings/{listing_id}/facts"
+---
+
+RealtyCrawl returns this account’s source observation, retained for 24 hours. This Zillow section is documentation-backed beta, validated with saved source fixtures and offline tests; it is not fresh live acceptance. Resolve a Zillow URL or fetch a ZPID detail first, then use the returned listing ID. Missing sections return CAPABILITY_UNAVAILABLE; explicit empty sections remain empty.
+
+Returns description, construction year, supported features, at-a-glance facts and virtual tours. Unknown fields stay null.
+
+A successful retained read costs 1 credit. No fresh source request occurs. Preserve source provenance, observation times and DOCUMENTED_SOURCE_BETA warnings.

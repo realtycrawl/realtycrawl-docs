@@ -1,0 +1,14 @@
+---
+title: "Fetch a bounded batch of Zillow listing details"
+openapi: "POST /v1/zillow/listings/batch"
+---
+
+RealtyCrawl fetches 1–5 unique numeric Zillow ZPIDs sequentially, using the existing source cost ceiling per request. This operation is documentation-backed beta; expanded selectors have not received fresh live acceptance.
+
+```json
+{"native_ids":["29419686","12345678"],"transaction":"sale","status":"active"}
+```
+
+Reserve 50 credits per requested ID. Successful details cost 50 credits each; failed or undispatched items cost zero. Each outcome contains native_id, status, listing or null, and a sanitized error_code. Partial results are explicit. A shared 50-second dispatch deadline stops further work; unfinished/undispatched items report BATCH_DEADLINE_EXCEEDED. No automatic retry occurs. Retry only failed IDs deliberately. Idempotency-Key replays the original settled response without new source calls or charges.
+
+Details and available sections are retained for 24 hours. This does not promise complete inventory, valuations or verified sales.
