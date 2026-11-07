@@ -8,3 +8,7 @@ Use this account’s unexpired Austin single-family Zillow property from source-
 The provider’s dedicated comparable_homes field establishes the selection relationship. Returned positive-price records have price.kind=unknown: the source does not establish asking, sold or estimated-value meaning. Zero-price sold rows are omitted. Event date, distance, adjustments and listing remain null. This is an unadjusted source recommendation, without verified closed sales, arm’s-length consideration, exhaustive matching, appraisal or valuation guarantees. Exact address/geometry, media, contacts and owner information are omitted. Comparison property IDs are source-scoped and are not automatically retained selectors for getProperty.
 
 <Note>Check [live capabilities](https://realtycrawl.dev/v1/meta/capabilities?platform=zillow). The original property selector is private to this account for 24 hours. Existing seven-day idempotency replay returns a prior snapshot and can outlive selector retention.</Note>
+
+## RentCast estimate comparables
+
+RentCast estimate properties (prop_rentcast_) serve their retained provider-selected listing comparables here as a1-credit read rather than a fresh call. Records keep price.kind=unknown, provider correlation and distance, event dates where reported and selection_method rentcast_avm_correlation. They are unadjusted provider selections, not verified sales.

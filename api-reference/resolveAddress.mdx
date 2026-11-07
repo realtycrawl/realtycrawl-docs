@@ -1,0 +1,14 @@
+---
+title: "Resolve and normalize a street address"
+openapi: "POST /v1/addresses/resolve"
+---
+
+Normalize one street address through the Geocodio pay-as-you-go geocoding source (v2.1). Supply address={formatted:...} for free-form text or address={line1,city,region or postal_code,country} for structured components; country is the ISO code and must be one of US, CA, MX, GB, AU or NZ. Success costs 50 credits and stores one account-owned normalized-address observation for24 hours.
+
+The response carries the provider-formatted address, parsed components, address lines, coordinates (WGS84/EPSG:4326), numeric accuracy, literal accuracy_type, provider source name and the stable_address_key retained as a reference. Coordinates are geographic matches, not parcel boundaries, deliverability confirmation or ownership evidence. Zero-result requests cost 0 and return status no_match.
+
+Optional fields selects up to 3 documented provider appends: timezone, cd (congressional district), stateleg (state legislative districts), school (districts), census (Census geographies), acs-housing (ACS housing) and zip4 (ZIP+4). Appends other than timezone are US-only. Each requested append is billed by the provider as one additional lookup, so appends are checked against the configured run allowance before execution. Provider credentials and enablement are checked before every call.
+
+<Note>Check [live capabilities](https://realtycrawl.dev/v1/meta/capabilities?platform=geocodio) before calling this operation.</Note>
+
+This binding is documentation-backed beta, not fresh live source verification. GEOCODIO_API_KEY must be configured and the source enabled explicitly.

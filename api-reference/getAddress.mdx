@@ -1,0 +1,8 @@
+---
+title: "Read a retained normalized address"
+openapi: "GET /v1/addresses/{address_id}"
+---
+
+Read this account’s unexpired normalized-address observation for1 credit. Requires the returned addr_geocodio_ address_id;24h retention. Returns the retained formatted address, components, coordinates, accuracy and stable-key reference plus any appends collected at resolve time. No fresh provider call, no re-normalization and no append re-billing; expired or cross-account IDs return404.
+
+<Note>Check [live capabilities](https://realtycrawl.dev/v1/meta/capabilities?platform=geocodio). Idempotent replay of the resolve request can return a prior snapshot that outlives selector retention.</Note>

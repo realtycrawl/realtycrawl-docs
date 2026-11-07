@@ -2,11 +2,11 @@
 title: "Coverage and evidence"
 ---
 
-The research inventory contains 202 platforms and the current API contract defines 61 operations. Runtime coverage is operation- and market-specific. Check live capabilities: active identifies accepted source integrations; beta identifies explicitly enabled documentation-backed integrations checked offline without live source acceptance. Research entries are not callable.
+The research inventory contains 205 platforms and the current API contract defines 64 operations. Runtime coverage is operation- and market-specific. Check live capabilities: active identifies accepted source integrations; beta identifies explicitly enabled documentation-backed integrations checked offline without live source acceptance. Research entries are not callable.
 
 ## Published coverage snapshot
 
-As of October 21, 2026, the catalog contains 202 platforms: 197 active source entries, four unavailable sources and one retired source. The unified API defines 43 operation templates. Across sources, 866 platform-operation bindings are callable: 844 active bindings and 22 documentation-backed beta bindings. One route template can serve many source bindings; these are different counts.
+As of November 10, 2026, the catalog contains 205 platforms: 200 active source entries, four unavailable sources and one retired source. The unified API defines 46 operation templates. Across sources, 880 platform-operation bindings are callable: 844 active bindings and 36 documentation-backed beta bindings. One route template can serve many source bindings; these are different counts.
 
 This is a dated release snapshot, not a new live scrape or a guarantee of present availability. Check the live capability response for the exact platform, operation and country before spending credits. See the machine-readable coverage snapshot at https://realtycrawl.dev/docs/coverage.json.
 
@@ -15,6 +15,8 @@ This is a dated release snapshot, not a new live scrape or a guarantee of presen
 A capability with status beta and evidence_level provider_documentation_and_offline_tests can be called when explicitly enabled by the operator. Its request and response mapping were reviewed against provider documentation and local tests, without live source acceptance. Responses include a DOCUMENTED_SOURCE_BETA warning. Upstream availability is not guaranteed; missing fields remain unknown.
 
 Beta never lifts provider spending, credential, ownership or native-access restrictions. Check the exact operation, source and country before a request; unsupported history is not implied by listing-detail support.
+
+The us_property address-composite source is documentation-backed beta across its seven property bindings; see the dedicated section below for its selectors, costs, allowances and per-source outcomes. The geocodio address-normalization source (two address bindings) and the rentcast provider-AVM source (five property bindings) are likewise documentation-backed beta behind explicit operator opt-ins; see their dedicated sections.
 
 ## Unavailable coverage
 
@@ -91,6 +93,32 @@ Tax-assessment snapshots preserve source-assessed land/total amounts in USD, dis
 `GET /v1/properties/{property_id}/transactions` fetches one newest DOF source entry for a retained current A1 one-family parcel. Exact borough/block/lot, sale-time A1/category 01/tax-class 1 must agree. Limit1 (default 1), no cursor. Source-reported USD amount preserves zero cash consideration and date precision day; provider row IDs are dataset-scoped. No arm's-length transfer, whole-parcel consideration allocation, current ownership, deed/title or complete-history inference. Success50 credits; no matching rolling-window entry 404 at zero credits.
 
 Fresh resolution and sale lookup each use one official metadata query and one bounded data query. No upstream key, paid account, redirect or automatic retry. Existing account/key scope and24h expiry checks precede source execution. Errors and idempotent replay cost 0; the existing 7-day replay cache remains a previous response snapshot and can outlive selector retention. Public datasets can be updated/replaced; source freshness and schema changes fail closed.
+
+## US address property composite
+
+The us_property source resolves a US street address through three pinned Apify actors: a county assessor/property-record actor, a recorder deed/mortgage/lien index actor and a Zillow address detail actor. It is a distinct source-scoped identity (prop_usproperty_), not cadastral or cross-portal matching, and every binding is documentation-backed beta behind an explicit operator opt-in.
+
+`POST /v1/properties/resolve` accepts `address` as `{"formatted":"123 Example Street, Austin, TX","country":"US"}` or structured `line1` + `city` (+ optional `region`, `postal_code`, `unit`). Parcel, native-ID, platform and non-US selectors are rejected. Success costs 50 credits and retains one account-owned property observation for 24 hours; retained property, record, assessment, transaction, valuation and listing reads cost 1 credit each.
+
+Owner fields are the published assessor owner of record, not verified title or current occupancy. Recorded documents are recorder-index rows (deed, mortgage, release, lien, satisfaction, assignment, easement) with filed parties and instrument numbers — filed-instrument evidence, not a lien search, debt status or title opinion. Assessor assessed/market figures are tax-roll values and Zillow Zestimate/rent estimates are portal model output; neither is an appraisal, AVM or sale price. Photos and listing status come only from the portal observation.
+
+Each upstream source reports its own outcome. The assessor actor's published run minimum exceeds the standard per-run allowance, so it returns an explicit allowance-unavailable outcome until a separate bounded cap is configured — it never silently raises the shared ceiling. County routing coverage varies and unsupported jurisdictions report explicit coverage or unsupported outcomes rather than fabricating records. Upstream schema, build or pricing drift fails closed before paid execution.
+
+## Geocodio address normalization
+
+The geocodio source normalizes one street address through the Geocodio pay-as-you-go geocoding API (v2.1) under a distinct addr_geocodio_ identity. Both bindings are documentation-backed beta behind GEOCODIO_API_KEY plus explicit operator opt-in and a bounded per-run allowance that never raises the shared provider ceiling.
+
+`POST /v1/addresses/resolve` accepts `address` as `{"formatted":"1109 N Highland St, Arlington, VA 22201"}` or structured `line1` + `city` (+ optional `unit`, `region`, `postal_code`), with `country` one of US, CA, MX, GB, AU or NZ. Optional `fields` selects documented provider appends (timezone, cd, stateleg, school, census, acs-housing, zip4; non-timezone appends are US-only), capped at three — each append is billed by the provider as one additional lookup, so appends are allowance-bounded before execution. Success costs 50 credits and retains one account-owned normalized-address observation for 24 hours; `GET /v1/addresses/{address_id}` reads it for 1 credit.
+
+The response preserves the provider-formatted address, parsed components, address lines, coordinates (EPSG:4326), numeric accuracy, literal accuracy_type, provider source name and the stable_address_key as a retained reference. Coordinates are geographic matches — not parcel boundaries, deliverability or occupancy proof — and appends are source-published district/Census/timezone associations, not legal or demographic verification. Zero-result lookups return an explicit unmatched outcome at 0 credits; this is geocoding/normalization, not autocomplete.
+
+## RentCast provider AVM estimates
+
+The rentcast source estimates a US property value and long-term rent through RentCast provider automated valuation models under a distinct prop_rentcast_ identity. All five bindings are documentation-backed beta behind RENTCAST_API_KEY plus explicit operator opt-in and a bounded per-run allowance covering both provider requests.
+
+`POST /v1/properties/estimate` accepts `address` as `{"formatted":"5500 Grand Lake Dr, San Antonio, TX 78244","country":"US"}` or structured `line1` + `city` (+ optional `region`, `postal_code`); `rent_estimate=false` skips the second provider request. Success costs 50 credits and retains one combined account-owned estimate observation — subject property summary, provenance record, value and rent valuations, provider-selected comparables — for 24 hours. Retained property, record, valuation and comparable reads cost 1 credit each.
+
+Both estimates are provider model outputs with low/high bounds: the value estimate is point-in-time and the rent estimate is labeled monthly long-term rent. Neither is an appraisal, sale price, achievable-rent guarantee or licensed AVM product. Subject attributes come from the provider lookup, not assessor verification, and comparables are unadjusted provider listing selections (price.kind=unknown, correlation-based), not verified sales.
 
 ## Official FHFA market data
 

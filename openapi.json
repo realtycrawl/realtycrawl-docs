@@ -2849,7 +2849,7 @@
       "post": {
         "operationId": "resolveProperty",
         "summary": "Resolve a NYC tax-lot property",
-        "description": "Resolve one exact current NYC non-condominium tax lot from official DCP PLUTO. Supply parcel_id=ten-digit BBL, jurisdiction=US-NY-NYC,country=US; alternatively platform=nyc_pluto,native_id=BBL,country=US. No address/geocoder, condo billing/unit-lot or historical split/merge inference. Success costs50 credits and stores account-owned property/record/assessment observations24h. Confidence unknown, method exact_current_nyc_tax_lot_bbl. Source: NYC Open Data DCP PLUTO. Independent wrapper, no title/ownership/unit/availability verification. Zillow alternative:resolve platform=zillow,native_id=ZPID,country=US directly for an Austin single-family sale home. No prior listing lookup;independently validated native identity,bare canonical URL,market,type,status and USD asking price. Source update time unknown;observed_at is retrieval. Private24h property and associated advertisement reads cost1credit;source resolution50,errors/replay0. No address geocoding,cadastral/cross-platform match or history guarantee.",
+        "description": "Resolve one exact current NYC non-condominium tax lot from official DCP PLUTO. Supply parcel_id=ten-digit BBL, jurisdiction=US-NY-NYC,country=US; alternatively platform=nyc_pluto,native_id=BBL,country=US. No address/geocoder, condo billing/unit-lot or historical split/merge inference. Success costs50 credits and stores account-owned property/record/assessment observations24h. Confidence unknown, method exact_current_nyc_tax_lot_bbl. Source: NYC Open Data DCP PLUTO. Independent wrapper, no title/ownership/unit/availability verification. Zillow alternative:resolve platform=zillow,native_id=ZPID,country=US directly for an Austin single-family sale home. No prior listing lookup;independently validated native identity,bare canonical URL,market,type,status and USD asking price. Source update time unknown;observed_at is retrieval. Private24h property and associated advertisement reads cost1credit;source resolution50,errors/replay0. No address geocoding,cadastral/cross-platform match or history guarantee. US address composite alternative:supply address={formatted or line1+city,region/postal_code optional,country=US} through source us_property to query pinned county-assessor,recorder deed/mortgage/lien-index and Zillow portal detail actors. Merged account-owned prop_usproperty_ observation with per-source outcomes;owner-of-record is not verified title,recorded documents are index evidence not a lien search,tax-roll/portal estimates are not appraisals. Documentation-backed beta;the assessor source stays gated while its provider minimum exceeds the configured run allowance. Source resolution50 credits,retained reads1,errors/replay0.",
         "x-research-status": "source_contract_accepted",
         "tags": [
           "properties"
@@ -2928,6 +2928,9 @@
               "default": "json"
             }
           }
+        ],
+        "x-documented-platforms": [
+          "us_property"
         ]
       }
     },
@@ -3013,6 +3016,10 @@
         "x-verified-platforms": [
           "zillow",
           "nyc_pluto"
+        ],
+        "x-documented-platforms": [
+          "rentcast",
+          "us_property"
         ]
       }
     },
@@ -3114,6 +3121,9 @@
         "x-credit-cost": 1,
         "x-verified-platforms": [
           "zillow"
+        ],
+        "x-documented-platforms": [
+          "us_property"
         ]
       }
     },
@@ -3215,6 +3225,10 @@
         "x-credit-cost": 1,
         "x-verified-platforms": [
           "nyc_pluto"
+        ],
+        "x-documented-platforms": [
+          "rentcast",
+          "us_property"
         ]
       }
     },
@@ -3316,6 +3330,9 @@
         "x-credit-cost": 50,
         "x-verified-platforms": [
           "nyc_pluto"
+        ],
+        "x-documented-platforms": [
+          "us_property"
         ]
       }
     },
@@ -3417,6 +3434,9 @@
         "x-credit-cost": 1,
         "x-verified-platforms": [
           "nyc_pluto"
+        ],
+        "x-documented-platforms": [
+          "us_property"
         ]
       }
     },
@@ -3518,6 +3538,10 @@
         "x-credit-cost": 50,
         "x-verified-platforms": [
           "nyc_pluto"
+        ],
+        "x-documented-platforms": [
+          "rentcast",
+          "us_property"
         ]
       }
     },
@@ -3635,6 +3659,9 @@
         "x-credit-cost": 50,
         "x-verified-platforms": [
           "zillow"
+        ],
+        "x-documented-platforms": [
+          "rentcast"
         ]
       }
     },
@@ -7865,6 +7892,263 @@
         "x-credit-unit": "successful_retained_read",
         "x-evidence-level": "provider_documentation_and_offline_tests"
       }
+    },
+    "/v1/addresses/resolve": {
+      "post": {
+        "operationId": "resolveAddress",
+        "summary": "Resolve and normalize a street address",
+        "description": "Resolve one street address through the Geocodio geocoding/normalization source (v2.1). Supply address={formatted or line1+city,country in US,CA,MX,GB,AU,NZ}; optional fields selects up to 3 documented appends (timezone,cd,stateleg,school,census,acs-housing,zip4; US-only appends rejected elsewhere), each one additional billed provider lookup. Success costs50 credits and stores one account-owned addr_geocodio_ observation24h; retained reads1, errors/replay0. Match accuracy and source_name are provider-reported; rooftop/point coordinates are geographic matches, not parcel, occupancy, deliverability or address-existence proof. No address autocomplete, unit inventory, USPS-certified delivery point, parcel or ownership verification. Source: Geocodio pay-as-you-go API. Documentation-backed beta; not fresh live-source verification.",
+        "x-research-status": "source_contract_prepared",
+        "tags": [
+          "addresses"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response; meta discloses source completeness",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/resolveAddressResponse"
+                }
+              },
+              "text/csv": {
+                "schema": {
+                  "type": "string",
+                  "description": "Data rows only; request, row count and credits are in headers."
+                }
+              },
+              "application/x-ndjson": {
+                "schema": {
+                  "type": "string",
+                  "description": "One JSON data item per line; metadata is in headers."
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Typed error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddressResolveRequest"
+              }
+            }
+          }
+        },
+        "x-runtime-status": "beta",
+        "x-credit-cost": 50,
+        "x-documented-platforms": [
+          "geocodio"
+        ],
+        "parameters": [
+          {
+            "name": "fields",
+            "in": "query",
+            "description": "Response-only comma-separated field paths relative to data items; up to 32 paths. Source requests and billing are unchanged.",
+            "schema": {
+              "type": "string",
+              "maxLength": 4127
+            }
+          },
+          {
+            "name": "format",
+            "in": "query",
+            "description": "Response-only export format. JSON retains the envelope; CSV/NDJSON contain data records, with request/credit metadata in headers. Errors stay JSON.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "json",
+                "csv",
+                "ndjson"
+              ],
+              "default": "json"
+            }
+          }
+        ],
+        "x-verified-platforms": []
+      }
+    },
+    "/v1/addresses/{address_id}": {
+      "get": {
+        "operationId": "getAddress",
+        "summary": "Read a retained normalized address",
+        "description": "Read this account’s unexpired addr_geocodio_ normalized-address observation for 24 hours after resolveAddress; no fresh provider request. 1 credit; errors/replay0. Missing components/appends stay unknown; coordinates, accuracy and appends are provider-published values, not verified.",
+        "x-research-status": "source_contract_prepared",
+        "tags": [
+          "addresses"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response; meta discloses source completeness",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/getAddressResponse"
+                }
+              },
+              "text/csv": {
+                "schema": {
+                  "type": "string",
+                  "description": "Data rows only; request, row count and credits are in headers."
+                }
+              },
+              "application/x-ndjson": {
+                "schema": {
+                  "type": "string",
+                  "description": "One JSON data item per line; metadata is in headers."
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Typed error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "x-runtime-status": "beta",
+        "x-credit-cost": 1,
+        "x-documented-platforms": [
+          "geocodio"
+        ],
+        "parameters": [
+          {
+            "name": "address_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          {
+            "name": "fields",
+            "in": "query",
+            "description": "Response-only comma-separated field paths relative to data items; up to 32 paths. Source requests and billing are unchanged.",
+            "schema": {
+              "type": "string",
+              "maxLength": 4127
+            }
+          },
+          {
+            "name": "format",
+            "in": "query",
+            "description": "Response-only export format. JSON retains the envelope; CSV/NDJSON contain data records, with request/credit metadata in headers. Errors stay JSON.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "json",
+                "csv",
+                "ndjson"
+              ],
+              "default": "json"
+            }
+          }
+        ],
+        "x-verified-platforms": []
+      }
+    },
+    "/v1/properties/estimate": {
+      "post": {
+        "operationId": "estimateProperty",
+        "summary": "Estimate a US property value and rent",
+        "description": "Request RentCast provider automated-valuation-model (AVM) value and long-term rent estimates for one US address, plus provider-selected listing comparables. Supply address={formatted or line1+city,region/postal_code optional,country=US}; rent_estimate=false runs only the value request. Success costs50 credits and stores one account-owned prop_rentcast_ observation24h; retained reads1, errors/replay0. Outputs are provider AVM estimates with model bounds (low/high), not appraisals, sale prices, tax assessments or guarantees; comparables are provider-selected and unadjusted. Subject attributes come from the provider lookup. Source: RentCast /avm/value and /avm/rent/long-term, billed per request. Documentation-backed beta; not fresh live-source verification.",
+        "x-research-status": "source_contract_prepared",
+        "tags": [
+          "properties"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response; meta discloses source completeness",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/estimatePropertyResponse"
+                }
+              },
+              "text/csv": {
+                "schema": {
+                  "type": "string",
+                  "description": "Data rows only; request, row count and credits are in headers."
+                }
+              },
+              "application/x-ndjson": {
+                "schema": {
+                  "type": "string",
+                  "description": "One JSON data item per line; metadata is in headers."
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Typed error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PropertyEstimateRequest"
+              }
+            }
+          }
+        },
+        "x-runtime-status": "beta",
+        "x-credit-cost": 50,
+        "x-documented-platforms": [
+          "rentcast"
+        ],
+        "parameters": [
+          {
+            "name": "fields",
+            "in": "query",
+            "description": "Response-only comma-separated field paths relative to data items; up to 32 paths. Source requests and billing are unchanged.",
+            "schema": {
+              "type": "string",
+              "maxLength": 4127
+            }
+          },
+          {
+            "name": "format",
+            "in": "query",
+            "description": "Response-only export format. JSON retains the envelope; CSV/NDJSON contain data records, with request/credit metadata in headers. Errors stay JSON.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "json",
+                "csv",
+                "ndjson"
+              ],
+              "default": "json"
+            }
+          }
+        ],
+        "x-verified-platforms": []
+      }
     }
   },
   "components": {
@@ -8977,7 +9261,8 @@
             "enum": [
               "property_record",
               "transaction",
-              "tax_assessment"
+              "tax_assessment",
+              "recorded_document"
             ]
           },
           "event_at": {
@@ -9765,7 +10050,8 @@
                   "enum": [
                     "listing",
                     "property",
-                    "building"
+                    "building",
+                    "address"
                   ]
                 },
                 "confidence": {
@@ -14469,6 +14755,239 @@
         "properties": {
           "data": {
             "$ref": "#/components/schemas/ListingLayoutOptions"
+          },
+          "meta": {
+            "$ref": "#/components/schemas/Meta"
+          }
+        },
+        "required": [
+          "data",
+          "meta"
+        ],
+        "additionalProperties": false
+      },
+      "AddressResolveRequest": {
+        "type": "object",
+        "properties": {
+          "address": {
+            "$ref": "#/components/schemas/AddressSelector"
+          },
+          "fields": {
+            "type": "array",
+            "description": "Optional documented Geocodio field appends; each is one additional billed provider lookup. US-only appends are rejected for other countries.",
+            "items": {
+              "type": "string",
+              "enum": [
+                "timezone",
+                "cd",
+                "stateleg",
+                "school",
+                "census",
+                "acs-housing",
+                "zip4"
+              ]
+            },
+            "maxItems": 3,
+            "uniqueItems": true
+          }
+        },
+        "required": [
+          "address"
+        ],
+        "additionalProperties": false
+      },
+      "AddressResource": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "address": {
+            "$ref": "#/components/schemas/Address"
+          },
+          "geometry": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Geometry"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "match": {
+            "type": "object",
+            "properties": {
+              "accuracy": {
+                "anyOf": [
+                  {
+                    "type": "number"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "accuracy_type": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "source_name": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "stable_key": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              }
+            },
+            "required": [
+              "accuracy",
+              "accuracy_type",
+              "source_name",
+              "stable_key"
+            ],
+            "additionalProperties": false
+          },
+          "components": {
+            "type": "object",
+            "description": "Provider-normalized address components; keys vary by country."
+          },
+          "address_lines": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "appends": {
+            "anyOf": [
+              {
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Requested provider field append payloads, source-published."
+          },
+          "references": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "namespace": {
+                  "type": "string"
+                },
+                "value": {
+                  "type": "string"
+                },
+                "jurisdiction": {
+                  "anyOf": [
+                    {
+                      "type": "string"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                }
+              },
+              "required": [
+                "namespace",
+                "value"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "sources": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Source"
+            }
+          }
+        },
+        "required": [
+          "id",
+          "address",
+          "match",
+          "components",
+          "address_lines",
+          "sources"
+        ],
+        "additionalProperties": false
+      },
+      "resolveAddressResponse": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/Resolution"
+          },
+          "meta": {
+            "$ref": "#/components/schemas/Meta"
+          }
+        },
+        "required": [
+          "data",
+          "meta"
+        ],
+        "additionalProperties": false
+      },
+      "getAddressResponse": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/AddressResource"
+          },
+          "meta": {
+            "$ref": "#/components/schemas/Meta"
+          }
+        },
+        "required": [
+          "data",
+          "meta"
+        ],
+        "additionalProperties": false
+      },
+      "PropertyEstimateRequest": {
+        "type": "object",
+        "properties": {
+          "address": {
+            "$ref": "#/components/schemas/AddressSelector"
+          },
+          "rent_estimate": {
+            "type": "boolean",
+            "default": true,
+            "description": "Request the provider long-term rent AVM in addition to the value AVM; false runs one provider request instead of two."
+          }
+        },
+        "required": [
+          "address"
+        ],
+        "additionalProperties": false
+      },
+      "estimatePropertyResponse": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/Resolution"
           },
           "meta": {
             "$ref": "#/components/schemas/Meta"

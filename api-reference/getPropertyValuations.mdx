@@ -3,4 +3,6 @@ title: "Read a final-roll NYC tax-purpose market estimate"
 openapi: "GET /v1/properties/{property_id}/valuations"
 ---
 
-<Note>Check [live capabilities](https://realtycrawl.dev/v1/meta/capabilities) before calling this operation. A documented contract does not imply active coverage for every source or country.</Note>
+Read this account’s unexpired valuation observations for 1 credit. For NYC PLUTO, the DOF tax-class-1 final-roll market assessed value; for address-composite properties (prop_usproperty_), the county tax-roll market value and Zillow Zestimate/rent-Zestimate portal model estimates where published. Tax-roll and portal model estimates are not appraisals or certified AVMs. RentCast estimate properties (prop_rentcast_) return provider AVM value and long-term rent estimates with model bounds, also not appraisals or sale prices.
+
+<Note>Check [live capabilities](https://realtycrawl.dev/v1/meta/capabilities) before calling this operation.</Note>

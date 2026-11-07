@@ -1,0 +1,12 @@
+---
+title: "Estimate a US property value and rent"
+openapi: "POST /v1/properties/estimate"
+---
+
+Estimate one US property through RentCast provider automated valuation models. Supply address={formatted:...} or address={line1,city,region or postal_code,country:"US"}; rent_estimate=false skips the long-term rent AVM and halves the provider requests. Success costs 50 credits and stores one combined account-owned estimate observation for24 hours: property summary, estimate provenance record, value and rent valuations, and provider-selected comparables.
+
+Both estimates are provider model outputs with low/high bounds: value is point-in-time; rent is labeled monthly long-term rent. Neither is an appraisal, sale price, achievable-rent guarantee or licensed AVM product. Subject property attributes come from the provider lookup, not from public-record verification. Comparables are unadjusted provider listing selections with correlation and distance, not verified sales. This binding is documentation-backed beta; no data responses return status no_match at0 cost.
+
+<Note>Check [live capabilities](https://realtycrawl.dev/v1/meta/capabilities?platform=rentcast) before calling this operation.</Note>
+
+Requires RENTCAST_API_KEY and explicit source enablement. Retained property, record, valuation and comparable reads then cost1 credit each.

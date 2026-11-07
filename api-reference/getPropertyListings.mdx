@@ -8,3 +8,7 @@ Resolve platform zillow, native_id and country US directly for an Austin single-
 <Note>Check [live capabilities](https://realtycrawl.dev/v1/meta/capabilities) before calling. Retained selectors are private to this account for 24 hours. The existing seven-day idempotency replay cache returns a prior response snapshot and can outlive selector retention.</Note>
 
 The associated advertisement preserves the independently returned native ZPID and bare canonical URL. Source update time is unknown. Unitless areas and listing history are not inferred.
+
+## US address composite listings
+
+Address-composite properties (prop_usproperty_) expose at most one Zillow portal advertisement observed during address resolution, when the portal page carried an active, pending or sold status. Off-market portal observations carry no listing.

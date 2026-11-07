@@ -132,7 +132,8 @@
               "api-reference/getPropertyTaxAssessments",
               "api-reference/getPropertyValuations",
               "api-reference/getPropertyComparables",
-              "api-reference/getPropertyZoning"
+              "api-reference/getPropertyZoning",
+              "api-reference/estimateProperty"
             ]
           },
           {
@@ -212,6 +213,13 @@
             "group": "Observations",
             "pages": [
               "api-reference/batchReadObservations"
+            ]
+          },
+          {
+            "group": "Addresses",
+            "pages": [
+              "api-reference/resolveAddress",
+              "api-reference/getAddress"
             ]
           }
         ]

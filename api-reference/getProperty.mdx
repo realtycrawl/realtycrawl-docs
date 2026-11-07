@@ -12,3 +12,11 @@ Read this account’s unexpired NYC PLUTO tax-lot property observation for1 cred
 Resolve an Austin single-family Zillow sale home directly with platform=zillow, native_id=its ZPID and country=US. No prior listing lookup is required. A fresh pinned source detail independently confirms the ZPID and canonical URL, costing 50 credits on success. The returned property has a zillow_zpid reference, separate from NYC BBL identity. Retained property details and one explicitly associated advertisement cost 1 credit each and last 24 hours. Errors and replay cost 0. No cadastral/cross-portal match, title, ownership, private AVM or complete listing inventory is inferred.
 
 The distinct pinned native-property provider returns the exact ZPID, bare canonical URL, market, home type, sale status and USD asking price. Source update time is unknown; observed_at is retrieval time. Unitless areas, contacts, precise location, narrative, photos and AVM fields are omitted. This property mode does not produce listing history.
+
+## US address composite properties
+
+Address-composite properties (property_id prefix prop_usproperty_) combine county assessor, recorder-index and portal observations under one source-scoped identity. The summary merges matched sources; per-source provenance is preserved on each record. Retained 24 hours by this account; reading never refreshes the source.
+
+## Provider AVM estimate properties
+
+RentCast estimate properties (property_id prefix prop_rentcast_) carry the provider-looked-up subject property: formatted address, property type, bedrooms/bathrooms, living area and year built where reported. Retained 24 hours by this account; reading never refreshes the provider estimate.
