@@ -1,7 +1,7 @@
 {
   "asOf": "2026-11-10",
-  "catalogPlatforms": 205,
-  "activePlatforms": 200,
+  "catalogPlatforms": 206,
+  "activePlatforms": 201,
   "unavailablePlatforms": [
     "beike",
     "costar",
@@ -11,10 +11,10 @@
   "retiredPlatforms": [
     "rumah_com"
   ],
-  "operationDefinitions": 46,
+  "operationDefinitions": 49,
   "activeBindings": 844,
-  "documentedBetaBindings": 36,
-  "callableBindings": 880,
+  "documentedBetaBindings": 47,
+  "callableBindings": 891,
   "betaEvidenceLevel": "provider_documentation_and_offline_tests",
   "deferredProviderPlatforms": [
     "makaan",

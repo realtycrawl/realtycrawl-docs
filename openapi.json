@@ -617,7 +617,8 @@
           }
         ],
         "x-documented-platforms": [
-          "591"
+          "591",
+          "rentcast"
         ]
       }
     },
@@ -1109,7 +1110,8 @@
           }
         },
         "x-documented-platforms": [
-          "591"
+          "591",
+          "rentcast"
         ]
       }
     },
@@ -2052,7 +2054,8 @@
           "immoscout24_at"
         ],
         "x-documented-platforms": [
-          "591"
+          "591",
+          "rentcast"
         ]
       }
     },
@@ -2637,7 +2640,10 @@
           "zoopla",
           "pap"
         ],
-        "x-prepared-status": "publication_date_only_implementation_unverified"
+        "x-prepared-status": "publication_date_only_implementation_unverified",
+        "x-documented-platforms": [
+          "rentcast"
+        ]
       }
     },
     "/v1/listings/{listing_id}/open-houses": {
@@ -3019,7 +3025,8 @@
         ],
         "x-documented-platforms": [
           "rentcast",
-          "us_property"
+          "us_property",
+          "shovels"
         ]
       }
     },
@@ -3228,7 +3235,8 @@
         ],
         "x-documented-platforms": [
           "rentcast",
-          "us_property"
+          "us_property",
+          "shovels"
         ]
       }
     },
@@ -4826,6 +4834,9 @@
               "default": "json"
             }
           }
+        ],
+        "x-documented-platforms": [
+          "rentcast"
         ]
       }
     },
@@ -7066,7 +7077,10 @@
         ],
         "x-data-freshness": "retained",
         "x-credit-cost": 1,
-        "x-credit-unit": "stored_observation_read"
+        "x-credit-unit": "stored_observation_read",
+        "x-documented-platforms": [
+          "rentcast"
+        ]
       }
     },
     "/v1/stays/{stay_id}/media": {
@@ -8123,6 +8137,279 @@
           "rentcast"
         ],
         "parameters": [
+          {
+            "name": "fields",
+            "in": "query",
+            "description": "Response-only comma-separated field paths relative to data items; up to 32 paths. Source requests and billing are unchanged.",
+            "schema": {
+              "type": "string",
+              "maxLength": 4127
+            }
+          },
+          {
+            "name": "format",
+            "in": "query",
+            "description": "Response-only export format. JSON retains the envelope; CSV/NDJSON contain data records, with request/credit metadata in headers. Errors stay JSON.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "json",
+                "csv",
+                "ndjson"
+              ],
+              "default": "json"
+            }
+          }
+        ],
+        "x-verified-platforms": []
+      }
+    },
+    "/v1/permits/search": {
+      "post": {
+        "operationId": "searchPermits",
+        "summary": "Search US building permits for an address",
+        "description": "Search building-permit index records for one US street address through the Shovels source (v2). Supply address={formatted or line1+city,country:US}; permit_from/permit_to bound the permit date window (defaults: ten years back to today) and limit bounds returned records (default10). The source resolves the address to its geo_id then returns indexed jurisdiction filings; each returned record bills provider usage, checked against the configured run allowance. Success costs50 credits and stores one account-owned prop_shovels_ observation24h; retained property/record/permit reads1, errors/replay0. Permits are provider-indexed filings, not a complete permit history, title or contractor verification; coverage varies by jurisdiction. Source: Shovels pay-per-record API. Documentation-backed beta; not fresh live-source verification.",
+        "x-research-status": "source_contract_prepared",
+        "tags": [
+          "permits"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response; meta discloses source completeness",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/searchPermitsResponse"
+                }
+              },
+              "text/csv": {
+                "schema": {
+                  "type": "string",
+                  "description": "Data rows only; request, row count and credits are in headers."
+                }
+              },
+              "application/x-ndjson": {
+                "schema": {
+                  "type": "string",
+                  "description": "One JSON data item per line; metadata is in headers."
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Typed error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PermitSearchRequest"
+              }
+            }
+          }
+        },
+        "x-runtime-status": "beta",
+        "x-credit-cost": 50,
+        "x-documented-platforms": [
+          "shovels"
+        ],
+        "parameters": [
+          {
+            "name": "fields",
+            "in": "query",
+            "description": "Response-only comma-separated field paths relative to data items; up to 32 paths. Source requests and billing are unchanged.",
+            "schema": {
+              "type": "string",
+              "maxLength": 4127
+            }
+          },
+          {
+            "name": "format",
+            "in": "query",
+            "description": "Response-only export format. JSON retains the envelope; CSV/NDJSON contain data records, with request/credit metadata in headers. Errors stay JSON.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "json",
+                "csv",
+                "ndjson"
+              ],
+              "default": "json"
+            }
+          }
+        ],
+        "x-verified-platforms": []
+      }
+    },
+    "/v1/properties/{property_id}/permits": {
+      "get": {
+        "operationId": "getPropertyPermits",
+        "summary": "Read retained building permits",
+        "description": "Read this account’s unexpired prop_shovels_ permit observations for24 hours after searchPermits; no fresh provider request. 1 credit; errors/replay0. Provider-indexed filings only — not a complete permit history; missing fields stay unknown.",
+        "x-research-status": "source_contract_prepared",
+        "tags": [
+          "permits"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response; meta discloses source completeness",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/getPropertyPermitsResponse"
+                }
+              },
+              "text/csv": {
+                "schema": {
+                  "type": "string",
+                  "description": "Data rows only; request, row count and credits are in headers."
+                }
+              },
+              "application/x-ndjson": {
+                "schema": {
+                  "type": "string",
+                  "description": "One JSON data item per line; metadata is in headers."
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Typed error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "x-runtime-status": "beta",
+        "x-credit-cost": 1,
+        "x-documented-platforms": [
+          "shovels"
+        ],
+        "parameters": [
+          {
+            "name": "property_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 100,
+              "default": 1
+            }
+          },
+          {
+            "name": "cursor",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "fields",
+            "in": "query",
+            "description": "Response-only comma-separated field paths relative to data items; up to 32 paths. Source requests and billing are unchanged.",
+            "schema": {
+              "type": "string",
+              "maxLength": 4127
+            }
+          },
+          {
+            "name": "format",
+            "in": "query",
+            "description": "Response-only export format. JSON retains the envelope; CSV/NDJSON contain data records, with request/credit metadata in headers. Errors stay JSON.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "json",
+                "csv",
+                "ndjson"
+              ],
+              "default": "json"
+            }
+          }
+        ],
+        "x-verified-platforms": []
+      }
+    },
+    "/v1/markets/{market_id}/stats": {
+      "get": {
+        "operationId": "getMarketStatistics",
+        "summary": "Read retained ZIP market statistics",
+        "description": "Read this account’s unexpired RentCast ZIP-level sale/rental listing statistics saved by searchMarkets for24 hours; no fresh provider request. 1 credit; errors/replay0. Provider aggregates from listing observations — not transaction records, appraisals or coverage-complete market measures; history gaps reflect low listing volume.",
+        "x-research-status": "source_contract_prepared",
+        "tags": [
+          "markets"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response; meta discloses source completeness",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/getMarketStatisticsResponse"
+                }
+              },
+              "text/csv": {
+                "schema": {
+                  "type": "string",
+                  "description": "Data rows only; request, row count and credits are in headers."
+                }
+              },
+              "application/x-ndjson": {
+                "schema": {
+                  "type": "string",
+                  "description": "One JSON data item per line; metadata is in headers."
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Typed error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "x-runtime-status": "beta",
+        "x-credit-cost": 1,
+        "x-documented-platforms": [
+          "rentcast"
+        ],
+        "parameters": [
+          {
+            "name": "market_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
           {
             "name": "fields",
             "in": "query",
@@ -14998,15 +15285,859 @@
           "meta"
         ],
         "additionalProperties": false
+      },
+      "Permit": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "property_id": {
+            "type": "string"
+          },
+          "source": {
+            "$ref": "#/components/schemas/Source"
+          },
+          "permit_number": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "permit_type": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "description": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "status": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "jurisdiction": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "event_dates": {
+            "type": "object",
+            "properties": {
+              "filed": {
+                "anyOf": [
+                  {
+                    "type": "string",
+                    "format": "date"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "issued": {
+                "anyOf": [
+                  {
+                    "type": "string",
+                    "format": "date"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "started": {
+                "anyOf": [
+                  {
+                    "type": "string",
+                    "format": "date"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "ended": {
+                "anyOf": [
+                  {
+                    "type": "string",
+                    "format": "date"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "finaled": {
+                "anyOf": [
+                  {
+                    "type": "string",
+                    "format": "date"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              }
+            },
+            "required": [
+              "filed",
+              "issued",
+              "started",
+              "ended",
+              "finaled"
+            ],
+            "additionalProperties": false
+          },
+          "durations_days": {
+            "type": "object",
+            "properties": {
+              "total": {
+                "anyOf": [
+                  {
+                    "type": "number"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "construction": {
+                "anyOf": [
+                  {
+                    "type": "number"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "approval": {
+                "anyOf": [
+                  {
+                    "type": "number"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              }
+            },
+            "required": [
+              "total",
+              "construction",
+              "approval"
+            ],
+            "additionalProperties": false
+          },
+          "inspection_pass_rate": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "job_value": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Money"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "fees": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Money"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "tags": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "contractor_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "required": [
+          "id",
+          "property_id",
+          "source",
+          "permit_number",
+          "permit_type",
+          "description",
+          "status",
+          "jurisdiction",
+          "event_dates",
+          "durations_days",
+          "inspection_pass_rate",
+          "job_value",
+          "fees",
+          "tags",
+          "contractor_id"
+        ],
+        "additionalProperties": false
+      },
+      "PermitSearchRequest": {
+        "type": "object",
+        "properties": {
+          "address": {
+            "$ref": "#/components/schemas/AddressSelector"
+          },
+          "permit_from": {
+            "type": "string",
+            "format": "date",
+            "description": "Earliest permit start date (file/issue/start); defaults to ten years before today."
+          },
+          "permit_to": {
+            "type": "string",
+            "format": "date",
+            "description": "Latest permit end bound; defaults to today."
+          },
+          "limit": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 100,
+            "default": 10,
+            "description": "Maximum permit records to return; each returned record bills provider usage, so the effective bound is also allowance-capped."
+          }
+        },
+        "required": [
+          "address"
+        ],
+        "additionalProperties": false
+      },
+      "searchPermitsResponse": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Permit"
+            }
+          },
+          "meta": {
+            "$ref": "#/components/schemas/Meta"
+          }
+        },
+        "required": [
+          "data",
+          "meta"
+        ],
+        "additionalProperties": false
+      },
+      "getPropertyPermitsResponse": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Permit"
+            }
+          },
+          "meta": {
+            "$ref": "#/components/schemas/Meta"
+          }
+        },
+        "required": [
+          "data",
+          "meta"
+        ],
+        "additionalProperties": false
+      },
+      "MarketStatistics": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "zip_code": {
+            "type": "string"
+          },
+          "sale": {
+            "anyOf": [
+              {
+                "type": "object",
+                "properties": {
+                  "average_price": {
+                    "anyOf": [
+                      {
+                        "type": "string"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "median_price": {
+                    "anyOf": [
+                      {
+                        "type": "string"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "min_price": {
+                    "anyOf": [
+                      {
+                        "type": "string"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "max_price": {
+                    "anyOf": [
+                      {
+                        "type": "string"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "average_price_per_sqft": {
+                    "anyOf": [
+                      {
+                        "type": "number"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "average_sqft": {
+                    "anyOf": [
+                      {
+                        "type": "number"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "average_days_on_market": {
+                    "anyOf": [
+                      {
+                        "type": "number"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "new_listings": {
+                    "anyOf": [
+                      {
+                        "type": "number"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "total_listings": {
+                    "anyOf": [
+                      {
+                        "type": "number"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "last_updated": {
+                    "anyOf": [
+                      {
+                        "type": "string",
+                        "format": "date"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "by_property_type": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "property_type": {
+                          "anyOf": [
+                            {
+                              "type": "string"
+                            },
+                            {
+                              "type": "null"
+                            }
+                          ]
+                        },
+                        "average_price": {
+                          "anyOf": [
+                            {
+                              "type": "string"
+                            },
+                            {
+                              "type": "null"
+                            }
+                          ]
+                        },
+                        "median_price": {
+                          "anyOf": [
+                            {
+                              "type": "string"
+                            },
+                            {
+                              "type": "null"
+                            }
+                          ]
+                        },
+                        "total_listings": {
+                          "anyOf": [
+                            {
+                              "type": "number"
+                            },
+                            {
+                              "type": "null"
+                            }
+                          ]
+                        }
+                      },
+                      "required": [
+                        "property_type",
+                        "average_price",
+                        "median_price",
+                        "total_listings"
+                      ],
+                      "additionalProperties": false
+                    }
+                  },
+                  "history": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "month": {
+                          "type": "string"
+                        },
+                        "average_price": {
+                          "anyOf": [
+                            {
+                              "type": "string"
+                            },
+                            {
+                              "type": "null"
+                            }
+                          ]
+                        },
+                        "median_price": {
+                          "anyOf": [
+                            {
+                              "type": "string"
+                            },
+                            {
+                              "type": "null"
+                            }
+                          ]
+                        },
+                        "new_listings": {
+                          "anyOf": [
+                            {
+                              "type": "number"
+                            },
+                            {
+                              "type": "null"
+                            }
+                          ]
+                        },
+                        "total_listings": {
+                          "anyOf": [
+                            {
+                              "type": "number"
+                            },
+                            {
+                              "type": "null"
+                            }
+                          ]
+                        },
+                        "average_days_on_market": {
+                          "anyOf": [
+                            {
+                              "type": "number"
+                            },
+                            {
+                              "type": "null"
+                            }
+                          ]
+                        }
+                      },
+                      "required": [
+                        "month",
+                        "average_price",
+                        "median_price",
+                        "new_listings",
+                        "total_listings",
+                        "average_days_on_market"
+                      ],
+                      "additionalProperties": false
+                    }
+                  }
+                },
+                "required": [
+                  "average_price",
+                  "median_price",
+                  "min_price",
+                  "max_price",
+                  "average_price_per_sqft",
+                  "average_sqft",
+                  "average_days_on_market",
+                  "new_listings",
+                  "total_listings",
+                  "last_updated",
+                  "by_property_type",
+                  "history"
+                ],
+                "additionalProperties": false
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "rental": {
+            "anyOf": [
+              {
+                "type": "object",
+                "properties": {
+                  "average_price": {
+                    "anyOf": [
+                      {
+                        "type": "string"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "median_price": {
+                    "anyOf": [
+                      {
+                        "type": "string"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "min_price": {
+                    "anyOf": [
+                      {
+                        "type": "string"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "max_price": {
+                    "anyOf": [
+                      {
+                        "type": "string"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "average_price_per_sqft": {
+                    "anyOf": [
+                      {
+                        "type": "number"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "average_sqft": {
+                    "anyOf": [
+                      {
+                        "type": "number"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "average_days_on_market": {
+                    "anyOf": [
+                      {
+                        "type": "number"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "new_listings": {
+                    "anyOf": [
+                      {
+                        "type": "number"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "total_listings": {
+                    "anyOf": [
+                      {
+                        "type": "number"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "last_updated": {
+                    "anyOf": [
+                      {
+                        "type": "string",
+                        "format": "date"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "by_property_type": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "property_type": {
+                          "anyOf": [
+                            {
+                              "type": "string"
+                            },
+                            {
+                              "type": "null"
+                            }
+                          ]
+                        },
+                        "average_price": {
+                          "anyOf": [
+                            {
+                              "type": "string"
+                            },
+                            {
+                              "type": "null"
+                            }
+                          ]
+                        },
+                        "median_price": {
+                          "anyOf": [
+                            {
+                              "type": "string"
+                            },
+                            {
+                              "type": "null"
+                            }
+                          ]
+                        },
+                        "total_listings": {
+                          "anyOf": [
+                            {
+                              "type": "number"
+                            },
+                            {
+                              "type": "null"
+                            }
+                          ]
+                        }
+                      },
+                      "required": [
+                        "property_type",
+                        "average_price",
+                        "median_price",
+                        "total_listings"
+                      ],
+                      "additionalProperties": false
+                    }
+                  },
+                  "history": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "month": {
+                          "type": "string"
+                        },
+                        "average_price": {
+                          "anyOf": [
+                            {
+                              "type": "string"
+                            },
+                            {
+                              "type": "null"
+                            }
+                          ]
+                        },
+                        "median_price": {
+                          "anyOf": [
+                            {
+                              "type": "string"
+                            },
+                            {
+                              "type": "null"
+                            }
+                          ]
+                        },
+                        "new_listings": {
+                          "anyOf": [
+                            {
+                              "type": "number"
+                            },
+                            {
+                              "type": "null"
+                            }
+                          ]
+                        },
+                        "total_listings": {
+                          "anyOf": [
+                            {
+                              "type": "number"
+                            },
+                            {
+                              "type": "null"
+                            }
+                          ]
+                        },
+                        "average_days_on_market": {
+                          "anyOf": [
+                            {
+                              "type": "number"
+                            },
+                            {
+                              "type": "null"
+                            }
+                          ]
+                        }
+                      },
+                      "required": [
+                        "month",
+                        "average_price",
+                        "median_price",
+                        "new_listings",
+                        "total_listings",
+                        "average_days_on_market"
+                      ],
+                      "additionalProperties": false
+                    }
+                  }
+                },
+                "required": [
+                  "average_price",
+                  "median_price",
+                  "min_price",
+                  "max_price",
+                  "average_price_per_sqft",
+                  "average_sqft",
+                  "average_days_on_market",
+                  "new_listings",
+                  "total_listings",
+                  "last_updated",
+                  "by_property_type",
+                  "history"
+                ],
+                "additionalProperties": false
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "history_note": {
+            "type": "string"
+          },
+          "source": {
+            "$ref": "#/components/schemas/Source"
+          }
+        },
+        "required": [
+          "id",
+          "zip_code",
+          "sale",
+          "rental",
+          "history_note",
+          "source"
+        ],
+        "additionalProperties": false
+      },
+      "getMarketStatisticsResponse": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/MarketStatistics"
+          },
+          "meta": {
+            "$ref": "#/components/schemas/Meta"
+          }
+        },
+        "required": [
+          "data",
+          "meta"
+        ],
+        "additionalProperties": false
       }
     }
-  },
-  "servers": [
-    {
-      "url": "https://realtycrawl.dev"
-    }
-  ],
-  "externalDocs": {
-    "url": "https://realtycrawl.dev/docs"
   }
 }

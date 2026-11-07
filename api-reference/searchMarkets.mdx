@@ -3,4 +3,9 @@ title: "Search markets"
 openapi: "POST /v1/markets/search"
 ---
 
-<Note>Check [live capabilities](https://realtycrawl.dev/v1/meta/capabilities) before calling this operation. A documented contract does not imply active coverage for every source or country.</Note>
+Search market resources. Two documented sources return different market shapes:
+
+- **fhfa**: `query` or a `source_region` location resolves FHFA state markets (`mkt_fhfa_state_*`); read quarterly index values with `getMarketSeries` or derived changes with `getMarketSummary`.
+- **rentcast**: a five-digit `postal_code` location resolves one RentCast ZIP market (`mkt_rentcast_`); read its retained sale/rental listing statistics with `getMarketStatistics`.
+
+Success costs50 credits and stores the matched market definitions for24 hours. FHFA index values are aggregate price indices, not property-level values; RentCast statistics are listing-derived aggregates, not transactions or coverage-complete measures. Both bindings are beta.

@@ -2,7 +2,7 @@
 title: "Coverage and evidence"
 ---
 
-The research inventory contains 205 platforms and the current API contract defines 64 operations. Runtime coverage is operation- and market-specific. Check live capabilities: active identifies accepted source integrations; beta identifies explicitly enabled documentation-backed integrations checked offline without live source acceptance. Research entries are not callable.
+The research inventory contains 205 platforms and the current API contract defines 67 operations. Runtime coverage is operation- and market-specific. Check live capabilities: active identifies accepted source integrations; beta identifies explicitly enabled documentation-backed integrations checked offline without live source acceptance. Research entries are not callable.
 
 ## Published coverage snapshot
 
@@ -657,3 +657,9 @@ REW documents exact Vancouver House advert URLs; its identity remains the canoni
 These strict field-label parsers use primary page evidence and explicitly synthetic HTML fixtures, without fresh provider acceptance. Each workflow requires separate operator opt-in, preserves the existing free-only source policy and has no paid fallback. Unsupported identity, market, property type or detail markup is rejected without searching for a replacement.
 
 REW full/partial bathrooms remain separate. Booli total rooms are not bedrooms; a source last bid or sold-or-removed date is not a verified transaction or current asking price. Coldwell HOA monthly amounts, explicit area units and separately displayed tax observations preserve their source labels and unknown payment status. Present availability, legal title and taxes paid are not verified.
+
+## US permit filings, licensed listings and ZIP statistics
+
+POST /v1/permits/search accepts one US street address through the Shovels pay-per-record source (v2). The provider resolves the address to a geo_id, then returns indexed jurisdiction permit filings with file, issue, start, end and final dates, status, job value, fees, tags and contractor id. Provider usage bills per returned record, so the configured run allowance bounds the requested window. Success costs 50 credits and stores one account-owned prop_shovels_ observation for 24 hours; GET /v1/properties/{property_id}/permits, getProperty and getPropertyRecords then read it for 1 credit each without a fresh provider call. Permits are provider-indexed filings — not a complete permit history, title, contractor verification or code-compliance proof; coverage varies across roughly 20k jurisdictions and absence of records does not establish absence of work.
+
+RentCast sale and long-term-rental listing search is bound to the existing listing operations for a five-digit US postal_code, radius or "City, ST" location. Listings are the provider's licensed feed slice — asking or monthly rent prices only, not sold values, complete inventory or current availability. Source status history is retained for getListingHistory reads. ZIP-level sale and rental statistics resolve through searchMarkets (mkt_rentcast_) and read back through GET /v1/markets/{market_id}/stats: aggregate prices, per-square-foot metrics, days on market, listing counts and per-type breakdowns. These are listing-derived aggregates, not transactions, appraisals or coverage-complete measures; history gaps reflect low volume. Both bindings remain documentation-backed beta behind RENTCAST_API_KEY and explicit source enablement.

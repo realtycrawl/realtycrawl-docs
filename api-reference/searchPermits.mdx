@@ -1,0 +1,12 @@
+---
+title: "Search US building permits for an address"
+openapi: "POST /v1/permits/search"
+---
+
+Search building-permit index records for one US street address through the Shovels pay-per-record source (v2). Supply `address={formatted:...}` or `address={line1,city,region or postal_code,country:\"US\"}`; optional `permit_from`/`permit_to` bound the permit date window (default: ten years back to today) and `limit` caps returned records (default10). Success costs50 credits and stores one account-owned `prop_shovels_` observation for24 hours; retained property, record and permit reads cost1 credit each, errors/no-match0.
+
+The source first resolves the address to a provider `geo_id`, then returns indexed jurisdiction permit filings with file/issue/start/end/final dates, status, job value, fees, tags and contractor id. Provider usage bills per returned record, so the requested window is also bounded by the configured run allowance. Permits are provider-indexed filings — not a complete permit history, title, contractor verification or code-compliance proof; coverage varies across ~20k US jurisdictions and absence of records does not establish absence of work. This binding is documentation-backed beta.
+
+<Note>Check [live capabilities](https://realtycrawl.dev/v1/meta/capabilities?platform=shovels) before calling this operation.</Note>
+
+Requires SHOVELS_API_KEY, SHOVELS_PLAN_CONFIRMED and a bounded REALTYCRAWL_SHOVELS_RUN_MAX_USD.

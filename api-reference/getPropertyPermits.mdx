@@ -1,0 +1,6 @@
+---
+title: "Read retained building permits"
+openapi: "GET /v1/properties/{property_id}/permits"
+---
+
+Read this account’s unexpired `prop_shovels_` building-permit observations for1 credit. Requires the property_id returned by `searchPermits`;24h retention. Returns the retained permit rows — dates, status, job value, fees, tags and contractor id exactly as indexed by the provider. No fresh provider call and no re-billing of the permit records; expired or cross-account IDs return404. Provider-indexed filings only: not a complete permit history, and missing fields stay unknown.

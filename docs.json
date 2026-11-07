@@ -179,7 +179,8 @@
               "api-reference/searchMarkets",
               "api-reference/getMarketSeries",
               "api-reference/getMarket",
-              "api-reference/getMarketSummary"
+              "api-reference/getMarketSummary",
+              "api-reference/getMarketStatistics"
             ]
           },
           {
@@ -220,6 +221,13 @@
             "pages": [
               "api-reference/resolveAddress",
               "api-reference/getAddress"
+            ]
+          },
+          {
+            "group": "Permits",
+            "pages": [
+              "api-reference/searchPermits",
+              "api-reference/getPropertyPermits"
             ]
           }
         ]

@@ -1,0 +1,6 @@
+---
+title: "Read retained ZIP market statistics"
+openapi: "GET /v1/markets/{market_id}/stats"
+---
+
+Read this account’s unexpired RentCast ZIP-level market statistics for1 credit. Requires an `mkt_rentcast_` market_id saved by a successful RentCast `searchMarkets`;24h retention. Returns retained sale and rental aggregates — average/median/min/max prices, per-square-foot metrics, days on market, listing counts and per-property-type breakdowns plus the source-published monthly history. No fresh provider call; expired or cross-account IDs return404. These are listing-derived aggregates — not transactions, appraisals or coverage-complete market measures; history gaps reflect low listing volume.
