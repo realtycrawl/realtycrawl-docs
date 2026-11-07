@@ -3,7 +3,7 @@ title: "Resolve and normalize a street address"
 openapi: "POST /v1/addresses/resolve"
 ---
 
-Normalize one street address through the Geocodio pay-as-you-go geocoding source (v2.1). Supply address={formatted:...} for free-form text or address={line1,city,region or postal_code,country} for structured components; country is the ISO code and must be one of US, CA, MX, GB, AU or NZ. Success costs 50 credits and stores one account-owned normalized-address observation for24 hours.
+Normalize one street address through the Geocodio pay-as-you-go geocoding source (v2.1). Supply `address={formatted:...}` for free-form text or `address={line1,city,region or postal_code,country}` for structured components; country is the ISO code and must be one of US, CA, MX, GB, AU or NZ. Success costs 50 credits and stores one account-owned normalized-address observation for24 hours.
 
 The response carries the provider-formatted address, parsed components, address lines, coordinates (WGS84/EPSG:4326), numeric accuracy, literal accuracy_type, provider source name and the stable_address_key retained as a reference. Coordinates are geographic matches, not parcel boundaries, deliverability confirmation or ownership evidence. Zero-result requests cost 0 and return status no_match.
 
